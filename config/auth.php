@@ -65,6 +65,16 @@ return [
             'model' => App\Models\User::class,
         ],
 
+        'students' => [
+            'driver' => 'eloquent',
+            'model'  => App\Models\User::class,
+        ],
+
+        'teachers' => [
+            'driver' => 'eloquent',
+            'model'  => App\Models\User::class,
+        ],
+
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',

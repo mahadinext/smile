@@ -194,7 +194,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
+        App\Providers\GlobalFunctionsServiceProvider::class,
+        App\Providers\TelescopeServiceProvider::class,
     ],
 
     /*
