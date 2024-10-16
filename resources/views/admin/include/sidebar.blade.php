@@ -60,14 +60,6 @@
                                         </a>
                                     </li>
                                 @endcan
-
-                                @can('audit_log_access')
-                                    <li class="nav-item">
-                                        <a href="{{ route('admin.audit-logs.index') }}" class="nav-link {{ request()->is('admin/audit-logs') || request()->is('admin/audit-logs/*') ? 'active' : '' }}">
-                                            <i class="fa-fw fas fa-file-alt"></i> <span >{{ trans('cruds.auditLog.title') }}</span>
-                                        </a>
-                                    </li>
-                                @endcan
                             </ul>
                         </div>
                     </li>
