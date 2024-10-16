@@ -10,12 +10,14 @@ use App\Models\Permission;
 use Illuminate\Http\Request;
 // use Gate;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 
 class PermissionsController extends Controller
 {
     public function index()
     {
+        Log::info("PermissionsController::index()");
         abort_if(Gate::denies('permission_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $permissions = Permission::all();

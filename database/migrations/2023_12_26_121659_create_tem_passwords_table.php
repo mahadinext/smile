@@ -15,7 +15,7 @@ class CreateTemPasswordsTable extends Migration
     {
         Schema::create('tmp_passwords', function (Blueprint $table) {
             $table->id();
-            $table->integer('customer_id')->nullable();
+            $table->integer('user_id')->nullable();
             $table->string('password')->nullable();
             $table->integer('created_by')->nullable();
             $table->timestamps();

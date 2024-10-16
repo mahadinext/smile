@@ -2,13 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\InfinityPoint\InfinityTaskRedeemSubmission;
-use App\Models\InfinityPoint\InfinityTaskSubmission;
-use App\Models\InfinityPoint\InfinityWallet;
 use \DateTimeInterface;
-use App\Models\Country;
-use App\Models\InfinityPoint\InfinityBadge;
-use App\Models\InfinityPoint\InfinityBadgeCustomer;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
