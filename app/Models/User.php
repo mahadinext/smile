@@ -42,6 +42,8 @@ class User extends Authenticatable
         'password',
         'approved',
         'user_type',
+        'google_id',
+        'facebook_id',
         'password_changed_at',
         'remember_token',
         'created_at',
