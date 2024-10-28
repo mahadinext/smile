@@ -2,16 +2,15 @@
 <html data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg">
 
     <head>
-        
+
         <title>Sign Up</title>
 
-        @include('admin.include.title-meta')
-        @include('admin.include.head-css')
+        @include('layouts.common.title-meta')
+        @include('layouts.common.head-css')
 
     </head>
 
     <body>
-
         <!-- auth-page wrapper -->
         <div class="auth-page-wrapper auth-bg-cover py-5 d-flex justify-content-center align-items-center min-vh-100">
             <div class="bg-overlay"></div>
@@ -74,7 +73,7 @@
                                                 <form method="POST" action="{{ route('user.signup') }}">
 
                                                     @csrf
-                                                    
+
                                                     <div class="mb-3">
                                                         <label for="name" class="form-label">Name <span class="text-danger">*</span></label>
                                                         <input type="text" class="form-control" name="name" placeholder="Enter name" >
@@ -165,7 +164,7 @@
         </div>
         <!-- end auth-page-wrapper -->
 
-        @include('admin.include.vendor-scripts')
+        @include('layouts.common.vendor-scripts')
 
         <!-- validation init -->
         <script src="{!! asset('theme/admin/assets/js/pages/form-validation.init.js') !!}"></script>

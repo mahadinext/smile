@@ -3,8 +3,8 @@
 
     <head>
         <title>Sign In</title>
-        @include('admin.include.title-meta')
-        @include('admin.include.head-css')
+        @include('layouts.common.title-meta')
+        @include('layouts.common.head-css')
         <style>
             .c-app {
                 /* color: #3c4b64; */
@@ -108,7 +108,7 @@
             </div>
         </div>
 
-        @include('admin.include.vendor-scripts')
+        @include('layouts.common.vendor-scripts')
 
         <!-- password-addon init -->
         <script src="{!! asset('theme/admin/assets/js/pages/password-addon.init.js') !!}"></script>
