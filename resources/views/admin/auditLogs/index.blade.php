@@ -1,4 +1,4 @@
-@extends('admin.include.master')
+@extends('layouts.common.master')
 @section('content')
     <style>
         .audit-modal-wrapper {

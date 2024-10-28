@@ -187,6 +187,13 @@ return [
          */
 
         /*
+         * Custom Service Providers...
+         */
+        App\Providers\AdminServiceProvider::class,
+        App\Providers\StudentServiceProvider::class,
+        App\Providers\TeacherServiceProvider::class,
+
+        /*
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,

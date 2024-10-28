@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Student;
+namespace App\Models\Teacher;
 
 use App\Traits\Auditable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -17,6 +17,11 @@ class Teachers extends Model
 
     protected $fillable = [
         'user_id',
+        'first_name',
+        'last_name',
+        'password',
+        'phone_no',
+        'email',
         'bio',
         'dob',
         'gender',
@@ -24,11 +29,11 @@ class Teachers extends Model
         'religion',
         'nid_no',
         'image',
+        'nid_front_image',
+        'nid_back_image',
         'experience',
         'intro_video',
         'address',
-        'phone_no',
-        'verification_document',
         'status',
         'terms_and_condition_agreement',
         'privacy_and_policy_agreement',

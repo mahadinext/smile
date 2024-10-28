@@ -17,13 +17,17 @@ class Students extends Model
 
     protected $fillable = [
         'user_id',
+        'first_name',
+        'last_name',
+        'password',
+        'phone_no',
+        'email',
         'dob',
         'gender',
         'marital_status',
         'religion',
         'image',
         'address',
-        'phone_no',
         'status',
         'terms_and_condition_agreement',
         'privacy_and_policy_agreement',

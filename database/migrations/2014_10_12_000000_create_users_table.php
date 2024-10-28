@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('password');
             $table->boolean('approved')->default(0)->nullable();
             $table->timestamp('password_changed_at')->nullable();
-            $table->enum('user_type', [1, 2, 3])->comment('1: admin, 2: teacher, 3: student');
+            $table->enum('user_type', [1, 2, 3])->comment('1: admin, 2: student, 3: teacher');
+            $table->string('token')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

@@ -22,9 +22,13 @@ class User extends Authenticatable
     use HasFactory;
 
     public $table = 'users';
+    public const ADMIN = 1;
+    public const STUDENT = 2;
+    public const TEACHER = 3;
 
     protected $hidden = [
         'remember_token',
+        'token',
         'password',
     ];
 
@@ -46,6 +50,7 @@ class User extends Authenticatable
         'facebook_id',
         'password_changed_at',
         'remember_token',
+        'token',
         'created_at',
         'updated_at',
         'deleted_at',
