@@ -24,7 +24,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{ route('admin.audit-logs.index') }}" class="nav-link {{ request()->is('admin/audit-logs') || request()->is('admin/audit-logs/*') ? 'active' : '' }}">
+                    <a href="{{ route('teacher.courses.index') }}" class="nav-link {{ request()->is('teacher.courses') || request()->is('teacher.courses/*') ? 'active' : '' }}">
                         <i class="mdi mdi-book-open"></i> <span >My Courses</span>
                     </a>
                 </li>

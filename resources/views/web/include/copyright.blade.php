@@ -7,8 +7,8 @@
             </div>
             <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-12">
                 <ul class="copyright-link rbt-link-hover justify-content-center justify-content-lg-end mt_sm--10 mt_md--10">
-                    <li><a href="subscription.html.htm">Courses</a></li>
-                    <li><a href="privacy-policy.html.htm">Contact Us</a></li>
+                    <li><a href="{{ route('courses') }}">Courses</a></li>
+                    <li><a href="{{ route('contact-us') }}">Contact Us</a></li>
                     <li><a href="#">Terms of service</a></li>
                 </ul>
             </div>

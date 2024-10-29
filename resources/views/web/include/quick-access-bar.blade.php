@@ -17,7 +17,7 @@
                             <img src="{!! asset('web/assets/images/team/avatar.jpg') !!}" alt="User Images">
                         </div>
                         <div class="admin-info">
-                            <span class="name">Rainbow IT</span>
+                            <span class="name">{{Auth::user()->name}}</span>
                             <a class="rbt-btn-link color-primary" href="profile.html.htm">View
                                 Profile</a>
                         </div>
@@ -36,37 +36,37 @@
                             </a>
                         </li>
                         <li>
-                            <a href="instructor-enrolled-courses.html.htm">
+                            <a href="#">
                                 <i class="feather-shopping-bag"></i>
                                 <span>Enrolled Courses</span>
                             </a>
                         </li>
                         <li>
-                            <a href="instructor-wishlist.html.htm">
+                            <a href="#">
                                 <i class="feather-heart"></i>
                                 <span>Wishlist</span>
                             </a>
                         </li>
                         <li>
-                            <a href="instructor-reviews.html.htm">
+                            <a href="#">
                                 <i class="feather-star"></i>
                                 <span>Reviews</span>
                             </a>
                         </li>
                         <li>
-                            <a href="instructor-my-quiz-attempts.html.htm">
+                            <a href="#">
                                 <i class="feather-list"></i>
                                 <span>My Quiz Attempts</span>
                             </a>
                         </li>
                         <li>
-                            <a href="instructor-order-history.html.htm">
+                            <a href="#">
                                 <i class="feather-clock"></i>
                                 <span>Order History</span>
                             </a>
                         </li>
                         <li>
-                            <a href="instructor-quiz-attempts.html.htm">
+                            <a href="#">
                                 <i class="feather-message-square"></i>
                                 <span>Question & Answer</span>
                             </a>
@@ -84,15 +84,15 @@
                     <hr class="mt--10 mb--10">
                     <ul class="user-list-wrapper">
                         <li>
-                            <a href="instructor-settings.html.htm">
+                            <a href="#">
                                 <i class="feather-settings"></i>
                                 <span>Settings</span>
                             </a>
                         </li>
                         <li>
-                            <a href="index.html.htm">
+                            <a href="#" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">
                                 <i class="feather-log-out"></i>
-                                <span>Logout</span>
+                                <span>{{ trans('global.logout') }}</span>
                             </a>
                         </li>
                     </ul>
@@ -102,7 +102,7 @@
                             <img src="{!! asset('web/assets/images/team/avatar.jpg') !!}" alt="User Images">
                         </div>
                         <div class="admin-info">
-                            <span class="name">Rainbow IT</span>
+                            <span class="name">{{Auth::user()->name}}</span>
                             <a class="rbt-btn-link color-primary" href="profile.html.htm">View
                                 Profile</a>
                         </div>
@@ -121,37 +121,37 @@
                             </a>
                         </li>
                         <li>
-                            <a href="instructor-enrolled-courses.html.htm">
+                            <a href="#">
                                 <i class="feather-shopping-bag"></i>
                                 <span>Enrolled Courses</span>
                             </a>
                         </li>
                         <li>
-                            <a href="instructor-wishlist.html.htm">
+                            <a href="#">
                                 <i class="feather-heart"></i>
                                 <span>Wishlist</span>
                             </a>
                         </li>
                         <li>
-                            <a href="instructor-reviews.html.htm">
+                            <a href="#">
                                 <i class="feather-star"></i>
                                 <span>Reviews</span>
                             </a>
                         </li>
                         <li>
-                            <a href="instructor-my-quiz-attempts.html.htm">
+                            <a href="#">
                                 <i class="feather-list"></i>
                                 <span>My Quiz Attempts</span>
                             </a>
                         </li>
                         <li>
-                            <a href="instructor-order-history.html.htm">
+                            <a href="#">
                                 <i class="feather-clock"></i>
                                 <span>Order History</span>
                             </a>
                         </li>
                         <li>
-                            <a href="instructor-quiz-attempts.html.htm">
+                            <a href="#">
                                 <i class="feather-message-square"></i>
                                 <span>Question & Answer</span>
                             </a>
@@ -169,13 +169,13 @@
                     <hr class="mt--10 mb--10">
                     <ul class="user-list-wrapper">
                         <li>
-                            <a href="instructor-settings.html.htm">
+                            <a href="#">
                                 <i class="feather-settings"></i>
                                 <span>Settings</span>
                             </a>
                         </li>
                         <li>
-                            <a href="index.html.htm">
+                            <a href="#" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">
                                 <i class="feather-log-out"></i>
                                 <span>Logout</span>
                             </a>
@@ -191,6 +191,10 @@
                         </li>
                     </ul>
                 @endif
+
+                <form id="logoutform" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    {{ csrf_field() }}
+                </form>
 
             </div>
         </div>

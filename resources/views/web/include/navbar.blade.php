@@ -5,7 +5,7 @@
         </li>
 
         <li class="with-megamenu">
-            <a href="#">Browse Courses</a>
+            <a href="{{ route('courses') }}">Browse Courses</a>
         </li>
 
         {{-- <li class="has-dropdown has-menu-child-item">
@@ -23,12 +23,12 @@
         <li class="has-dropdown has-menu-child-item">
             <a href="#">Pages <i class="feather-chevron-down"></i></a>
             <ul class="submenu">
-                <li><a href="about-us-01.html.htm">About Us</a></li>
-                <li><a href="contact.html.htm">Contact Us</a></li>
-                <li><a href="faqs.html.htm">FAQS</a></li>
-                <li><a href="privacy-policy.html.htm">Privacy Policy</a></li>
-                <li><a href="404.html.htm">404 Page</a></li>
-                <li><a href="wishlist.html.htm">Wishlist Page</a></li>
+                <li><a href="{{ route('about-us') }}">About Us</a></li>
+                <li><a href="{{ route('contact-us') }}">Contact Us</a></li>
+                <li><a href="#">FAQS</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">404 Page</a></li>
+                <li><a href="#">Wishlist Page</a></li>
             </ul>
         </li>
     </ul>

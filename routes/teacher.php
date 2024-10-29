@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Teacher\CourseController;
 use App\Http\Controllers\Teacher\DashboardController;
 use App\Http\Controllers\Web\TeacherAuthController;
 use Illuminate\Support\Facades\Route;
@@ -14,4 +15,8 @@ Route::get('/account/verify/{token}', [TeacherAuthController::class, 'verifyAcco
 
 Route::group(['prefix' => 'teacher', 'as' => 'teacher.', 'middleware' => ['auth']], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::group(['prefix' => 'courses', 'as' => 'courses.', 'middleware' => ['auth']], function () {
+        Route::get('/', [CourseController::class, 'index'])->name('index');
+    });
 });

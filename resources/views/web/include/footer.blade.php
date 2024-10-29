@@ -5,14 +5,12 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-12">
-                    <p class="rbt-link-hover text-center text-lg-start">Copyright © 2024 <a href="https://rainbowthemes.net">Rainbow-Themes.</a> All Rights Reserved</p>
+                    <p class="rbt-link-hover text-center text-lg-start">Copyright © 2024 <a href="https://mahadiislam.com">Mahadi.</a> All Rights Reserved</p>
                 </div>
                 <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-12">
                     <ul class="copyright-link rbt-link-hover justify-content-center justify-content-lg-end mt_sm--10 mt_md--10">
                         <li><a href="#">Terms of service</a></li>
-                        <li><a href="privacy-policy.html.htm">Privacy policy</a></li>
-                        <li><a href="subscription.html.htm">Subscription</a></li>
-                        <li><a href="login.html.htm">Login & Register</a></li>
+                        <li><a href="#">Privacy policy</a></li>
                     </ul>
                 </div>
             </div>
