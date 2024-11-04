@@ -25,3 +25,15 @@
 
 <!-- App js -->
 <script src="{!! asset('theme/admin/assets/js/app.js') !!}"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+    flatpickr(".datetimepicker", {
+        enableTime: true,
+        // dateFormat: "Y-m-d H:i",
+        noCalendar: false,
+        dateFormat: "Y-m-d H:i:S", // Change to include seconds
+        time_24hr: true, // Optional: to use 24-hour time format
+        enableSeconds: true // Enable seconds in the picker
+    });
+</script>

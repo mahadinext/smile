@@ -2,6 +2,9 @@
 
 namespace App\Helper;
 
+use App\Models\CourseCategory;
+use Illuminate\Support\Facades\Cache;
+
 class Helper
 {
     /**
@@ -44,5 +47,15 @@ class Helper
             'Other',
             'Prefer not to say',
         ];
+    }
+
+    /**
+     * @return collection
+     */
+    public static function getAllCourseCategory(): array
+    {
+        return Cache::remember("all-course-category-cache", 60*60*24, function () {
+            return CourseCategory::all()->pluck('name', 'id')->toArray();
+        });
     }
 }

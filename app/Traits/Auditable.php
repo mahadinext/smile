@@ -43,7 +43,6 @@ trait Auditable
     }
     public static function auditLogEntry($description, $subjectId, $subjectType, $properties)
     {
-
         AuditLog::create([
             'description'  => $description,
             'subject_id'   => $subjectId ?? null,

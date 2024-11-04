@@ -82,7 +82,7 @@
                             <img class="w-100" src="{!! asset('web/assets/images/course/course-01.jpg') !!}" alt="Card image">
                         </div>
 
-                        <div class="rbt-inner-onepage-navigation sticky-top mt--30">
+                        <div class="rbt-inner-onepage-navigation sticky-top mt--30" style="top: 80px">
                             <nav class="mainmenu-nav onepagenav">
                                 <ul class="mainmenu">
                                     <li class="current">
@@ -1110,7 +1110,7 @@
                 </div>
 
                 <div class="col-lg-4">
-                    <div class="course-sidebar sticky-top rbt-shadow-box course-sidebar-top rbt-gradient-border">
+                    <div class="course-sidebar sticky-top rbt-shadow-box course-sidebar-top rbt-gradient-border" style="top: 80px">
                         <div class="inner">
 
                             <!-- Start Viedo Wrapper  -->

@@ -27,6 +27,9 @@
 
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
+<!-- ckeditor css -->
+<link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/43.3.0/ckeditor5.css" />
+
 <!--Jquery-->
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 
@@ -46,5 +49,10 @@
     .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
         color: #ffffff;
         padding: 4px;
+    }
+
+    label.required::after {
+        content: " *";
+        color: red;
     }
 </style>

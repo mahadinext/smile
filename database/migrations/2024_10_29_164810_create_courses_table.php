@@ -15,16 +15,47 @@ class CreateCoursesTable extends Migration
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('description');
             $table->unsignedBigInteger('teacher_id');
-            $table->integer('duration_weeks');
+            $table->unsignedBigInteger('category_id');
+            $table->string('title');
+            $table->text('short_description');
+            $table->longText('long_description');
+            $table->dateTime('course_start_date')->nullable();
+            $table->text('requirments');
+            $table->integer('total_class');
+            $table->integer('certificate')->nullable();
+            $table->integer('quizes')->nullable();
+            $table->integer('qa')->nullable();
+            $table->integer('study_tips')->nullable();
+            $table->integer('career_guidance')->nullable();
+            $table->integer('progress_tracking')->nullable();
+            $table->integer('flex_learning_pace')->nullable();
             $table->decimal('price', 8, 2);
+            $table->tinyInteger('discount_type')->nullable();
+            $table->float('discount_amount')->nullable();
+            $table->dateTime('discount_start_date')->nullable();
+            $table->dateTime('discount_expiry_date')->nullable();
+
+            $table->integer('duration_weeks')->nullable();
+            $table->string('card_image')->nullable();
             $table->string('promotional_image')->nullable();
+            $table->string('promotional_video')->nullable();
+
+            $table->integer('created_by')->nullable();
+            $table->integer('updated_by')->nullable();
+            $table->integer('deleted_by')->nullable();
+            $table->tinyInteger('status');
+
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('teacher_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('course_categories')->onDelete('cascade');
+
+            $table->index('teacher_id');
+            $table->index('category_id');
+            $table->index('discount_type');
+            $table->index('status');
         });
     }
 
