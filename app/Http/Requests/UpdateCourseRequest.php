@@ -34,7 +34,6 @@ class UpdateCourseRequest extends FormRequest
             ],
             'course_start_date' => [
                 'required',
-                'after:now',
                 'date_format:' . config('panel.date_format') . ' ' . config('panel.time_format'),
             ],
             'content_title' => [

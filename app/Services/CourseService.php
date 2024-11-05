@@ -6,6 +6,8 @@ use App\Http\Requests\StoreCourseRequest;
 use App\Http\Requests\UpdateCourseRequest;
 use App\Models\Course;
 use App\Models\CourseContents;
+use App\Traits\Auditable;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,6 +17,8 @@ use Illuminate\Support\Facades\Storage;
 
 class CourseService
 {
+    use Auditable;
+
     /**
      * filter course
      *
@@ -107,12 +111,12 @@ class CourseService
                 'status' => Course::STATUS_ENABLE, // Set default status or from request
             ];
 
-            // Create a sanitized version of the title for image naming
-            $sanitizedTitle = preg_replace('/\s+/', '-', trim($request->title)); // Replace spaces with hyphens
-            $sanitizedTitle = substr($sanitizedTitle, 0, 20); // Limit to 10 characters
+            $teacherId = $request->teacher_id ?? Auth::user()->id;
+            $courseNo = Course::where('teacher_id', $teacherId)->count();
+            $courseNo++;
 
             // Define base directory for teacher images
-            $teacherDir = 'teacher/' . Auth::user()->id . '/course/' . $sanitizedTitle;
+            $teacherDir = 'teacher/' . $teacherId . '/course/' . $courseNo;
 
             // Ensure the directory exists
             Storage::makeDirectory($teacherDir);
@@ -182,10 +186,52 @@ class CourseService
     public function update(UpdateCourseRequest $request, $course): Course|null
     {
         try {
+            // dd($request->all());
             DB::beginTransaction();
-            
-            $course->status = $request->status;
+
+            $course->teacher_id = $request->teacher_id ?? Auth::user()->id;
+            $course->category_id = $request->course_category;
+            $course->title = $request->title;
+            $course->short_description = $request->short_description;
+            $course->long_description = $request->long_description;
+            $course->course_start_date = $request->course_start_date;
+            $course->requirments = $request->requirments;
+            $course->total_class = $request->total_class;
+            $course->certificate = $request->certificate ?? null;
+            $course->quizes = $request->quizes ?? null;
+            $course->qa = $request->qa ?? null;
+            $course->study_tips = $request->study_tips ?? null;
+            $course->career_guidance = $request->career_guidance ?? null;
+            $course->progress_tracking = $request->progress_tracking ?? null;
+            $course->flex_learning_pace = $request->flex_learning_pace ?? null;
+            $course->price = $request->price;
+            $course->discount_type = $request->discount_type ?? null;
+            $course->discount_amount = $request->discount_amount ?? null;
+            $course->discount_start_date = $request->discount_start_date ?? null;
+            $course->discount_expiry_date = $request->discount_expiry_date ?? null;
+            $course->promotional_video = $request->promo_video;
+            $course->status = $request->course_status;
             $course->updated_by = Auth::user()->id;
+
+            $teacherId = $request->teacher_id ?? Auth::user()->id;
+            $courseNo = Course::where('teacher_id', $teacherId)->count();
+
+            // Define base directory for teacher images
+            $teacherDir = 'teacher/' . $teacherId . '/course/' . $courseNo;
+
+            // Ensure the new directory exists
+            Storage::makeDirectory($teacherDir);
+
+            // Save course card image
+            if ($request->hasFile('course_card_image')) {
+                $course->card_image = $this->saveImage($request->file('course_card_image'), $teacherDir, 'course-card.' . $request->file('course_card_image')->getClientOriginalExtension());
+            }
+
+            // Save promotional image
+            if ($request->hasFile('promo_image')) {
+                $course->promotional_image = $this->saveImage($request->file('course_card_image'), $teacherDir, 'promo-image.' . $request->file('promo_image')->getClientOriginalExtension());
+            }
+
             $course->save();
 
             $this->deleteAndUpdateCourseInfos($course->id, $request);
@@ -196,6 +242,25 @@ class CourseService
         } catch (Exception $exception) {
             Log::error("CourseService::update()", [$exception]);
             DB::rollback();
+            return null;
+        }
+    }
+
+    /**
+     * Save the uploaded image to the specified directory and return the URL.
+     *
+     * @param \Illuminate\Http\UploadedFile $imageRequest The uploaded image file.
+     * @param string $directory The directory where the image should be stored.
+     * @param string $imageName The name of the image file to store.
+     * @return string|null The URL of the saved image or null if there was an error.
+     */
+    private function saveImage($imageRequest, $directory, $imageName)
+    {
+        try {
+            $imagePath = $imageRequest->storeAs($directory, $imageName, 'public');
+            return Storage::url($imagePath);
+        } catch (Exception $exception) {
+            Log::error("CourseService::saveImage()", [$exception]);
             return null;
         }
     }
@@ -214,6 +279,34 @@ class CourseService
             $this->storeCourseContents($request, $courseId);
         } catch (Exception $exception) {
             Log::error("CourseService::deleteAndUpdateCourseInfos()", [$exception]);
+            DB::rollback();
+        }
+    }
+
+    /**
+     * delete specific Course
+     *
+     * @param Course $course
+     * @return void
+     */
+    public function delete(Course $course)
+    {
+        try {
+            DB::beginTransaction();
+
+            // Update the deleted_by column with the current user's ID
+            $course->deleted_by = Auth::user()->id;
+            $course->title = $course->title . '-deleted:' . Carbon::now()->format('Y-m-d H:i:s');
+            $course->save();
+
+            $course->delete();
+            DB::commit();
+
+            // Clear the relevant cache
+
+            $this->auditLogEntry("course:deleted", $course->id, 'course-deleted', $course);
+        } catch (Exception $exception) {
+            Log::error("CouponCentralizationService::delete()", [$exception]);
             DB::rollback();
         }
     }
