@@ -22,6 +22,7 @@ class CreateTeachersTable extends Migration
             $table->string('email')->nullable();
             $table->string('phone_no')->nullable();
             $table->text('bio')->nullable();
+            $table->longText('detailed_info')->nullable();
             $table->string('dob')->nullable();
             $table->string('gender')->nullable();
             $table->string('marital_status')->nullable();

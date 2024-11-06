@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\Auth\ChangePasswordController;
 use App\Http\Controllers\Teacher\CourseController;
 use App\Http\Controllers\Teacher\DashboardController;
+use App\Http\Controllers\Teacher\ProfileController;
+use App\Http\Controllers\Teacher\ReviewController;
 use App\Http\Controllers\Web\TeacherAuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,5 +27,19 @@ Route::group(['prefix' => 'teacher', 'as' => 'teacher.', 'middleware' => ['auth'
         Route::get('/edit/{id}', [CourseController::class, 'edit'])->name('edit');
         Route::post('/update/{id}', [CourseController::class, 'update'])->name('update');
         Route::get('/delete/{id}', [CourseController::class, 'delete'])->name('delete');
+    });
+
+    Route::group(['prefix' => 'profile', 'as' => 'profile.', 'middleware' => ['auth']], function () {
+        Route::get('/', [ProfileController::class, 'index'])->name('index');
+        Route::post('/update/{id}', [ProfileController::class, 'update'])->name('update');
+    });
+
+    Route::group(['prefix' => 'change-password', 'as' => 'change-password.', 'middleware' => ['auth']], function () {
+        Route::get('/', [ChangePasswordController::class, 'index'])->name('index');
+        Route::post('/update/{id}', [ChangePasswordController::class, 'update'])->name('update');
+    });
+
+    Route::group(['prefix' => 'reviews', 'as' => 'reviews.', 'middleware' => ['auth']], function () {
+        Route::get('/', [ReviewController::class, 'index'])->name('index');
     });
 });

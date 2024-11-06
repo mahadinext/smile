@@ -52,6 +52,7 @@ class CourseController extends Controller
                 "courses" => isset($result['courses']) ? $result['courses'] : [],
                 "totalCourses" => isset($result['totalCourses']) ? $result['totalCourses'] : 0,
                 "courseCategory" => $courseCategory,
+                "courseStatus" => Course::STATUS_SELECT,
             ];
 
             return view("{$this->layoutFolder}.index", $data);
@@ -83,6 +84,9 @@ class CourseController extends Controller
             ];
 
             return view("{$this->layoutFolder}.show", $data);
+        } catch (ModelNotFoundException $e) {
+            Log::error("CourseController::show()", [$e]);
+            return redirect()->route('teacher.courses.index')->with('error', $e->getMessage());
         } catch (Exception $exception) {
             Log::error("CourseController::show()", [$exception]);
         }
@@ -121,9 +125,10 @@ class CourseController extends Controller
 
             if ($course) {
                 $this->auditLogEntry("course:created", $course->id, 'course-create', $course);
+                return redirect()->route('teacher.courses.index')->with('success', "Course added successfully");
             }
 
-            return redirect()->route('teacher.courses.index')->with('success', "Course added successfully");
+            return redirect()->route('teacher.courses.index')->with('error', "Something went wrong!");
         } catch (Exception $exception) {
             Log::error("CourseController::store()", [$exception]);
             dd("☠💀");
@@ -176,10 +181,10 @@ class CourseController extends Controller
             $courseUpdate = $this->courseService->update($request, $course);
             if ($courseUpdate) {
                 $this->auditLogEntry("course:updated", $course->id, 'course-update', $courseUpdate);
-
                 return redirect()->route('teacher.courses.index')->with('success', "Course updated successfully");
             }
 
+            return redirect()->route('teacher.courses.index')->with('error', "Something went wrong");
         } catch (ModelNotFoundException $exception) {
             Log::error("CourseController::update()", [$exception]);
             return redirect()->route('teacher.courses.index')->with('error', $exception->getMessage());

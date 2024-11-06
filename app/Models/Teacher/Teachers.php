@@ -23,6 +23,7 @@ class Teachers extends Model
         'phone_no',
         'email',
         'bio',
+        'detailed_info',
         'dob',
         'gender',
         'marital_status',

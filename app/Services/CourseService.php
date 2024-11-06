@@ -61,13 +61,13 @@ class CourseService
                 $query->where('category_id', $request->course_category);
             }
 
+            if ($request->filled('course_title')) {
+                $query->where('title', 'LIKE', '%' . $request->course_title . '%');
+            }
+
             // Filter by status
-            if ($request->filled('status')) {
-                if ($request->status == 'Active') {
-                    $query->where('courses.status', Course::STATUS_ENABLE);
-                } elseif ($request->status == 'Inactive') {
-                    $query->where('courses.status', Course::STATUS_DISABLE);
-                }
+            if ($request->filled('course_status')) {
+                $query->where('courses.status', $request->course_status);
             }
 
             return $query;
