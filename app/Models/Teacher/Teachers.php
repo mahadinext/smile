@@ -2,6 +2,8 @@
 
 namespace App\Models\Teacher;
 
+use App\Models\Course;
+use App\Models\CourseEnrollment;
 use App\Traits\Auditable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -30,6 +32,7 @@ class Teachers extends Model
         'religion',
         'nid_no',
         'image',
+        'cover_image',
         'nid_front_image',
         'nid_back_image',
         'experience',
@@ -47,4 +50,9 @@ class Teachers extends Model
         'updated_by',
         'deleted_by',
     ];
+
+    public function courses()
+    {
+        return $this->hasMany(Course::class, 'teacher_id', 'user_id');
+    }
 }

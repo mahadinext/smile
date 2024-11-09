@@ -120,6 +120,15 @@
                     // Use 'hex' format for output instead of 'hsl'.
                     format: 'hex'
                 }
+            },
+            fontBackgroundColor: {
+                colorPicker: {
+                    format: 'hex', // Use 'hex' format for consistency
+                    colors: [
+                        '#000000', '#FFFFFF', '#FF0000', '#00FF00', '#0000FF', '#FFFF00', '#FF00FF', '#00FFFF', // Common color options
+                        'transparent' // Add transparent as an option
+                    ]
+                }
             }
         })
         .catch( error => {

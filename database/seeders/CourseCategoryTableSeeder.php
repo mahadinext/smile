@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\CourseCategory;
-use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class CourseCategoryTableSeeder extends Seeder

@@ -6,12 +6,20 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class CourseEnrollment extends Model
+class Faq extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
-    public $table = 'course_enrollments';
+    public $table = 'faqs';
+
+    public const STATUS_ENABLE = 1;
+    public const STATUS_DISABLE = 0;
+
+    public const STATUS_SELECT = [
+        1 => 'Active',
+        0 => 'Inactive',
+    ];
 
     protected $dates = [
         'created_at',
@@ -20,8 +28,11 @@ class CourseEnrollment extends Model
     ];
 
     protected $fillable = [
-        'student_id',
-        'course_id',
-        'order_id',
+        'title',
+        'description',
+        'status',
+        'created_at',
+        'updated_at',
+        'deleted_at',
     ];
 }

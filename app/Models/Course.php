@@ -8,6 +8,7 @@ use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 class Course extends Model
 {
@@ -110,7 +111,7 @@ class Course extends Model
     public function courseTeacher()
     {
         return $this->belongsTo(Teachers::class, 'teacher_id', 'user_id')
-        ->select('teachers.id', 'teachers.user_id', 'teachers.first_name', 'teachers.last_name', 'teachers.email');
+        ->select('teachers.id', 'teachers.user_id', 'teachers.first_name', 'teachers.last_name', 'teachers.email', 'teachers.image');
     }
 
     public function courseCategory()
@@ -123,6 +124,33 @@ class Course extends Model
         return $this->hasMany(CourseContents::class, 'course_id');
     }
 
+    public function courseStudents()
+    {
+        return $this->hasMany(CourseEnrollment::class, 'course_id');
+    }
+
+    // public function averageRating()
+    // {
+    //     // If no ratings exist, return a default value of 0
+    //     return $this->courseRatings()->avg('rating') ?? 0;
+    // }
+
+    public function averageRating()
+    {
+        // Calculate the average rating directly using a query
+        $average = DB::table('course_ratings')
+            ->where('course_id', $this->id)  // Filter by the current course ID
+            ->avg('rating');  // Get the average rating
+
+        // If no ratings exist, return a default value of 0
+        return $average ?? 0;
+    }
+
+    public function courseRatings()
+    {
+        return $this->hasMany(CourseRating::class, 'course_id');
+    }
+
     /**
      * Get the user who created the course with specific fields.
      */
@@ -130,5 +158,10 @@ class Course extends Model
     {
         return $this->belongsTo(User::class, 'created_by')
         ->select(['id', 'name', 'email']);
+    }
+
+    public function courseEnrollments()
+    {
+        return $this->hasMany(CourseEnrollment::class, 'course_id');
     }
 }

@@ -9,7 +9,7 @@ use App\Http\Requests\UpdateCourseRequest;
 use App\Models\Course;
 use App\Models\CourseCategory;
 use App\Models\CourseContents;
-use App\Services\CourseService;
+use App\Services\Teacher\CourseService;
 use App\Traits\Auditable;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -131,7 +131,6 @@ class CourseController extends Controller
             return redirect()->route('teacher.courses.index')->with('error', "Something went wrong!");
         } catch (Exception $exception) {
             Log::error("CourseController::store()", [$exception]);
-            dd("☠💀");
             return redirect()->route('teacher.courses.index')->with('error', [$exception->getMessage()]);
         }
     }
@@ -159,9 +158,9 @@ class CourseController extends Controller
             ];
 
             return view("{$this->layoutFolder}.edit", $data);
-        } catch (ModelNotFoundException $e) {
-            Log::error("CourseController::edit()", [$e]);
-            return redirect()->route('teacher.courses.index')->with('error', $e->getMessage());
+        } catch (ModelNotFoundException $exception) {
+            Log::error("CourseController::edit()", [$exception]);
+            return redirect()->route('teacher.courses.index')->with('error', $exception->getMessage());
         } catch (Exception $exception) {
             Log::error("CourseController::edit()", [$exception]);
         }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Teacher;
 
 use App\Http\Requests\StoreCourseRequest;
 use App\Http\Requests\UpdateCourseRequest;
@@ -306,7 +306,7 @@ class CourseService
 
             $this->auditLogEntry("course:deleted", $course->id, 'course-deleted', $course);
         } catch (Exception $exception) {
-            Log::error("CouponCentralizationService::delete()", [$exception]);
+            Log::error("CourseService::delete()", [$exception]);
             DB::rollback();
         }
     }

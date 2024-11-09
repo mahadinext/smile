@@ -25,10 +25,10 @@
             <ul class="submenu">
                 <li><a href="{{ route('about-us') }}">About Us</a></li>
                 <li><a href="{{ route('contact-us') }}">Contact Us</a></li>
-                <li><a href="#">FAQS</a></li>
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">404 Page</a></li>
-                <li><a href="#">Wishlist Page</a></li>
+                <li><a href="{{ route('faqs') }}">FAQs</a></li>
+                <li><a href="{{ route('privacy-policy') }}">Privacy Policy</a></li>
+                {{-- <li><a href="#">404 Page</a></li>
+                <li><a href="#">Wishlist Page</a></li> --}}
             </ul>
         </li>
     </ul>

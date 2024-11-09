@@ -29,6 +29,7 @@ class CreateTeachersTable extends Migration
             $table->string('religion')->nullable();
             $table->string('nid_no')->nullable();
             $table->string('image')->nullable();
+            $table->string('cover_image')->nullable();
             $table->string('nid_front_image')->nullable();
             $table->string('nid_back_image')->nullable();
             $table->double('experience')->nullable();

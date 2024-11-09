@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\FaqsController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\PermissionsController;
+use App\Http\Controllers\Admin\PrivacyPolicyController;
 use App\Http\Controllers\Admin\RolesController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -38,4 +40,19 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     // Audit Logs
     Route::resource('audit-logs', 'AuditLogsController', ['except' => ['create', 'store', 'edit', 'update', 'destroy']]);
+
+    Route::group(['prefix' => 'faqs', 'as' => 'faqs.', 'middleware' => ['auth']], function () {
+        Route::get('/', [FaqsController::class, 'index'])->name('index');
+        Route::get('/show/{id}', [FaqsController::class, 'show'])->name('show');
+        Route::get('/create', [FaqsController::class, 'create'])->name('create');
+        Route::post('/store', [FaqsController::class, 'store'])->name('store');
+        Route::get('/edit/{id}', [FaqsController::class, 'edit'])->name('edit');
+        Route::post('/update/{id}', [FaqsController::class, 'update'])->name('update');
+        Route::get('/delete/{id}', [FaqsController::class, 'delete'])->name('delete');
+    });
+
+    Route::group(['prefix' => 'privacy-policy', 'as' => 'privacy-policy.', 'middleware' => ['auth']], function () {
+        Route::get('/', [PrivacyPolicyController::class, 'index'])->name('index');
+        Route::post('/update/{id}', [PrivacyPolicyController::class, 'update'])->name('update');
+    });
 });

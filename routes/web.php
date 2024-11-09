@@ -3,7 +3,9 @@
 use App\Http\Controllers\Web\AboutUsController;
 use App\Http\Controllers\Web\ContactUsController;
 use App\Http\Controllers\Web\CourseController;
+use App\Http\Controllers\Web\FaqsController;
 use App\Http\Controllers\Web\HomeController;
+use App\Http\Controllers\Web\PrivacyPolicyController;
 use App\Http\Controllers\Web\StudentAuthController;
 use App\Http\Controllers\Web\TeacherController;
 use Illuminate\Support\Facades\Route;
@@ -26,12 +28,20 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::controller(CourseController::class)->group(function () {
     Route::prefix('courses')->group(function () {
         Route::get('/', 'index')->name('courses');
-        Route::get('/detail/{slug}', 'courseDetails')->name('course-details');
+        Route::get('/detail/{id}', 'courseDetails')->name('course-details');
     });
 });
+
+Route::get('/teacher/{id}/profile', [TeacherController::class, 'profile'])->name('teacher-profile');
 
 Route::get('/about-us', [AboutUsController::class, 'index'])->name('about-us');
 
 Route::get('/contact-us', [ContactUsController::class, 'index'])->name('contact-us');
 
-Route::get('/teacher/{slug}/profile', [TeacherController::class, 'profile'])->name('teacher-profile');
+Route::get('/faqs', [FaqsController::class, 'index'])->name('faqs');
+
+Route::get('/privacy-policy', [PrivacyPolicyController::class, 'index'])->name('privacy-policy');
+
+// Route::get('/cart/{id}', [ContactUsController::class, 'index'])->name('cart');
+
+// Route::get('/wishlist/{id}', [TeacherController::class, 'profile'])->name('wishlist');

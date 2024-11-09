@@ -11,23 +11,22 @@
                 <div class="col-lg-8">
                     <div class="content text-start">
                         <ul class="page-list">
-                            <li class="rbt-breadcrumb-item"><a href="index.html.htm">Home</a></li>
+                            <li class="rbt-breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
                             <li>
                                 <div class="icon-right"><i class="feather-chevron-right"></i></div>
                             </li>
-                            <li class="rbt-breadcrumb-item active">Web Development</li>
+                            <li class="rbt-breadcrumb-item active">{{ $course->courseCategory->name }}</li>
                         </ul>
-                        <h2 class="title">The Complete Histudy 2024: From Zero to Expert!</h2>
-                        <p class="description">Master Python by building 100 projects in 100 days. Learn data
-                            science, automation, build websites, games and apps!</p>
+                        <h2 class="title">{{ $course->courseCategory->title }}</h2>
+                        <p class="description">{!! $course->short_description !!}</p>
 
                         <div class="d-flex align-items-center mb--20 flex-wrap rbt-course-details-feature">
 
-                            <div class="feature-sin best-seller-badge">
+                            {{-- <div class="feature-sin best-seller-badge">
                                 <span class="rbt-badge-2">
-                                    <span class="image"><img src="{!! asset('web/assets/images/icons/card-icon-1.png') !!}" alt="Best Seller Icon"></span> Bestseller
-                                </span>
-                            </div>
+                                    <span class="image"><img src="{!! asset('web/assets/images/icons/card-icon-1.png') !!}" alt="Best Seller Icon">
+                                    </span> Bestseller</span>
+                            </div> --}}
 
                             <div class="feature-sin rating">
                                 <a href="#">4.8</a>
@@ -43,7 +42,7 @@
                             </div>
 
                             <div class="feature-sin total-student">
-                                <span>616,029 students</span>
+                                <span>{{ $course->courseStudents->count() }} students</span>
                             </div>
 
                         </div>
@@ -55,16 +54,15 @@
                                 </a>
                             </div>
                             <div class="rbt-author-info">
-                                By <a href="profile.html.htm">Angela</a> In <a href="#">Development</a>
+                                By <a href="#">{{ $course->courseTeacher->first_name }}</a>
                             </div>
                         </div>
 
-                        <ul class="rbt-meta">
+                        {{-- <ul class="rbt-meta">
                             <li><i class="feather-calendar"></i>Last updated 12/2024</li>
                             <li><i class="feather-globe"></i>English</li>
                             <li><i class="feather-award"></i>Certified Course</li>
-                        </ul>
-
+                        </ul> --}}
                     </div>
                 </div>
             </div>
@@ -79,7 +77,7 @@
                 <div class="col-lg-8">
                     <div class="course-details-content">
                         <div class="rbt-course-feature-box rbt-shadow-box thuumbnail">
-                            <img class="w-100" src="{!! asset('web/assets/images/course/course-01.jpg') !!}" alt="Card image">
+                            <img class="w-100" src="{{ $course->promotional_image }}" alt="Card image">
                         </div>
 
                         <div class="rbt-inner-onepage-navigation sticky-top mt--30" style="top: 80px">
@@ -110,62 +108,7 @@
                                 <div class="section-title">
                                     <h4 class="rbt-title-style-3">What you'll learn</h4>
                                 </div>
-                                <p>Are you new to PHP or need a refresher? Then this course will help you get
-                                    all the fundamentals of Procedural PHP, Object Oriented PHP, MYSQLi and
-                                    ending the course by building a CMS system similar to WordPress, Joomla or
-                                    Drupal. Knowing PHP has allowed me to make enough money to stay home and
-                                    make courses like this one for students all over the world. </p>
-
-                                <div class="row g-5 mb--30">
-                                    <!-- Start Feture Box  -->
-                                    <div class="col-lg-6">
-                                        <ul class="rbt-list-style-1">
-                                            <li><i class="feather-check"></i>Become an advanced, confident, and
-                                                modern
-                                                JavaScript developer from scratch.</li>
-                                            <li><i class="feather-check"></i>Have an intermediate skill level of
-                                                Python
-                                                programming.</li>
-                                            <li><i class="feather-check"></i>Have a portfolio of various data
-                                                analysis
-                                                projects.</li>
-                                            <li><i class="feather-check"></i>Use the numpy library to create and
-                                                manipulate
-                                                arrays.</li>
-                                        </ul>
-                                    </div>
-                                    <!-- End Feture Box  -->
-
-                                    <!-- Start Feture Box  -->
-                                    <div class="col-lg-6">
-                                        <ul class="rbt-list-style-1">
-                                            <li><i class="feather-check"></i>Use the Jupyter Notebook
-                                                Environment.
-                                                JavaScript developer from scratch.</li>
-                                            <li><i class="feather-check"></i>Use the pandas module with Python
-                                                to create and
-                                                structure data.</li>
-                                            <li><i class="feather-check"></i>Have a portfolio of various data
-                                                analysis
-                                                projects.</li>
-                                            <li><i class="feather-check"></i>Create data visualizations using
-                                                matplotlib and
-                                                the seaborn.</li>
-                                        </ul>
-                                    </div>
-                                    <!-- End Feture Box  -->
-                                </div>
-                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Omnis, aliquam
-                                    voluptas laudantium incidunt architecto nam excepturi provident rem laborum
-                                    repellendus placeat neque aut doloremque ut ullam, veritatis nesciunt iusto
-                                    officia alias, non est vitae. Eius repudiandae optio quam alias aperiam nemo
-                                    nam tempora, dignissimos dicta excepturi ea quo ipsum omnis maiores
-                                    perferendis commodi voluptatum facere vel vero. Praesentium quisquam iure
-                                    veritatis, perferendis adipisci sequi blanditiis quidem porro eligendi
-                                    fugiat facilis inventore amet delectus expedita deserunt ut molestiae modi
-                                    laudantium, quia tenetur animi natus ea. Molestiae molestias ducimus
-                                    pariatur et consectetur. Error vero, eum soluta delectus necessitatibus
-                                    eligendi numquam hic at?</p>
+                                {!! $course->long_description !!}
                             </div>
                             <div class="rbt-show-more-btn">Show More</div>
                         </div>
@@ -179,335 +122,21 @@
                                 </div>
                                 <div class="rbt-accordion-style rbt-accordion-02 accordion">
                                     <div class="accordion" id="accordionExampleb2">
-
-                                        <div class="accordion-item card">
-                                            <h2 class="accordion-header card-header" id="headingTwo1">
-                                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo1" aria-expanded="true" aria-controls="collapseTwo1">
-                                                    Intro to Course and Histudy <span class="rbt-badge-5 ml--10">1hr
-                                                        30min</span>
-                                                </button>
-                                            </h2>
-                                            <div id="collapseTwo1" class="accordion-collapse collapse show" aria-labelledby="headingTwo1" data-bs-parent="#accordionExampleb2">
-                                                <div class="accordion-body card-body pr--0">
-                                                    <ul class="rbt-course-main-content liststyle">
-                                                        <li>
-                                                            <a href="lesson.html.htm">
-                                                                <div class="course-content-left">
-                                                                    <i class="feather-play-circle"></i> <span class="text">Course Intro</span>
-                                                                </div>
-                                                                <div class="course-content-right">
-                                                                    <span class="min-lable">30 min</span>
-                                                                    <span class="rbt-badge variation-03 bg-primary-opacity"><i class="feather-eye"></i> Preview</span>
-                                                                </div>
-                                                            </a>
-                                                        </li>
-
-                                                        <li>
-                                                            <a href="lesson.html.htm">
-                                                                <div class="course-content-left">
-                                                                    <i class="feather-play-circle"></i> <span class="text">Watch Before Start</span>
-                                                                </div>
-                                                                <div class="course-content-right">
-                                                                    <span class="min-lable">0.5 min</span>
-                                                                    <span class="rbt-badge variation-03 bg-primary-opacity"><i class="feather-eye"></i> Preview</span>
-                                                                </div>
-                                                            </a>
-                                                        </li>
-
-                                                        <li>
-                                                            <a href="lesson.html.htm">
-                                                                <div class="course-content-left">
-                                                                    <i class="feather-file-text"></i> <span class="text">Read Before You Start</span>
-                                                                </div>
-                                                                <div class="course-content-right">
-                                                                    <span class="course-lock"><i class="feather-lock"></i></span>
-                                                                </div>
-                                                            </a>
-                                                        </li>
-
-                                                    </ul>
+                                        @foreach($courseContents as $key => $data)
+                                            <div class="accordion-item card">
+                                                <h2 class="accordion-header card-header" id="headingTwo{{ $key }}">
+                                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo{{ $key }}" aria-expanded="true" aria-controls="collapseTwo{{ $key }}">
+                                                        {{ $data->title }}
+                                                        {{-- <span class="rbt-badge-5 ml--10">1hr 30min</span> --}}
+                                                    </button>
+                                                </h2>
+                                                <div id="collapseTwo{{ $key }}" class="accordion-collapse collapse show" aria-labelledby="headingTwo{{ $key }}" data-bs-parent="#accordionExampleb2">
+                                                    <div class="accordion-body card-body pr--0">
+                                                        {{ $data->description }}
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-
-                                        <div class="accordion-item card">
-                                            <h2 class="accordion-header card-header" id="headingTwo2">
-                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo2" aria-expanded="false" aria-controls="collapseTwo2">
-                                                    Course Fundamentals <span class="rbt-badge-5 ml--10">2hr
-                                                        30min</span>
-                                                </button>
-                                            </h2>
-                                            <div id="collapseTwo2" class="accordion-collapse collapse" aria-labelledby="headingTwo2" data-bs-parent="#accordionExampleb2">
-                                                <div class="accordion-body card-body pr--0">
-                                                    <ul class="rbt-course-main-content liststyle">
-                                                        <li><a href="lesson.html.htm">
-                                                                <div class="course-content-left">
-                                                                    <i class="feather-play-circle"></i> <span class="text">Course Intro</span>
-                                                                </div>
-                                                                <div class="course-content-right">
-                                                                    <span class="course-lock"><i class="feather-lock"></i></span>
-                                                                </div>
-                                                            </a></li>
-                                                        <li><a href="lesson.html.htm">
-                                                                <div class="course-content-left">
-                                                                    <i class="feather-file-text"></i> <span class="text">Read Before You Start</span>
-                                                                </div>
-                                                                <div class="course-content-right">
-                                                                    <span class="course-lock"><i class="feather-lock"></i></span>
-                                                                </div>
-                                                            </a></li>
-
-                                                        <li><a href="lesson.html.htm">
-                                                                <div class="course-content-left">
-                                                                    <i class="feather-play-circle"></i> <span class="text">Why You Should Not Go To
-                                                                        Education.</span>
-                                                                </div>
-                                                                <div class="course-content-right">
-                                                                    <span class="course-lock"><i class="feather-lock"></i></span>
-                                                                </div>
-                                                            </a></li>
-
-                                                        <li><a href="lesson.html.htm">
-                                                                <div class="course-content-left">
-                                                                    <i class="feather-file-text"></i> <span class="text">Read Before You Start</span>
-                                                                </div>
-                                                                <div class="course-content-right">
-                                                                    <span class="course-lock"><i class="feather-lock"></i></span>
-                                                                </div>
-                                                            </a></li>
-
-
-                                                        <li><a href="lesson.html.htm">
-                                                                <div class="course-content-left">
-                                                                    <i class="feather-play-circle"></i> <span class="text">Ten Factors That Affect Education's
-                                                                        Longevity.</span>
-                                                                </div>
-                                                                <div class="course-content-right">
-                                                                    <span class="course-lock"><i class="feather-lock"></i></span>
-                                                                </div>
-                                                            </a></li>
-
-                                                        <li><a href="lesson.html.htm">
-                                                                <div class="course-content-left">
-                                                                    <i class="feather-file-text"></i> <span class="text">Read Before You Start</span>
-                                                                </div>
-                                                                <div class="course-content-right">
-                                                                    <span class="course-lock"><i class="feather-lock"></i></span>
-                                                                </div>
-                                                            </a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="accordion-item card">
-                                            <h2 class="accordion-header card-header" id="headingTwo3">
-                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo3" aria-expanded="false" aria-controls="collapseTwo3">
-                                                    You can develop skill and setup <span class="rbt-badge-5 ml--10">1hr
-                                                        50min</span>
-                                                </button>
-                                            </h2>
-                                            <div id="collapseTwo3" class="accordion-collapse collapse" aria-labelledby="headingTwo3" data-bs-parent="#accordionExampleb2">
-                                                <div class="accordion-body card-body pr--0">
-                                                    <ul class="rbt-course-main-content liststyle">
-                                                        <li><a href="lesson.html.htm">
-                                                                <div class="course-content-left">
-                                                                    <i class="feather-play-circle"></i> <span class="text">Course Intro</span>
-                                                                </div>
-                                                                <div class="course-content-right">
-                                                                    <span class="course-lock"><i class="feather-lock"></i></span>
-                                                                </div>
-                                                            </a></li>
-                                                        <li><a href="lesson.html.htm">
-                                                                <div class="course-content-left">
-                                                                    <i class="feather-file-text"></i> <span class="text">Read Before You Start</span>
-                                                                </div>
-                                                                <div class="course-content-right">
-                                                                    <span class="course-lock"><i class="feather-lock"></i></span>
-                                                                </div>
-                                                            </a></li>
-
-                                                        <li><a href="lesson.html.htm">
-                                                                <div class="course-content-left">
-                                                                    <i class="feather-play-circle"></i> <span class="text">Why You Should Not Go To
-                                                                        Education.</span>
-                                                                </div>
-                                                                <div class="course-content-right">
-                                                                    <span class="course-lock"><i class="feather-lock"></i></span>
-                                                                </div>
-                                                            </a></li>
-
-                                                        <li><a href="lesson.html.htm">
-                                                                <div class="course-content-left">
-                                                                    <i class="feather-file-text"></i> <span class="text">Read Before You Start</span>
-                                                                </div>
-                                                                <div class="course-content-right">
-                                                                    <span class="course-lock"><i class="feather-lock"></i></span>
-                                                                </div>
-                                                            </a></li>
-
-
-                                                        <li><a href="lesson.html.htm">
-                                                                <div class="course-content-left">
-                                                                    <i class="feather-play-circle"></i> <span class="text">Ten Factors That Affect Education's
-                                                                        Longevity.</span>
-                                                                </div>
-                                                                <div class="course-content-right">
-                                                                    <span class="course-lock"><i class="feather-lock"></i></span>
-                                                                </div>
-                                                            </a></li>
-
-                                                        <li><a href="lesson.html.htm">
-                                                                <div class="course-content-left">
-                                                                    <i class="feather-file-text"></i> <span class="text">Read Before You Start</span>
-                                                                </div>
-                                                                <div class="course-content-right">
-                                                                    <span class="course-lock"><i class="feather-lock"></i></span>
-                                                                </div>
-                                                            </a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="accordion-item card">
-                                            <h2 class="accordion-header card-header" id="headingTwo4">
-                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo4" aria-expanded="false" aria-controls="collapseTwo4">
-                                                    15 Things To Know About Education? <span class="rbt-badge-5 ml--10">2hr 60min</span>
-                                                </button>
-                                            </h2>
-                                            <div id="collapseTwo4" class="accordion-collapse collapse" aria-labelledby="headingTwo4" data-bs-parent="#accordionExampleb2">
-                                                <div class="accordion-body card-body pr--0">
-                                                    <ul class="rbt-course-main-content liststyle">
-                                                        <li><a href="lesson.html.htm">
-                                                                <div class="course-content-left">
-                                                                    <i class="feather-play-circle"></i> <span class="text">Course Intro</span>
-                                                                </div>
-                                                                <div class="course-content-right">
-                                                                    <span class="course-lock"><i class="feather-lock"></i></span>
-                                                                </div>
-                                                            </a></li>
-                                                        <li><a href="lesson.html.htm">
-                                                                <div class="course-content-left">
-                                                                    <i class="feather-file-text"></i> <span class="text">Read Before You Start</span>
-                                                                </div>
-                                                                <div class="course-content-right">
-                                                                    <span class="course-lock"><i class="feather-lock"></i></span>
-                                                                </div>
-                                                            </a></li>
-
-                                                        <li><a href="lesson.html.htm">
-                                                                <div class="course-content-left">
-                                                                    <i class="feather-play-circle"></i> <span class="text">Why You Should Not Go To
-                                                                        Education.</span>
-                                                                </div>
-                                                                <div class="course-content-right">
-                                                                    <span class="course-lock"><i class="feather-lock"></i></span>
-                                                                </div>
-                                                            </a></li>
-
-                                                        <li><a href="lesson.html.htm">
-                                                                <div class="course-content-left">
-                                                                    <i class="feather-file-text"></i> <span class="text">Read Before You Start</span>
-                                                                </div>
-                                                                <div class="course-content-right">
-                                                                    <span class="course-lock"><i class="feather-lock"></i></span>
-                                                                </div>
-                                                            </a></li>
-
-
-                                                        <li><a href="lesson.html.htm">
-                                                                <div class="course-content-left">
-                                                                    <i class="feather-play-circle"></i> <span class="text">Ten Factors That Affect Education's
-                                                                        Longevity.</span>
-                                                                </div>
-                                                                <div class="course-content-right">
-                                                                    <span class="course-lock"><i class="feather-lock"></i></span>
-                                                                </div>
-                                                            </a></li>
-
-                                                        <li><a href="lesson.html.htm">
-                                                                <div class="course-content-left">
-                                                                    <i class="feather-file-text"></i> <span class="text">Read Before You Start</span>
-                                                                </div>
-                                                                <div class="course-content-right">
-                                                                    <span class="course-lock"><i class="feather-lock"></i></span>
-                                                                </div>
-                                                            </a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="accordion-item card">
-                                            <h2 class="accordion-header card-header" id="headingTwo5">
-                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo5" aria-expanded="false" aria-controls="collapseTwo5">
-                                                    Course Description <span class="rbt-badge-5 ml--10">2hr 20min</span>
-                                                </button>
-                                            </h2>
-                                            <div id="collapseTwo5" class="accordion-collapse collapse" aria-labelledby="headingTwo5" data-bs-parent="#accordionExampleb2">
-                                                <div class="accordion-body card-body pr--0">
-                                                    <ul class="rbt-course-main-content liststyle">
-                                                        <li><a href="lesson.html.htm">
-                                                                <div class="course-content-left">
-                                                                    <i class="feather-play-circle"></i> <span class="text">Course Intro</span>
-                                                                </div>
-                                                                <div class="course-content-right">
-                                                                    <span class="course-lock"><i class="feather-lock"></i></span>
-                                                                </div>
-                                                            </a></li>
-                                                        <li><a href="lesson.html.htm">
-                                                                <div class="course-content-left">
-                                                                    <i class="feather-file-text"></i> <span class="text">Read Before You Start</span>
-                                                                </div>
-                                                                <div class="course-content-right">
-                                                                    <span class="course-lock"><i class="feather-lock"></i></span>
-                                                                </div>
-                                                            </a></li>
-
-                                                        <li><a href="lesson.html.htm">
-                                                                <div class="course-content-left">
-                                                                    <i class="feather-play-circle"></i> <span class="text">Why You Should Not Go To
-                                                                        Education.</span>
-                                                                </div>
-                                                                <div class="course-content-right">
-                                                                    <span class="course-lock"><i class="feather-lock"></i></span>
-                                                                </div>
-                                                            </a></li>
-
-                                                        <li><a href="lesson.html.htm">
-                                                                <div class="course-content-left">
-                                                                    <i class="feather-file-text"></i> <span class="text">Read Before You Start</span>
-                                                                </div>
-                                                                <div class="course-content-right">
-                                                                    <span class="course-lock"><i class="feather-lock"></i></span>
-                                                                </div>
-                                                            </a></li>
-
-
-                                                        <li><a href="lesson.html.htm">
-                                                                <div class="course-content-left">
-                                                                    <i class="feather-play-circle"></i> <span class="text">Ten Factors That Affect Education's
-                                                                        Longevity.</span>
-                                                                </div>
-                                                                <div class="course-content-right">
-                                                                    <span class="course-lock"><i class="feather-lock"></i></span>
-                                                                </div>
-                                                            </a></li>
-
-                                                        <li><a href="lesson.html.htm">
-                                                                <div class="course-content-left">
-                                                                    <i class="feather-file-text"></i> <span class="text">Read Before You Start</span>
-                                                                </div>
-                                                                <div class="course-content-right">
-                                                                    <span class="course-lock"><i class="feather-lock"></i></span>
-                                                                </div>
-                                                            </a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
@@ -518,38 +147,11 @@
                         <div class="rbt-course-feature-box rbt-shadow-box details-wrapper mt--30" id="details">
                             <div class="row g-5">
                                 <!-- Start Feture Box  -->
-                                <div class="col-lg-6">
+                                <div class="col-lg-12">
                                     <div class="section-title">
                                         <h4 class="rbt-title-style-3 mb--20">Requirements</h4>
                                     </div>
-                                    <ul class="rbt-list-style-1">
-                                        <li><i class="feather-check"></i>Become an advanced, confident, and modern
-                                            JavaScript developer from scratch.</li>
-                                        <li><i class="feather-check"></i>Have an intermediate skill level of Python
-                                            programming.</li>
-                                        <li><i class="feather-check"></i>Have a portfolio of various data analysis
-                                            projects.</li>
-                                        <li><i class="feather-check"></i>Use the numpy library to create and manipulate
-                                            arrays.</li>
-                                    </ul>
-                                </div>
-                                <!-- End Feture Box  -->
-
-                                <!-- Start Feture Box  -->
-                                <div class="col-lg-6">
-                                    <div class="section-title">
-                                        <h4 class="rbt-title-style-3 mb--20">Description</h4>
-                                    </div>
-                                    <ul class="rbt-list-style-1">
-                                        <li><i class="feather-check"></i>Use the Jupyter Notebook Environment.
-                                            JavaScript developer from scratch.</li>
-                                        <li><i class="feather-check"></i>Use the pandas module with Python to create and
-                                            structure data.</li>
-                                        <li><i class="feather-check"></i>Have a portfolio of various data analysis
-                                            projects.</li>
-                                        <li><i class="feather-check"></i>Create data visualizations using matplotlib and
-                                            the seaborn.</li>
-                                    </ul>
+                                    {!! $course->requirments !!}
                                 </div>
                                 <!-- End Feture Box  -->
                             </div>
@@ -565,27 +167,25 @@
                                 <div class="media align-items-center">
                                     <div class="thumbnail">
                                         <a href="#">
-                                            <img src="{!! asset('web/assets/images/testimonial/testimonial-7.jpg') !!}" alt="Author Images">
+                                            <img src="{{ $course->courseTeacher->image }}" alt="{{ $course->courseTeacher->first_name }}">
                                         </a>
                                     </div>
                                     <div class="media-body">
                                         <div class="author-info">
                                             <h5 class="title">
-                                                <a class="hover-flip-item-wrapper" href="author.html">B.M. Rafekul
-                                                    Islam</a>
+                                                <a class="hover-flip-item-wrapper" href="#">{{ $course->courseTeacher->first_name . " " . $course->courseTeacher->last_name }}</a>
                                             </h5>
                                             <span class="b3 subtitle">Advanced Educator</span>
                                             <ul class="rbt-meta mb--20 mt--10">
                                                 <li><i class="fa fa-star color-warning"></i>75,237 Reviews <span class="rbt-badge-5 ml--5">4.4 Rating</span></li>
-                                                <li><i class="feather-users"></i>912,970 Students</li>
-                                                <li><a href="#"><i class="feather-video"></i>16 Courses</a></li>
+                                                {{-- <li><i class="feather-users"></i>912,970 Students</li> --}}
+                                                <li><a href="#"><i class="feather-video"></i>{{ $teacher->courses->count() }} Courses</a></li>
                                             </ul>
                                         </div>
                                         <div class="content">
-                                            <p class="description">John is a brilliant educator, whose life was spent
-                                                for computer science and love of nature.</p>
+                                            <p class="description">{{ $teacher->bio }}</p>
 
-                                            <ul class="social-icon social-default icon-naked justify-content-start">
+                                            {{-- <ul class="social-icon social-default icon-naked justify-content-start">
                                                 <li><a href="https://www.facebook.com/">
                                                         <i class="feather-facebook"></i>
                                                     </a>
@@ -602,7 +202,7 @@
                                                         <i class="feather-linkedin"></i>
                                                     </a>
                                                 </li>
-                                            </ul>
+                                            </ul> --}}
 
                                         </div>
 
@@ -976,135 +576,73 @@
                             <div class="col-lg-8 col-md-8 col-12">
                                 <div class="section-title">
                                     <span class="subtitle bg-pink-opacity">Top Course</span>
-                                    <h4 class="title">More Course By <strong class="color-primary">Angela</strong></h4>
+                                    <h4 class="title">More Course By <strong class="color-primary">{{ $course->courseTeacher->first_name }}</strong></h4>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-4 col-12">
                                 <div class="read-more-btn text-start text-md-end">
-                                    <a class="rbt-btn rbt-switch-btn btn-border btn-sm" href="#">
+                                    <a class="rbt-btn rbt-switch-btn btn-border btn-sm" href="{{ route('courses', ['course_instructors' => [$course->teacher_id]]) }}">
                                         <span data-text="View All Course">View All Course</span>
                                     </a>
                                 </div>
                             </div>
                         </div>
                         <div class="row g-5">
-                            <!-- Start Single Card  -->
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-12" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
-                                <div class="rbt-card variation-01 rbt-hover">
-                                    <div class="rbt-card-img">
-                                        <a href="course-details.html.htm">
-                                            <img src="{!! asset('web/assets/images/course/course-online-01.jpg') !!}" alt="Card image">
-                                            <div class="rbt-badge-3 bg-white">
-                                                <span>-40%</span>
-                                                <span>Off</span>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="rbt-card-body">
-                                        <div class="rbt-card-top">
-                                            <div class="rbt-review">
-                                                <div class="rating">
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
+                            @foreach ($teacherCourses as $key => $data)
+                                <!-- Start Single Card  -->
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-12" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
+                                    <div class="rbt-card variation-01 rbt-hover">
+                                        <div class="rbt-card-img">
+                                            <a href="{{ route('course-details', $data->id) }}">
+                                                <img src="{{ $data->card_image }}" alt="Card image">
+                                                {{-- <div class="rbt-badge-3 bg-white">
+                                                    <span>-{{ $data->discount_amount . App\Models\Course::TYPE_ARRAY[$data->discount_type] }}</span>
+                                                    <span>Off</span>
+                                                </div> --}}
+                                            </a>
+                                        </div>
+                                        <div class="rbt-card-body">
+                                            <div class="rbt-card-top">
+                                                <div class="rbt-bookmark-btn">
+                                                    <a class="rbt-round-btn" title="Bookmark" href="#"><i class="feather-bookmark"></i></a>
                                                 </div>
-                                                <span class="rating-count"> (15 Reviews)</span>
+                                                <div class="rbt-review">
+                                                    <a class="rbt-round-btn left-icon" title="Add To Cart" href="#"><i class="feather-shopping-cart"></i></a>
+                                                </div>
                                             </div>
-                                            <div class="rbt-bookmark-btn">
-                                                <a class="rbt-round-btn" title="Bookmark" href="#"><i class="feather-bookmark"></i></a>
-                                            </div>
-                                        </div>
 
-                                        <h4 class="rbt-card-title"><a href="course-details.html.htm">React Front To Back</a>
-                                        </h4>
+                                            <h4 class="rbt-card-title"><a href="{{ route('course-details', $data->id) }}">{{ $data->title }}</a>
+                                            </h4>
 
-                                        <ul class="rbt-meta">
-                                            <li><i class="feather-book"></i>12 Lessons</li>
-                                            <li><i class="feather-users"></i>50 Students</li>
-                                        </ul>
+                                            <ul class="rbt-meta">
+                                                <li><i class="feather-book"></i>{{ $data->total_class }} Lessons</li>
+                                                <li><i class="feather-users"></i>{{ $data->courseStudents->count() }} Students</li>
+                                            </ul>
 
-                                        <p class="rbt-card-text">It is a long established fact that a reader will be
-                                            distracted.</p>
-                                        <div class="rbt-author-meta mb--10">
-                                            <div class="rbt-avater">
-                                                <a href="#">
-                                                    <img src="{!! asset('web/assets/images/client/avatar-02.png') !!}" alt="Sophia Jaymes">
-                                                </a>
+                                            <p class="rbt-card-text">{!! $data->short_description !!}</p>
+                                            <div class="rbt-author-meta mb--10">
+                                                <div class="rbt-avater">
+                                                    <a href="#">
+                                                        <img src="{{ $data->courseTeacher->image }}" alt="{{ $data->courseTeacher->first_name }}">
+                                                    </a>
+                                                </div>
+                                                <div class="rbt-author-info">
+                                                    By <a href="{{ route('teacher-profile', $data->courseTeacher->user_id) }}">{{ $data->courseTeacher->first_name }}</a>
+                                                </div>
                                             </div>
-                                            <div class="rbt-author-info">
-                                                By <a href="profile.html.htm">Angela</a> In <a href="#">Development</a>
+                                            <div class="rbt-card-bottom">
+                                                <div class="rbt-price">
+                                                    <span class="current-price">৳{{ $data->price }}</span>
+                                                    {{-- <span class="off-price">৳{{ $data->price }}</span> --}}
+                                                </div>
+                                                <a class="rbt-btn-link" href="{{ route('course-details', $data->id) }}">Learn
+                                                    More<i class="feather-arrow-right"></i></a>
                                             </div>
-                                        </div>
-                                        <div class="rbt-card-bottom">
-                                            <div class="rbt-price">
-                                                <span class="current-price">$60</span>
-                                                <span class="off-price">$120</span>
-                                            </div>
-                                            <a class="rbt-btn-link" href="course-details.html.htm">Learn
-                                                More<i class="feather-arrow-right"></i></a>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <!-- End Single Card  -->
-
-                            <!-- Start Single Card  -->
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-12" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
-                                <div class="rbt-card variation-01 rbt-hover">
-                                    <div class="rbt-card-img">
-                                        <a href="course-details.html.htm">
-                                            <img src="{!! asset('web/assets/images/course/course-online-02.jpg') !!}" alt="Card image">
-                                        </a>
-                                    </div>
-                                    <div class="rbt-card-body">
-                                        <div class="rbt-card-top">
-                                            <div class="rbt-review">
-                                                <div class="rating">
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                </div>
-                                                <span class="rating-count"> (15 Reviews)</span>
-                                            </div>
-                                            <div class="rbt-bookmark-btn">
-                                                <a class="rbt-round-btn" title="Bookmark" href="#"><i class="feather-bookmark"></i></a>
-                                            </div>
-                                        </div>
-                                        <h4 class="rbt-card-title"><a href="course-details.html.htm">PHP Beginner
-                                                Advanced</a>
-                                        </h4>
-                                        <ul class="rbt-meta">
-                                            <li><i class="feather-book"></i>12 Lessons</li>
-                                            <li><i class="feather-users"></i>50 Students</li>
-                                        </ul>
-
-                                        <p class="rbt-card-text">It is a long established fact that a reader will be
-                                            distracted.</p>
-                                        <div class="rbt-author-meta mb--10">
-                                            <div class="rbt-avater">
-                                                <a href="#">
-                                                    <img src="{!! asset('web/assets/images/client/avatar-02.png') !!}" alt="Sophia Jaymes">
-                                                </a>
-                                            </div>
-                                            <div class="rbt-author-info">
-                                                By <a href="profile.html.htm">Angela</a> In <a href="#">Development</a>
-                                            </div>
-                                        </div>
-                                        <div class="rbt-card-bottom">
-                                            <div class="rbt-price">
-                                                <span class="current-price">$60</span>
-                                                <span class="off-price">$120</span>
-                                            </div>
-                                            <a class="rbt-btn-link left-icon" href="course-details.html.htm"><i class="feather-shopping-cart"></i> Add To Cart</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End Single Card  -->
+                                <!-- End Single Card  -->
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -1114,9 +652,9 @@
                         <div class="inner">
 
                             <!-- Start Viedo Wrapper  -->
-                            <a class="video-popup-with-text video-popup-wrapper text-center popup-video sidebar-video-hidden mb--15" href="https://www.youtube.com/watch?v=nA1Aqp0sPQo">
+                            <a class="video-popup-with-text video-popup-wrapper text-center popup-video sidebar-video-hidden mb--15" href="{{ $course->promotional_video }}">
                                 <div class="video-content">
-                                    <img class="w-100 rbt-radius" src="{!! asset('web/assets/images/others/video-01.jpg') !!}" alt="Video Images">
+                                    <img class="w-100 rbt-radius" src="{{ $course->promotional_video }}" alt="Video Images">
                                     <div class="position-to-top">
                                         <span class="rbt-btn rounded-player-2 with-animation">
                                             <span class="play-icon"></span>
@@ -1127,15 +665,22 @@
                                 </div>
                             </a>
                             <!-- End Viedo Wrapper  -->
+                            @php
+                                use Carbon\Carbon;
+                                $courseStartDate = Carbon::parse($course->course_start_date);
+                                $currentTime = Carbon::now();
+                                $diff = $courseStartDate->diff($currentTime);  // This gives a CarbonInterval
+                                $formattedTimeDifference = $diff->days . " Days " . $diff->h . " Hrs " . $diff->i . " Min";
+                            @endphp
 
                             <div class="content-item-content">
                                 <div class="rbt-price-wrapper d-flex flex-wrap align-items-center justify-content-between">
                                     <div class="rbt-price">
-                                        <span class="current-price">$60.99</span>
-                                        <span class="off-price">$84.99</span>
+                                        <span class="current-price">BDT {{ $course->price }}</span>
+                                        {{-- <span class="off-price">$84.99</span> --}}
                                     </div>
                                     <div class="discount-time">
-                                        <span class="rbt-badge color-danger bg-color-danger-opacity"><i class="feather-clock"></i> 3 days left!</span>
+                                        <span class="rbt-badge color-danger bg-color-danger-opacity"><i class="feather-clock"></i> {{ $diff->days }} days left!</span>
                                     </div>
                                 </div>
 
@@ -1153,30 +698,78 @@
                                     </a>
                                 </div>
 
-                                <span class="subtitle"><i class="feather-rotate-ccw"></i> 30-Day Money-Back
-                                    Guarantee</span>
-
+                                {{-- <span class="subtitle"><i class="feather-rotate-ccw"></i> 30-Day Money-Back Guarantee</span> --}}
 
                                 <div class="rbt-widget-details has-show-more">
                                     <ul class="has-show-more-inner-content rbt-course-details-list-wrapper">
-                                        <li><span>Start Date</span><span class="rbt-feature-value rbt-badge-5">5 Hrs 20
-                                                Min</span>
+                                        <li>
+                                            <span>Start Date</span>
+                                            <span class="rbt-feature-value rbt-badge-5">{{ $formattedTimeDifference }}</span>
                                         </li>
-                                        <li><span>Enrolled</span><span class="rbt-feature-value rbt-badge-5">100</span>
+
+                                        <li>
+                                            <span>Enrolled</span>
+                                            <span class="rbt-feature-value rbt-badge-5">100</span>
                                         </li>
-                                        <li><span>Lectures</span><span class="rbt-feature-value rbt-badge-5">50</span>
+
+                                        <li>
+                                            <span>Lectures</span>
+                                            <span class="rbt-feature-value rbt-badge-5">{{ $course->total_class }}</span>
                                         </li>
-                                        <li><span>Skill Level</span><span class="rbt-feature-value rbt-badge-5">Basic</span></li>
-                                        <li><span>Language</span><span class="rbt-feature-value rbt-badge-5">English</span></li>
-                                        <li><span>Quizzes</span><span class="rbt-feature-value rbt-badge-5">10</span>
-                                        </li>
-                                        <li><span>Certificate</span><span class="rbt-feature-value rbt-badge-5">Yes</span></li>
-                                        <li><span>Pass Percentage</span><span class="rbt-feature-value rbt-badge-5">95%</span></li>
+
+                                        @if($course->certificate)
+                                            <li>
+                                                <span>Certificate</span>
+                                                <span class="rbt-feature-value rbt-badge-5">Yes</span>
+                                            </li>
+                                        @endif
+
+                                        @if($course->quizes)
+                                            <li>
+                                                <span>Quizes</span>
+                                                <span class="rbt-feature-value rbt-badge-5">Yes</span>
+                                            </li>
+                                        @endif
+
+                                        @if($course->qa)
+                                            <li>
+                                                <span>Question & Answer Session</span>
+                                                <span class="rbt-feature-value rbt-badge-5">Yes</span>
+                                            </li>
+                                        @endif
+
+                                        @if($course->study_tips)
+                                            <li>
+                                                <span>Study Tips</span>
+                                                <span class="rbt-feature-value rbt-badge-5">Yes</span>
+                                            </li>
+                                        @endif
+
+                                        @if($course->career_guidance)
+                                            <li>
+                                                <span>Career Guidance</span>
+                                                <span class="rbt-feature-value rbt-badge-5">Yes</span>
+                                            </li>
+                                        @endif
+
+                                        @if($course->progress_tracking)
+                                            <li>
+                                                <span>Progress Tracking</span>
+                                                <span class="rbt-feature-value rbt-badge-5">Yes</span>
+                                            </li>
+                                        @endif
+
+                                        @if($course->flex_learning_pace)
+                                            <li>
+                                                <span>Flex Learning Pace</span>
+                                                <span class="rbt-feature-value rbt-badge-5">Yes</span>
+                                            </li>
+                                        @endif
                                     </ul>
                                     <div class="rbt-show-more-btn">Show More</div>
                                 </div>
 
-                                <div class="social-share-wrapper mt--30 text-center">
+                                {{-- <div class="social-share-wrapper mt--30 text-center">
                                     <div class="rbt-post-share d-flex align-items-center justify-content-center">
                                         <ul class="social-icon social-default transparent-with-border justify-content-center">
                                             <li><a href="https://www.facebook.com/">
@@ -1203,7 +796,7 @@
                                         <p class="rbt-badge-2 mt--10 justify-content-center w-100"><i class="feather-phone mr--5"></i> Call Us: <a href="#"><strong>+444 555
                                                     666 777</strong></a></p>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
@@ -1220,192 +813,77 @@
 
     <div class="rbt-related-course-area bg-color-white pt--60 rbt-section-gapBottom">
         <div class="container">
-            <div class="section-title mb--30">
-                <span class="subtitle bg-primary-opacity">More Similar Courses</span>
-                <h4 class="title">Related Courses</h4>
+            <div class="row g-5 align-items-end mb--40">
+                <div class="col-lg-8 col-md-8 col-12">
+                    <div class="section-title">
+                        <span class="subtitle bg-pink-opacity">More Similar Courses</span>
+                        <h4 class="title">Related Courses</h4>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-12">
+                    <div class="read-more-btn text-start text-md-end">
+                        <a class="rbt-btn rbt-switch-btn btn-border btn-sm" href="{{ route('courses', ['course_categories' => [$course->category_id]]) }}">
+                            <span data-text="View All Course">View All Course</span>
+                        </a>
+                    </div>
+                </div>
             </div>
             <div class="row g-5">
-
-                <!-- Start Single Card  -->
-                <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-                    <div class="rbt-card variation-01 rbt-hover">
-                        <div class="rbt-card-img">
-                            <a href="course-details.html.htm">
-                                <img src="{!! asset('web/assets/images/course/course-online-03.jpg') !!}" alt="Card image">
-                                <div class="rbt-badge-3 bg-white">
-                                    <span>-10%</span>
-                                    <span>Off</span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="rbt-card-body">
-                            <div class="rbt-card-top">
-                                <div class="rbt-review">
-                                    <div class="rating">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
+                @foreach ($relatedCourses as $key => $data)
+                    <!-- Start Single Card  -->
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                        <div class="rbt-card variation-01 rbt-hover">
+                            <div class="rbt-card-img">
+                                <a href="{{ route('course-details', $data->id) }}">
+                                    <img src="{{ $data->card_image }}" alt="Card image">
+                                    {{-- <div class="rbt-badge-3 bg-white">
+                                        <span>-{{ $data->discount_amount . App\Models\Course::TYPE_ARRAY[$data->discount_type] }}</span>
+                                        <span>Off</span>
+                                    </div> --}}
+                                </a>
+                            </div>
+                            <div class="rbt-card-body">
+                                <div class="rbt-card-top">
+                                    <div class="rbt-bookmark-btn">
+                                        <a class="rbt-round-btn" title="Bookmark" href="#"><i class="feather-bookmark"></i></a>
                                     </div>
-                                    <span class="rating-count"> (5 Reviews)</span>
+                                    <div class="rbt-review">
+                                        <a class="rbt-round-btn left-icon" title="Add To Cart" href="#"><i class="feather-shopping-cart"></i></a>
+                                    </div>
                                 </div>
-                                <div class="rbt-bookmark-btn">
-                                    <a class="rbt-round-btn" title="Bookmark" href="#"><i class="feather-bookmark"></i></a>
-                                </div>
-                            </div>
-                            <h4 class="rbt-card-title"><a href="course-details.html.htm">Angular Zero to Mastery</a>
-                            </h4>
-                            <ul class="rbt-meta">
-                                <li><i class="feather-book"></i>8 Lessons</li>
-                                <li><i class="feather-users"></i>30 Students</li>
-                            </ul>
-                            <p class="rbt-card-text">Angular Js long fact that a reader will be distracted by
-                                the readable.</p>
 
-                            <div class="rbt-author-meta mb--20">
-                                <div class="rbt-avater">
-                                    <a href="#">
-                                        <img src="{!! asset('web/assets/images/client/avatar-03.png') !!}" alt="Sophia Jaymes">
-                                    </a>
+                                <h4 class="rbt-card-title"><a href="{{ route('course-details', $data->id) }}">{{ $data->title }}</a>
+                                </h4>
+
+                                <ul class="rbt-meta">
+                                    <li><i class="feather-book"></i>{{ $data->total_class }} Lessons</li>
+                                    <li><i class="feather-users"></i>{{ $data->courseStudents->count() }} Students</li>
+                                </ul>
+
+                                <p class="rbt-card-text">{!! $data->short_description !!}</p>
+                                <div class="rbt-author-meta mb--10">
+                                    <div class="rbt-avater">
+                                        <a href="#">
+                                            <img src="{{ $data->courseTeacher->image }}" alt="{{ $data->courseTeacher->first_name }}">
+                                        </a>
+                                    </div>
+                                    <div class="rbt-author-info">
+                                        By <a href="{{ route('teacher-profile', $data->courseTeacher->user_id) }}">{{ $data->courseTeacher->first_name }}</a>
+                                    </div>
                                 </div>
-                                <div class="rbt-author-info">
-                                    By <a href="profile.html.htm">Slaughter</a> In <a href="#">Languages</a>
+                                <div class="rbt-card-bottom">
+                                    <div class="rbt-price">
+                                        <span class="current-price">৳{{ $data->price }}</span>
+                                        {{-- <span class="off-price">৳{{ $data->price }}</span> --}}
+                                    </div>
+                                    <a class="rbt-btn-link" href="{{ route('course-details', $data->id) }}">Learn
+                                        More<i class="feather-arrow-right"></i></a>
                                 </div>
-                            </div>
-                            <div class="rbt-card-bottom">
-                                <div class="rbt-price">
-                                    <span class="current-price">$80</span>
-                                    <span class="off-price">$100</span>
-                                </div>
-                                <a class="rbt-btn-link" href="course-details.html.htm">Learn
-                                    More<i class="feather-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- End Single Card  -->
-
-                <!-- Start Single Card  -->
-                <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-                    <div class="rbt-card variation-01 rbt-hover">
-                        <div class="rbt-card-img">
-                            <a href="course-details.html.htm">
-                                <img src="{!! asset('web/assets/images/course/course-online-04.jpg') !!}" alt="Card image">
-                                <div class="rbt-badge-3 bg-white">
-                                    <span>-40%</span>
-                                    <span>Off</span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="rbt-card-body">
-                            <div class="rbt-card-top">
-                                <div class="rbt-review">
-                                    <div class="rating">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <span class="rating-count"> (15 Reviews)</span>
-                                </div>
-                                <div class="rbt-bookmark-btn">
-                                    <a class="rbt-round-btn" title="Bookmark" href="#"><i class="feather-bookmark"></i></a>
-                                </div>
-                            </div>
-
-                            <h4 class="rbt-card-title"><a href="course-details.html.htm">Web Front To Back</a>
-                            </h4>
-                            <ul class="rbt-meta">
-                                <li><i class="feather-book"></i>20 Lessons</li>
-                                <li><i class="feather-users"></i>40 Students</li>
-                            </ul>
-                            <p class="rbt-card-text">Web Js long fact that a reader will be distracted by
-                                the readable.</p>
-                            <div class="rbt-author-meta mb--20">
-                                <div class="rbt-avater">
-                                    <a href="#">
-                                        <img src="{!! asset('web/assets/images/client/avater-01.png') !!}" alt="Sophia Jaymes">
-                                    </a>
-                                </div>
-                                <div class="rbt-author-info">
-                                    By <a href="profile.html.htm">Patrick</a> In <a href="#">Languages</a>
-                                </div>
-                            </div>
-
-                            <div class="rbt-card-bottom">
-                                <div class="rbt-price">
-                                    <span class="current-price">$60</span>
-                                    <span class="off-price">$120</span>
-                                </div>
-                                <a class="rbt-btn-link" href="course-details.html.htm">Learn
-                                    More<i class="feather-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Single Card  -->
-
-                <!-- Start Single Card  -->
-                <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-                    <div class="rbt-card variation-01 rbt-hover">
-                        <div class="rbt-card-img">
-                            <a href="course-details.html.htm">
-                                <img src="{!! asset('web/assets/images/course/course-online-05.jpg') !!}" alt="Card image">
-                                <div class="rbt-badge-3 bg-white">
-                                    <span>-20%</span>
-                                    <span>Off</span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="rbt-card-body">
-                            <div class="rbt-card-top">
-                                <div class="rbt-review">
-                                    <div class="rating">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <span class="rating-count"> (15 Reviews)</span>
-                                </div>
-                                <div class="rbt-bookmark-btn">
-                                    <a class="rbt-round-btn" title="Bookmark" href="#"><i class="feather-bookmark"></i></a>
-                                </div>
-                            </div>
-                            <h4 class="rbt-card-title"><a href="course-details.html.htm">SQL Beginner Advanced</a>
-                            </h4>
-                            <ul class="rbt-meta">
-                                <li><i class="feather-book"></i>12 Lessons</li>
-                                <li><i class="feather-users"></i>50 Students</li>
-                            </ul>
-                            <p class="rbt-card-text">It is a long established fact that a reader will be
-                                distracted
-                                by the readable.</p>
-                            <div class="rbt-author-meta mb--20">
-                                <div class="rbt-avater">
-                                    <a href="#">
-                                        <img src="{!! asset('web/assets/images/client/avatar-02.png') !!}" alt="Sophia Jaymes">
-                                    </a>
-                                </div>
-                                <div class="rbt-author-info">
-                                    By <a href="profile.html.htm">Angela</a> In <a href="#">Development</a>
-                                </div>
-                            </div>
-                            <div class="rbt-card-bottom">
-                                <div class="rbt-price">
-                                    <span class="current-price">$60</span>
-                                    <span class="off-price">$120</span>
-                                </div>
-                                <a class="rbt-btn-link left-icon" href="course-details.html.htm"><i class="feather-shopping-cart"></i> Add To Cart</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Single Card  -->
-
+                    <!-- End Single Card  -->
+                @endforeach
             </div>
         </div>
     </div>
@@ -1416,14 +894,14 @@
             <div class="row align-items-center">
                 <div class="col-lg-6 col-md-6">
                     <div class="section-title text-center text-md-start">
-                        <h5 class="title mb--0">The Complete Histudy 2024: From Zero to Expert!</h5>
+                        <h5 class="title mb--0">{{ $course->title }}</h5>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 mt_sm--15">
                     <div class="course-action-bottom-right rbt-single-group">
                         <div class="rbt-single-list rbt-price large-size justify-content-center">
-                            <span class="current-price color-primary">$750.00</span>
-                            <span class="off-price">$1500.00</span>
+                            <span class="current-price color-primary">BDT {{ $course->price }}</span>
+                            {{-- <span class="off-price">$1500.00</span> --}}
                         </div>
                         <div class="rbt-single-list action-btn">
                             <a class="rbt-btn btn-gradient hover-icon-reverse btn-md" href="#">

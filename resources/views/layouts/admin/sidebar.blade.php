@@ -61,6 +61,65 @@
                 @endcan
 
                 <li class="nav-item">
+                    <a class="nav-link menu-link {{ request()->is('admin/faqs*') ? 'active' : '' }} {{ request()->is('admin/privacy-policy*') ? 'collapsed active' : '' }} {{ request()->is('admin/faqs*') ? 'collapsed active' : '' }} {{ request()->is('admin/faqs*') ? 'collapsed active' : '' }}" href="#webManagementPages" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="webManagementPages">
+                        <i class="mdi mdi-sticker-text-outline"></i> <span data-key="t-pages">Manage Web pages</span>
+                    </a>
+                    <div class="collapse menu-dropdown {{ request()->is('admin/faqs*') ? 'show' : '' }} {{ request()->is('admin/privacy-policy*') ? 'show' : '' }} {{ request()->is('admin/faqs*') ? 'show' : '' }} {{ request()->is('admin/faqs*') ? 'show' : '' }}" id="webManagementPages">
+                        <ul class="nav nav-sm flex-column">
+                            @can('access_faq')
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.faqs.index') }}" class="nav-link {{ request()->is('admin/faqs') || request()->is('admin/faqs/*') ? 'active' : '' }}">
+                                        <i class="fa-fw fas fa-unlock-alt"></i> <span >Home</span>
+                                    </a>
+                                </li>
+                            @endcan
+
+                            @can('access_faq')
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.faqs.index') }}" class="nav-link {{ request()->is('admin/faqs') || request()->is('admin/faqs/*') ? 'active' : '' }}">
+                                        <i class="fa-fw fas fa-unlock-alt"></i> <span >About Us</span>
+                                    </a>
+                                </li>
+                            @endcan
+
+                            @can('access_faq')
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.faqs.index') }}" class="nav-link {{ request()->is('admin/faqs') || request()->is('admin/faqs/*') ? 'active' : '' }}">
+                                        <i class="fa-fw fas fa-unlock-alt"></i> <span >Contact Us</span>
+                                    </a>
+                                </li>
+                            @endcan
+
+                            @can('access_faq')
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.faqs.index') }}" class="nav-link {{ request()->is('admin/faqs') || request()->is('admin/faqs/*') ? 'active' : '' }}">
+                                        <i class="fa-fw fas fa-unlock-alt"></i> <span >FAQ</span>
+                                    </a>
+                                </li>
+                            @endcan
+
+                            @can('access_faq')
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.faqs.index') }}" class="nav-link {{ request()->is('admin/faqs') || request()->is('admin/faqs/*') ? 'active' : '' }}">
+                                        <i class="fa-fw fas fa-unlock-alt"></i> <span >FAQ</span>
+                                    </a>
+                                </li>
+                            @endcan
+
+                            @can('access_privacy_policy')
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.privacy-policy.index') }}" class="nav-link {{ request()->is('admin/privacy-policy') || request()->is('admin/privacy-policy/*') ? 'active' : '' }}">
+                                        <i class="fa-fw fas fa-unlock-alt"></i> <span >Privacy & Policy</span>
+                                    </a>
+                                </li>
+                            @endcan
+                        </ul>
+                    </div>
+                </li>
+
+
+
+                <li class="nav-item">
                     <a href="#" class="nav-link" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">
                         <i class="mdi mdi-logout"></i> <span >{{ trans('global.logout') }}</span>
                     </a>

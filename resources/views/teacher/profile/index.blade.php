@@ -165,6 +165,19 @@
                                             @endif
                                         </div>
                                     </div>
+
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="mb-3">
+                                            <label class="" for="cover_image">Cover Image (945 * 255)</label>
+                                            <input class="form-control mb-3 {{ $errors->has('cover_image') ? 'is-invalid' : '' }}" type="file" name="cover_image" id="cover_image" accept="image/*">
+                                            <a href="{{ $teacher->cover_image }}" target="_blank">Click to see previous uploaded image</a>
+                                            @if($errors->has('cover_image'))
+                                                <div class="invalid-feedback">
+                                                    {{ $errors->first('cover_image') }}
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

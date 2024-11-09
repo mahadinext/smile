@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0">Course {{ trans('global.list') }}</h4>
+                        <h4 class="mb-sm-0">FAQs {{ trans('global.list') }}</h4>
                     </div>
                 </div>
             </div>
@@ -16,8 +16,8 @@
                 <div class="col-12">
                     <div style="margin-bottom: 10px;" class="row">
                         <div class="col-lg-12 text-end">
-                            <a class="btn btn-success" href="{{ route('teacher.courses.create') }}">
-                                {{ trans('global.add') }} Course
+                            <a class="btn btn-success" href="{{ route('admin.faqs.create') }}">
+                                {{ trans('global.add') }} FAQs
                             </a>
                         </div>
                     </div>
@@ -28,40 +28,28 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            Total Course- {{ $totalCourses }}
+                            Total FAQs- {{ $totalFaqs }}
                         </div>
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <form action="{{ route('teacher.courses.index') }}" method="GET">
+                                    <form action="{{ route('admin.faqs.index') }}" method="GET">
                                         <div class="row d-flex flex-row align-items-center card-body">
 
                                             <div class="col-md-4">
                                                 <div class="mb-3">
-                                                    <label class="" for="course_category">Course Category</label>
-                                                    <select class="form-control search select2 {{ $errors->has('course_category') ? 'is-invalid' : '' }}" name="course_category" id="course_category">
-                                                        <option value="">Select</option>
-                                                        @foreach ($courseCategory as $key => $value)
-                                                            <option value="{{ $key }}" {{ request('course_category', '') == $key ? 'selected' : '' }}>{{ $value }}</option>
-                                                        @endforeach
-                                                    </select>
+                                                    <label for="title">Title</label>
+                                                    <input class="form-control" value="{{ request('title') }}" type="text" name="title" id="title">
                                                 </div>
                                             </div>
 
                                             <div class="col-md-4">
                                                 <div class="mb-3">
-                                                    <label for="course_title">Title</label>
-                                                    <input class="form-control" value="{{ request('course_title') }}" type="text" name="course_title" id="course_title">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-4">
-                                                <div class="mb-3">
-                                                    <label class="" for="course_status">Course status</label>
-                                                    <select class="form-control {{ $errors->has('course_status') ? 'is-invalid' : '' }}" name="course_status" id="course_status">
+                                                    <label class="" for="faqs_status">FAQs status</label>
+                                                    <select class="form-control {{ $errors->has('faqs_status') ? 'is-invalid' : '' }}" name="faqs_status" id="faqs_status">
                                                         <option value="">Select</option>
-                                                        @foreach ($courseStatus as $key => $label)
-                                                            <option {{ request('course_status', '') == $key ? 'selected' : '' }} value="{{ $key }}">{{ $label }}</option>
+                                                        @foreach ($faqStatus as $key => $label)
+                                                            <option {{ request('faqs_status', '') == $key ? 'selected' : '' }} value="{{ $key }}">{{ $label }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -69,7 +57,7 @@
 
                                             <div class="col-md-4 mt-3">
                                                 <button type="submit" class="btn btn-success btn-md mr-3" style="padding: 6px 19px;"><i class="mdi mdi-file-search-outline"></i> Search</button>
-                                                <a href="{{ route('teacher.courses.index') }}" class="btn btn-warning btn-md">Clear</a>
+                                                <a href="{{ route('admin.faqs.index') }}" class="btn btn-warning btn-md">Clear</a>
                                             </div>
                                         </div>
                                     </form>
@@ -82,46 +70,36 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Course List</h4>
+                            <h4>FAQs List</h4>
                         </div>
                         <div class="card-body">
                             <table class="table table-bordered dt-responsive table-striped align-middle"
                                 style="width:100%">
-                                @if (!($courses->isEmpty()))
+                                @if (!($faqs->isEmpty()))
                                     <thead>
                                         <tr>
                                             <th>Id</th>
                                             <th>Title</th>
-                                            <th>Category</th>
-                                            {{-- <th>Instructor</th> --}}
-                                            <th>Price</th>
-                                            <th>Status</th>
-                                            {{-- <th>Created By</th> --}}
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody id="filteredData">
-                                        @foreach ($courses as $key => $course)
+                                        @foreach ($faqs as $key => $faq)
                                         <tr>
-                                            {{-- <td>{{ $courses->firstItem() + $key }}</td> --}}
-                                            <td>{{ ($courses->currentPage() - 1) * $courses->perPage() + $loop->iteration }}</td>
-                                            <td>{{ $course->title }}</td>
-                                            <td>{{ ($course->courseCategory) ? $course->courseCategory->name : '' }}</td>
-                                            {{-- <td>{{ ($course->courseTeacher) ? $course->courseTeacher->email : '' }}</td> --}}
-                                            <td>{{ $course->price }}</td>
-                                            <td>{{ App\Models\Course::STATUS_SELECT[$course->status] }}</td>
-                                            {{-- <td>{{ ($course->createdBy) ? $course->createdBy->email : '' }}</td> --}}
+                                            {{-- <td>{{ $faqs->firstItem() + $key }}</td> --}}
+                                            <td>{{ ($faqs->currentPage() - 1) * $faqs->perPage() + $loop->iteration }}</td>
+                                            <td>{{ $faq->title }}</td>
                                             <td>
                                                 <a class="btn btn-sm btn-primary mt-2"
-                                                    href="{{ route('teacher.courses.show', $course->id) }}">
+                                                    href="{{ route('admin.faqs.show', $faq->id) }}">
                                                     {{ trans('global.view') }}
                                                 </a>
                                                 <a class="btn btn-sm btn-info mt-2"
-                                                    href="{{ route('teacher.courses.edit', $course->id) }}">
+                                                    href="{{ route('admin.faqs.edit', $faq->id) }}">
                                                     {{ trans('global.edit') }}
                                                 </a>
 
-                                                <form action="{{ route('teacher.courses.delete', $course->id) }}" method="POST"
+                                                <form action="{{ route('admin.faqs.delete', $faq->id) }}" method="POST"
                                                     onsubmit="return confirm('{{ trans('global.areYouSure') }}');"
                                                     style="display: inline-block;">
                                                     <input type="hidden" name="_method" value="DELETE">
@@ -141,7 +119,7 @@
                                 @endif
                             </table>
                         </div>
-                        {{ $courses->withQueryString()->links('pagination::bootstrap-5') }}
+                        {{ $faqs->withQueryString()->links('pagination::bootstrap-5') }}
                     </div>
                 </div>
             </div>

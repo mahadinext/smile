@@ -52,6 +52,11 @@ class ProfileService
                 $teacher->image = $this->saveImage($request->file('image'), $teacherDir, 'profile-picture.' . $request->file('image')->getClientOriginalExtension());
             }
 
+            // Save the cover image
+            if ($request->hasFile('cover_image')) {
+                $teacher->image = $this->saveImage($request->file('cover_image'), $teacherDir, 'cover-picture.' . $request->file('cover_image')->getClientOriginalExtension());
+            }
+
             // Save the NID front image
             if ($request->hasFile('nid_front_image')) {
                 $teacher->nid_front_image = $this->saveImage($request->file('nid_front_image'), $teacherDir, 'nid-front.' . $request->file('nid_front_image')->getClientOriginalExtension());
