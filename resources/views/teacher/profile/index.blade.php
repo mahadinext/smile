@@ -155,7 +155,7 @@
 
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="mb-3">
-                                            <label class="" for="image">Image</label>
+                                            <label class="" for="image">Image (415 * 555)</label>
                                             <input class="form-control mb-3 {{ $errors->has('image') ? 'is-invalid' : '' }}" type="file" name="image" id="image" accept="image/*">
                                             <a href="{{ $teacher->image }}" target="_blank">Click to see previous uploaded image</a>
                                             @if($errors->has('image'))
@@ -168,7 +168,7 @@
 
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="mb-3">
-                                            <label class="" for="cover_image">Cover Image (945 * 255)</label>
+                                            <label class="" for="cover_image">Cover Image (2610 * 700)</label>
                                             <input class="form-control mb-3 {{ $errors->has('cover_image') ? 'is-invalid' : '' }}" type="file" name="cover_image" id="cover_image" accept="image/*">
                                             <a href="{{ $teacher->cover_image }}" target="_blank">Click to see previous uploaded image</a>
                                             @if($errors->has('cover_image'))

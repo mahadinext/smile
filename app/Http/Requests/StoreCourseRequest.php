@@ -134,14 +134,14 @@ class StoreCourseRequest extends FormRequest
                 'required',
                 'mimes:jpeg,png,gif,bmp,svg,jpg',
                 'max:2048',
-                'dimensions:min_width=300,min_height=205,max_width=300,max_height=205',
+                'dimensions:min_width=710,min_height=488,max_width=710,max_height=488',
             ],
             'promo_image' => [
                 'file',
                 'required',
                 'mimes:jpeg,png,gif,bmp,svg,jpg',
                 'max:2048',
-                'dimensions:min_width=665,min_height=460,max_width=665,max_height=460',
+                'dimensions:min_width=710,min_height=488,max_width=710,max_height=488',
             ],
             'promo_video' => [
                 'nullable',

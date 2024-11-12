@@ -18,7 +18,7 @@
 
     <body class="rbt-header-sticky">
         @include('web.include.color')
-        @include('web.include.campaign')
+        {{-- @include('web.include.campaign') --}}
         @include('web.include.header')
         @include('web.include.mobile-menu')
         @include('web.include.side-cart')

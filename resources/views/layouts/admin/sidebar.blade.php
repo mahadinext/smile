@@ -27,7 +27,7 @@
                                 @can('permission_access')
                                     <li class="nav-item">
                                         <a href="{{ route('admin.permissions.index') }}" class="nav-link {{ request()->is('admin/permissions') || request()->is('admin/permissions/*') ? 'active' : '' }}">
-                                            <i class="fa-fw fas fa-unlock-alt"></i> <span >{{ trans('cruds.permission.title') }}</span>
+                                            <span >{{ trans('cruds.permission.title') }}</span>
                                         </a>
                                     </li>
                                 @endcan
@@ -35,7 +35,7 @@
                                 @can('role_access')
                                     <li class="nav-item">
                                         <a href="{{ route('admin.roles.index') }}" class="nav-link {{ request()->is('admin/roles') || request()->is('admin/roles/*') ? 'active' : '' }}">
-                                            <i class="fa-fw fas fa-briefcase"></i> <span >{{ trans('cruds.role.title') }}</span>
+                                            <span >{{ trans('cruds.role.title') }}</span>
                                         </a>
                                     </li>
                                 @endcan
@@ -43,7 +43,7 @@
                                 @can('user_access')
                                     <li class="nav-item">
                                         <a href="{{ route('admin.users.index') }}" class="nav-link {{ request()->is('admin/users') || request()->is('admin/users/*') ? 'active' : '' }}">
-                                            <i class="fa-fw fas fa-user"></i> <span >{{ trans('cruds.user.title') }}</span>
+                                            <span >{{ trans('cruds.user.title') }}</span>
                                         </a>
                                     </li>
                                 @endcan
@@ -51,7 +51,50 @@
                                 @can('audit_log_access')
                                     <li class="nav-item">
                                         <a href="{{ route('admin.audit-logs.index') }}" class="nav-link {{ request()->is('admin/audit-logs') || request()->is('admin/audit-logs/*') ? 'active' : '' }}">
-                                            <i class="fa-fw fas fa-file-alt"></i> <span >{{ trans('cruds.auditLog.title') }}</span>
+                                            <span >{{ trans('cruds.auditLog.title') }}</span>
+                                        </a>
+                                    </li>
+                                @endcan
+                            </ul>
+                        </div>
+                    </li>
+                @endcan
+
+                @can('access_web_elements')
+                    <li class="nav-item">
+                        <a class="nav-link menu-link {{ request()->is('admin/web/image*', 'admin/web/color*', 'admin/web/typography*', 'admin/web/meta-contents*') ? 'collapsed active' : '' }}" href="#webElementManagementPages" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="webElementManagementPages">
+                            <i class="mdi mdi-sticker-text-outline"></i> <span data-key="t-pages">Manage Web Elements</span>
+                        </a>
+                        <div class="collapse menu-dropdown {{ request()->is('admin/web/image*', 'admin/web/color*', 'admin/web/typography*', 'admin/web/meta-contents*') ? 'show' : '' }}" id="webElementManagementPages">
+                            <ul class="nav nav-sm flex-column">
+                                @can('access_logo')
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.web.image') }}" class="nav-link {{ request()->is('admin/web/image') || request()->is('admin/web/image/*') ? 'active' : '' }}">
+                                            <span >Images</span>
+                                        </a>
+                                    </li>
+                                @endcan
+
+                                @can('access_color')
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.web.color') }}" class="nav-link {{ request()->is('admin/web/color') || request()->is('admin/web/color/*') ? 'active' : '' }}">
+                                            <span >Color</span>
+                                        </a>
+                                    </li>
+                                @endcan
+
+                                @can('access_typography')
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.web.typography') }}" class="nav-link {{ request()->is('admin/web/typography') || request()->is('admin/web/typography/*') ? 'active' : '' }}">
+                                            <span >Typography</span>
+                                        </a>
+                                    </li>
+                                @endcan
+
+                                @can('access_meta_contents')
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.web.meta-contents') }}" class="nav-link {{ request()->is('admin/web/meta-contents') || request()->is('admin/web/meta-contents/*') ? 'active' : '' }}">
+                                            <span >Meta Contents</span>
                                         </a>
                                     </li>
                                 @endcan
@@ -61,47 +104,72 @@
                 @endcan
 
                 <li class="nav-item">
-                    <a class="nav-link menu-link {{ request()->is('admin/faqs*') ? 'active' : '' }} {{ request()->is('admin/privacy-policy*') ? 'collapsed active' : '' }} {{ request()->is('admin/faqs*') ? 'collapsed active' : '' }} {{ request()->is('admin/faqs*') ? 'collapsed active' : '' }}" href="#webManagementPages" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="webManagementPages">
+                    <a class="nav-link menu-link {{ request()->is('admin/home/*', 'admin/about-us/*', 'admin/contact-us/*', 'admin/privacy-policy*', 'admin/faqs*') ? 'collapsed active' : '' }}" href="#webManagementPages" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="webManagementPages">
                         <i class="mdi mdi-sticker-text-outline"></i> <span data-key="t-pages">Manage Web pages</span>
                     </a>
-                    <div class="collapse menu-dropdown {{ request()->is('admin/faqs*') ? 'show' : '' }} {{ request()->is('admin/privacy-policy*') ? 'show' : '' }} {{ request()->is('admin/faqs*') ? 'show' : '' }} {{ request()->is('admin/faqs*') ? 'show' : '' }}" id="webManagementPages">
+                    <div class="collapse menu-dropdown {{ request()->is('admin/home/*', 'admin/about-us/*', 'admin/contact-us/*', 'admin/faqs*', 'admin/privacy-policy*') ? 'show' : '' }}" id="webManagementPages">
                         <ul class="nav nav-sm flex-column">
-                            @can('access_faq')
+                            @can('access_home')
                                 <li class="nav-item">
-                                    <a href="{{ route('admin.faqs.index') }}" class="nav-link {{ request()->is('admin/faqs') || request()->is('admin/faqs/*') ? 'active' : '' }}">
-                                        <i class="fa-fw fas fa-unlock-alt"></i> <span >Home</span>
+                                    <a href="#sidebarHome" class="nav-link {{ request()->is('admin/home*') ? 'collapsed active' : '' }}" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarHome">
+                                        Home
                                     </a>
+                                    <div class="collapse menu-dropdown {{ request()->is('admin/home*') ? 'show' : '' }}" id="sidebarHome">
+                                        <ul class="nav nav-sm flex-column">
+                                            <li class="nav-item">
+                                                <a href="{{ route('admin.home.hero-section') }}" class="nav-link {{ request()->is('admin/home/hero-section', 'admin/home/hero-section/*') ? 'active' : '' }}">Hero Section</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="{{ route('admin.home.campaign-section') }}" class="nav-link {{ request()->is('admin/home/campaign-section-', 'admin/home/campaign-section/*') ? 'active' : '' }}">Campaign Section</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            @endcan
+
+                            @can('access_about_us')
+                                <li class="nav-item">
+                                    <a href="#sidebarAboutUs" class="nav-link {{ request()->is('admin/about-us*') ? 'collapsed active' : '' }}" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarAboutUs">
+                                        About Us
+                                    </a>
+                                    <div class="collapse menu-dropdown {{ request()->is('admin/about-us*') ? 'show' : '' }}" id="sidebarAboutUs">
+                                        <ul class="nav nav-sm flex-column">
+                                            <li class="nav-item">
+                                                <a href="{{ route('admin.about-us.section-1') }}" class="nav-link {{ request()->is('admin/about-us/section-1', 'admin/about-us/section-1/*') ? 'active' : '' }}">Section One</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="{{ route('admin.about-us.section-2') }}" class="nav-link {{ request()->is('admin/about-us/section-2', 'admin/about-us/section-2/*') ? 'active' : '' }}">Section Two</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="{{ route('admin.about-us.section-3') }}" class="nav-link {{ request()->is('admin/about-us/section-3', 'admin/about-us/section-3/*') ? 'active' : '' }}">Section Three</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            @endcan
+
+                            @can('access_contact_us')
+                                <li class="nav-item">
+                                    <a href="#sidebarContactUs" class="nav-link {{ request()->is('admin/contact-us/*') ? 'collapsed active' : '' }}" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarContactUs">
+                                        Contact Us
+                                    </a>
+                                    <div class="collapse menu-dropdown {{ request()->is('admin/contact-us/*') ? 'show' : '' }}" id="sidebarContactUs">
+                                        <ul class="nav nav-sm flex-column">
+                                            <li class="nav-item">
+                                                <a href="{{ route('admin.contact-us.edit') }}" class="nav-link {{ request()->is('admin/contact-us/edit') || request()->is('admin/contact-us/edit/*') ? 'active' : '' }}">Section Contents</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="{{ route('admin.contact-us.index') }}" class="nav-link {{ request()->is('admin/contact-us/index') || request()->is('admin/contact-us/index/*') ? 'active' : '' }}">Messages</a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </li>
                             @endcan
 
                             @can('access_faq')
                                 <li class="nav-item">
                                     <a href="{{ route('admin.faqs.index') }}" class="nav-link {{ request()->is('admin/faqs') || request()->is('admin/faqs/*') ? 'active' : '' }}">
-                                        <i class="fa-fw fas fa-unlock-alt"></i> <span >About Us</span>
-                                    </a>
-                                </li>
-                            @endcan
-
-                            @can('access_faq')
-                                <li class="nav-item">
-                                    <a href="{{ route('admin.faqs.index') }}" class="nav-link {{ request()->is('admin/faqs') || request()->is('admin/faqs/*') ? 'active' : '' }}">
-                                        <i class="fa-fw fas fa-unlock-alt"></i> <span >Contact Us</span>
-                                    </a>
-                                </li>
-                            @endcan
-
-                            @can('access_faq')
-                                <li class="nav-item">
-                                    <a href="{{ route('admin.faqs.index') }}" class="nav-link {{ request()->is('admin/faqs') || request()->is('admin/faqs/*') ? 'active' : '' }}">
-                                        <i class="fa-fw fas fa-unlock-alt"></i> <span >FAQ</span>
-                                    </a>
-                                </li>
-                            @endcan
-
-                            @can('access_faq')
-                                <li class="nav-item">
-                                    <a href="{{ route('admin.faqs.index') }}" class="nav-link {{ request()->is('admin/faqs') || request()->is('admin/faqs/*') ? 'active' : '' }}">
-                                        <i class="fa-fw fas fa-unlock-alt"></i> <span >FAQ</span>
+                                        <span >FAQ</span>
                                     </a>
                                 </li>
                             @endcan
@@ -109,15 +177,13 @@
                             @can('access_privacy_policy')
                                 <li class="nav-item">
                                     <a href="{{ route('admin.privacy-policy.index') }}" class="nav-link {{ request()->is('admin/privacy-policy') || request()->is('admin/privacy-policy/*') ? 'active' : '' }}">
-                                        <i class="fa-fw fas fa-unlock-alt"></i> <span >Privacy & Policy</span>
+                                        <span >Privacy & Policy</span>
                                     </a>
                                 </li>
                             @endcan
                         </ul>
                     </div>
                 </li>
-
-
 
                 <li class="nav-item">
                     <a href="#" class="nav-link" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">

@@ -2,7 +2,7 @@
 <header class="rbt-header rbt-header-3">
     <div class="rbt-sticky-placeholder"></div>
 
-    @include('web.include.top-header')
+    {{-- @include('web.include.top-header') --}}
 
     <!-- Start Header Top -->
     <div class="rbt-header-middle position-relative rbt-header-mid-1 header-space-betwween bg-color-white rbt-border-bottom d-none d-xl-block">

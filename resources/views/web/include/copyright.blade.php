@@ -9,7 +9,7 @@
                 <ul class="copyright-link rbt-link-hover justify-content-center justify-content-lg-end mt_sm--10 mt_md--10">
                     <li><a href="{{ route('courses') }}">Courses</a></li>
                     <li><a href="{{ route('contact-us') }}">Contact Us</a></li>
-                    <li><a href="#">Terms of service</a></li>
+                    <li><a href="{{ route('privacy-policy') }}">Privacy Policy</a></li>
                 </ul>
             </div>
         </div>

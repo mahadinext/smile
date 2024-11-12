@@ -37,6 +37,7 @@ Route::get('/teacher/{id}/profile', [TeacherController::class, 'profile'])->name
 Route::get('/about-us', [AboutUsController::class, 'index'])->name('about-us');
 
 Route::get('/contact-us', [ContactUsController::class, 'index'])->name('contact-us');
+Route::post('/contact-message/store', [ContactUsController::class, 'store'])->name('contact-message.store');
 
 Route::get('/faqs', [FaqsController::class, 'index'])->name('faqs');
 

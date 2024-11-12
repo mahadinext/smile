@@ -107,13 +107,21 @@
             },
             fontFamily: {
                 options: [
-                    'default',
-                    'Ubuntu, Arial, sans-serif',
-                    'Ubuntu Mono, Courier New, Courier, monospace',
-                    'Georgia, serif',
-                    'Times New Roman, Times, serif',
-                    'Comic Sans MS, cursive'
-                ]
+                    "default",
+                    "Arial, Helvetica, sans-serif",
+                    "Courier New, Courier, monospace",
+                    "Georgia, serif",
+                    "Lucida Sans Unicode, Lucida Grande, sans-serif",
+                    "Tahoma, Geneva, sans-serif",
+                    "Times New Roman, Times, serif",
+                    "Trebuchet MS, Helvetica, sans-serif",
+                    "Verdana, Geneva, sans-serif",
+                ],
+                supportAllValues: true,
+            },
+            fontSize: {
+                options: [10, 12, 14, "default", 18, 20, 22],
+                supportAllValues: true,
             },
             fontColor: {
                 colorPicker: {
@@ -129,6 +137,19 @@
                         'transparent' // Add transparent as an option
                     ]
                 }
+            },
+            link: {
+                decorators: {
+                    addTargetToExternalLinks: true,
+                    defaultProtocol: "https://",
+                    toggleDownloadable: {
+                        mode: "manual",
+                        label: "Downloadable",
+                        attributes: {
+                            download: "file",
+                        },
+                    },
+                },
             }
         })
         .catch( error => {

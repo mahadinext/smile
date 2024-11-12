@@ -37,3 +37,6 @@
         enableSeconds: true // Enable seconds in the picker
     });
 </script>
+
+{{-- Bootstrap Color Pickr --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/2.3.3/js/bootstrap-colorpicker.min.js"></script>

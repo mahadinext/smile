@@ -86,13 +86,14 @@ class UpdateTeacherProfileRequest extends FormRequest
                 'file',
                 'mimes:jpeg,png,jpg,gif', // Specifies acceptable file types
                 'max:2048', // Max file size of 2MB
+                'dimensions:min_width=415,min_height=555,max_width=415,max_height=555',
             ],
             'cover_image' => [
                 'nullable',
                 'file',
                 'mimes:jpeg,png,jpg,gif', // Specifies acceptable file types
                 'max:2048', // Max file size of 2MB
-                'dimensions:min_width=945,min_height=255,max_width=945,max_height=255',
+                'dimensions:min_width=2610,min_height=700,max_width=2610,max_height=700',
             ],
             'nid_no' => [
                 'required',

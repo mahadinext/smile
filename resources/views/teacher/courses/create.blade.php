@@ -335,7 +335,7 @@
                         </div>
                         <div class="card-body">
                             <div class="mb-3">
-                                <label class="required" for="course_card_image">Course Card Image (300 * 205)</label>
+                                <label class="required" for="course_card_image">Course Card Image (710 * 488)</label>
                                 <input class="form-control mb-3 {{ $errors->has('course_card_image') ? 'is-invalid' : '' }}" type="file" name="course_card_image" id="course_card_image" accept="image/*" required>
                                 @if($errors->has('course_card_image'))
                                     <div class="invalid-feedback">
@@ -345,7 +345,7 @@
                             </div>
 
                             <div class="mb-3">
-                                <label class="required" for="promo_image">Promotional Image (665 * 460)</label>
+                                <label class="required" for="promo_image">Promotional Image (710 * 488)</label>
                                 <input class="form-control mb-3 {{ $errors->has('promo_image') ? 'is-invalid' : '' }}" type="file" name="promo_image" id="promo_image" accept="image/*" required>
                                 @if($errors->has('promo_image'))
                                     <div class="invalid-feedback">
