@@ -11,14 +11,42 @@
         </a>
         <div class="rbt-user-menu-list-wrapper">
             <div class="inner">
-                @if (isset(app('student')->id))
+                @if (isset(app('admin')->id))
                     <div class="rbt-admin-profile">
                         <div class="admin-thumbnail">
                             <img src="{!! asset('web/assets/images/team/avatar.jpg') !!}" alt="User Images">
                         </div>
                         <div class="admin-info">
                             <span class="name">{{Auth::user()->name}}</span>
-                            <a class="rbt-btn-link color-primary" href="profile.html.htm">View
+                            <a class="rbt-btn-link color-primary" href="#">View
+                                Profile</a>
+                        </div>
+                    </div>
+                    <ul class="user-list-wrapper">
+                        <li>
+                            <a href="{{ route('admin.dashboard') }}">
+                                <i class="feather-home"></i>
+                                <span>My Dashboard</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <hr class="mt--10 mb--10">
+                    <ul class="user-list-wrapper">
+                        <li>
+                            <a href="#" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">
+                                <i class="feather-log-out"></i>
+                                <span>Logout</span>
+                            </a>
+                        </li>
+                    </ul>
+                @elseif (isset(app('student')->id))
+                    <div class="rbt-admin-profile">
+                        <div class="admin-thumbnail">
+                            <img src="{!! asset('web/assets/images/team/avatar.jpg') !!}" alt="User Images">
+                        </div>
+                        <div class="admin-info">
+                            <span class="name">{{Auth::user()->name}}</span>
+                            <a class="rbt-btn-link color-primary" href="#">View
                                 Profile</a>
                         </div>
                     </div>
@@ -31,12 +59,6 @@
                         </li>
                         <li>
                             <a href="#">
-                                <i class="feather-bookmark"></i>
-                                <span>Bookmark</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
                                 <i class="feather-shopping-bag"></i>
                                 <span>Enrolled Courses</span>
                             </a>
@@ -45,39 +67,6 @@
                             <a href="#">
                                 <i class="feather-heart"></i>
                                 <span>Wishlist</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="feather-star"></i>
-                                <span>Reviews</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="feather-list"></i>
-                                <span>My Quiz Attempts</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="feather-clock"></i>
-                                <span>Order History</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="feather-message-square"></i>
-                                <span>Question & Answer</span>
-                            </a>
-                        </li>
-                    </ul>
-                    <hr class="mt--10 mb--10">
-                    <ul class="user-list-wrapper">
-                        <li>
-                            <a href="#">
-                                <i class="feather-book-open"></i>
-                                <span>Getting Started</span>
                             </a>
                         </li>
                     </ul>
@@ -103,7 +92,7 @@
                         </div>
                         <div class="admin-info">
                             <span class="name">{{Auth::user()->name}}</span>
-                            <a class="rbt-btn-link color-primary" href="profile.html.htm">View
+                            <a class="rbt-btn-link color-primary" href="#">View
                                 Profile</a>
                         </div>
                     </div>
@@ -116,53 +105,14 @@
                         </li>
                         <li>
                             <a href="#">
-                                <i class="feather-bookmark"></i>
-                                <span>Bookmark</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="feather-shopping-bag"></i>
-                                <span>Enrolled Courses</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="feather-heart"></i>
-                                <span>Wishlist</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
                                 <i class="feather-star"></i>
                                 <span>Reviews</span>
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                <i class="feather-list"></i>
-                                <span>My Quiz Attempts</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
                                 <i class="feather-clock"></i>
                                 <span>Order History</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="feather-message-square"></i>
-                                <span>Question & Answer</span>
-                            </a>
-                        </li>
-                    </ul>
-                    <hr class="mt--10 mb--10">
-                    <ul class="user-list-wrapper">
-                        <li>
-                            <a href="#">
-                                <i class="feather-book-open"></i>
-                                <span>Getting Started</span>
                             </a>
                         </li>
                     </ul>
