@@ -39,12 +39,18 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="alert"
                                         aria-label="Close"></button>
                                 </div>
+                            @elseif (session('postRegistrationMessage'))
+                                <div class="alert alert-success alert-dismissible fade show my-2" role="alert">
+                                    <strong>{{ session('postRegistrationMessage') }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
                             @endif
                             <h3 class="title">Account Information</h3>
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-12 my-3">
                                     <div class="rbt-form-group">
-                                        <label for="email">{{ trans('global.login_email') }} *</label>
+                                        <label for="email">{{ trans('global.login_email') }} <span style="color:red">*</span></label>
                                         <input id="email" name="email" type="text" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" required autocomplete="email" autofocus value="{{ old('email', null) }}">
                                         @if($errors->has('email'))
                                             <div class="invalid-feedback">
@@ -56,7 +62,7 @@
 
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-12 my-3">
                                     <div class="rbt-form-group">
-                                        <label for="phone_no">Phone No *</label>
+                                        <label for="phone_no">Phone No <span style="color:red">*</span></label>
                                         <input id="phone_no" name="phone_no" type="text" class="form-control {{ $errors->has('phone_no') ? ' is-invalid' : '' }}" required autofocus value="{{ old('phone_no', null) }}">
                                         @if($errors->has('phone_no'))
                                             <div class="invalid-feedback">
@@ -68,7 +74,7 @@
 
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-12 my-3">
                                     <div class="rbt-form-group">
-                                        <label for="password">{{ trans('global.login_password') }} *</label>
+                                        <label for="password">{{ trans('global.login_password') }} <span style="color:red">*</span></label>
                                         <input id="password" name="password" type="password" class="form-control {{ $errors->has('password') ? ' is-invalid' : '' }}" required placeholder="{{ trans('global.login_password') }} *" value="{{ old('password', null) }}">
                                         @if($errors->has('password'))
                                             <div class="invalid-feedback">
@@ -80,7 +86,7 @@
 
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-12 my-3">
                                     <div class="rbt-form-group">
-                                        <label for="confirm_password">Confirm {{ trans('global.login_password') }} *</label>
+                                        <label for="confirm_password">Confirm {{ trans('global.login_password') }} <span style="color:red">*</span></label>
                                         <input id="confirm_password" name="confirm_password" type="password" class="form-control {{ $errors->has('confirm_password') ? ' is-invalid' : '' }}" required placeholder="Confirm {{ trans('global.login_password') }} *" value="{{ old('confirm_password', null) }}">
                                         @if($errors->has('confirm_password'))
                                             <div class="invalid-feedback">
@@ -103,7 +109,7 @@
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-12 my-3">
                                     <div class="rbt-form-group">
-                                        <label for="firstname">First Name *</label>
+                                        <label for="firstname">First Name <span style="color:red">*</span></label>
                                         <input id="first_name" name="first_name" type="text" class="form-control {{ $errors->has('first_name') ? ' is-invalid' : '' }}" required value="{{ old('first_name', null) }}">
                                         @if($errors->has('first_name'))
                                             <div class="invalid-feedback">
@@ -114,7 +120,7 @@
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-12 my-3">
                                     <div class="rbt-form-group">
-                                        <label for="lastname">Last Name *</label>
+                                        <label for="lastname">Last Name <span style="color:red">*</span></label>
                                         <input id="last_name" name="last_name" type="text" class="form-control {{ $errors->has('last_name') ? ' is-invalid' : '' }}" autofocus value="{{ old('last_name', null) }}">
                                         @if($errors->has('last_name'))
                                             <div class="invalid-feedback">
@@ -125,7 +131,7 @@
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-12 my-3">
                                     <div class="rbt-form-group">
-                                        <label for="lastname">DOB *</label>
+                                        <label for="lastname">DOB <span style="color:red">*</span></label>
                                         <input id="dob" name="dob" type="date" class="form-control {{ $errors->has('dob') ? ' is-invalid' : '' }}" autofocus value="{{ old('dob', null) }}">
                                         @if($errors->has('dob'))
                                             <div class="invalid-feedback">
@@ -202,7 +208,7 @@
 
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-12 my-3">
                                     <div class="rbt-form-group">
-                                        <label for="image">Image *</label>
+                                        <label for="image">Image (415 * 555) <span style="color:red">*</span></label>
                                         <input type="file" class="form-control form-control-file {{ $errors->has('image') ? ' is-invalid' : '' }}" name="image" id="image" accept=".jpeg, .jpg, .png, .gif">
                                         @if($errors->has('image'))
                                             <div class="invalid-feedback">
@@ -229,7 +235,7 @@
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-12 my-3">
                                     <div class="rbt-form-group">
-                                        <label for="lastname">NID No *</label>
+                                        <label for="lastname">NID No <span style="color:red">*</span></label>
                                         <input id="nid_no" name="nid_no" type="number" class="form-control {{ $errors->has('nid_no') ? ' is-invalid' : '' }}" required autofocus value="{{ old('nid_no', null) }}">
                                         @if($errors->has('nid_no'))
                                             <div class="invalid-feedback">
@@ -241,7 +247,7 @@
 
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-12 my-3">
                                     <div class="rbt-form-group">
-                                        <label for="nid_front_image">NID Front Image *</label>
+                                        <label for="nid_front_image">NID Front Image <span style="color:red">*</span></label>
                                         <input type="file" class="form-control form-control-file {{ $errors->has('nid_front_image') ? ' is-invalid' : '' }}" name="nid_front_image" id="nid_front_image" accept=".jpeg, .jpg, .png, .gif">
                                         @if($errors->has('nid_front_image'))
                                             <div class="invalid-feedback">
@@ -257,7 +263,7 @@
 
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-12 my-3">
                                     <div class="rbt-form-group">
-                                        <label for="nid_back_image">NID Back Image *</label>
+                                        <label for="nid_back_image">NID Back Image <span style="color:red">*</span></label>
                                         <input type="file" class="form-control form-control-file {{ $errors->has('nid_back_image') ? ' is-invalid' : '' }}" name="nid_back_image" id="nid_back_image" accept=".jpeg, .jpg, .png, .gif">
                                         @if($errors->has('nid_back_image'))
                                             <div class="invalid-feedback">

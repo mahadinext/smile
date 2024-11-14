@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\Constants\AppConstants;
+use App\Helper\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTeacherRequest;
+use App\Mail\VerifyEmail;
 use App\Models\Teacher\Teachers;
 use App\Models\User;
 use Carbon\Carbon;
@@ -14,6 +17,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -51,10 +55,28 @@ class TeacherAuthController extends Controller
         try {
             $data = $request->all();
             $createUser = $this->createUser($request);
+
+            if ($createUser) {
+                $mailData = [
+                    'token' => $this->token,
+                    'first_name' => $data['first_name'],
+                    'route' => 'teacher.verify',
+                    'user_type' => User::TEACHER,
+                    'email' => AppConstants::HELP_MAIL,
+                ];
+
+                Mail::to($request->email)->send(new VerifyEmail($mailData));
+                return Redirect()->back()->with('postRegistrationMessage', 'A verification mail has been sent to your email address, please confirm your mail account.');
+
+                return Redirect()->route('teacher.login-page')->with('signinPageMessage', 'You have been registered, please verify your email to signin your account.');
+                // dd("Email is sent successfully.");
+
+                // return redirect("dashboard")->withSuccess('Great! You have Successfully loggedin');
+            }
             // dd($data);
         } catch (Exception $exception) {
-            dd("TeacherAuthController::register() ☠💀");
             Log::error("TeacherAuthController::register() ", [$exception]);
+            return Redirect()->back()->with('registrationMessage', 'Something went wrong!');
         }
     }
 
@@ -67,7 +89,7 @@ class TeacherAuthController extends Controller
     {
         try {
             DB::transaction(function () use ($request) {
-                $this->token = Str::random(64);
+                $this->token = Helper::generateUniqueToken();
                 // First query: Create a new user
                 $this->user = User::create([
                     'name' => $request->first_name . ' ' . $request->last_name,
@@ -75,7 +97,7 @@ class TeacherAuthController extends Controller
                     'phone_no' => $request->phone_no,
                     'password' => Hash::make($request->password),
                     'user_type' => User::TEACHER,
-                    'email_verified_at' => Carbon::now(),
+                    // 'email_verified_at' => Carbon::now(),
                     'token' => $this->token,
                     'approved' => 1
                 ]);
@@ -171,26 +193,27 @@ class TeacherAuthController extends Controller
         try {
             $verifyUser = User::where('token', $token)->first();
 
-            $message = 'Sorry your email cannot be identified.';
+            $message = 'Sorry your email cannot be identified';
 
-            if (!is_null($verifyUser)) {
-                $user = $verifyUser->user;
+            if ($verifyUser) {
+                $user = User::find($verifyUser->id);
+                $user = $verifyUser;
                 // dd($user);
 
-                if (!$user->email_verified_at) {
-                    $verifyUser->user->email_verified_at = Carbon::now()->getTimestamp();
-                    $verifyUser->user->save();
-                    $message = "Your e-mail is verified. You can now login.";
-                    $user = User::where('id', $verifyUser->user_id)->first();
+                if (!$verifyUser->email_verified_at) {
+                    $verifyUser->email_verified_at = Carbon::now();
+                    $verifyUser->save();
+                    $message = "Your e-mail is verified. You can now login";
 
                     Auth::login($user);
-                    return redirect()->intended('/teacher')->withSuccess('Signed in');
+
+                    return redirect('/teacher')->withSuccess('Signed in');
                 } else {
                     $message = "Your e-mail is already verified. You can now login.";
-                    $user = User::where('id', $verifyUser->user_id)->first();
 
                     Auth::login($user);
-                    return redirect()->intended('/teacher')->withSuccess('Signed in');
+
+                    return redirect('/teacher')->withSuccess('Signed in');
                 }
             }
             // dd($message);

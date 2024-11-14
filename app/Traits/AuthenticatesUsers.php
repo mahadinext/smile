@@ -111,7 +111,7 @@ trait AuthenticatesUsers
      */
     protected function sendLoginResponse(Request $request)
     {
-        $request->session()->regenerate();
+        // $request->session()->regenerate();
 
         $this->clearLoginAttempts($request);
 
@@ -132,13 +132,24 @@ trait AuthenticatesUsers
         }
 
         if ($user->user_type == User::STUDENT) {
+            if (!$user->email_verified_at) {
+                $this->logout($request);
+                return Redirect()->route('student.login-page')->with('signinErrorMessage', 'Please verify your email to signin your account.');
+            }
+
             if ($request->session()->has('url.intended')) {
                 return redirect()->intended($request->session()->get('url.intended'))->withSuccess('Signed in');
             }
+
             return redirect('/student')->withSuccess('Signed in');
         }
 
         if ($user->user_type == User::TEACHER) {
+            if (!$user->email_verified_at) {
+                $this->logout($request);
+                return Redirect()->route('teacher.login-page')->with('signinErrorMessage', 'Please verify your email to signin your account.');
+            }
+
             if ($request->session()->has('url.intended')) {
                 return redirect()->intended($request->session()->get('url.intended'))->withSuccess('Signed in');
             }

@@ -95,20 +95,20 @@
 
 <div class="email-wrapper">
     <div class="email-container">
-        <h1>✨ Almost There, [First Name]! ✨</h1>
+        <h1>✨ Almost There, [{{ $mailData['first_name'] }}]! ✨</h1>
 
-        <p>We’re thrilled you want to join us! To get started, we just need you to <strong>verify your email</strong> so you can unlock all the amazing features waiting for you.</p>
-        <p>Click the link below to verify your email, and you’ll be all set to dive in:</p>
+        <p>We’re thrilled to know that you want to join us! To get started, we just need you to <strong>verify your email</strong> so you can unlock all the amazing features waiting for you.</p>
+        <p>Just click the link below to verify your email, and you’ll be all set to dive in:</p>
 
         <p>
-            <a href="{{ route('js-user.verify', $mailData['token']) }}" class="btn">
+            <a href="{{ route($mailData['route'], $mailData['token']) }}" class="btn">
                 🔑 Verify My Email
             </a>
         </p>
 
         <p class="footer">
             If you didn’t sign up for this, no worries! You can simply ignore this message.
-            <br>Or if you have any issues, reach out to us at <a href="mailto:support@example.com">support@example.com</a>.
+            <br>Or if you have any issues, reach out to us at <a href="mailto:{{ $mailData['email'] }}">{{ $mailData['email'] }}</a>.
         </p>
     </div>
 </div>

@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Constants\AppConstants;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -31,7 +32,7 @@ class VerifyEmail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Verify Email',
+            subject: AppConstants::VERIFICATION_EMAIL_SUBJECT,
         );
     }
 
@@ -41,7 +42,7 @@ class VerifyEmail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'v1.careepick.pages.auth.emailVerificationEmail',
+            view: AppConstants::VERIFICATION_EMAIL_TEMPLATE,
         );
     }
 

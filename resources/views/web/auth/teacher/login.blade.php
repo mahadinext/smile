@@ -27,7 +27,7 @@
                             @csrf
                             <div class="col-12 my-3">
                                 <div class="rbt-form-group">
-                                    <label>{{ trans('global.login_email') }} *</label>
+                                    <label>{{ trans('global.login_email') }} <span style="color:red">*</span></label>
                                     <input id="email" name="email" type="text" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" required autocomplete="email" autofocus value="{{ old('email', null) }}">
                                     @if($errors->has('email'))
                                         <div class="invalid-feedback">
@@ -39,7 +39,7 @@
 
                             <div class="col-12 my-3">
                                 <div class="rbt-form-group">
-                                    <label>{{ trans('global.login_password') }} *</label>
+                                    <label>{{ trans('global.login_password') }} <span style="color:red">*</span></label>
                                     <input id="password" name="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" required value="{{ old('password', null) }}">
                                     @if($errors->has('password'))
                                         <div class="invalid-feedback">
@@ -59,10 +59,10 @@
                                 </button>
                             </div>
                         </form>
-                        <div class="text-center mt-5">
+                        {{-- <div class="text-center mt-5">
                             <a class="rbt-btn-link text-primary" href="#">Forgot password?</a>
-                        </div>
-                        <div class="text-center">
+                        </div> --}}
+                        <div class="text-center mt-5">
                             <a class="rbt-btn-link text-primary" href="{{ route('teacher.register-page') }}">Register</a>
                         </div>
                     </div>

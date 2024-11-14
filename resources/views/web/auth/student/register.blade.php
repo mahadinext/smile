@@ -14,6 +14,12 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="alert"
                                     aria-label="Close"></button>
                             </div>
+                        @elseif (session('postRegistrationMessage'))
+                            <div class="alert alert-success alert-dismissible fade show my-2" role="alert">
+                                <strong>{{ session('postRegistrationMessage') }}</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
                         @endif
                         <h3 class="title">Register</h3>
                         <form class="max-width-auto" method="POST" action="{{ route('student.register') }}">
@@ -22,7 +28,7 @@
                                 <div class="col-6 my-2">
                                     <div class="form-group">
                                         <input id="first_name" name="first_name" type="text" class="form-control {{ $errors->has('first_name') ? ' is-invalid' : '' }}" required autofocus placeholder="First Name *" value="{{ old('first_name', null) }}">
-                                        {{-- <label>First Name *</label> --}}
+                                        {{-- <label>First Name <span style="color:red">*</span></label> --}}
                                         <span class="focus-border"></span>
                                         @if($errors->has('first_name'))
                                             <div class="invalid-feedback">
@@ -35,7 +41,7 @@
                                 <div class="col-6 my-2">
                                     <div class="form-group">
                                         <input id="last_name" name="last_name" type="text" class="form-control {{ $errors->has('last_name') ? ' is-invalid' : '' }}" autofocus placeholder="Last Name *" value="{{ old('last_name', null) }}">
-                                        {{-- <label>Last Name *</label> --}}
+                                        {{-- <label>Last Name <span style="color:red">*</span></label> --}}
                                         <span class="focus-border"></span>
                                         @if($errors->has('last_name'))
                                             <div class="invalid-feedback">
@@ -48,7 +54,7 @@
                                 <div class="col-6 my-2">
                                     <div class="form-group">
                                         <input id="email" name="email" type="text" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" required autocomplete="email" autofocus placeholder="{{ trans('global.login_email') }} *" value="{{ old('email', null) }}">
-                                        {{-- <label>{{ trans('global.login_email') }} *</label> --}}
+                                        {{-- <label>{{ trans('global.login_email') }} <span style="color:red">*</span></label> --}}
                                         <span class="focus-border"></span>
                                         @if($errors->has('email'))
                                             <div class="invalid-feedback">
@@ -61,7 +67,7 @@
                                 <div class="col-6 my-2">
                                     <div class="form-group">
                                         <input id="phone_no" name="phone_no" type="text" class="form-control {{ $errors->has('phone_no') ? ' is-invalid' : '' }}" required autofocus placeholder="Phone No *" value="{{ old('phone_no', null) }}">
-                                        {{-- <label>Phone No *</label> --}}
+                                        {{-- <label>Phone No <span style="color:red">*</span></label> --}}
                                         <span class="focus-border"></span>
                                         @if($errors->has('phone_no'))
                                             <div class="invalid-feedback">
@@ -74,7 +80,7 @@
                                 <div class="col-6 my-2">
                                     <div class="form-group">
                                         <input id="password" name="password" type="password" class="form-control {{ $errors->has('password') ? ' is-invalid' : '' }}" required placeholder="{{ trans('global.login_password') }} *" value="{{ old('password', null) }}">
-                                        {{-- <label>{{ trans('global.login_password') }} *</label> --}}
+                                        {{-- <label>{{ trans('global.login_password') }} <span style="color:red">*</span></label> --}}
                                         <span class="focus-border"></span>
                                         @if($errors->has('password'))
                                             <div class="invalid-feedback">
@@ -87,7 +93,7 @@
                                 <div class="col-6 my-2">
                                     <div class="form-group">
                                         <input id="confirm_password" name="confirm_password" type="password" class="form-control {{ $errors->has('confirm_password') ? ' is-invalid' : '' }}" required placeholder="Confirm {{ trans('global.login_password') }} *" value="{{ old('confirm_password', null) }}">
-                                        {{-- <label>Confirm {{ trans('global.login_password') }} *</label> --}}
+                                        {{-- <label>Confirm {{ trans('global.login_password') }} <span style="color:red">*</span></label> --}}
                                         <span class="focus-border"></span>
                                         @if($errors->has('confirm_password'))
                                             <div class="invalid-feedback">
