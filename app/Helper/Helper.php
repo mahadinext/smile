@@ -71,9 +71,9 @@ class Helper
      */
     public static function getWebColor()
     {
-        return Cache::remember("web-color-cache", 60*60*24, function () {
+        // return Cache::remember("web-color-cache", 60*60*24, function () {
             return WebColor::first();
-        });
+        // });
     }
 
     /**

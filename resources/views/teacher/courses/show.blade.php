@@ -14,9 +14,28 @@
                 <div class="col-lg-12" id="course-basic-section">
                     <div class="card">
                         <div class="card-body">
+                            @if(Auth::user()->user_type == App\Models\User::ADMIN)
+                                <div class="mb-3">
+                                    <label class="required" for="teacher_id">Teacher</label>
+                                    <select class="form-control search select2 {{ $errors->has('teacher_id') ? 'is-invalid' : '' }}" name="teacher_id" id="teacher_id" disabled>
+                                        <option value="">Select</option>
+                                        @if (isset($teachers))
+                                            @foreach ($teachers as $key => $data)
+                                                <option value="{{ $data->user_id }}" {{ (old('teacher_id') == $data->user_id || $course->teacher_id == $data->user_id) ? 'selected' : '' }}>{{ $data->first_name . ' ' . $data->last_name }}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                    @if($errors->has('teacher_id'))
+                                        <div class="invalid-feedback">
+                                            {{ $errors->first('teacher_id') }}
+                                        </div>
+                                    @endif
+                                </div>
+                            @endif
+
                             <div class="mb-3">
                                 <label class="required" for="course_category">Course Category</label>
-                                <select class="form-control search select2 {{ $errors->has('course_category') ? 'is-invalid' : '' }}" name="course_category" id="course_category" required>
+                                <select class="form-control search select2 {{ $errors->has('course_category') ? 'is-invalid' : '' }}" name="course_category" id="course_category" disabled>
                                     <option value="">Select</option>
                                     @foreach ($courseCategory as $key => $value)
                                         <option value="{{ $key }}" {{ (old('course_category') == $key || $course->category_id == $key) ? 'selected' : '' }}>{{ $value }}</option>
@@ -31,7 +50,7 @@
 
                             <div class="mb-3">
                                 <label class="required" for="title">Title</label>
-                                <input class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" type="text" name="title" id="title" value="{{ old('title', $course->title ?? '') }}" required>
+                                <input class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" type="text" name="title" id="title" value="{{ old('title', $course->title ?? '') }}" disabled>
                                 @if($errors->has('title'))
                                     <div class="invalid-feedback">
                                         {{ $errors->first('title') }}
@@ -41,7 +60,7 @@
 
                             <div class="mb-3">
                                 <label class="required" for="short_description">Short Description</label>
-                                <textarea class="form-control {{ $errors->has('short_description') ? 'is-invalid' : '' }} ckeditor-classic" name="short_description" id="short_description">{{ old('short_description', $course->short_description ?? '') }}</textarea>
+                                <textarea class="form-control {{ $errors->has('short_description') ? 'is-invalid' : '' }} ckeditor-classic" name="short_description" id="short_description" disabled>{{ old('short_description', $course->short_description ?? '') }}</textarea>
 
                                 @if($errors->has('short_description'))
                                     <div class="invalid-feedback">
@@ -52,7 +71,7 @@
 
                             <div class="mb-3">
                                 <label class="required" for="long_description">Long Description (What you'll learn)</label>
-                                <textarea class="form-control {{ $errors->has('long_description') ? 'is-invalid' : '' }} ckeditor-classic" name="long_description" id="long_description">{{ old('long_description', $course->long_description ?? '') }}</textarea>
+                                <textarea class="form-control {{ $errors->has('long_description') ? 'is-invalid' : '' }} ckeditor-classic" name="long_description" id="long_description" disabled>{{ old('long_description', $course->long_description ?? '') }}</textarea>
 
                                 @if($errors->has('long_description'))
                                     <div class="invalid-feedback">
@@ -63,7 +82,7 @@
 
                             <div class="mb-3">
                                 <label class="required" for="course_start_date">Course Starts Date</label>
-                                <input type="text" class="form-control datetimepicker {{ $errors->has('course_start_date') ? 'is-invalid' : '' }}" name="course_start_date" id="course_start_date" value="{{ old('course_start_date', $course->course_start_date ?? '') }}" required>
+                                <input type="text" class="form-control datetimepicker {{ $errors->has('course_start_date') ? 'is-invalid' : '' }}" name="course_start_date" id="course_start_date" value="{{ old('course_start_date', $course->course_start_date ?? '') }}" disabled>
                                 @if($errors->has('course_start_date'))
                                     <div class="invalid-feedback">
                                         {{ $errors->first('course_start_date') }}
@@ -88,7 +107,7 @@
                         <div class="card-body">
                             <div class="mb-3">
                                 <label class="required" for="content_title">Title</label>
-                                <input class="form-control {{ $errors->has('content_title') ? 'is-invalid' : '' }}" type="text" name="content_title[]" id="content_title" required>
+                                <input class="form-control {{ $errors->has('content_title') ? 'is-invalid' : '' }}" type="text" name="content_title[]" id="content_title" disabled>
                                 @if($errors->has('content_title'))
                                     <div class="invalid-feedback">
                                         {{ $errors->first('content_title') }}
@@ -123,7 +142,7 @@
                         <div class="card-body">
                             <div class="mb-3">
                                 <label class="required" for="requirments">Requirements</label>
-                                <textarea class="form-control {{ $errors->has('requirments') ? 'is-invalid' : '' }} ckeditor-classic" name="requirments" id="requirments">{{ old('requirments', $course->requirments ?? '') }}</textarea>
+                                <textarea class="form-control {{ $errors->has('requirments') ? 'is-invalid' : '' }} ckeditor-classic" name="requirments" id="requirments" disabled>{{ old('requirments', $course->requirments ?? '') }}</textarea>
 
                                 @if($errors->has('requirments'))
                                     <div class="invalid-feedback">
@@ -143,7 +162,7 @@
                         <div class="card-body">
                             <div class="mb-3">
                                 <label class="required" for="total_class">Total Class</label>
-                                <input class="form-control mb-3 {{ $errors->has('total_class') ? 'is-invalid' : '' }}" type="number" name="total_class" id="total_class" value="{{ old('total_class', $course->total_class ?? '') }}" required>
+                                <input class="form-control mb-3 {{ $errors->has('total_class') ? 'is-invalid' : '' }}" type="number" name="total_class" id="total_class" value="{{ old('total_class', $course->total_class ?? '') }}" disabled>
                                 @if($errors->has('total_class'))
                                     <div class="invalid-feedback">
                                         {{ $errors->first('total_class') }}
@@ -153,7 +172,7 @@
 
                             <div class="mb-3">
                                 <div class="form-check">
-                                    <input class="form-check-input {{ $errors->has('certificate') ? 'is-invalid' : '' }}" type="checkbox" name="certificate" id="certificate" value="1" {{ old('certificate', $course->certificate ?? null) == 1 ? 'checked' : '' }}>
+                                    <input class="form-check-input {{ $errors->has('certificate') ? 'is-invalid' : '' }}" type="checkbox" name="certificate" id="certificate" value="1" {{ old('certificate', $course->certificate ?? null) == 1 ? 'checked' : '' }} disabled>
                                     <label class="form-check-label" for="certificate">
                                         Certificate of completion
                                     </label>
@@ -167,7 +186,7 @@
 
                             <div class="mb-3">
                                 <div class="form-check">
-                                    <input class="form-check-input {{ $errors->has('quizes') ? 'is-invalid' : '' }}" type="checkbox" name="quizes" id="quizes" value="1" {{ old('quizes', $course->quizes ?? null) == 1 ? 'checked' : '' }}>
+                                    <input class="form-check-input {{ $errors->has('quizes') ? 'is-invalid' : '' }}" type="checkbox" name="quizes" id="quizes" value="1" {{ old('quizes', $course->quizes ?? null) == 1 ? 'checked' : '' }} disabled>
                                     <label class="form-check-label" for="quizes">
                                         Quizzes and Assessments
                                     </label>
@@ -181,7 +200,7 @@
 
                             <div class="mb-3">
                                 <div class="form-check">
-                                    <input class="form-check-input {{ $errors->has('qa') ? 'is-invalid' : '' }}" type="checkbox" name="qa" id="qa" value="1" {{ old('qa', $course->qa ?? null) == 1 ? 'checked' : '' }}>
+                                    <input class="form-check-input {{ $errors->has('qa') ? 'is-invalid' : '' }}" type="checkbox" name="qa" id="qa" value="1" {{ old('qa', $course->qa ?? null) == 1 ? 'checked' : '' }} disabled>
                                     <label class="form-check-label" for="qa">
                                         Q&A Sessions
                                     </label>
@@ -195,7 +214,7 @@
 
                             <div class="mb-3">
                                 <div class="form-check">
-                                    <input class="form-check-input {{ $errors->has('study_tips') ? 'is-invalid' : '' }}" type="checkbox" name="study_tips" id="study_tips" value="1" {{ old('study_tips', $course->study_tips ?? null) == 1 ? 'checked' : '' }}>
+                                    <input class="form-check-input {{ $errors->has('study_tips') ? 'is-invalid' : '' }}" type="checkbox" name="study_tips" id="study_tips" value="1" {{ old('study_tips', $course->study_tips ?? null) == 1 ? 'checked' : '' }} disabled>
                                     <label class="form-check-label" for="study_tips">
                                         Study Tips and Strategies
                                     </label>
@@ -209,7 +228,7 @@
 
                             <div class="mb-3">
                                 <div class="form-check">
-                                    <input class="form-check-input {{ $errors->has('career_guidance') ? 'is-invalid' : '' }}" type="checkbox" name="career_guidance" id="career_guidance" value="1" {{ old('career_guidance', $course->career_guidance ?? null) == 1 ? 'checked' : '' }}>
+                                    <input class="form-check-input {{ $errors->has('career_guidance') ? 'is-invalid' : '' }}" type="checkbox" name="career_guidance" id="career_guidance" value="1" {{ old('career_guidance', $course->career_guidance ?? null) == 1 ? 'checked' : '' }} disabled>
                                     <label class="form-check-label" for="career_guidance">
                                         Career Guidance
                                     </label>
@@ -223,7 +242,7 @@
 
                             <div class="mb-3">
                                 <div class="form-check">
-                                    <input class="form-check-input {{ $errors->has('progress_tracking') ? 'is-invalid' : '' }}" type="checkbox" name="progress_tracking" id="progress_tracking" value="1" {{ old('progress_tracking', $course->progress_tracking ?? null) == 1 ? 'checked' : '' }}>
+                                    <input class="form-check-input {{ $errors->has('progress_tracking') ? 'is-invalid' : '' }}" type="checkbox" name="progress_tracking" id="progress_tracking" value="1" {{ old('progress_tracking', $course->progress_tracking ?? null) == 1 ? 'checked' : '' }} disabled>
                                     <label class="form-check-label" for="progress_tracking">
                                         Progress Tracking
                                     </label>
@@ -237,7 +256,7 @@
 
                             <div class="mb-3">
                                 <div class="form-check">
-                                    <input class="form-check-input {{ $errors->has('flex_learning_pace') ? 'is-invalid' : '' }}" type="checkbox" name="flex_learning_pace" id="flex_learning_pace" value="1" {{ old('flex_learning_pace', $course->flex_learning_pace ?? null) == 1 ? 'checked' : '' }}>
+                                    <input class="form-check-input {{ $errors->has('flex_learning_pace') ? 'is-invalid' : '' }}" type="checkbox" name="flex_learning_pace" id="flex_learning_pace" value="1" {{ old('flex_learning_pace', $course->flex_learning_pace ?? null) == 1 ? 'checked' : '' }} disabled>
                                     <label class="form-check-label" for="flex_learning_pace">
                                         Flexible Learning Pace
                                     </label>
@@ -261,7 +280,7 @@
                         <div class="card-body">
                             <div class="mb-3">
                                 <label class="required" for="price">Price</label>
-                                <input class="form-control mb-3 {{ $errors->has('price') ? 'is-invalid' : '' }}" type="number" name="price" id="price" value="{{ old('price', $course->price ?? '') }}" required>
+                                <input class="form-control mb-3 {{ $errors->has('price') ? 'is-invalid' : '' }}" type="number" name="price" id="price" value="{{ old('price', $course->price ?? '') }}" disabled>
                                 @if($errors->has('price'))
                                     <div class="invalid-feedback">
                                         {{ $errors->first('price') }}
@@ -271,7 +290,7 @@
 
                             <div class="mb-3">
                                 <label class="" for="discount_type">Discount Type</label>
-                                <select class="form-control select2 {{ $errors->has('discount_type') ? 'is-invalid' : '' }}" name="discount_type" id="discount_type">
+                                <select class="form-control select2 {{ $errors->has('discount_type') ? 'is-invalid' : '' }}" name="discount_type" id="discount_type" disabled>
                                     <option value="">Select</option>
                                     @foreach (App\Models\Course::TYPE_ARRAY as $key => $value)
                                         <option value="{{ $key }}" {{ (old('discount_type') == $key || $course->discount_type == $key) ? 'selected' : '' }}>{{ $value }}</option>
@@ -286,7 +305,7 @@
 
                             <div class="mb-3">
                                 <label class="" for="discount_amount">Discount Amount</label>
-                                <input class="form-control {{ $errors->has('discount_amount') ? 'is-invalid' : '' }}" type="text" name="discount_amount" id="discount_amount" value="{{ old('discount_amount', $course->discount_amount ?? '') }}">
+                                <input class="form-control {{ $errors->has('discount_amount') ? 'is-invalid' : '' }}" type="text" name="discount_amount" id="discount_amount" value="{{ old('discount_amount', $course->discount_amount ?? '') }}" disabled>
                                 @if($errors->has('discount_amount'))
                                     <div class="invalid-feedback">
                                         {{ $errors->first('discount_amount') }}
@@ -296,7 +315,7 @@
 
                             <div class="mb-3">
                                 <label class="" for="discount_start_date">Discount Start Date</label>
-                                <input type="text" class="form-control datetimepicker {{ $errors->has('discount_start_date') ? 'is-invalid' : '' }}" name="discount_start_date" id="discount_start_date" value="{{ old('discount_start_date', $course->discount_start_date ?? '') }}">
+                                <input type="text" class="form-control datetimepicker {{ $errors->has('discount_start_date') ? 'is-invalid' : '' }}" name="discount_start_date" id="discount_start_date" value="{{ old('discount_start_date', $course->discount_start_date ?? '') }}" disabled>
                                 @if($errors->has('discount_start_date'))
                                     <div class="invalid-feedback">
                                         {{ $errors->first('discount_start_date') }}
@@ -306,7 +325,7 @@
 
                             <div class="mb-3">
                                 <label class="" for="discount_expiry_date">Discount Expiry Date</label>
-                                <input type="text" class="form-control datetimepicker {{ $errors->has('discount_expiry_date') ? 'is-invalid' : '' }}" name="discount_expiry_date" id="discount_expiry_date" value="{{ old('discount_expiry_date', $course->discount_expiry_date ?? '') }}">
+                                <input type="text" class="form-control datetimepicker {{ $errors->has('discount_expiry_date') ? 'is-invalid' : '' }}" name="discount_expiry_date" id="discount_expiry_date" value="{{ old('discount_expiry_date', $course->discount_expiry_date ?? '') }}" disabled>
                                 @if($errors->has('discount_expiry_date'))
                                     <div class="invalid-feedback">
                                         {{ $errors->first('discount_expiry_date') }}
@@ -367,7 +386,7 @@
                         <div class="card-body">
                             <div class="mb-3">
                                 <label class="required" for="course_status">Course status</label>
-                                <select class="form-control {{ $errors->has('course_status') ? 'is-invalid' : '' }}" name="course_status" id="course_status">
+                                <select class="form-control {{ $errors->has('course_status') ? 'is-invalid' : '' }}" name="course_status" id="course_status" disabled>
                                     <option value="">Select</option>
                                     @foreach ($courseStatus as $key => $label)
                                         @php

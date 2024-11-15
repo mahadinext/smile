@@ -60,6 +60,41 @@
                     </li>
                 @endcan
 
+                @can('teacher_management_access')
+                    <li class="nav-item">
+                        <a class="nav-link menu-link {{ request()->is('admin/courses*','admin/teachers*','teacher/courses*') ? 'collapsed active' : '' }}" href="#teacherManagementPages" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="teacherManagementPages">
+                            <i class="mdi mdi-sticker-text-outline"></i> <span data-key="t-pages">Teacher Management</span>
+                        </a>
+                        <div class="collapse menu-dropdown {{ request()->is('admin/courses*','admin/teachers*','teacher/courses*') ? 'show' : '' }}" id="teacherManagementPages">
+                            <ul class="nav nav-sm flex-column">
+                                @can('access_teacher')
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.teachers.index') }}" class="nav-link {{ request()->is('admin/teachers','admin/teachers/*') ? 'active' : '' }}">
+                                            <i class="mdi mdi-account"></i> <span >Manage Teacher</span>
+                                        </a>
+                                    </li>
+                                @endcan
+
+                                @can('access_change_password')
+                                    {{-- <li class="nav-item">
+                                        <a href="{{ route('admin.change-password.index') }}" class="nav-link {{ request()->is('teacher/change-password') || request()->is('teacher/change-password/*') ? 'active' : '' }}">
+                                            <i class="fa-fw fas fa-briefcase"></i> <span >Change Password</span>
+                                        </a>
+                                    </li> --}}
+                                @endcan
+
+                                @can('access_course')
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.courses.index') }}" class="nav-link {{ request()->is('admin/courses*','teacher/courses*') ? 'active' : '' }}">
+                                            <i class="mdi mdi-book-open"></i> <span >Courses</span>
+                                        </a>
+                                    </li>
+                                @endcan
+                            </ul>
+                        </div>
+                    </li>
+                @endcan
+
                 @can('access_web_elements')
                     <li class="nav-item">
                         <a class="nav-link menu-link {{ request()->is('admin/web/image*', 'admin/web/color*', 'admin/web/typography*', 'admin/web/meta-contents*') ? 'collapsed active' : '' }}" href="#webElementManagementPages" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="webElementManagementPages">

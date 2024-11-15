@@ -1,17 +1,25 @@
 <?php
 
-use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\AboutUsController;
 use App\Http\Controllers\Admin\ContactUsController;
-use App\Http\Controllers\Admin\FaqsController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\FaqsController;
+use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\HomePageController;
 use App\Http\Controllers\Admin\PermissionsController;
 use App\Http\Controllers\Admin\PrivacyPolicyController;
 use App\Http\Controllers\Admin\RolesController;
+use App\Http\Controllers\Admin\TeacherController;
 use App\Http\Controllers\Admin\WebElementController;
+use App\Http\Controllers\Auth\ChangePasswordController;
+use App\Http\Controllers\Teacher\CourseController;
+use App\Http\Controllers\Teacher\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+
+
+
+
 
 Route::redirect('/admin', '/login');
 Route::get('/home', function () {
@@ -43,6 +51,34 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::delete('users/destroy', 'UsersController@massDestroy')->name('users.massDestroy');
     Route::resource('users', 'UsersController');
     Route::get('users/restoreByEmail/{email}', 'UsersController@restoreByEmail')->name('users.restoreByEmail');
+
+    // Courses
+    Route::group(['prefix' => 'courses', 'as' => 'courses.', 'middleware' => ['auth']], function () {
+        Route::get('/', [CourseController::class, 'index'])->name('index');
+        Route::get('/show/{id}', [CourseController::class, 'show'])->name('show');
+        Route::get('/create', [CourseController::class, 'create'])->name('create');
+        Route::post('/store', [CourseController::class, 'store'])->name('store');
+        Route::get('/edit/{id}', [CourseController::class, 'edit'])->name('edit');
+        Route::post('/update/{id}', [CourseController::class, 'update'])->name('update');
+        Route::get('/delete/{id}', [CourseController::class, 'delete'])->name('delete');
+    });
+
+    // Teacher
+    Route::group(['prefix' => 'teachers', 'as' => 'teachers.', 'middleware' => ['auth']], function () {
+        Route::get('/', [TeacherController::class, 'index'])->name('index');
+        Route::get('/show/{id}', [TeacherController::class, 'show'])->name('show');
+        Route::get('/create', [TeacherController::class, 'create'])->name('create');
+        Route::post('/store', [TeacherController::class, 'store'])->name('store');
+        Route::get('/edit/{id}', [TeacherController::class, 'edit'])->name('edit');
+        Route::post('/update/{id}', [TeacherController::class, 'update'])->name('update');
+        Route::get('/delete/{id}', [TeacherController::class, 'delete'])->name('delete');
+    });
+
+    // Teacher Password Change
+    Route::group(['prefix' => 'change-password', 'as' => 'change-password.', 'middleware' => ['auth']], function () {
+        Route::get('/', [ChangePasswordController::class, 'index'])->name('index');
+        Route::post('/update/{id}', [ChangePasswordController::class, 'update'])->name('update');
+    });
 
     // Audit Logs
     Route::resource('audit-logs', 'AuditLogsController', ['except' => ['create', 'store', 'edit', 'update', 'destroy']]);

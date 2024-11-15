@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg">
+<html data-layout="vertical" data-topbar="light" data-sidebar="gradient" data-sidebar-size="lg">
 
     <head>
 

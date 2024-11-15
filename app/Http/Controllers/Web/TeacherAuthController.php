@@ -24,6 +24,7 @@ use Illuminate\Support\Str;
 class TeacherAuthController extends Controller
 {
     private $user = null;
+    private $teacher = null;
     private string $token = '';
 
     /**
@@ -57,15 +58,7 @@ class TeacherAuthController extends Controller
             $createUser = $this->createUser($request);
 
             if ($createUser) {
-                $mailData = [
-                    'token' => $this->token,
-                    'first_name' => $data['first_name'],
-                    'route' => 'teacher.verify',
-                    'user_type' => User::TEACHER,
-                    'email' => AppConstants::HELP_MAIL,
-                ];
-
-                Mail::to($request->email)->send(new VerifyEmail($mailData));
+                $this->sendMail($data, $request);
                 return Redirect()->back()->with('postRegistrationMessage', 'A verification mail has been sent to your email address, please confirm your mail account.');
 
                 return Redirect()->route('teacher.login-page')->with('signinPageMessage', 'You have been registered, please verify your email to signin your account.');
@@ -77,6 +70,24 @@ class TeacherAuthController extends Controller
         } catch (Exception $exception) {
             Log::error("TeacherAuthController::register() ", [$exception]);
             return Redirect()->back()->with('registrationMessage', 'Something went wrong!');
+        }
+    }
+
+    public function sendMail($data, $request)
+    {
+        try {
+            $mailData = [
+                'token' => $this->token,
+                'first_name' => $data['first_name'],
+                'route' => 'teacher.verify',
+                'user_type' => User::TEACHER,
+                'email' => AppConstants::HELP_MAIL,
+            ];
+
+            Mail::to($request->email)->send(new VerifyEmail($mailData));
+        } catch (Exception $exception) {
+            Log::error("TeacherAuthController::sendMail() ", [$exception]);
+            return null;
         }
     }
 
@@ -99,7 +110,7 @@ class TeacherAuthController extends Controller
                     'user_type' => User::TEACHER,
                     // 'email_verified_at' => Carbon::now(),
                     'token' => $this->token,
-                    'approved' => 1
+                    'approved' => 0
                 ]);
                 // dd($this->user);
 
@@ -114,6 +125,13 @@ class TeacherAuthController extends Controller
                 if ($request->hasFile('image')) {
                     $profileImage = $request->file('image');
                     $profilePath = $profileImage->storeAs($teacherDir, 'profile-picture.' . $profileImage->getClientOriginalExtension(), 'public');
+                }
+
+                // Save the cover image
+                $coverPath = null;
+                if ($request->hasFile('cover_image')) {
+                    $coverImage = $request->file('cover_image');
+                    $coverPath = $coverImage->storeAs($teacherDir, 'cover-picture.' . $coverImage->getClientOriginalExtension(), 'public');
                 }
 
                 // Save the NID front image
@@ -134,7 +152,7 @@ class TeacherAuthController extends Controller
                 // dd($profilePath, $nidFrontPath, $nidBackPath);
 
                 // Second query: Create a new teacher record
-                $teacher = Teachers::create([
+                $this->teacher = Teachers::create([
                     'user_id' => $this->user->id,
                     'first_name' => $request->first_name,
                     'last_name' => $request->last_name,
@@ -148,15 +166,19 @@ class TeacherAuthController extends Controller
                     'nid_no' => $request->nid_no,
                     'address' => $request->address,
                     'image' => Storage::url($profilePath),
+                    'cover_image' => Storage::url($coverPath),
                     'nid_front_image' => Storage::url($nidFrontPath),
                     'nid_back_image' => Storage::url($nidBackPath),
+                    'bio' => $request->bio ?? null,
+                    'detailed_info' => $request->detailed_info ?? null,
+                    'created_by' => (Auth::user() && Auth::user()->id) ? Auth::user()->id : null,
                 ]);
                 // dd($teacher);
             });
 
             DB::commit();
 
-            return $this->token;
+            return $this->teacher;
         } catch (Exception $exception) {
             DB::rollBack();
             Log::error("TeacherAuthController::createUser() ", [$exception]);

@@ -19,6 +19,8 @@ class UpdateImageRequest extends FormRequest
         $currentLogo = ($currentFormImage && $currentFormImage->logo) ? $currentFormImage->logo : null;
         $currentDashboardLogo = ($currentFormImage && $currentFormImage->dashboard_logo) ? $currentFormImage->dashboard_logo : null;
         $currentFavicon = ($currentFormImage && $currentFormImage->favicon) ? $currentFormImage->favicon : null;
+        $currentDashboardFavicon = ($currentFormImage && $currentFormImage->dashboard_favicon) ? $currentFormImage->dashboard_favicon : null;
+
 
         return [
             'logo' => [
@@ -35,6 +37,12 @@ class UpdateImageRequest extends FormRequest
             ],
             'favicon' => [
                 $currentFavicon ? 'nullable' : 'required',
+                'file',
+                'mimes:jpeg,png,gif,bmp,svg,jpg',
+                'dimensions:min_width=150,min_height=164,max_width=150,max_height=164',
+            ],
+            'dashboard_favicon' => [
+                $currentDashboardFavicon ? 'nullable' : 'required',
                 'file',
                 'mimes:jpeg,png,gif,bmp,svg,jpg',
                 'dimensions:min_width=150,min_height=164,max_width=150,max_height=164',

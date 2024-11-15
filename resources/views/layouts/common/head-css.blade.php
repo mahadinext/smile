@@ -71,7 +71,15 @@
     }
 
     [data-sidebar=gradient-2] .navbar-nav .nav-link, [data-sidebar=gradient-3] .navbar-nav .nav-link, [data-sidebar=gradient-4] .navbar-nav .nav-link, [data-sidebar=gradient] .navbar-nav .nav-link {
-        color: rgb(255 255 255 / 73%);
+        color: rgb(255 255 255 / 83%);
+    }
+
+    [data-sidebar=gradient-2][data-sidebar-size=sm] .navbar-brand-box, [data-sidebar=gradient-3][data-sidebar-size=sm] .navbar-brand-box, [data-sidebar=gradient-4][data-sidebar-size=sm] .navbar-brand-box, [data-sidebar=gradient][data-sidebar-size=sm] .navbar-brand-box {
+        background: linear-gradient(to right, #f4b121, #ed5b21);
+    }
+
+    [data-sidebar=gradient-2] .navbar-nav .nav-sm .nav-link, [data-sidebar=gradient-3] .navbar-nav .nav-sm .nav-link, [data-sidebar=gradient-4] .navbar-nav .nav-sm .nav-link, [data-sidebar=gradient] .navbar-nav .nav-sm .nav-link {
+        color: rgb(255 255 255 / 83%);
     }
     /* Admin Dashboad Styles Ends */
 </style>

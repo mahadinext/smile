@@ -57,6 +57,10 @@ class CourseService
     public function filterByRequest(Request $request, $query)
     {
         try {
+            if ($request->filled('teacher_id')) {
+                $query->where('teacher_id', $request->teacher_id);
+            }
+
             if ($request->filled('course_category')) {
                 $query->where('category_id', $request->course_category);
             }

@@ -16,6 +16,25 @@
                     <div class="col-lg-12" id="course-basic-section">
                         <div class="card">
                             <div class="card-body">
+                                @if(Auth::user()->user_type == App\Models\User::ADMIN)
+                                    <div class="mb-3">
+                                        <label class="required" for="teacher_id">Teacher</label>
+                                        <select class="form-control search select2 {{ $errors->has('teacher_id') ? 'is-invalid' : '' }}" name="teacher_id" id="teacher_id">
+                                            <option value="">Select</option>
+                                            @if (isset($teachers))
+                                                @foreach ($teachers as $key => $data)
+                                                    <option value="{{ $data->user_id }}" {{ (old('teacher_id') == $data->user_id || $course->teacher_id == $data->user_id) ? 'selected' : '' }}>{{ $data->first_name . ' ' . $data->last_name }}</option>
+                                                @endforeach
+                                            @endif
+                                        </select>
+                                        @if($errors->has('teacher_id'))
+                                            <div class="invalid-feedback">
+                                                {{ $errors->first('teacher_id') }}
+                                            </div>
+                                        @endif
+                                    </div>
+                                @endif
+
                                 <div class="mb-3">
                                     <label class="required" for="course_category">Course Category</label>
                                     <select class="form-control search select2 {{ $errors->has('course_category') ? 'is-invalid' : '' }}" name="course_category" id="course_category" required>

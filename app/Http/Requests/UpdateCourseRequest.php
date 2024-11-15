@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateCourseRequest extends FormRequest
@@ -13,7 +15,13 @@ class UpdateCourseRequest extends FormRequest
 
     public function rules()
     {
+        $isTeacherIdRequired = (Auth::user()->user_type == User::ADMIN) ? 'required' : 'nullable';
+
         return [
+            'teacher_id' => [
+                $isTeacherIdRequired,
+                'integer', // Ensure it exists in the database
+            ],
             'course_category' => [
                 'required',
                 'exists:course_categories,id', // Ensure it exists in the database

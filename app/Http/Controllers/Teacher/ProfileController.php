@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Teacher;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateTeacherProfileRequest;
 use App\Models\Teacher\Teachers;
+use App\Models\User;
 use App\Services\Teacher\ProfileService;
 use App\Traits\Auditable;
 use Exception;
@@ -35,16 +36,17 @@ class ProfileController extends Controller
      * @param Request $request
      * @return \Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index(Request $request, $teacherId = null)
     {
         try {
-            $teacher = Teachers::where('user_id', Auth::user()->id)->first();
+            $userId = (Auth::user()->user_type == User::ADMIN) ? $teacherId : Auth::user()->id;
+            $teacher = Teachers::where('user_id', $userId)->first();
 
             $data = [
                 "teacher" => $teacher,
             ];
 
-            return view("{$this->layoutFolder}.index", $data);
+            return view("{$this->layoutFolder}.edit", $data);
         } catch (Exception $exception) {
             Log::error("ProfileController::index()", [$exception]);
         }

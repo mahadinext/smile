@@ -87,13 +87,17 @@ class WebElementController extends Controller
                 $favicon = $this->saveImage($request->file('favicon'), $directory, 'favicon.' . $request->file('favicon')->getClientOriginalExtension());
             }
 
+            if ($request->hasFile('dashboard_favicon')) {
+                $dashboardFavicon = $this->saveImage($request->file('dashboard_favicon'), $directory, 'dashboard-favicon.' . $request->file('dashboard_favicon')->getClientOriginalExtension());
+            }
+
             // Prepare the data array for the updateOrInsert
             $data = [
                 "updated_by"    => Auth::user()->id ?? null,
             ];
 
             // Only proceed if at least one of logo or favicon exists
-            if ($logo || $dashboardLogo || $favicon) {
+            if ($logo || $dashboardLogo || $favicon || $dashboardFavicon) {
                 // Prepare the data array
                 $data = [
                     "updated_by"    => Auth::user()->id ?? null,
@@ -111,6 +115,10 @@ class WebElementController extends Controller
                 // Add favicon if it exists
                 if ($favicon) {
                     $data['favicon'] = $favicon;
+                }
+
+                if ($dashboardFavicon) {
+                    $data['dashboard_favicon'] = $dashboardFavicon;
                 }
 
                 // Perform the update or insert

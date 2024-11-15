@@ -2,11 +2,16 @@
 
 namespace App\Services\Teacher;
 
+use App\Helper\Helper;
+use App\Http\Controllers\Web\TeacherAuthController;
+use App\Http\Requests\StoreTeacherRequest;
 use App\Http\Requests\UpdateChangePasswordRequest;
 use App\Http\Requests\UpdateTeacherProfileRequest;
 use App\Models\Teacher\Teachers;
 use App\Models\User;
+use App\Traits\Auditable;
 use Exception;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -15,6 +20,99 @@ use Illuminate\Support\Facades\Storage;
 
 class ProfileService
 {
+    use Auditable;
+    private $user = null;
+    private string $token = '';
+
+    /**
+     * filter
+     *
+     * @param Request $request
+     * @param $query
+     * @return array
+     */
+    public function filter(Request $request, $query)
+    {
+        try {
+            $query = $this->filterByRequest($request, $query);
+
+            $orderBy = $request->order_by ?? 'DESC';
+            $filterOption = $request->filter_option ?? 'id';
+            $paginate = $request->paginate ?? 10;
+
+            $teachers = $query->orderBy($filterOption, $orderBy)->paginate($paginate);
+
+            return [
+                "teachers" => $teachers,
+                "totalTeachers" => $teachers->total(),
+            ];
+        } catch (Exception $exception) {
+            Log::error("ProfileService::filter()", [$exception]);
+            return [];
+        }
+    }
+
+    /**
+     * filter by request params
+     *
+     * @param Request $request
+     * @param $query
+     * @return object
+     */
+    public function filterByRequest(Request $request, $query)
+    {
+        try {
+            if ($request->filled('email')) {
+                $query->where('email', $request->email);
+            }
+
+            if ($request->filled('phone_no')) {
+                $query->where('phone_no', $request->phone_no);
+            }
+
+            // Filter by status
+            if ($request->filled('teacher_status')) {
+                $query->where('status', $request->teacher_status);
+            }
+
+            if ($request->filled('approved')) {
+                $query->where(function ($query) use ($request) {
+                    $query->whereHas('user', function ($subQuery) use ($request) {
+                        $subQuery->where('approved', $request->approved);
+                    });
+                });
+            }
+
+            return $query;
+        } catch (Exception $exception) {
+            Log::error("ProfileService::filterByRequest()", [$exception]);
+            return [];
+        }
+    }
+
+    /**
+     * store
+     *
+     * @param StoreTeacherRequest $request
+     * @return \App\Models\Teacher\Teachers|null
+     */
+    public function store(StoreTeacherRequest $request): Teachers|null
+    {
+        try {
+            $data = $request->all();
+            $teacher = (new TeacherAuthController())->createUser($request);
+
+            if ($teacher) {
+                (new TeacherAuthController())->sendMail($data, $request);
+            }
+
+            return $teacher;
+        } catch (Exception $exception) {
+            Log::error("ProfileService::store()", [$exception]);
+            return null;
+        }
+    }
+
     /**
      * update teacher profile
      *
@@ -54,7 +152,7 @@ class ProfileService
 
             // Save the cover image
             if ($request->hasFile('cover_image')) {
-                $teacher->image = $this->saveImage($request->file('cover_image'), $teacherDir, 'cover-picture.' . $request->file('cover_image')->getClientOriginalExtension());
+                $teacher->cover_image = $this->saveImage($request->file('cover_image'), $teacherDir, 'cover-picture.' . $request->file('cover_image')->getClientOriginalExtension());
             }
 
             // Save the NID front image
@@ -81,6 +179,32 @@ class ProfileService
     }
 
     /**
+     * delete specific entry
+     *
+     * @param Teachers $teacher
+     * @return void
+     */
+    public function delete(Teachers $teacher)
+    {
+        try {
+            DB::beginTransaction();
+
+            $teacher->deleted_by = Auth::user()->id;
+            $teacher->save();
+
+            $teacher->delete();
+            DB::commit();
+
+            // Clear the relevant cache
+
+            $this->auditLogEntry("teacher:deleted", $teacher->id, 'course-deleted', $teacher);
+        } catch (Exception $exception) {
+            Log::error("ProfileService::delete()", [$exception]);
+            DB::rollback();
+        }
+    }
+
+    /**
      * Save the uploaded image to the specified directory and return the URL.
      *
      * @param \Illuminate\Http\UploadedFile $imageRequest The uploaded image file.
@@ -98,6 +222,7 @@ class ProfileService
             return null;
         }
     }
+
     /**
      * update password
      *

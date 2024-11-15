@@ -9,11 +9,14 @@ use App\Http\Requests\UpdateCourseRequest;
 use App\Models\Course;
 use App\Models\CourseCategory;
 use App\Models\CourseContents;
+use App\Models\Teacher\Teachers;
+use App\Models\User;
 use App\Services\Teacher\CourseService;
 use App\Traits\Auditable;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class CourseController extends Controller
@@ -27,9 +30,18 @@ class CourseController extends Controller
 
     public $layoutFolder = "teacher.courses";
 
+    public $routePrefix = "";
+
     public function __construct(CourseService $courseService)
     {
         $this->courseService = $courseService;
+
+        if (isset(app('admin')->id)) {
+            $this->routePrefix = "admin";
+        }
+        else if (isset(app('teacher')->id)) {
+            $this->routePrefix = "teacher";
+        }
     }
 
     /**
@@ -42,17 +54,26 @@ class CourseController extends Controller
     {
         try {
             $query = Course::query()
-                ->with('courseTeacher','courseCategory','createdBy')
-                ->select('id','price','title','category_id','teacher_id','course_start_date','status','created_by')
-                ->whereNull('courses.deleted_at');
+            ->with('courseTeacher','courseCategory','createdBy')
+            ->select('id','price','title','category_id','teacher_id','course_start_date','status','created_by')
+            ->where(function ($query) {
+                if (Auth::user()->user_type == User::TEACHER) {
+                    $query->where('teacher_id', Auth::user()->id);
+                }
+            })
+            ->whereNull('courses.deleted_at');
+
             $result = (new CourseService)->filter($request, $query);
 
             $courseCategory = Helper::getAllCourseCategory();
+            $teachers = Teachers::select('id','first_name','last_name','user_id')->get();
+
             $data = [
                 "courses" => isset($result['courses']) ? $result['courses'] : [],
                 "totalCourses" => isset($result['totalCourses']) ? $result['totalCourses'] : 0,
                 "courseCategory" => $courseCategory,
                 "courseStatus" => Course::STATUS_SELECT,
+                "teachers" => $teachers,
             ];
 
             return view("{$this->layoutFolder}.index", $data);
@@ -74,6 +95,7 @@ class CourseController extends Controller
             $courseContents = CourseContents::where('course_id', $id)->get();
             $contentTitles = $courseContents->pluck('title')->toArray();
             $contentDescriptions = $courseContents->pluck('description')->toArray();
+            $teachers = Teachers::select('id','first_name','last_name','user_id')->get();
 
             $data = [
                 "course" => $course,
@@ -81,12 +103,13 @@ class CourseController extends Controller
                 "contentDescriptions" => $contentDescriptions,
                 "courseCategory" => Helper::getAllCourseCategory(),
                 "courseStatus" => Course::STATUS_SELECT,
+                "teachers" => $teachers,
             ];
 
             return view("{$this->layoutFolder}.show", $data);
         } catch (ModelNotFoundException $e) {
             Log::error("CourseController::show()", [$e]);
-            return redirect()->route('teacher.courses.index')->with('error', $e->getMessage());
+            return redirect()->route($this->routePrefix . '.courses.index')->with('error', $e->getMessage());
         } catch (Exception $exception) {
             Log::error("CourseController::show()", [$exception]);
         }
@@ -101,8 +124,10 @@ class CourseController extends Controller
     {
         try {
             $courseCategory = Helper::getAllCourseCategory();
+            $teachers = Teachers::select('id','first_name','last_name','user_id')->get();
             $data = [
                 "courseCategory" => $courseCategory,
+                "teachers" => $teachers,
             ];
 
             return view("{$this->layoutFolder}.create", $data);
@@ -125,13 +150,13 @@ class CourseController extends Controller
 
             if ($course) {
                 $this->auditLogEntry("course:created", $course->id, 'course-create', $course);
-                return redirect()->route('teacher.courses.index')->with('success', "Course added successfully");
+                return redirect()->route($this->routePrefix . '.courses.index')->with('success', "Course added successfully");
             }
 
-            return redirect()->route('teacher.courses.index')->with('error', "Something went wrong!");
+            return redirect()->route($this->routePrefix . '.courses.index')->with('error', "Something went wrong!");
         } catch (Exception $exception) {
             Log::error("CourseController::store()", [$exception]);
-            return redirect()->route('teacher.courses.index')->with('error', [$exception->getMessage()]);
+            return redirect()->route($this->routePrefix . '.courses.index')->with('error', [$exception->getMessage()]);
         }
     }
 
@@ -148,6 +173,7 @@ class CourseController extends Controller
             $courseContents = CourseContents::where('course_id', $id)->get();
             $contentTitles = $courseContents->pluck('title')->toArray();
             $contentDescriptions = $courseContents->pluck('description')->toArray();
+            $teachers = Teachers::select('id','first_name','last_name','user_id')->get();
 
             $data = [
                 "course" => $course,
@@ -155,12 +181,13 @@ class CourseController extends Controller
                 "contentDescriptions" => $contentDescriptions,
                 "courseCategory" => Helper::getAllCourseCategory(),
                 "courseStatus" => Course::STATUS_SELECT,
+                "teachers" => $teachers,
             ];
 
             return view("{$this->layoutFolder}.edit", $data);
         } catch (ModelNotFoundException $exception) {
             Log::error("CourseController::edit()", [$exception]);
-            return redirect()->route('teacher.courses.index')->with('error', $exception->getMessage());
+            return redirect()->route($this->routePrefix . '.courses.index')->with('error', $exception->getMessage());
         } catch (Exception $exception) {
             Log::error("CourseController::edit()", [$exception]);
         }
@@ -180,16 +207,16 @@ class CourseController extends Controller
             $courseUpdate = $this->courseService->update($request, $course);
             if ($courseUpdate) {
                 $this->auditLogEntry("course:updated", $course->id, 'course-update', $courseUpdate);
-                return redirect()->route('teacher.courses.index')->with('success', "Course updated successfully");
+                return redirect()->route($this->routePrefix . '.courses.index')->with('success', "Course updated successfully");
             }
 
-            return redirect()->route('teacher.courses.index')->with('error', "Something went wrong");
+            return redirect()->route($this->routePrefix . '.courses.index')->with('error', "Something went wrong");
         } catch (ModelNotFoundException $exception) {
             Log::error("CourseController::update()", [$exception]);
-            return redirect()->route('teacher.courses.index')->with('error', $exception->getMessage());
+            return redirect()->route($this->routePrefix . '.courses.index')->with('error', $exception->getMessage());
         } catch (Exception $exception) {
             Log::error("CourseController::update()", [$exception]);
-            return redirect()->route('teacher.courses.index')->with('error', $exception->getMessage());
+            return redirect()->route($this->routePrefix . '.courses.index')->with('error', $exception->getMessage());
         }
     }
 
@@ -205,13 +232,13 @@ class CourseController extends Controller
             $course = Course::findOrFail($id);
             $this->courseService->delete($course);
 
-            return redirect()->route('teacher.courses.index')->with('success', "Course deleted successfully");
+            return redirect()->route($this->routePrefix . '.courses.index')->with('success', "Course deleted successfully");
         } catch (ModelNotFoundException $exception) {
             Log::error("CourseController::delete()", [$exception]);
-            return redirect()->route('teacher.courses.index')->with('error', $exception->getMessage());
+            return redirect()->route($this->routePrefix . '.courses.index')->with('error', $exception->getMessage());
         } catch (Exception $exception) {
             Log::error("CourseController::delete()", [$exception]);
-            return redirect()->route('teacher.courses.index')->with('error', $exception->getMessage());
+            return redirect()->route($this->routePrefix . '.courses.index')->with('error', $exception->getMessage());
         }
     }
 }

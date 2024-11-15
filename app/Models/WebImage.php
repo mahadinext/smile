@@ -20,6 +20,7 @@ class WebImage extends Model
         'logo',
         'dashboard_logo',
         'favicon',
+        'dashboard_favicon',
         'campaign_image',
         'updated_by',
         'deleted_by',

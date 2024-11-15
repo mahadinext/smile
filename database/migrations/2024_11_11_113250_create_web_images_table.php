@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('logo');
             $table->string('dashboard_logo');
             $table->string('favicon');
+            $table->string('dashboard_favicon');
             $table->string('campaign_image')->nullable();
             $table->integer('updated_by')->nullable();
             $table->integer('deleted_by')->nullable();

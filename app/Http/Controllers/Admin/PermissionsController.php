@@ -20,7 +20,7 @@ class PermissionsController extends Controller
         Log::info("PermissionsController::index()");
         abort_if(Gate::denies('permission_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $permissions = Permission::all();
+        $permissions = Permission::orderby('id', 'DESC')->get();
 
         return view('admin.permissions.index', compact('permissions'));
     }

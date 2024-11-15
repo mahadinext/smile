@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class StoreTeacherRequest extends FormRequest
 {
@@ -13,6 +14,13 @@ class StoreTeacherRequest extends FormRequest
 
     public function rules()
     {
+        $isCoverImgRequired = $isBioRequired = $isDetailedInfoRequired = 'nullable';
+        if (Auth::user()) {
+            // $isCoverImgRequired = 'required';
+            $isBioRequired = 'required';
+            $isDetailedInfoRequired = 'required';
+        }
+
         return [
             'first_name' => [
                 'string',
@@ -90,6 +98,22 @@ class StoreTeacherRequest extends FormRequest
                 'file',
                 'mimes:jpeg,png,jpg,gif',
                 'max:2048', // Max file size of 2MB
+            ],
+            'cover_image' => [
+                'nullable',
+                'file',
+                'mimes:jpeg,png,jpg,gif', // Specifies acceptable file types
+                'max:2048', // Max file size of 2MB
+                'dimensions:min_width=2610,min_height=700,max_width=2610,max_height=700',
+            ],
+            'bio' => [
+                $isBioRequired,
+                'string',
+                'max:200',
+            ],
+            'detailed_info' => [
+                $isDetailedInfoRequired,
+                'string',
             ],
         ];
     }

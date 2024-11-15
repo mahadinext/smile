@@ -26,6 +26,14 @@ class User extends Authenticatable
     public const STUDENT = 2;
     public const TEACHER = 3;
 
+    public const STATUS_PENDING = 0;
+    public const STATUS_APPROVED = 1;
+
+    public const STATUS_SELECT = [
+        1 => 'Approved',
+        0 => 'Pending',
+    ];
+
     protected $hidden = [
         'remember_token',
         'token',

@@ -36,6 +36,27 @@
                                     <form action="{{ route('teacher.courses.index') }}" method="GET">
                                         <div class="row d-flex flex-row align-items-center card-body">
 
+                                            @if(Auth::user()->user_type == App\Models\User::ADMIN)
+                                                <div class="col-md-4">
+                                                    <div class="mb-3">
+                                                        <label class="required" for="teacher_id">Teacher</label>
+                                                        <select class="form-control search select2 {{ $errors->has('teacher_id') ? 'is-invalid' : '' }}" name="teacher_id" id="teacher_id">
+                                                            <option value="">Select</option>
+                                                            @if (isset($teachers))
+                                                                @foreach ($teachers as $key => $data)
+                                                                    <option value="{{ $data->user_id }}" {{ request('teacher_id', '') == $data->user_id ? 'selected' : '' }}>{{ $data->first_name . ' ' . $data->last_name }}</option>
+                                                                @endforeach
+                                                            @endif
+                                                        </select>
+                                                        @if($errors->has('teacher_id'))
+                                                            <div class="invalid-feedback">
+                                                                {{ $errors->first('teacher_id') }}
+                                                            </div>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            @endif
+
                                             <div class="col-md-4">
                                                 <div class="mb-3">
                                                     <label class="" for="course_category">Course Category</label>
@@ -93,7 +114,7 @@
                                             <th>Id</th>
                                             <th>Title</th>
                                             <th>Category</th>
-                                            {{-- <th>Instructor</th> --}}
+                                            <th>Instructor</th>
                                             <th>Price</th>
                                             <th>Status</th>
                                             {{-- <th>Created By</th> --}}
@@ -107,7 +128,7 @@
                                             <td>{{ ($courses->currentPage() - 1) * $courses->perPage() + $loop->iteration }}</td>
                                             <td>{{ $course->title }}</td>
                                             <td>{{ ($course->courseCategory) ? $course->courseCategory->name : '' }}</td>
-                                            {{-- <td>{{ ($course->courseTeacher) ? $course->courseTeacher->email : '' }}</td> --}}
+                                            <td>{{ ($course->courseTeacher) ? $course->courseTeacher->email : '' }}</td>
                                             <td>{{ $course->price }}</td>
                                             <td>{{ App\Models\Course::STATUS_SELECT[$course->status] }}</td>
                                             {{-- <td>{{ ($course->createdBy) ? $course->createdBy->email : '' }}</td> --}}
