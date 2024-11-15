@@ -1396,7 +1396,8 @@ ul.rbt-dropdown-menu li .sub-menu li a, ul.rbt-dropdown-menu li a .right-icon, u
 }
 
 .bg-gradient-1 {
-  background: var(--gradient-1) !important;
+  background: linear-gradient(to right, #f4b121, #ed5b21) !important;
+  /* background: var(--gradient-1) !important; */
 }
 
 .bg-gradient-2 {
@@ -1432,7 +1433,8 @@ ul.rbt-dropdown-menu li .sub-menu li a, ul.rbt-dropdown-menu li a .right-icon, u
 }
 
 .bg-gradient-11 {
-  background: linear-gradient(180deg, #EEDEFD 0%, #FFFFFF 100%) !important;
+  background: linear-gradient(to right, #f4b121, #ed5b21) !important;
+  /* background: linear-gradient(180deg, #EEDEFD 0%, #FFFFFF 100%) !important; */
 }
 
 .bg-gradient-12 {

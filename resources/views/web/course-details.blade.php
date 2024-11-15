@@ -28,7 +28,7 @@
                                     </span> Bestseller</span>
                             </div> --}}
 
-                            <div class="feature-sin rating">
+                            {{-- <div class="feature-sin rating">
                                 <a href="#">4.8</a>
                                 <a href="#"><i class="fa fa-star"></i></a>
                                 <a href="#"><i class="fa fa-star"></i></a>
@@ -39,7 +39,7 @@
 
                             <div class="feature-sin total-rating">
                                 <a class="rbt-badge-4" href="#">215,475 rating</a>
-                            </div>
+                            </div> --}}
 
                             <div class="feature-sin total-student">
                                 <span>{{ $course->courseStudents->count() }} students</span>
@@ -177,7 +177,7 @@
                                             </h5>
                                             <span class="b3 subtitle">Advanced Educator</span>
                                             <ul class="rbt-meta mb--20 mt--10">
-                                                <li><i class="fa fa-star color-warning"></i>75,237 Reviews <span class="rbt-badge-5 ml--5">4.4 Rating</span></li>
+                                                {{-- <li><i class="fa fa-star color-warning"></i>75,237 Reviews <span class="rbt-badge-5 ml--5">4.4 Rating</span></li> --}}
                                                 {{-- <li><i class="feather-users"></i>912,970 Students</li> --}}
                                                 <li><a href="#"><i class="feather-video"></i>{{ $teacher->courses->count() }} Courses</a></li>
                                             </ul>
@@ -213,7 +213,7 @@
                         <!-- End Intructor Area  -->
 
                         <!-- Start Edu Review List  -->
-                        <div class="rbt-review-wrapper rbt-shadow-box review-wrapper mt--30" id="review">
+                        {{-- <div class="rbt-review-wrapper rbt-shadow-box review-wrapper mt--30" id="review">
                             <div class="course-content">
                                 <div class="section-title">
                                     <h4 class="rbt-title-style-3">Review</h4>
@@ -367,10 +367,10 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <!-- End Edu Review List  -->
 
-                        <div class="about-author-list rbt-shadow-box featured-wrapper mt--30 has-show-more">
+                        {{-- <div class="about-author-list rbt-shadow-box featured-wrapper mt--30 has-show-more">
                             <div class="section-title">
                                 <h4 class="rbt-title-style-3">Featured review</h4>
                             </div>
@@ -569,7 +569,7 @@
                                 </div>
                             </div>
                             <div class="rbt-show-more-btn">Show More</div>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="related-course mt--60">
                         <div class="row g-5 align-items-end mb--40">
@@ -684,16 +684,16 @@
                                     </div>
                                 </div>
 
-                                <div class="add-to-card-button mt--15">
+                                {{-- <div class="add-to-card-button mt--15">
                                     <a class="rbt-btn btn-gradient icon-hover w-100 d-block text-center" href="#">
                                         <span class="btn-text">Add to Cart</span>
                                         <span class="btn-icon"><i class="feather-arrow-right"></i></span>
                                     </a>
-                                </div>
+                                </div> --}}
 
                                 <div class="buy-now-btn mt--15">
                                     <a class="rbt-btn btn-border icon-hover w-100 d-block text-center" href="#">
-                                        <span class="btn-text">Buy Now</span>
+                                        <span class="btn-text">Enroll Now</span>
                                         <span class="btn-icon"><i class="feather-arrow-right"></i></span>
                                     </a>
                                 </div>

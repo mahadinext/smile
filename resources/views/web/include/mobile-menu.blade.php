@@ -10,7 +10,7 @@
                     <button class="close-button rbt-round-btn"><i class="feather-x"></i></button>
                 </div>
             </div>
-            <p class="description">Histudy is a education website template. You can customize all.</p>
+            {{-- <p class="description">Histudy is a education website template. You can customize all.</p>
             <ul class="navbar-top-left rbt-information-list justify-content-start">
                 <li>
                     <a href="mailto:hello@example.com"><i class="feather-mail"></i>example@gmail.com</a>
@@ -18,7 +18,7 @@
                 <li>
                     <a href="#"><i class="feather-phone"></i>(302) 555-0107</a>
                 </li>
-            </ul>
+            </ul> --}}
         </div>
 
         @include('web.include.navbar')
@@ -31,7 +31,7 @@
                 </a>
             </div>
 
-            <div class="social-share-wrapper">
+            {{-- <div class="social-share-wrapper">
                 <span class="rbt-short-title d-block">Find With Us</span>
                 <ul class="social-icon social-default transparent-with-border justify-content-start mt--20">
                     <li><a href="https://www.facebook.com/">
@@ -51,7 +51,7 @@
                         </a>
                     </li>
                 </ul>
-            </div>
+            </div> --}}
         </div>
 
     </div>

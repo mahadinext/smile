@@ -55,7 +55,7 @@
                             </li>
 
                             <li class="access-icon">
-                                <a class="rbt-round-btn" href="wishlist.html.htm">
+                                <a class="rbt-round-btn" href="#">
                                     <i class="feather-heart"></i>
                                 </a>
                             </li>
