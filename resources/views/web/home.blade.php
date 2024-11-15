@@ -119,7 +119,7 @@
             <div class="row mb--60 g-5 align-items-end">
                 <div class="col-lg-6 col-md-6 col-12">
                     <div class="section-title text-start">
-                        <span class="subtitle bg-primary-opacity">Latest Course</span>
+                        <span class="subtitle bg-coral-opacity">Latest Course</span>
                         {{-- <h2 class="title">Latest course</h2> --}}
                     </div>
                 </div>
@@ -206,7 +206,7 @@
             <div class="row mb--60">
                 <div class="col-lg-12">
                     <div class="section-title text-center">
-                        <span class="subtitle bg-primary-opacity">Why Choose Us</span>
+                        <span class="subtitle bg-coral-opacity">Why Choose Us</span>
                         <h2 class="title">Why Choose Smile Academy</h2>
                         {{-- <p class="description has-medium-font-size mt--20 mb--0"></p> --}}
                     </div>

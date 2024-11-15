@@ -18,6 +18,7 @@ class WebImage extends Model
 
     protected $fillable = [
         'logo',
+        'dashboard_logo',
         'favicon',
         'campaign_image',
         'updated_by',

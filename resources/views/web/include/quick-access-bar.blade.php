@@ -1,10 +1,10 @@
 <ul class="quick-access">
-    <li class="access-icon rbt-mini-cart">
+    {{-- <li class="access-icon rbt-mini-cart">
         <a class="rbt-cart-sidenav-activation rbt-round-btn" href="#">
             <i class="feather-shopping-cart"></i>
             <span class="rbt-cart-count">5</span>
         </a>
-    </li>
+    </li> --}}
     <li class="access-icon rbt-user-wrapper right-align-dropdown">
         <a class="rbt-round-btn" href="#">
             <i class="feather-user"></i>

@@ -24,6 +24,7 @@ class HomeContents extends Model
         'title',
         'subtitle',
         'description',
+        'image',
         'created_by',
         'updated_by',
         'deleted_by',

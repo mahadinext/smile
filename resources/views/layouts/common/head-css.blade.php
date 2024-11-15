@@ -43,7 +43,6 @@
         border-radius: 3px;
         margin-top: 6px;
     }
-
     .select2-container--default .select2-selection--multiple .select2-selection__choice {
         padding: 4px;
         padding-left: 20px;
@@ -54,8 +53,25 @@
         padding: 4px;
     }
 
+    /* Web Styles Starts */
+    /* div.rbt-banner-area.rbt-banner-1 {
+        background: linear-gradient(to right, #f4b121, #ed5b21) !important;
+    } */
+    /* Web Styles Starts */
+
+    /* Admin Dashboard Styles Starts */
     label.required::after {
         content: " *";
         color: red;
     }
+
+    [data-sidebar=gradient-2] .navbar-menu, [data-sidebar=gradient-3] .navbar-menu, [data-sidebar=gradient-4] .navbar-menu, [data-sidebar=gradient] .navbar-menu {
+        /* background: linear-gradient(to right, #b38c38, #cb6b45); */
+        background: linear-gradient(to right, #f4b121, #ed5b21);
+    }
+
+    [data-sidebar=gradient-2] .navbar-nav .nav-link, [data-sidebar=gradient-3] .navbar-nav .nav-link, [data-sidebar=gradient-4] .navbar-nav .nav-link, [data-sidebar=gradient] .navbar-nav .nav-link {
+        color: rgb(255 255 255 / 73%);
+    }
+    /* Admin Dashboad Styles Ends */
 </style>

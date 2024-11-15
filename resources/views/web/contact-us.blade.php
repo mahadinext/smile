@@ -66,7 +66,7 @@
 
                     <div class="rbt-contact-form contact-form-style-1 max-width-auto">
                         <div class="section-title text-start">
-                            <span class="subtitle bg-primary-opacity">{{ $contactUs->form_title ?? '' }}</span>
+                            <span class="subtitle bg-coral-opacity">{{ $contactUs->form_title ?? '' }}</span>
                         </div>
                     <h3 class="title">{{ $contactUs->form_subtitle ?? '' }}</h3>
                         <form id="contact-form" method="POST" action="{{ route('contact-message.store') }}" class="max-width-auto">

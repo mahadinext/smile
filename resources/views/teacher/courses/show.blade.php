@@ -324,8 +324,8 @@
                         </div>
                         <div class="card-body">
                             <div class="mb-3">
-                                <label class="" for="course_card_image">Course Card Image (300 * 205)</label>
-                                <input class="form-control mb-3 {{ $errors->has('course_card_image') ? 'is-invalid' : '' }}" type="file" name="course_card_image" id="course_card_image" accept="image/*">
+                                <label class="" for="course_card_image">Course Card Image (710 * 488)</label>
+                                {{-- <input class="form-control mb-3 {{ $errors->has('course_card_image') ? 'is-invalid' : '' }}" type="file" name="course_card_image" id="course_card_image" accept="image/*"> --}}
                                 <a href="{{ $course->card_image }}" target="_blank">Click to see previous uploaded image</a>
                                 @if($errors->has('course_card_image'))
                                     <div class="invalid-feedback">
@@ -335,8 +335,8 @@
                             </div>
 
                             <div class="mb-3">
-                                <label class="" for="promo_image">Promotional Image (665 * 460)</label>
-                                <input class="form-control mb-3 {{ $errors->has('promo_image') ? 'is-invalid' : '' }}" type="file" name="promo_image" id="promo_image" accept="image/*">
+                                <label class="" for="promo_image">Promotional Image (710 * 488)</label>
+                                {{-- <input class="form-control mb-3 {{ $errors->has('promo_image') ? 'is-invalid' : '' }}" type="file" name="promo_image" id="promo_image" accept="image/*"> --}}
                                 <a href="{{ $course->promotional_image }}" target="_blank">Click to see previous uploaded image</a>
                                 @if($errors->has('promo_image'))
                                     <div class="invalid-feedback">
@@ -347,7 +347,7 @@
 
                             <div class="mb-3">
                                 <label class="" for="promo_video">Promotional Video</label>
-                                <input class="form-control {{ $errors->has('promo_video') ? 'is-invalid' : '' }}" type="text" name="promo_video" id="promo_video" value="{{ old('promo_video', $course->promotional_video ?? '') }}" placeholder="Ex: https://www.youtube.com/watch?v=nA1A..., https://youtu.be/nA1Aqp...">
+                                {{-- <input class="form-control {{ $errors->has('promo_video') ? 'is-invalid' : '' }}" type="text" name="promo_video" id="promo_video" value="{{ old('promo_video', $course->promotional_video ?? '') }}" placeholder="Ex: https://www.youtube.com/watch?v=nA1A..., https://youtu.be/nA1Aqp..."> --}}
                                 <a href="{{ $course->promotional_video }}" target="_blank">Click to see previous uploaded video</a>
                                 @if($errors->has('promo_video'))
                                     <div class="invalid-feedback">

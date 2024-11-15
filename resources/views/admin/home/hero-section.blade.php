@@ -58,6 +58,19 @@
                                             @endif
                                         </div>
                                     </div>
+
+                                    {{-- <div class="col-12">
+                                        <div class="mb-3">
+                                            <label class="required" for="bg_image">Background Image (1920 * 1408)</label>
+                                            <input class="form-control mb-3 {{ $errors->has('bg_image') ? 'is-invalid' : '' }}" type="file" name="bg_image" id="bg_image" accept="image/*">
+                                            <a href="{{ $webImage->image ?? '#' }}" target="_blank">Click to see previous uploaded image</a>
+                                            @if($errors->has('bg_image'))
+                                                <div class="invalid-feedback">
+                                                    {{ $errors->first('bg_image') }}
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>

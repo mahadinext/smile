@@ -36,6 +36,19 @@
 
                                     <div class="col-12">
                                         <div class="mb-3">
+                                            <label class="required" for="dashboard_logo">Dashboard Logo (250 * 82)</label>
+                                            <input class="form-control mb-3 {{ $errors->has('dashboard_logo') ? 'is-invalid' : '' }}" type="file" name="dashboard_logo" id="dashboard_logo" accept="image/*">
+                                            <a href="{{ $webImage->dashboard_logo ?? '#' }}" target="_blank">Click to see previous uploaded image</a>
+                                            @if($errors->has('dashboard_logo'))
+                                                <div class="invalid-feedback">
+                                                    {{ $errors->first('dashboard_logo') }}
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="mb-3">
                                             <label class="required" for="favicon">Favicon (150 * 164)</label>
                                             <input class="form-control mb-3 {{ $errors->has('favicon') ? 'is-invalid' : '' }}" type="file" name="favicon" id="favicon" accept="image/*">
                                             <a href="{{ $webImage->favicon ?? '#' }}" target="_blank">Click to see previous uploaded image</a>

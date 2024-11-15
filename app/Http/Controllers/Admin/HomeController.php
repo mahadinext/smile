@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
 
 class HomeController extends Controller
@@ -62,6 +63,22 @@ class HomeController extends Controller
                 "description"   => $request->description,
                 "updated_by"    => Auth::user()->id ?? null,
             ];
+
+            $bgImage = null;
+            // Define base directory
+            $directory = 'web/hero-section';
+
+            // Ensure the new directory exists
+            Storage::makeDirectory($directory);
+
+            // Save image
+            if ($request->hasFile('bg_image')) {
+                $bgImage = $this->saveImage($request->file('bg_image'), $directory, 'bg-image.' . $request->file('bg_image')->getClientOriginalExtension());
+            }
+
+            if ($bgImage) {
+                $data['image'] = $bgImage;
+            }
 
             // Perform the update or insert
             $homeUpdate = HomeContents::updateOrCreate(

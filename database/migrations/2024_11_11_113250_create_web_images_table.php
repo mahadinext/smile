@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('web_images', function (Blueprint $table) {
             $table->id();
             $table->string('logo');
+            $table->string('dashboard_logo');
             $table->string('favicon');
             $table->string('campaign_image')->nullable();
             $table->integer('updated_by')->nullable();

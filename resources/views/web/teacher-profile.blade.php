@@ -2424,7 +2424,7 @@
                                 </div>
 
                                 <div class="rbt-card-bottom">
-                                    <a class="rbt-btn btn-sm bg-primary-opacity w-100 text-center" href="#">Download Certificate</a>
+                                    <a class="rbt-btn btn-sm bg-coral-opacity w-100 text-center" href="#">Download Certificate</a>
                                 </div>
 
                             </div>
@@ -2542,7 +2542,7 @@
                                 </div>
 
                                 <div class="rbt-card-bottom">
-                                    <a class="rbt-btn btn-sm bg-primary-opacity w-100 text-center" href="#">Download Certificate</a>
+                                    <a class="rbt-btn btn-sm bg-coral-opacity w-100 text-center" href="#">Download Certificate</a>
                                 </div>
                             </div>
                         </div>

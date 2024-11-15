@@ -13,6 +13,7 @@ use App\Models\WebTypography;
 use App\Traits\Auditable;
 use Exception;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -59,7 +60,7 @@ class WebElementController extends Controller
     public function updateImage(UpdateImageRequest $request)
     {
         try {
-            $logo = $favicon = null;
+            $logo = $dashboardLogo = $favicon = null;
             // Define base directory
             $directory = 'web/images';
 
@@ -69,6 +70,10 @@ class WebElementController extends Controller
             // Save image
             if ($request->hasFile('logo')) {
                 $logo = $this->saveImage($request->file('logo'), $directory, 'logo.' . $request->file('logo')->getClientOriginalExtension());
+            }
+
+            if ($request->hasFile('dashboard_logo')) {
+                $dashboardLogo = $this->saveImage($request->file('dashboard_logo'), $directory, 'dashboard-logo.' . $request->file('dashboard_logo')->getClientOriginalExtension());
             }
 
             if ($request->hasFile('favicon')) {
@@ -81,7 +86,7 @@ class WebElementController extends Controller
             ];
 
             // Only proceed if at least one of logo or favicon exists
-            if ($logo || $favicon) {
+            if ($logo || $dashboardLogo || $favicon) {
                 // Prepare the data array
                 $data = [
                     "updated_by"    => Auth::user()->id ?? null,
@@ -90,6 +95,10 @@ class WebElementController extends Controller
                 // Add logo if it exists
                 if ($logo) {
                     $data['logo'] = $logo;
+                }
+
+                if ($dashboardLogo) {
+                    $data['dashboard_logo'] = $dashboardLogo;
                 }
 
                 // Add favicon if it exists
@@ -104,6 +113,7 @@ class WebElementController extends Controller
                 );
 
                 if ($webImageUpdate) {
+                    Cache::forget("web-image-cache");
                     $this->auditLogEntry("web-image:updated", $webImageUpdate->id, 'web-image-update', $webImageUpdate);
                     return redirect()->route('admin.web.image')->with('success', "Web Images updated successfully");
                 }
@@ -161,6 +171,7 @@ class WebElementController extends Controller
             );
 
             if ($webColorUpdate) {
+                Cache::forget("web-color-cache");
                 $this->auditLogEntry("web-color:updated", $webColorUpdate->id, 'web-color-update', $webColorUpdate);
                 return redirect()->route('admin.web.color')->with('success', "Web Color updated successfully");
             }

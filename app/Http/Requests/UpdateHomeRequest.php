@@ -19,6 +19,8 @@ class UpdateHomeRequest extends FormRequest
         $homeContents = HomeContents::where("section_id", $sectionId)->first();
         $isDescriptionrequired = ($sectionId == HomeContents::HERO_SECTION) ? 'required' : 'nullable';
 
+        $currentImage = ($homeContents && $homeContents->image) ? $homeContents->image : null;
+
         $rules = [
             'section_id' => [
                 'required',
@@ -38,6 +40,13 @@ class UpdateHomeRequest extends FormRequest
                 $isDescriptionrequired,
                 'string',
                 'max:400',
+            ],
+            'bg_image' => [
+                // $currentImage ? 'nullable' : 'required',
+                'nullable',
+                'file',
+                'mimes:jpeg,png,gif,bmp,svg,jpg',
+                'dimensions:min_width=1920,min_height=1408,max_width=1920,max_height=1408',
             ],
         ];
 
