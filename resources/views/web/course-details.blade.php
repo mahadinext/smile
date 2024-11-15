@@ -2,9 +2,9 @@
 @section('content')
 
     <!-- Start breadcrumb Area -->
-    <div class="rbt-breadcrumb-default rbt-breadcrumb-style-3">
-        <div class="breadcrumb-inner breadcrumb-dark">
-            <img src="{!! asset('web/assets/images/bg/bg-image-10.jpg') !!}" alt="Education Images">
+    <div class="rbt-breadcrumb-default rbt-breadcrumb-style-3" style="background: linear-gradient(to right, #f4b121, #ed5b21) !important;">
+        <div class="breadcrumb-inner breadcrumb-dark" style="background: linear-gradient(to right, #f4b121, #ed5b21) !important;">
+            {{-- <img src="{!! asset('web/assets/images/bg/bg-image-10.jpg') !!}" alt="Education Images"> --}}
         </div>
         <div class="container">
             <div class="row">
@@ -50,7 +50,7 @@
                         <div class="rbt-author-meta mb--20">
                             <div class="rbt-avater">
                                 <a href="#">
-                                    <img src="{!! asset('web/assets/images/client/avatar-02.png') !!}" alt="Sophia Jaymes">
+                                    <img src="{{ $course->courseTeacher->image }}" alt="{{ $course->courseTeacher->first_name }}">
                                 </a>
                             </div>
                             <div class="rbt-author-info">
@@ -175,7 +175,7 @@
                                             <h5 class="title">
                                                 <a class="hover-flip-item-wrapper" href="#">{{ $course->courseTeacher->first_name . " " . $course->courseTeacher->last_name }}</a>
                                             </h5>
-                                            <span class="b3 subtitle">Advanced Educator</span>
+                                            {{-- <span class="b3 subtitle">Advanced Educator</span> --}}
                                             <ul class="rbt-meta mb--20 mt--10">
                                                 {{-- <li><i class="fa fa-star color-warning"></i>75,237 Reviews <span class="rbt-badge-5 ml--5">4.4 Rating</span></li> --}}
                                                 {{-- <li><i class="feather-users"></i>912,970 Students</li> --}}
@@ -906,7 +906,7 @@
                         <div class="rbt-single-list action-btn">
                             <a class="rbt-btn btn-gradient hover-icon-reverse btn-md" href="#">
                                 <span class="icon-reverse-wrapper">
-                                <span class="btn-text">Purchase Now</span>
+                                <span class="btn-text">Enroll Now</span>
                                 <span class="btn-icon"><i class="feather-arrow-right"></i></span>
                                 <span class="btn-icon"><i class="feather-arrow-right"></i></span>
                                 </span>
