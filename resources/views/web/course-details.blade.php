@@ -654,7 +654,7 @@
                             <!-- Start Viedo Wrapper  -->
                             <a class="video-popup-with-text video-popup-wrapper text-center popup-video sidebar-video-hidden mb--15" href="{{ $course->promotional_video }}">
                                 <div class="video-content" style="display:none">
-                                    <img class="w-100 rbt-radius" src="{{ $course->promotional_video }}" alt="Video Images">
+                                    <img class="w-100 rbt-radius" src="{{ $course->promotional_image }}" alt="Video Images">
                                     <div class="position-to-top">
                                         <span class="rbt-btn rounded-player-2 with-animation">
                                             <span class="play-icon"></span>
