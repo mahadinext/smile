@@ -12,6 +12,7 @@ use App\Models\WebMetaContents;
 use App\Models\WebTypography;
 use App\Traits\Auditable;
 use Exception;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Gate;
@@ -46,6 +47,12 @@ class WebElementController extends Controller
             ];
 
             return view("{$this->layoutFolder}.image", $data);
+        } catch (AuthorizationException $exception) {
+            // Log the error if needed
+            Log::error("WebElementController::image() - Unauthorized access", [$exception]);
+
+            // Redirect to the 'home' route with an optional error message
+            return redirect()->route('home')->with('error', 'You do not have access to this page.');
         } catch (Exception $exception) {
             Log::error("WebElementController::image()", [$exception]);
         }

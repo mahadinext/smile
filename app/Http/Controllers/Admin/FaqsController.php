@@ -9,6 +9,7 @@ use App\Models\Faq;
 use App\Services\Admin\FaqsService;
 use App\Traits\Auditable;
 use Exception;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -52,6 +53,12 @@ class FaqsController extends Controller
             ];
 
             return view("{$this->layoutFolder}.index", $data);
+        } catch (AuthorizationException $exception) {
+            // Log the error if needed
+            Log::error("FaqsController::index() - Unauthorized access", [$exception]);
+
+            // Redirect to the 'home' route with an optional error message
+            return redirect()->route('home')->with('error', 'You do not have access to this page.');
         } catch (Exception $exception) {
             Log::error("FaqsController::index()", [$exception]);
         }
