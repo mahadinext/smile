@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\HomePageController;
 use App\Http\Controllers\Admin\PermissionsController;
 use App\Http\Controllers\Admin\PrivacyPolicyController;
 use App\Http\Controllers\Admin\RolesController;
+use App\Http\Controllers\Admin\TeacherApprovalController;
 use App\Http\Controllers\Admin\TeacherController;
 use App\Http\Controllers\Admin\WebElementController;
 use App\Http\Controllers\Auth\ChangePasswordController;
@@ -16,6 +17,7 @@ use App\Http\Controllers\Teacher\CourseController;
 use App\Http\Controllers\Teacher\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -73,6 +75,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
         Route::post('/update/{id}', [TeacherController::class, 'update'])->name('update');
         Route::get('/delete/{id}', [TeacherController::class, 'delete'])->name('delete');
         Route::get('/change-password/{id}', [TeacherController::class, 'changePassword'])->name('change-password');
+
+        Route::group(['prefix' => 'approve-requests', 'as' => 'approve-requests.', 'middleware' => ['auth']], function () {
+            Route::get('/', [TeacherApprovalController::class, 'index'])->name('index');
+            Route::get('/update/{id}', [TeacherApprovalController::class, 'update'])->name('update');
+        });
     });
 
     // Audit Logs

@@ -17,7 +17,6 @@ class PermissionsController extends Controller
 {
     public function index()
     {
-        Log::info("PermissionsController::index()");
         abort_if(Gate::denies('permission_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $permissions = Permission::orderby('id', 'DESC')->get();

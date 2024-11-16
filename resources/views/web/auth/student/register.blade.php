@@ -1,7 +1,7 @@
 ﻿@extends('web.include.master')
 @section('content')
 
-    @include('web.include.breadcrumb')
+    {{-- @include('web.include.breadcrumb') --}}
 
     <div class="newsletter-style-2 bg-color-primary rbt-section-gap">
         <div class="container">

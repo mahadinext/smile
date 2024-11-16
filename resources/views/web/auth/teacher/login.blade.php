@@ -1,7 +1,7 @@
 ﻿@extends('web.include.master')
 @section('content')
 
-    @include('web.include.breadcrumb')
+    {{-- @include('web.include.breadcrumb') --}}
 
     <div class="newsletter-style-2 bg-color-primary rbt-section-gap">
         <div class="container">
@@ -41,7 +41,7 @@
                                 <div class="rbt-form-group">
                                     <label>{{ trans('global.login_password') }} <span style="color:red">*</span></label>
                                     <input id="password" name="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }} password-input" required value="{{ old('password', null) }}">
-                                    <button type="button" class="position-absolute translate-middle-y password-toggle-btn" style="right: 10px; top: 70%; border: none; background: none; cursor: pointer;">
+                                    <button type="button" class="position-absolute translate-middle-y password-toggle-btn" style="right: 12%; top: 56%; border: none; background: none; cursor: pointer;">
                                         <i class="feather-eye"></i>
                                     </button>
                                     @if($errors->has('password'))

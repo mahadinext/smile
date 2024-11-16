@@ -23,7 +23,7 @@
         </style>
     @endsection
 
-    @include('web.include.breadcrumb')
+    {{-- @include('web.include.breadcrumb') --}}
 
     <div class="newsletter-style-2 bg-color-primary rbt-section-gap">
         <form class="max-width-auto" method="POST" action="{{ route('teacher.register') }}" enctype="multipart/form-data">
@@ -76,7 +76,7 @@
                                     <div class="rbt-form-group">
                                         <label for="password">{{ trans('global.login_password') }} <span style="color:red">*</span></label>
                                         <input id="password" name="password" type="password" class="form-control {{ $errors->has('password') ? ' is-invalid' : '' }} password-input" required placeholder="{{ trans('global.login_password') }} *" value="{{ old('password', null) }}">
-                                        <button type="button" class="position-absolute translate-middle-y password-toggle-btn" style="right: 10px; top: 70%; border: none; background: none; cursor: pointer;">
+                                        <button type="button" class="position-absolute translate-middle-y password-toggle-btn" style="left: 45%; top: 76%; border: none; background: none; cursor: pointer;">
                                             <i class="feather-eye"></i>
                                         </button>
                                         @if($errors->has('password'))
@@ -91,7 +91,7 @@
                                     <div class="rbt-form-group">
                                         <label for="confirm_password">Confirm {{ trans('global.login_password') }} <span style="color:red">*</span></label>
                                         <input id="confirm_password" name="confirm_password" type="password" class="form-control {{ $errors->has('confirm_password') ? ' is-invalid' : '' }} password-input" required placeholder="Confirm {{ trans('global.login_password') }} *" value="{{ old('confirm_password', null) }}">
-                                        <button type="button" class="position-absolute translate-middle-y password-toggle-btn" style="right: 10px; top: 70%; border: none; background: none; cursor: pointer;">
+                                        <button type="button" class="position-absolute translate-middle-y password-toggle-btn" style="right: 7%; top: 76%; border: none; background: none; cursor: pointer;">
                                             <i class="feather-eye"></i>
                                         </button>
                                         @if($errors->has('confirm_password'))

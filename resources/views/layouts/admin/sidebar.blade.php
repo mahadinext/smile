@@ -77,7 +77,7 @@
 
                                 @can('access_new_teacher_requests')
                                     <li class="nav-item">
-                                        <a href="{{ route('admin.teachers.index') }}" class="nav-link {{ request()->is('teacher/change-password') || request()->is('teacher/change-password/*') ? 'active' : '' }}">
+                                        <a href="{{ route('admin.teachers.approve-requests.index') }}" class="nav-link {{ request()->is('admin/teachers/approve-requests','admin/teachers/approve-requests/*') ? 'active' : '' }}">
                                             <i class="mdi mdi-account"></i> <span >New Teacher Requests</span>
                                         </a>
                                     </li>

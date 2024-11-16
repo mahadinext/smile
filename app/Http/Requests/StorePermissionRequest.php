@@ -3,9 +3,9 @@
 namespace App\Http\Requests;
 
 use App\Models\Permission;
-use Gate;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Gate;
 
 class StorePermissionRequest extends FormRequest
 {
@@ -20,6 +20,7 @@ class StorePermissionRequest extends FormRequest
             'title' => [
                 'string',
                 'required',
+                'unique:permissions',
             ],
         ];
     }

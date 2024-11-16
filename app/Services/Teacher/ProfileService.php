@@ -2,11 +2,12 @@
 
 namespace App\Services\Teacher;
 
-use App\Helper\Helper;
+use App\Constants\AppConstants;
 use App\Http\Controllers\Web\TeacherAuthController;
 use App\Http\Requests\StoreTeacherRequest;
 use App\Http\Requests\UpdateChangePasswordRequest;
 use App\Http\Requests\UpdateTeacherProfileRequest;
+use App\Mail\TeacherIsApproved;
 use App\Models\Teacher\Teachers;
 use App\Models\User;
 use App\Traits\Auditable;
@@ -16,6 +17,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class ProfileService
@@ -241,6 +243,32 @@ class ProfileService
             return $user;
         } catch (Exception $exception) {
             Log::error("ProfileService::changePassword()", [$exception]);
+            return null;
+        }
+    }
+
+    /**
+     * approve teacher
+     *
+     * @param User $teacherUser
+     * @return \App\Models\User|null
+     */
+    public function approveTeacherUser(User $teacherUser)
+    {
+        try {
+            $teacherUser->approved = User::STATUS_APPROVED;
+            $teacherUser->save();
+
+            $mailData = [
+                'name' => $teacherUser->name ?? '',
+                'email' => AppConstants::HELP_MAIL,
+            ];
+
+            Mail::to($teacherUser->email)->send(new TeacherIsApproved($mailData));
+
+            return $teacherUser;
+        } catch (Exception $exception) {
+            Log::error("ProfileService::approveTeacherUser()", [$exception]);
             return null;
         }
     }

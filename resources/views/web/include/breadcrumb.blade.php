@@ -1,5 +1,5 @@
 <!-- Start breadcrumb Area -->
-<div class="rbt-breadcrumb-default ptb--100 ptb_md--50 ptb_sm--30 bg-gradient-1">
+<div class="rbt-breadcrumb-default ptb--100 ptb_md--50 ptb_sm--30">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">

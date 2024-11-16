@@ -10,13 +10,13 @@ class ApprovalMiddleware
 {
     public function handle($request, Closure $next)
     {
-        if (auth()->check()) {
-            if (!auth()->user()->approved) {
-                auth()->logout();
+        // if (auth()->check()) {
+        //     if (!auth()->user()->approved) {
+        //         auth()->logout();
 
-                return redirect()->route('home')->with('message', trans('global.yourAccountNeedsAdminApproval'));
-            }
-        }
+        //         return redirect()->route('home')->with('message', trans('global.yourAccountNeedsAdminApproval'));
+        //     }
+        // }
 
         return $next($request);
     }

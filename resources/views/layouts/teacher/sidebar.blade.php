@@ -31,24 +31,26 @@
 
                             <li class="nav-item">
                                 <a href="{{ route('teacher.change-password.index') }}" class="nav-link {{ request()->is('teacher/change-password') || request()->is('teacher/change-password/*') ? 'active' : '' }}">
-                                    <i class="fa-fw fas fa-briefcase"></i> <span >Change Password</span>
+                                    <i class="mdi mdi-account"></i> <span >Change Password</span>
                                 </a>
                             </li>
                         </ul>
                     </div>
                 </li>
 
-                <li class="nav-item">
-                    <a href="{{ route('teacher.courses.index') }}" class="nav-link {{ request()->is('teacher/courses') || request()->is('teacher/courses/*') ? 'active' : '' }}">
-                        <i class="mdi mdi-book-open"></i> <span >My Courses</span>
-                    </a>
-                </li>
+                @if(Auth::user()->approved == App\Models\User::STATUS_APPROVED)
+                    <li class="nav-item">
+                        <a href="{{ route('teacher.courses.index') }}" class="nav-link {{ request()->is('teacher/courses') || request()->is('teacher/courses/*') ? 'active' : '' }}">
+                            <i class="mdi mdi-book-open"></i> <span >My Courses</span>
+                        </a>
+                    </li>
 
-                <li class="nav-item">
-                    <a href="{{ route('teacher.reviews.index') }}" class="nav-link {{ request()->is('teacher/reviews') || request()->is('teacher/reviews/*') ? 'active' : '' }}">
-                        <i class="mdi mdi-star"></i> <span >Reviews</span>
-                    </a>
-                </li>
+                    <li class="nav-item">
+                        <a href="{{ route('teacher.reviews.index') }}" class="nav-link {{ request()->is('teacher/reviews') || request()->is('teacher/reviews/*') ? 'active' : '' }}">
+                            <i class="mdi mdi-star"></i> <span >Reviews</span>
+                        </a>
+                    </li>
+                @endif
 
                 <li class="nav-item">
                     <a href="#" class="nav-link" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">

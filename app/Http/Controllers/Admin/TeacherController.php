@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTeacherRequest;
-use App\Http\Requests\UpdateChangePasswordRequest;
 use App\Http\Requests\UpdateTeacherProfileRequest;
 use App\Models\Teacher\Teachers;
 use App\Models\User;
@@ -13,7 +12,9 @@ use App\Traits\Auditable;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
+use Symfony\Component\HttpFoundation\Response;
 
 class TeacherController extends Controller
 {
@@ -77,13 +78,15 @@ class TeacherController extends Controller
     public function show(int $id)
     {
         try {
+            abort_if(Gate::denies('show_teacher'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
             $teacher = Teachers::findOrFail($id);
 
             $data = [
                 "teacher" => $teacher,
             ];
 
-            return view("{$this->layoutFolder}.show", $data);
+            return view("teacher.profile.show", $data);
         } catch (ModelNotFoundException $e) {
             Log::error("TeacherController::show()", [$e]);
             return redirect()->route($this->routePrefix . '.teachers.index')->with('error', $e->getMessage());
@@ -100,6 +103,8 @@ class TeacherController extends Controller
     public function create()
     {
         try {
+            abort_if(Gate::denies('create_teacher'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
             $data = [];
 
             return view("teacher.profile.create", $data);
@@ -141,6 +146,8 @@ class TeacherController extends Controller
     public function edit(int $id)
     {
         try {
+            abort_if(Gate::denies('edit_teacher'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
             $teacher = Teachers::findOrFail($id);
 
             $data = [
@@ -192,6 +199,8 @@ class TeacherController extends Controller
     public function delete(int $id)
     {
         try {
+            abort_if(Gate::denies('delete_teacher'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
             $teacher = Teachers::findOrFail($id);
             $this->profileService->delete($teacher);
 
@@ -214,6 +223,8 @@ class TeacherController extends Controller
     public function changePassword(int $id)
     {
         try {
+            abort_if(Gate::denies('access_change_password'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
             $user = User::findOrFail($id);
 
             $data = [
