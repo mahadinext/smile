@@ -41,9 +41,11 @@
                                     </span>
                                 @endif
                             </div>
-                            <div class="mb-3">
+
+                            <div class="position-relative auth-pass-inputgroup mb-3">
                                 <label class="required" for="password">{{ trans('cruds.user.fields.password') }}</label>
-                                <input class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}" type="password" name="password" id="password" required>
+                                <input class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }} password-input" type="password" name="password" id="password" required>
+                                <button class="btn btn-link position-absolute end-0 text-decoration-none text-muted password-toggle-btn" type="button" style="top: 43%; box-shadow: none;"><i class="ri-eye-fill align-middle"></i></button>
                                 @if($errors->has('password'))
                                     <div class="invalid-feedback">
                                         {{ $errors->first('password') }}
@@ -51,6 +53,7 @@
                                 @endif
                                 <span class="help-block">{{ trans('cruds.user.fields.password_helper') }}</span>
                             </div>
+
                             <div class="mb-3">
                                 <div class="form-check {{ $errors->has('approved') ? 'is-invalid' : '' }}">
                                     <input type="hidden" name="approved" value="0">
@@ -94,5 +97,12 @@
             </div>
         </div>
     </div>
+
+@endsection
+
+@section('scripts')
+    @parent
+
+    @include('layouts.common.toggle-password-visibility')
 
 @endsection

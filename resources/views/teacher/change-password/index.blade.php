@@ -21,9 +21,10 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-sm-12">
-                                        <div class="mb-3">
+                                        <div class="position-relative auth-pass-inputgroup mb-3">
                                             <label class="required" for="old_password">Old {{ trans('global.login_password') }}</label>
-                                            <input id="old_password" name="old_password" type="password" class="form-control {{ $errors->has('old_password') ? ' is-invalid' : '' }}" required placeholder="Old {{ trans('global.login_password') }} *" value="{{ old('old_password', null) }}">
+                                            <input id="old_password" name="old_password" type="password" class="form-control {{ $errors->has('old_password') ? ' is-invalid' : '' }} password-input" required placeholder="Old {{ trans('global.login_password') }} *" value="{{ old('old_password', null) }}">
+                                            <button class="btn btn-link position-absolute end-0 text-decoration-none text-muted password-toggle-btn" type="button" style="top: 43%; box-shadow: none;"><i class="ri-eye-fill align-middle"></i></button>
                                             @if($errors->has('old_password'))
                                                 <div class="invalid-feedback">
                                                     {{ $errors->first('old_password') }}
@@ -33,9 +34,10 @@
                                     </div>
 
                                     <div class="col-lg-6 col-md-6 col-sm-12">
-                                        <div class="mb-3">
+                                        <div class="position-relative auth-pass-inputgroup mb-3">
                                             <label class="required" for="password">{{ trans('global.login_password') }}</label>
-                                            <input id="password" name="password" type="password" class="form-control {{ $errors->has('password') ? ' is-invalid' : '' }}" placeholder="{{ trans('global.login_password') }} *" value="{{ old('password', null) }}" required>
+                                            <input id="password" name="password" type="password" class="form-control {{ $errors->has('password') ? ' is-invalid' : '' }} password-input" placeholder="{{ trans('global.login_password') }} *" value="{{ old('password', null) }}" required>
+                                            <button class="btn btn-link position-absolute end-0 text-decoration-none text-muted password-toggle-btn" type="button" style="top: 43%; box-shadow: none;"><i class="ri-eye-fill align-middle"></i></button>
                                             @if($errors->has('password'))
                                                 <div class="invalid-feedback">
                                                     {{ $errors->first('password') }}
@@ -45,9 +47,10 @@
                                     </div>
 
                                     <div class="col-lg-6 col-md-6 col-sm-12">
-                                        <div class="mb-3">
+                                        <div class="position-relative auth-pass-inputgroup mb-3">
                                             <label class="required" for="confirm_password">Confirm {{ trans('global.login_password') }}</label>
-                                            <input id="confirm_password" name="confirm_password" type="password" class="form-control {{ $errors->has('confirm_password') ? ' is-invalid' : '' }}" placeholder="Confirm {{ trans('global.login_password') }} *" value="{{ old('confirm_password', null) }}" required>
+                                            <input id="confirm_password" name="confirm_password" type="password" class="form-control {{ $errors->has('confirm_password') ? ' is-invalid' : '' }} password-input" placeholder="Confirm {{ trans('global.login_password') }} *" value="{{ old('confirm_password', null) }}" required>
+                                            <button class="btn btn-link position-absolute end-0 text-decoration-none text-muted password-toggle-btn" type="button" style="top: 43%; box-shadow: none;"><i class="ri-eye-fill align-middle"></i></button>
                                             @if($errors->has('confirm_password'))
                                                 <div class="invalid-feedback">
                                                     {{ $errors->first('confirm_password') }}
@@ -75,5 +78,6 @@
 
     {{-- @include('layouts.common.ckeditor5.43_3_0') --}}
     @include('layouts.common.ckeditor5.super_build_41_2_1')
+    @include('layouts.common.toggle-password-visibility')
 
 @endsection

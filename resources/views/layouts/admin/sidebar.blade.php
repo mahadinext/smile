@@ -75,12 +75,12 @@
                                     </li>
                                 @endcan
 
-                                @can('access_change_password')
-                                    {{-- <li class="nav-item">
-                                        <a href="{{ route('admin.change-password.index') }}" class="nav-link {{ request()->is('teacher/change-password') || request()->is('teacher/change-password/*') ? 'active' : '' }}">
-                                            <i class="fa-fw fas fa-briefcase"></i> <span >Change Password</span>
+                                @can('access_new_teacher_requests')
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.teachers.index') }}" class="nav-link {{ request()->is('teacher/change-password') || request()->is('teacher/change-password/*') ? 'active' : '' }}">
+                                            <i class="mdi mdi-account"></i> <span >New Teacher Requests</span>
                                         </a>
-                                    </li> --}}
+                                    </li>
                                 @endcan
 
                                 @can('access_course')

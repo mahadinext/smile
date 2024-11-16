@@ -67,8 +67,8 @@
                                             </div> --}}
                                             <label class="form-label" for="password-input">Password</label>
                                             <div class="position-relative auth-pass-inputgroup mb-3">
-                                                <input id="password" name="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" required placeholder="{{ trans('global.login_password') }}">
-                                                {{-- <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted" type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button> --}}
+                                                <input id="password" name="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }} password-input" required placeholder="{{ trans('global.login_password') }}">
+                                                <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-toggle-btn" type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
                                                 @if ($errors->has('password'))
                                                     <span class="text-danger">{{ $errors->first('password') }}</span>
                                                 @endif
@@ -108,9 +108,20 @@
             </div>
         </div>
 
-        @include('layouts.common.vendor-scripts')
+        {{-- @include('layouts.common.vendor-scripts') --}}
+
+        <!-- JAVASCRIPT -->
+        <script src="{!! asset('theme/admin/assets/libs/bootstrap/js/bootstrap.bundle.min.js') !!}"></script>
+        <script src="{!! asset('theme/admin/assets/libs/simplebar/simplebar.min.js') !!}"></script>
+        <script src="{!! asset('theme/admin/assets/libs/node-waves/waves.min.js') !!}"></script>
+        <script src="{!! asset('theme/admin/assets/libs/feather-icons/feather.min.js') !!}"></script>
+        <script src="{!! asset('theme/admin/assets/js/pages/plugins/lord-icon-2.1.0.js') !!}"></script>
+        <script src="{!! asset('theme/admin/assets/js/plugins.js') !!}"></script>
 
         <!-- password-addon init -->
         <script src="{!! asset('theme/admin/assets/js/pages/password-addon.init.js') !!}"></script>
+
+        @include('layouts.common.toggle-password-visibility')
+
     </body>
 </html>

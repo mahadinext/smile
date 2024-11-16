@@ -40,7 +40,10 @@
                             <div class="col-12 my-3">
                                 <div class="rbt-form-group">
                                     <label>{{ trans('global.login_password') }} <span style="color:red">*</span></label>
-                                    <input id="password" name="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" required value="{{ old('password', null) }}">
+                                    <input id="password" name="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }} password-input" required value="{{ old('password', null) }}">
+                                    <button type="button" class="position-absolute translate-middle-y password-toggle-btn" style="right: 10px; top: 70%; border: none; background: none; cursor: pointer;">
+                                        <i class="feather-eye"></i>
+                                    </button>
                                     @if($errors->has('password'))
                                         <div class="invalid-feedback">
                                             {{ $errors->first('password') }}
@@ -71,4 +74,9 @@
         </div>
     </div>
 
+@endsection
+
+@section('scripts')
+    @parent
+    @include('web.include.toggle-password-visibility')
 @endsection

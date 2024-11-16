@@ -31,6 +31,7 @@
                                             @endif
                                         </div>
                                     </div>
+
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="mb-3">
                                             <label class="required" for="phone_no">Phone No</label>
@@ -38,6 +39,32 @@
                                             @if($errors->has('phone_no'))
                                                 <div class="invalid-feedback">
                                                     {{ $errors->first('phone_no') }}
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="position-relative auth-pass-inputgroup mb-3">
+                                            <label class="required" for="password">{{ trans('global.login_password') }}</label>
+                                            <input id="password" name="password" type="password" class="form-control {{ $errors->has('password') ? ' is-invalid' : '' }} password-input" value="{{ old('password', '') }}" autofocus required>
+                                            <button class="btn btn-link position-absolute end-0 text-decoration-none text-muted password-toggle-btn" type="button" style="top: 43%; box-shadow: none;"><i class="ri-eye-fill align-middle"></i></button>
+                                            @if($errors->has('password'))
+                                                <div class="invalid-feedback">
+                                                    {{ $errors->first('password') }}
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="position-relative auth-pass-inputgroup mb-3">
+                                            <label class="required" for="confirm_password">Confirm {{ trans('global.login_password') }}</label>
+                                            <input id="confirm_password" name="confirm_password" type="password" class="form-control {{ $errors->has('confirm_password') ? ' is-invalid' : '' }} password-input" value="{{ old('confirm_password', '') }}" autofocus required>
+                                            <button class="btn btn-link position-absolute end-0 text-decoration-none text-muted password-toggle-btn" type="button" style="top: 43%; box-shadow: none;"><i class="ri-eye-fill align-middle"></i></button>
+                                            @if($errors->has('confirm_password'))
+                                                <div class="invalid-feedback">
+                                                    {{ $errors->first('confirm_password') }}
                                                 </div>
                                             @endif
                                         </div>
@@ -290,5 +317,6 @@
 
     {{-- @include('layouts.common.ckeditor5.43_3_0') --}}
     @include('layouts.common.ckeditor5.super_build_41_2_1')
+    @include('layouts.common.toggle-password-visibility')
 
 @endsection

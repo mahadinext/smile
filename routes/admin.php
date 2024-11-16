@@ -72,12 +72,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
         Route::get('/edit/{id}', [TeacherController::class, 'edit'])->name('edit');
         Route::post('/update/{id}', [TeacherController::class, 'update'])->name('update');
         Route::get('/delete/{id}', [TeacherController::class, 'delete'])->name('delete');
-    });
-
-    // Teacher Password Change
-    Route::group(['prefix' => 'change-password', 'as' => 'change-password.', 'middleware' => ['auth']], function () {
-        Route::get('/', [ChangePasswordController::class, 'index'])->name('index');
-        Route::post('/update/{id}', [ChangePasswordController::class, 'update'])->name('update');
+        Route::get('/change-password/{id}', [TeacherController::class, 'changePassword'])->name('change-password');
     });
 
     // Audit Logs

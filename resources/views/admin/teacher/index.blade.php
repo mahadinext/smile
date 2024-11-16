@@ -119,6 +119,11 @@
                                             <td>{{ App\Models\Teacher\Teachers::STATUS_SELECT[$teacher->status] }}</td>
                                             <td>{{ ($teacher->createdBy) ? $teacher->createdBy->email : '' }}</td>
                                             <td>
+                                                <a class="btn btn-sm btn-warning mt-2"
+                                                    href="{{ route('admin.teachers.change-password', $teacher->user_id) }}">
+                                                    Change Password
+                                                </a>
+
                                                 <a class="btn btn-sm btn-info mt-2"
                                                     href="{{ route('admin.teachers.edit', $teacher->id) }}">
                                                     {{ trans('global.edit') }}

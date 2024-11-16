@@ -52,3 +52,6 @@
 
 <script src="{!! asset('theme/admin/assets/js/pages/select2.init.js') !!}"></script>
 
+<!-- password-addon init -->
+<script src="assets/js/pages/password-addon.init.js"></script>
+

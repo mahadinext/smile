@@ -17,6 +17,8 @@ class ChangePasswordController extends Controller
 {
     use Auditable;
 
+    public $routePrefix = "";
+
     /**
      * @var ProfileService
      */
@@ -27,6 +29,12 @@ class ChangePasswordController extends Controller
     public function __construct(ProfileService $profileService)
     {
         $this->profileService = $profileService;
+
+        if (isset(app('admin')->id)) {
+            $this->routePrefix = "admin.teachers";
+        } else if (isset(app('teacher')->id)) {
+            $this->routePrefix = "teacher.change-password";
+        }
     }
 
     /**
@@ -47,9 +55,10 @@ class ChangePasswordController extends Controller
             return view("{$this->layoutFolder}.index", $data);
         } catch (ModelNotFoundException $exception) {
             Log::error("ChangePasswordController::index()", [$exception]);
-            return redirect()->route('teacher.change-password.index')->with('error', $exception->getMessage());
+            return redirect()->route($this->routePrefix . '.index')->with('error', $exception->getMessage());
         } catch (Exception $exception) {
             Log::error("ChangePasswordController::index()", [$exception]);
+            return redirect()->route($this->routePrefix . '.index')->with('error', $exception->getMessage());
         }
     }
 
@@ -66,17 +75,17 @@ class ChangePasswordController extends Controller
             $user = User::findOrFail(Auth::user()->id);
             $passwordUpdate = $this->profileService->changePassword($request, $user);
             if ($passwordUpdate) {
-                $this->auditLogEntry("password:updated", $user->id, 'course-update', $passwordUpdate);
-                return redirect()->route('teacher.change-password.index')->with('success', "Password updated successfully");
+                $this->auditLogEntry("password:updated", $user->id, 'password-update', $passwordUpdate);
+                return redirect()->route($this->routePrefix . '.index')->with('success', "Password updated successfully");
             }
 
-            return redirect()->route('teacher.change-password.index')->with('error', "Something went wrong!");
+            return redirect()->route($this->routePrefix . '.index')->with('error', "Something went wrong!");
         } catch (ModelNotFoundException $exception) {
             Log::error("ChangePasswordController::update()", [$exception]);
-            return redirect()->route('teacher.change-password.index')->with('error', $exception->getMessage());
+            return redirect()->route($this->routePrefix . '.index')->with('error', $exception->getMessage());
         } catch (Exception $exception) {
             Log::error("ChangePasswordController::update()", [$exception]);
-            return redirect()->route('teacher.change-password.index')->with('error', $exception->getMessage());
+            return redirect()->route($this->routePrefix . '.index')->with('error', $exception->getMessage());
         }
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTeacherRequest;
+use App\Http\Requests\UpdateChangePasswordRequest;
 use App\Http\Requests\UpdateTeacherProfileRequest;
 use App\Models\Teacher\Teachers;
 use App\Models\User;
@@ -121,7 +122,7 @@ class TeacherController extends Controller
 
             if ($teacher) {
                 $this->auditLogEntry("teacher:created", $teacher->id, 'teacher-create', $teacher);
-                return redirect()->route($this->routePrefix . '.teachers.index')->with('success', "Teacher added successfully");
+                return redirect()->route($this->routePrefix . '.teachers.index')->with('success', "Teacher added successfully & A verificatio mail has been sent to the teacher.");
             }
 
             return redirect()->route($this->routePrefix . '.teachers.index')->with('error', "Something went wrong!");
@@ -200,6 +201,31 @@ class TeacherController extends Controller
             return redirect()->route($this->routePrefix . '.teachers.index')->with('error', $exception->getMessage());
         } catch (Exception $exception) {
             Log::error("TeacherController::delete()", [$exception]);
+            return redirect()->route($this->routePrefix . '.teachers.index')->with('error', $exception->getMessage());
+        }
+    }
+
+    /**
+     * Get page.
+     *
+     * @param integer $id
+     * @return \Illuminate\View\View
+     */
+    public function changePassword(int $id)
+    {
+        try {
+            $user = User::findOrFail($id);
+
+            $data = [
+                "teacher" => $user,
+            ];
+
+            return view("teacher.change-password.index", $data);
+        } catch (ModelNotFoundException $exception) {
+            Log::error("TeacherController::changePassword()", [$exception]);
+            return redirect()->route($this->routePrefix . '.teachers.index')->with('error', $exception->getMessage());
+        } catch (Exception $exception) {
+            Log::error("TeacherController::changePassword()", [$exception]);
             return redirect()->route($this->routePrefix . '.teachers.index')->with('error', $exception->getMessage());
         }
     }
