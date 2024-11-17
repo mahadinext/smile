@@ -17,8 +17,13 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->boolean('approved')->default(0)->nullable();
+            $table->timestamp('password_changed_at')->nullable();
+            $table->enum('user_type', [1, 2, 3])->comment('1: admin, 2: student, 3: teacher');
+            $table->string('token')->nullable();
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

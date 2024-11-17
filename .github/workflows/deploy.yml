@@ -1,0 +1,32 @@
+name: Deploy to cPanel
+
+on:
+  push:
+    branches:
+      - evaluation  # Only deploys when changes are pushed to the evaluation branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Install Dependencies
+        run: |
+          composer install --optimize-autoloader --no-dev
+          npm install && npm run production  # For asset compilation if needed
+
+      - name: Deploy to cPanel
+        env:
+          HOST: ${{ secrets.CPANEL_HOST }}
+          USERNAME: ${{ secrets.CPANEL_USERNAME }}
+          PASSWORD: ${{ secrets.CPANEL_PASSWORD }}
+        run: |
+          lftp -f "
+          set ftp:ssl-allow no
+          open -u $USERNAME,$PASSWORD $HOST
+          mirror -R . /public_html  # Uploading to public_html or your project directory on cPanel
+          bye
+          "

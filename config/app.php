@@ -187,6 +187,13 @@ return [
          */
 
         /*
+         * Custom Service Providers...
+         */
+        App\Providers\AdminServiceProvider::class,
+        App\Providers\StudentServiceProvider::class,
+        App\Providers\TeacherServiceProvider::class,
+
+        /*
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
@@ -194,7 +201,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
+        App\Providers\GlobalFunctionsServiceProvider::class,
+        App\Providers\TelescopeServiceProvider::class,
     ],
 
     /*
