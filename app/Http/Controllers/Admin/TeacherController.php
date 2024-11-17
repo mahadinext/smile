@@ -173,34 +173,6 @@ class TeacherController extends Controller
     }
 
     /**
-     * Update in DB
-     *
-     * @param UpdateTeacherProfileRequest $request
-     * @param integer $id
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function update(UpdateTeacherProfileRequest $request, int $id)
-    {
-        try {
-            $this->setRoutePrefix();
-            $teacher = Teachers::findOrFail($id);
-            $teacherUpdate = $this->profileService->update($request, $teacher);
-            if ($teacherUpdate) {
-                $this->auditLogEntry("teacher:updated", $teacher->id, 'teacher-update', $teacherUpdate);
-                return redirect()->route($this->routePrefix . '.teachers.index')->with('success', "Teacher updated successfully");
-            }
-
-            return redirect()->route($this->routePrefix . '.teachers.index')->with('error', "Something went wrong");
-        } catch (ModelNotFoundException $exception) {
-            Log::error("TeacherController::update()", [$exception]);
-            return redirect()->route($this->routePrefix . '.teachers.index')->with('error', $exception->getMessage());
-        } catch (Exception $exception) {
-            Log::error("TeacherController::update()", [$exception]);
-            return redirect()->route($this->routePrefix . '.teachers.index')->with('error', $exception->getMessage());
-        }
-    }
-
-    /**
      * Delete
      *
      * @param integer $id

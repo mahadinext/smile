@@ -25,9 +25,21 @@ class ProfileController extends Controller
 
     public $layoutFolder = "teacher.profile";
 
+    public $routePrefix = "";
+
     public function __construct(ProfileService $profileService)
     {
         $this->profileService = $profileService;
+    }
+
+    public function setRoutePrefix()
+    {
+        if (isset(app('admin')->id)) {
+            $this->routePrefix = "admin.teachers";
+        }
+        else if (isset(app('teacher')->id)) {
+            $this->routePrefix = "teacher.profile";
+        }
     }
 
     /**
@@ -62,20 +74,21 @@ class ProfileController extends Controller
     public function update(UpdateTeacherProfileRequest $request, int $id)
     {
         try {
+            $this->setRoutePrefix();
             $teacher = Teachers::findOrFail($id);
             $teacherUpdate = $this->profileService->update($request, $teacher);
             if ($teacherUpdate) {
                 $this->auditLogEntry("teacher:updated", $teacher->id, 'teacher-update', $teacherUpdate);
-                return redirect()->route('teacher.profile.index')->with('success', "Teacher Info updated successfully");
+                return redirect()->route($this->routePrefix . '.index')->with('success', "Teacher Info updated successfully");
             }
 
-            return redirect()->route('teacher.profile.index')->with('error', "Something went wrong!");
+            return redirect()->route($this->routePrefix . '.index')->with('error', "Something went wrong!");
         } catch (ModelNotFoundException $exception) {
             Log::error("ProfileController::update()", [$exception]);
-            return redirect()->route('teacher.profile.index')->with('error', $exception->getMessage());
+            return redirect()->route($this->routePrefix . '.index')->with('error', $exception->getMessage());
         } catch (Exception $exception) {
             Log::error("ProfileController::update()", [$exception]);
-            return redirect()->route('teacher.profile.index')->with('error', $exception->getMessage());
+            return redirect()->route($this->routePrefix . '.index')->with('error', $exception->getMessage());
         }
     }
 }

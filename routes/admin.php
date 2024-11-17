@@ -72,7 +72,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
         Route::get('/create', [TeacherController::class, 'create'])->name('create');
         Route::post('/store', [TeacherController::class, 'store'])->name('store');
         Route::get('/edit/{id}', [TeacherController::class, 'edit'])->name('edit');
-        Route::post('/update/{id}', [TeacherController::class, 'update'])->name('update');
         Route::get('/delete/{id}', [TeacherController::class, 'delete'])->name('delete');
         Route::get('/change-password/{id}', [TeacherController::class, 'changePassword'])->name('change-password');
 
