@@ -19,4 +19,12 @@
     .page-list li a:hover {
         color: #ffffff;
     }
+
+    .rbt-accordion-style.rbt-accordion-04 .card {
+        border: 2px solid #f38b051f;
+    }
+
+    .rbt-accordion-style.rbt-accordion-04 .card .card-body {
+        border-top: 2px solid #f38b051f;
+    }
 </style>

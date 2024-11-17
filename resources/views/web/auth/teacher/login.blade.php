@@ -3,7 +3,7 @@
 
     {{-- @include('web.include.breadcrumb') --}}
 
-    <div class="newsletter-style-2 bg-color-primary rbt-section-gap">
+    <div class="newsletter-style-2 bg-color-primary rbt-section-gap" style="background: linear-gradient(218.15deg, var(--color-secondary) 0%, var(--color-primary) 100%);">
         <div class="container">
             <div class="row gy-5 row--30 justify-content-center">
                 <div class="col-lg-6">

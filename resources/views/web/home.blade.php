@@ -114,7 +114,7 @@
     </div>
 
     <!-- Start Course Area  -->
-    <div class="rbt-course-area bg-color-extra2 rbt-section-gap">
+    <div class="rbt-course-area bg-color-extra2 rbt-section-gap" style="background:#f38b051f;">
         <div class="container">
             <div class="row mb--60 g-5 align-items-end">
                 <div class="col-lg-6 col-md-6 col-12">
@@ -201,7 +201,7 @@
     <!-- End Course Area  -->
 
     {{-- Counter --}}
-    <div class="rbt-counterup-area rbt-section-gapBottom bg-gradient-1 mt--60">
+    <div class="rbt-counterup-area rbt-section-gapBottom mt--60">
         <div class="container">
             <div class="row mb--60">
                 <div class="col-lg-12">

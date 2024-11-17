@@ -2,8 +2,8 @@
 @section('content')
 
     <!-- Start breadcrumb Area -->
-    <div class="rbt-breadcrumb-default rbt-breadcrumb-style-3" style="background: linear-gradient(to right, #f4b121, #ed5b21) !important;">
-        <div class="breadcrumb-inner breadcrumb-dark" style="background: linear-gradient(to right, #f4b121, #ed5b21) !important;">
+    <div class="rbt-breadcrumb-default rbt-breadcrumb-style-3" style="background: linear-gradient(218.15deg, var(--color-secondary) 0%, var(--color-primary) 100%);">
+        <div class="breadcrumb-inner breadcrumb-dark" style="background: linear-gradient(218.15deg, var(--color-secondary) 0%, var(--color-primary) 100%);">
             {{-- <img src="{!! asset('web/assets/images/bg/bg-image-10.jpg') !!}" alt="Education Images"> --}}
         </div>
         <div class="container">
@@ -575,7 +575,7 @@
                         <div class="row g-5 align-items-end mb--40">
                             <div class="col-lg-8 col-md-8 col-12">
                                 <div class="section-title">
-                                    <span class="subtitle bg-pink-opacity">Top Course</span>
+                                    <span class="subtitle bg-coral-opacity">Top Course</span>
                                     <h4 class="title">More Course By <strong class="color-primary">{{ $course->courseTeacher->first_name }}</strong></h4>
                                 </div>
                             </div>
@@ -816,7 +816,7 @@
             <div class="row g-5 align-items-end mb--40">
                 <div class="col-lg-8 col-md-8 col-12">
                     <div class="section-title">
-                        <span class="subtitle bg-pink-opacity">More Similar Courses</span>
+                        <span class="subtitle bg-coral-opacity">More Similar Courses</span>
                         <h4 class="title">Related Courses</h4>
                     </div>
                 </div>

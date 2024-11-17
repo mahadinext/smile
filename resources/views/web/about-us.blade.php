@@ -58,7 +58,7 @@
             <div class="row mb--60">
                 <div class="col-lg-12">
                     <div class="section-title text-center">
-                        <span class="subtitle bg-pink-opacity">Histudy Feature</span>
+                        <span class="subtitle bg-coral-opacity">Smile Academy Feature</span>
                         {{-- <h2 class="title">Check out Histudy's features <br> to win any exam</h2> --}}
                     </div>
                 </div>
@@ -147,12 +147,12 @@
     </div>
     <!-- End Service Area -->
 
-    <div class="rbt-team-area bg-color-extra2 rbt-section-gap">
+    <div class="rbt-team-area bg-color-extra2 rbt-section-gap" style="background:#f38b051f;">
         <div class="container">
             <div class="row mb--60">
                 <div class="col-lg-12">
                     <div class="section-title text-center">
-                        <span class="subtitle bg-pink-opacity">Our Instructor</span>
+                        <span class="subtitle bg-coral-opacity">Our Instructor</span>
                         <h2 class="title">Some of our Best Instructor</h2>
                     </div>
                 </div>

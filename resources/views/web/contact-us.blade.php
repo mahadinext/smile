@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title text-center mb--60">
-                        <span class="subtitle bg-secondary-opacity">Contact Us</span>
+                        <span class="subtitle bg-secondary-opacity" style="background: #f68c1e !important; color: #ffffff !important;">Contact Us</span>
                         <h2 class="title">{{ $contactUs->title ?? '' }}</h2>
                     </div>
                 </div>

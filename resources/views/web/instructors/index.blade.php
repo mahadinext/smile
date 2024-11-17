@@ -22,7 +22,7 @@
     </div>
     <!-- End Breadcrumb Area -->
 
-    <div class="rbt-team-area bg-color-extra2 rbt-section-gap">
+    <div class="rbt-team-area bg-color-extra2 rbt-section-gap" style="background:#f38b051f;">
         <div class="container">
             <div class="row g-5">
 
