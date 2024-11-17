@@ -13,17 +13,17 @@
                         <div class="col-lg-12">
                             <!-- Start Breadcrumb Area  -->
                             <ul class="page-list">
-                                <li class="rbt-breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+                                <li class="rbt-breadcrumb-item"><a href="{{ route('home') }}" style="color: #000000;">Home</a></li>
                                 <li>
                                     <div class="icon-right"><i class="feather-chevron-right"></i></div>
                                 </li>
-                                <li class="rbt-breadcrumb-item active">All Courses</li>
+                                <li class="rbt-breadcrumb-item active" style="color: #000000;">All Courses</li>
                             </ul>
                             <!-- End Breadcrumb Area  -->
 
                             <div class=" title-wrapper">
                                 <h1 class="title mb--0">All Courses</h1>
-                                <a href="#" class="rbt-badge-2">
+                                <a href="#" class="rbt-badge-2" style="background: rgb(237 173 134 / 80%);">
                                     <div class="image">🎉</div> {{ $totalCourses }} Courses
                                 </a>
                             </div>
