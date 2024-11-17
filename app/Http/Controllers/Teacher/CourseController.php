@@ -35,7 +35,10 @@ class CourseController extends Controller
     public function __construct(CourseService $courseService)
     {
         $this->courseService = $courseService;
+    }
 
+    public function setRoutePrefix()
+    {
         if (isset(app('admin')->id)) {
             $this->routePrefix = "admin";
         }
@@ -53,6 +56,7 @@ class CourseController extends Controller
     public function index(Request $request)
     {
         try {
+            $this->setRoutePrefix();
             $query = Course::query()
             ->with('courseTeacher','courseCategory','createdBy')
             ->select('id','price','title','category_id','teacher_id','course_start_date','status','created_by')
@@ -91,6 +95,7 @@ class CourseController extends Controller
     public function show(int $id)
     {
         try {
+            $this->setRoutePrefix();
             $course = Course::findOrFail($id);
             $courseContents = CourseContents::where('course_id', $id)->get();
             $contentTitles = $courseContents->pluck('title')->toArray();
@@ -123,6 +128,7 @@ class CourseController extends Controller
     public function create()
     {
         try {
+            $this->setRoutePrefix();
             $courseCategory = Helper::getAllCourseCategory();
             $teachers = Teachers::select('id','first_name','last_name','user_id')->get();
             $data = [
@@ -145,6 +151,7 @@ class CourseController extends Controller
     public function store(StoreCourseRequest $request)
     {
         try {
+            $this->setRoutePrefix();
             // dd($request);
             $course = $this->courseService->store($request);
 
@@ -169,6 +176,7 @@ class CourseController extends Controller
     public function edit(int $id)
     {
         try {
+            $this->setRoutePrefix();
             $course = Course::findOrFail($id);
             $courseContents = CourseContents::where('course_id', $id)->get();
             $contentTitles = $courseContents->pluck('title')->toArray();
@@ -203,6 +211,7 @@ class CourseController extends Controller
     public function update(UpdateCourseRequest $request, int $id)
     {
         try {
+            $this->setRoutePrefix();
             $course = Course::findOrFail($id);
             $courseUpdate = $this->courseService->update($request, $course);
             if ($courseUpdate) {
@@ -229,6 +238,7 @@ class CourseController extends Controller
     public function delete(int $id)
     {
         try {
+            $this->setRoutePrefix();
             $course = Course::findOrFail($id);
             $this->courseService->delete($course);
 

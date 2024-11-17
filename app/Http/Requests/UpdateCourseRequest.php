@@ -125,16 +125,18 @@ class UpdateCourseRequest extends FormRequest
                     }
                 },
             ],
-            'discount_expiry_date' => [
-                'date_format:' . config('panel.date_format') . ' ' . config('panel.time_format'),
-                'after:discount_start_date', // Ensure expiry_date is after start_date
-                'required_with:discount_type,discount_amount,discount_start_date', // Required if these fields are present
-            ],
             'discount_start_date' => [
+                'nullable',
                 'after_or_equal:course_start_date',
                 'date_format:' . config('panel.date_format') . ' ' . config('panel.time_format'),
                 'before:discount_expiry_date', // Ensure start_date is before expiry_date
                 'required_with:discount_type,discount_amount,discount_expiry_date', // Required if these fields are present
+            ],
+            'discount_expiry_date' => [
+                'nullable',
+                'date_format:' . config('panel.date_format') . ' ' . config('panel.time_format'),
+                'after:discount_start_date', // Ensure expiry_date is after start_date
+                'required_with:discount_type,discount_amount,discount_start_date', // Required if these fields are present
             ],
             'course_card_image' => [
                 'file',

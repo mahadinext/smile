@@ -32,10 +32,14 @@ class TeacherController extends Controller
     public function __construct(ProfileService $profileService)
     {
         $this->profileService = $profileService;
+    }
 
+    public function setRoutePrefix()
+    {
         if (isset(app('admin')->id)) {
             $this->routePrefix = "admin";
-        } else if (isset(app('teacher')->id)) {
+        }
+        else if (isset(app('teacher')->id)) {
             $this->routePrefix = "teacher";
         }
     }
@@ -49,6 +53,7 @@ class TeacherController extends Controller
     public function index(Request $request)
     {
         try {
+            $this->setRoutePrefix();
             $query = Teachers::query()
             ->with(['user','createdBy'])
             ->select('id','first_name','last_name','email','phone_no','status','user_id')
@@ -79,6 +84,7 @@ class TeacherController extends Controller
     {
         try {
             abort_if(Gate::denies('show_teacher'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+            $this->setRoutePrefix();
 
             $teacher = Teachers::findOrFail($id);
 
@@ -104,6 +110,7 @@ class TeacherController extends Controller
     {
         try {
             abort_if(Gate::denies('create_teacher'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+            $this->setRoutePrefix();
 
             $data = [];
 
@@ -122,6 +129,7 @@ class TeacherController extends Controller
     public function store(StoreTeacherRequest $request)
     {
         try {
+            $this->setRoutePrefix();
             // dd($request);
             $teacher = $this->profileService->store($request);
 
@@ -147,6 +155,7 @@ class TeacherController extends Controller
     {
         try {
             abort_if(Gate::denies('edit_teacher'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+            $this->setRoutePrefix();
 
             $teacher = Teachers::findOrFail($id);
 
@@ -173,6 +182,7 @@ class TeacherController extends Controller
     public function update(UpdateTeacherProfileRequest $request, int $id)
     {
         try {
+            $this->setRoutePrefix();
             $teacher = Teachers::findOrFail($id);
             $teacherUpdate = $this->profileService->update($request, $teacher);
             if ($teacherUpdate) {
@@ -200,6 +210,7 @@ class TeacherController extends Controller
     {
         try {
             abort_if(Gate::denies('delete_teacher'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+            $this->setRoutePrefix();
 
             $teacher = Teachers::findOrFail($id);
             $this->profileService->delete($teacher);
@@ -224,6 +235,7 @@ class TeacherController extends Controller
     {
         try {
             abort_if(Gate::denies('access_change_password'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+            $this->setRoutePrefix();
 
             $user = User::findOrFail($id);
 

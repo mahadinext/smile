@@ -132,4 +132,17 @@ class Helper
             return null;
         }
     }
+
+    public static function setRoutePrefix()
+    {
+        $routePrefix = "";
+        if (isset(app('admin')->id)) {
+            $routePrefix = "admin";
+        }
+        else if (isset(app('teacher')->id)) {
+            $routePrefix = "teacher";
+        }
+
+        dd($routePrefix);
+    }
 }
