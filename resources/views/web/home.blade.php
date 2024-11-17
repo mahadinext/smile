@@ -14,7 +14,7 @@
                             <h1 class="title">{!! $heroSection->title !!}</h1>
                             <p class="description">{!! $heroSection->description !!}</p>
                             <div class="slider-btn">
-                                <a class="rbt-btn btn-gradient hover-icon-reverse" href="{{ route('courses') }}">
+                                <a class="rbt-btn btn-gradient hover-icon-reverse" href="{{ route('courses') }}" style="background: black;">
                                     <span class="icon-reverse-wrapper">
                                         <span class="btn-text">View Course</span>
                                         <span class="btn-icon"><i class="feather-arrow-right"></i></span>
