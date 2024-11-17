@@ -115,7 +115,7 @@
                                             <td>{{ $teacher->first_name . ' ' . $teacher->last_name }}</td>
                                             <td>{{ $teacher->email }}</td>
                                             <td>{{ $teacher->phone_no }}</td>
-                                            <td>{{ App\Models\User::STATUS_SELECT[$teacher->user->approved] }}</td>
+                                            <td>{{ ($teacher->user) ? App\Models\User::STATUS_SELECT[$teacher->user->approved] : '' }}</td>
                                             <td>{{ App\Models\Teacher\Teachers::STATUS_SELECT[$teacher->status] }}</td>
                                             <td>{{ ($teacher->createdBy) ? $teacher->createdBy->email : '' }}</td>
                                             <td>

@@ -214,7 +214,7 @@
 
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-12 my-3">
                                     <div class="rbt-form-group">
-                                        <label for="image">Image (415 * 555) <span style="color:red">*</span></label>
+                                        <label for="image">Image (1500 * 1500) <span style="color:red">*</span></label>
                                         <input type="file" class="form-control form-control-file {{ $errors->has('image') ? ' is-invalid' : '' }}" name="image" id="image" accept=".jpeg, .jpg, .png, .gif">
                                         @if($errors->has('image'))
                                             <div class="invalid-feedback">

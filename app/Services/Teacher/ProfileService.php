@@ -8,6 +8,7 @@ use App\Http\Requests\StoreTeacherRequest;
 use App\Http\Requests\UpdateChangePasswordRequest;
 use App\Http\Requests\UpdateTeacherProfileRequest;
 use App\Mail\TeacherIsApproved;
+use App\Models\Course;
 use App\Models\Teacher\Teachers;
 use App\Models\User;
 use App\Traits\Auditable;
@@ -191,9 +192,12 @@ class ProfileService
         try {
             DB::beginTransaction();
 
+            $userId = $teacher->user_id;
             $teacher->deleted_by = Auth::user()->id;
             $teacher->save();
 
+            User::where('id', $userId)->delete();
+            Course::where('teacher_id', $userId)->delete();
             $teacher->delete();
             DB::commit();
 

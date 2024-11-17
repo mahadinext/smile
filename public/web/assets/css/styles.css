@@ -16541,7 +16541,8 @@ span.transparent-button:hover i {
   overflow: hidden;
 }
 .rbt-counterup.border-bottom-gradient::before {
-  background: linear-gradient(90deg, #CFA2E8, #637FEA);
+  /* background: linear-gradient(90deg, #CFA2E8, #637FEA); */
+  background: linear-gradient(218.15deg, var(--color-secondary) 0%, var(--color-primary) 100%);
   position: absolute;
   content: "";
   left: 0;

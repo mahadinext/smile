@@ -81,7 +81,7 @@ class StoreTeacherRequest extends FormRequest
                 'file',
                 'mimes:jpeg,png,jpg,gif', // Specifies acceptable file types
                 'max:2048', // Max file size of 2MB
-                'dimensions:min_width=415,min_height=555,max_width=415,max_height=555',
+                'dimensions:min_width=1500,min_height=1500,max_width=1500,max_height=1500',
             ],
             'nid_no' => [
                 'required',
