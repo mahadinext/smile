@@ -131,13 +131,10 @@
                                                     {{ trans('global.edit') }}
                                                 </a>
 
-                                                <form action="{{ route('admin.teachers.delete', $teacher->id) }}" method="POST"
-                                                    onsubmit="return confirm('{{ trans('global.areYouSure') }}');"
-                                                    style="display: inline-block;">
-                                                    <input type="hidden" name="_method" value="DELETE">
-                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                    <input type="submit" class="btn btn-sm btn-danger mt-2" value="{{ trans('global.delete') }}">
-                                                </form>
+                                                <a class="btn btn-sm btn-danger mt-2" onclick="return confirm('{{ trans('global.areYouSure') }}');"
+                                                    href="{{ route('admin.teachers.delete', $teacher->id) }}">
+                                                    {{ trans('global.delete') }}
+                                                </a>
                                             </td>
                                         </tr>
                                         @endforeach
