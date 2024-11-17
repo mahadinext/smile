@@ -142,7 +142,7 @@ class ProfileService
             $teacher->updated_by = Auth::user()->id;
 
             // Define base directory for teacher images
-            $teacherDir = 'teacher/' . Auth::user()->id;
+            $teacherDir = 'teacher/' . $teacher->user_id;
 
             // Ensure the directory exists
             Storage::makeDirectory($teacherDir);
