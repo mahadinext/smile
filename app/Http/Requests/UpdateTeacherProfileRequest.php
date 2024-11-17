@@ -109,13 +109,13 @@ class UpdateTeacherProfileRequest extends FormRequest
                 'digits:10', // Assuming a 10-digit NID number (adjust if necessary)
             ],
             'nid_front_image' => [
-                $currentNidFrontImage ? 'required' : 'nullable',
+                $currentNidFrontImage ? 'nullable' : 'required',
                 'file',
                 'mimes:jpeg,png,jpg,gif',
                 'max:2048', // Max file size of 2MB
             ],
             'nid_back_image' => [
-                $currentNidBackImage ? 'required' : 'nullable',
+                $currentNidBackImage ? 'nullable' : 'required',
                 'file',
                 'mimes:jpeg,png,jpg,gif',
                 'max:2048', // Max file size of 2MB
