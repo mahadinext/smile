@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\Teacher\Teachers;
+use App\Models\User;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -12,6 +13,33 @@ use Illuminate\Support\Facades\Log;
 
 class TeacherController extends Controller
 {
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function index(Request $request)
+    {
+        try {
+            $teachers = Teachers::query()
+                ->select('id','user_id','first_name','last_name','email','phone_no','image')
+                ->where('status', Teachers::STATUS_ACTIVE)
+                ->whereHas('user', function ($query) {
+                    $query->where('approved', User::STATUS_APPROVED);
+                })
+                ->orderBy('id', 'desc')
+                ->paginate(8);
+
+            $data = [
+                "teachers" => $teachers,
+            ];
+
+            return view("web.instructors.index", $data);
+        } catch (Exception $exception) {
+            Log::error("TeacherController::index()", [$exception]);
+            return redirect()->back()->with('error', $exception->getMessage());
+        }
+    }
+
     /**
      * @param integer $id
      * @return \Illuminate\Contracts\Support\Renderable
@@ -32,12 +60,13 @@ class TeacherController extends Controller
                 "teacherCourses" => $teacherCourses,
             ];
 
-            return view('web.teacher.profile', $data);
+            return view('web.instructors.profile', $data);
         } catch (ModelNotFoundException $exception) {
             Log::error("TeacherController::profile()", [$exception]);
             return redirect()->back()->with('error', $exception->getMessage());
         }  catch (Exception $exception) {
             Log::error("TeacherController::profile()", [$exception]);
+            return redirect()->back()->with('error', $exception->getMessage());
         }
     }
 }

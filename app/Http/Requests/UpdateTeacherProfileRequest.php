@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Teacher\Teachers;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateTeacherProfileRequest extends FormRequest
@@ -13,6 +14,13 @@ class UpdateTeacherProfileRequest extends FormRequest
 
     public function rules()
     {
+        $id = $this->input('teacher_id');
+        $teacher = Teachers::select()->where('id', $id)->first();
+        $currentImage = ($teacher && $teacher->image) ? $teacher->image : null;
+        $currentCoverImage = ($teacher && $teacher->cover_image) ? $teacher->cover_image : null;
+        $currentNidFrontImage = ($teacher && $teacher->nid_front_image) ? $teacher->nid_front_image : null;
+        $currentNidBackImage = ($teacher && $teacher->nid_back_image) ? $teacher->nid_back_image : null;
+
         return [
             'first_name' => [
                 'string',
@@ -82,13 +90,14 @@ class UpdateTeacherProfileRequest extends FormRequest
                 // 'in:islam,christianity,hinduism,buddhism,other', // Assuming possible values
             ],
             'image' => [
-                'nullable',
+                $currentImage ? 'required' : 'nullable',
                 'file',
                 'mimes:jpeg,png,jpg,gif', // Specifies acceptable file types
                 'max:2048', // Max file size of 2MB
                 'dimensions:min_width=415,min_height=555,max_width=415,max_height=555',
             ],
             'cover_image' => [
+                // $currentCoverImage ? 'required' : 'nullable',
                 'nullable',
                 'file',
                 'mimes:jpeg,png,jpg,gif', // Specifies acceptable file types
@@ -100,13 +109,13 @@ class UpdateTeacherProfileRequest extends FormRequest
                 'digits:10', // Assuming a 10-digit NID number (adjust if necessary)
             ],
             'nid_front_image' => [
-                'nullable',
+                $currentNidFrontImage ? 'required' : 'nullable',
                 'file',
                 'mimes:jpeg,png,jpg,gif',
                 'max:2048', // Max file size of 2MB
             ],
             'nid_back_image' => [
-                'nullable',
+                $currentNidBackImage ? 'required' : 'nullable',
                 'file',
                 'mimes:jpeg,png,jpg,gif',
                 'max:2048', // Max file size of 2MB

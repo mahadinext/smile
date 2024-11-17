@@ -32,7 +32,12 @@ Route::controller(CourseController::class)->group(function () {
     });
 });
 
-Route::get('/teacher/{id}/profile', [TeacherController::class, 'profile'])->name('teacher-profile');
+Route::controller(TeacherController::class)->group(function () {
+    Route::prefix('instructors')->group(function () {
+        Route::get('/', 'index')->name('instructors');
+        Route::get('/{id}/profile', 'profile')->name('instructor-profile');
+    });
+});
 
 Route::get('/about-us', [AboutUsController::class, 'index'])->name('about-us');
 

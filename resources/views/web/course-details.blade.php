@@ -627,7 +627,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="rbt-author-info">
-                                                    By <a href="{{ route('teacher-profile', $data->courseTeacher->user_id) }}">{{ $data->courseTeacher->first_name }}</a>
+                                                    By <a href="{{ route('instructor-profile', $data->courseTeacher->user_id) }}">{{ $data->courseTeacher->first_name }}</a>
                                                 </div>
                                             </div>
                                             <div class="rbt-card-bottom">
@@ -868,7 +868,7 @@
                                         </a>
                                     </div>
                                     <div class="rbt-author-info">
-                                        By <a href="{{ route('teacher-profile', $data->courseTeacher->user_id) }}">{{ $data->courseTeacher->first_name }}</a>
+                                        By <a href="{{ route('instructor-profile', $data->courseTeacher->user_id) }}">{{ $data->courseTeacher->first_name }}</a>
                                     </div>
                                 </div>
                                 <div class="rbt-card-bottom">

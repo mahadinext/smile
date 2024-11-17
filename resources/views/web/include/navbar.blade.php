@@ -8,6 +8,10 @@
             <a href="{{ route('courses') }}">Browse Courses</a>
         </li>
 
+        <li class="with-megamenu">
+            <a href="{{ route('instructors') }}">Our Instructors</a>
+        </li>
+
         {{-- <li class="has-dropdown has-menu-child-item">
             <a href="#">Dashboard
                 <i class="feather-chevron-down"></i>

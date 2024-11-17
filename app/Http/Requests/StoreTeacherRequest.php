@@ -156,6 +156,8 @@ class StoreTeacherRequest extends FormRequest
             'nid_back_image.required' => 'Back NID image is required.',
             'nid_back_image.mimes' => 'Back NID image must be a file of type: jpeg, png, jpg, gif.',
             'nid_back_image.max' => 'Back NID image size cannot exceed 2MB.',
+            'bio.required' => 'A short bio is required',
+            'detailed_info.required' => 'Detailed information (Ex: Experience, Education..) is required',
         ];
     }
 }

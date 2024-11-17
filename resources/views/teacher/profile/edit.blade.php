@@ -23,6 +23,7 @@
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="mb-3">
                                             <label class="required" for="email">Email</label>
+                                            <input type="hidden" name="teacher_id" id="teacher_id" value="{{ $teacher->id }}">
                                             <input id="email" name="email" type="text" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" value="{{ old('email', $teacher->email ?? '') }}" autocomplete="email" autofocus disabled required>
                                             @if($errors->has('email'))
                                                 <div class="invalid-feedback">
@@ -155,7 +156,7 @@
 
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="mb-3">
-                                            <label class="" for="image">Image (415 * 555)</label>
+                                            <label class="required" for="image">Image (415 * 555)</label>
                                             <input class="form-control mb-3 {{ $errors->has('image') ? 'is-invalid' : '' }}" type="file" name="image" id="image" accept="image/*">
                                             <a href="{{ $teacher->image }}" target="_blank">Click to see previous uploaded image</a>
                                             @if($errors->has('image'))

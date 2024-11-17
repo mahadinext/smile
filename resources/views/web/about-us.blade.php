@@ -162,14 +162,16 @@
                 @foreach($teachers as $key => $data)
                     <!-- Start Single Team  -->
                     <div class="col-lg-3 col-md-6 col-sm-6 col-12 mt--30">
-                        <div class="team">
-                            <div class="thumbnail"><img src="{!! asset('web/assets/images/team/team-05.jpg') !!}" alt="Blog Images">
+                        <a href="{{ route('instructor-profile', $data->user_id) }}">
+                            <div class="team">
+                                <div class="thumbnail"><img src="{{ $data->image }}" alt="{{ $data->first_name . ' ' . $data->last_name }}">
+                                </div>
+                                <div class="content">
+                                    <h4 class="title">{{ $data->first_name . ' ' . $data->last_name }}</h4>
+                                    {{-- <p class="designation"></p> --}}
+                                </div>
                             </div>
-                            <div class="content">
-                                <h4 class="title">{{ $data->first_name . ' ' . $data->last_name }}</h4>
-                                {{-- <p class="designation"></p> --}}
-                            </div>
-                        </div>
+                        </a>
                     </div>
                     <!-- End Single Team  -->
                 @endforeach
