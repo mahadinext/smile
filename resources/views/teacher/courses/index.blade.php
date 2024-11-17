@@ -137,18 +137,16 @@
                                                     href="{{ route('teacher.courses.show', $course->id) }}">
                                                     {{ trans('global.view') }}
                                                 </a>
+
                                                 <a class="btn btn-sm btn-info mt-2"
                                                     href="{{ route('teacher.courses.edit', $course->id) }}">
                                                     {{ trans('global.edit') }}
                                                 </a>
 
-                                                <form action="{{ route('teacher.courses.delete', $course->id) }}" method="POST"
-                                                    onsubmit="return confirm('{{ trans('global.areYouSure') }}');"
-                                                    style="display: inline-block;">
-                                                    <input type="hidden" name="_method" value="DELETE">
-                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                    <input type="submit" class="btn btn-sm btn-danger mt-2" value="{{ trans('global.delete') }}">
-                                                </form>
+                                                <a class="btn btn-sm btn-danger mt-2" onclick="return confirm('{{ trans('global.areYouSure') }}');"
+                                                    href="{{ route('teacher.courses.delete', $course->id) }}">
+                                                    {{ trans('global.delete') }}
+                                                </a>
                                             </td>
                                         </tr>
                                         @endforeach
