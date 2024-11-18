@@ -10,16 +10,45 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+    - name: Checkout Code
+      uses: actions/checkout@v3
 
-      - name: Set up LFTP
-        run: sudo apt-get install -y lftp
+    - name: Set up SSH
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.CPANEL_DEPLOY_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H evaluation.smileacad.com >> ~/.ssh/known_hosts
 
-      - name: Deploy to FTP
-        run: |
-          chmod +x ./.github/workflows/deploy.sh
-          ./.github/workflows/deploy.sh ${{ secrets.FTP_SERVER }} ${{ secrets.FTP_USERNAME }} ${{ secrets.FTP_PASSWORD }} ./ /evaluation.smileacad.com/cicd_evaluation
+    - name: Install Dependencies
+      run: |
+        composer install --no-dev --optimize-autoloader
+        npm ci
+        npm run prod  # Optional: If using Laravel Mix
+
+    - name: Deploy to cPanel Subdomain
+      run: |
+        rsync -avz --exclude=".git" --exclude="node_modules" --exclude=".github" ./ smileaca@evaluation.smileacad.com:/home/smileaca/cicd_evaluation/
+
+    - name: Run Artisan Commands
+      run: |
+        ssh smileaca@evaluation.smileacad.com "cd /home/smileaca/cicd_evaluation && php artisan migrate --force && php artisan cache:clear && php artisan config:clear"
+
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v3
+
+#       - name: Set up LFTP
+#         run: sudo apt-get install -y lftp
+
+#       - name: Deploy to FTP
+#         run: |
+#           chmod +x ./.github/workflows/deploy.sh
+#           ./.github/workflows/deploy.sh ${{ secrets.FTP_SERVER }} ${{ secrets.FTP_USERNAME }} ${{ secrets.FTP_PASSWORD }} ./ /evaluation.smileacad.com/cicd_evaluation
 # jobs:
 #   ftp-deploy:
 #     runs-on: ubuntu-latest
