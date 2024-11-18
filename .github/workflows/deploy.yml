@@ -23,6 +23,11 @@ jobs:
     - name: Check PHP Version
       run: php -v
 
+    - name: Set Up PHP 8.2
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.2'
+
     - name: Install Dependencies
       run: |
         composer install --no-dev --optimize-autoloader
