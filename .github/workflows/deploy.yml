@@ -25,8 +25,8 @@ jobs:
     #   if: steps.cache.outputs.cache-hit != 'true' || github.event_name == 'push' && contains(github.event.head_commit.message, 'composer.json')
     #   run: composer install
 
-    - name: Run Deployment Script
-      run: bash ./.github/workflows/deploy.sh
+    # - name: Run Deployment Script
+    #   run: bash ./.github/workflows/deploy.sh
 
     - name: FTP Deploy
       uses: SamKirkland/FTP-Deploy-Action@4.3.0
