@@ -18,7 +18,7 @@ jobs:
 
       - name: Deploy to FTP
         run: |
-          chmod +x deploy.sh
+          chmod +x ./.github/workflows/deploy.sh
           ./.github/workflows/deploy.sh ${{ secrets.FTP_SERVER }} ${{ secrets.FTP_USERNAME }} ${{ secrets.FTP_PASSWORD }} ./ /evaluation.smileacad.com/cicd_evaluation
 # jobs:
 #   ftp-deploy:
