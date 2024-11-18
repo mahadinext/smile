@@ -19,7 +19,7 @@ jobs:
         echo "${{ secrets.CPANEL_DEPLOY_KEY }}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
         ssh-keyscan -H evaluation.smileacad.com >> ~/.ssh/known_hosts
-        ssh -i ~/.ssh/id_rsa smileaca@evaluation.smileacad.com "echo SSH connection successful"
+        # ssh -i ~/.ssh/id_rsa smileaca@evaluation.smileacad.com "echo SSH connection successful"
 
     - name: Add Host Key to Known Hosts
       run: |
