@@ -36,7 +36,7 @@ jobs:
 
     - name: Deploy to cPanel Subdomain
       run: |
-        rsync -avz --exclude=".git" --exclude="node_modules" --exclude=".github" ./ smileaca@evaluation.smileacad.com:/home/smileaca/evaluation.smileacad.com/cicd_evaluation/
+        rsync -avz --exclude=".git" --exclude="node_modules" --exclude=".github" ./ smileaca@smileacad.com:/home/smileaca/new/
 
     - name: Run Artisan Commands
       run: |
