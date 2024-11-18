@@ -6,35 +6,50 @@ on:
       - evaluation
 
 jobs:
-  ftp-deploy:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Cache Composer dependencies
-      uses: actions/cache@v2
-      with:
-        path: vendor
-        key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-composer-
+      - name: Set up LFTP
+        run: sudo apt-get install -y lftp
 
-    # - name: Install Composer dependencies
-    #   if: steps.cache.outputs.cache-hit != 'true' || github.event_name == 'push' && contains(github.event.head_commit.message, 'composer.json')
-    #   run: composer install
+      - name: Deploy to FTP
+        run: |
+          chmod +x deploy.sh
+          ./deploy.sh ${{ secrets.FTP_SERVER }} ${{ secrets.FTP_USERNAME }} ${{ secrets.FTP_PASSWORD }} ./ /evaluation.smileacad.com/cicd_evaluation
+# jobs:
+#   ftp-deploy:
+#     runs-on: ubuntu-latest
 
-    # - name: Run Deployment Script
-    #   run: bash ./.github/workflows/deploy.sh
+#     steps:
+#     - name: Checkout code
+#       uses: actions/checkout@v2
 
-    - name: FTP Deploy
-      uses: SamKirkland/FTP-Deploy-Action@4.3.0
-      with:
-        server: ftp.smileacad.com
-        username: ${{ secrets.FTP_USERNAME }}
-        password: ${{ secrets.FTP_PASSWORD }}
-        port: 21
-        protocol: ftps
-        local-dir: ./
-        server-dir: /home/smileaca/evaluation.smileacad.com/cicd_evaluation/
+#     - name: Cache Composer dependencies
+#       uses: actions/cache@v2
+#       with:
+#         path: vendor
+#         key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+#         restore-keys: |
+#           ${{ runner.os }}-composer-
+
+#     # - name: Install Composer dependencies
+#     #   if: steps.cache.outputs.cache-hit != 'true' || github.event_name == 'push' && contains(github.event.head_commit.message, 'composer.json')
+#     #   run: composer install
+
+#     # - name: Run Deployment Script
+#     #   run: bash ./.github/workflows/deploy.sh
+
+#     - name: FTP Deploy
+#       uses: SamKirkland/FTP-Deploy-Action@4.3.0
+#       with:
+#         server: ftp.smileacad.com
+#         username: ${{ secrets.FTP_USERNAME }}
+#         password: ${{ secrets.FTP_PASSWORD }}
+#         port: 21
+#         protocol: ftps
+#         local-dir: ./
+#         server-dir: /home/smileaca/evaluation.smileacad.com/cicd_evaluation/
