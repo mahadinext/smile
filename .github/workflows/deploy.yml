@@ -19,11 +19,13 @@ jobs:
         echo "${{ secrets.CPANEL_DEPLOY_KEY }}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
         ssh-keyscan -H evaluation.smileacad.com >> ~/.ssh/known_hosts
+        ssh -i ~/.ssh/id_rsa smileaca@evaluation.smileacad.com "echo SSH connection successful"
 
     - name: Add Host Key to Known Hosts
       run: |
         mkdir -p ~/.ssh
         ssh-keyscan -H smileacad.com >> ~/.ssh/known_hosts
+        ssh -i ~/.ssh/id_rsa smileaca@smileacad.com "echo SSH connection successful"
 
     - name: Check PHP Version
       run: php -v
@@ -41,7 +43,9 @@ jobs:
 
     - name: Deploy to cPanel Subdomain
       run: |
-        rsync -avz --exclude=".git" --exclude="node_modules" --exclude=".github" ./ smileaca@smileacad.com:/home/smileaca/new/
+          rsync -avz -e "ssh -vvv -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" \
+            --exclude=".git" --exclude="node_modules" --exclude=".github" \
+            ./ smileaca@smileacad.com:/home/smileaca/new/
 
     - name: Run Artisan Commands
       run: |
