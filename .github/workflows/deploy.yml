@@ -20,6 +20,11 @@ jobs:
         chmod 600 ~/.ssh/id_rsa
         ssh-keyscan -H evaluation.smileacad.com >> ~/.ssh/known_hosts
 
+    - name: Add Host Key to Known Hosts
+      run: |
+        mkdir -p ~/.ssh
+        ssh-keyscan -H smileacad.com >> ~/.ssh/known_hosts
+
     - name: Check PHP Version
       run: php -v
 
