@@ -25,7 +25,7 @@ jobs:
       run: |
         mkdir -p ~/.ssh
         ssh-keyscan -H smileacad.com >> ~/.ssh/known_hosts
-        ssh -i ~/.ssh/id_rsa smileaca@smileacad.com "echo SSH connection successful"
+        # ssh -i ~/.ssh/id_rsa smileaca@smileacad.com "echo SSH connection successful"
 
     - name: Check PHP Version
       run: php -v
