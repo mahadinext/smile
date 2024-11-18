@@ -20,6 +20,9 @@ jobs:
         chmod 600 ~/.ssh/id_rsa
         ssh-keyscan -H evaluation.smileacad.com >> ~/.ssh/known_hosts
 
+    - name: Check PHP Version
+      run: php -v
+
     - name: Install Dependencies
       run: |
         composer install --no-dev --optimize-autoloader
