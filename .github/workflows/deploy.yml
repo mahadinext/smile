@@ -31,16 +31,16 @@ jobs:
     - name: Install Dependencies
       run: |
         composer install --no-dev --optimize-autoloader
-        npm ci
-        npm run prod  # Optional: If using Laravel Mix
+        # npm ci
+        # npm run prod  # Optional: If using Laravel Mix
 
     - name: Deploy to cPanel Subdomain
       run: |
-        rsync -avz --exclude=".git" --exclude="node_modules" --exclude=".github" ./ smileaca@evaluation.smileacad.com:/home/smileaca/cicd_evaluation/
+        rsync -avz --exclude=".git" --exclude="node_modules" --exclude=".github" ./ smileaca@evaluation.smileacad.com:/home/smileaca/evaluation.smileacad.com/cicd_evaluation/
 
     - name: Run Artisan Commands
       run: |
-        ssh smileaca@evaluation.smileacad.com "cd /home/smileaca/cicd_evaluation && php artisan migrate --force && php artisan cache:clear && php artisan config:clear"
+        ssh smileaca@evaluation.smileacad.com "cd /home/smileaca/evaluation.smileacad.com/cicd_evaluation && php artisan migrate --force && php artisan cache:clear && php artisan config:clear"
 
 # jobs:
 #   deploy:
