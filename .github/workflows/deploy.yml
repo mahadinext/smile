@@ -21,9 +21,9 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-composer-
 
-    - name: Install Composer dependencies
-      if: steps.cache.outputs.cache-hit != 'true' || github.event_name == 'push' && contains(github.event.head_commit.message, 'composer.json')
-      run: composer install
+    # - name: Install Composer dependencies
+    #   if: steps.cache.outputs.cache-hit != 'true' || github.event_name == 'push' && contains(github.event.head_commit.message, 'composer.json')
+    #   run: composer install
 
     - name: Run Deployment Script
       run: bash ./.github/workflows/deploy.sh
