@@ -1,32 +1,40 @@
-name: Deploy to cPanel
+name: FTP Deploy
 
 on:
   push:
     branches:
-      - evaluation  # Only deploys when changes are pushed to the evaluation branch
+      - evaluation
 
 jobs:
-  deploy:
+  ftp-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Install Dependencies
-        run: |
-          composer install --optimize-autoloader --no-dev
-          npm install && npm run production  # For asset compilation if needed
+    - name: Cache Composer dependencies
+      uses: actions/cache@v2
+      with:
+        path: vendor
+        key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-composer-
 
-      - name: Deploy to cPanel
-        env:
-          HOST: ${{ secrets.CPANEL_HOST }}
-          USERNAME: ${{ secrets.CPANEL_USERNAME }}
-          PASSWORD: ${{ secrets.CPANEL_PASSWORD }}
-        run: |
-          lftp -f "
-          set ftp:ssl-allow no
-          open -u $USERNAME,$PASSWORD $HOST
-          mirror -R . /public_html  # Uploading to public_html or your project directory on cPanel
-          bye
-          "
+    - name: Install Composer dependencies
+      if: steps.cache.outputs.cache-hit != 'true' || github.event_name == 'push' && contains(github.event.head_commit.message, 'composer.json')
+      run: composer install
+
+    - name: Run Deployment Script
+      run: bash ./.github/workflows/deploy.sh
+
+    - name: FTP Deploy
+      uses: SamKirkland/FTP-Deploy-Action@4.3.0
+      with:
+        server: ftp.smileacad.com
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        port: 21
+        protocol: ftps
+        local-dir: ./
+        server-dir: /home/smileaca/evaluation.smileacad.com/cicd_evaluation/
