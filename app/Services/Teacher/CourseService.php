@@ -304,6 +304,8 @@ class CourseService
             $course->save();
 
             $course->delete();
+            CourseContents::where('course_id', $course->id)->delete();
+
             DB::commit();
 
             // Clear the relevant cache

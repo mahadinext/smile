@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('student_id')->nullable();
-            $table->unsignedBigInteger('course_id')->nullable();
+            // $table->unsignedBigInteger('course_id')->nullable();
             $table->unsignedBigInteger('coupon_id')->nullable();
             $table->tinyInteger('order_type')->nullable();
             $table->tinyInteger('gateway')->nullable();
@@ -30,11 +30,11 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
+            // $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
             $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('coupon_id')->references('id')->on('coupons')->onDelete('cascade');
 
-            $table->index('course_id');
+            // $table->index('course_id');
             $table->index('student_id');
             $table->index('coupon_id');
             $table->index('order_type');

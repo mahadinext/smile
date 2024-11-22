@@ -21,7 +21,7 @@ class Order extends Model
 
     protected $fillable = [
         'student_id',
-        'course_id',
+        // 'course_id',
         'coupon_id',
         'order_type',
         'gateway',
