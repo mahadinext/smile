@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Teacher\Teachers;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -20,8 +21,27 @@ class CourseEnrollment extends Model
     ];
 
     protected $fillable = [
-        'student_id',
+        'teacher_id',
         'course_id',
         'order_id',
+        'status',
     ];
+
+    public const STATUS_DISABLE = 0;
+    public const STATUS_ENABLE  = 1;
+
+    public function courses()
+    {
+        return $this->belongsTo(Course::class, 'course_id');
+    }
+
+    public function order()
+    {
+        return $this->belongsTo(Order::class, 'order_id');
+    }
+
+    public function teacher()
+    {
+        return $this->belongsTo(Teachers::class, 'teacher_id');
+    }
 }

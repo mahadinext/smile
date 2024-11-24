@@ -28,4 +28,9 @@ class OrderCourses extends Model
 
     public const STATUS_DISABLE = 0;
     public const STATUS_ENABLE  = 1;
+
+    public function courses()
+    {
+        return $this->belongsTo(Course::class, 'course_id');
+    }
 }

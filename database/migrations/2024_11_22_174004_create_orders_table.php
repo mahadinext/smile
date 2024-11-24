@@ -26,6 +26,8 @@ return new class extends Migration
             $table->float('grand_total', 12, 2);
             $table->tinyInteger('status');
             $table->integer('created_by')->nullable();
+            $table->integer('updated_by')->nullable();
+            $table->integer('deleted_by')->nullable();
             $table->text('remarks')->nullable();
             $table->timestamps();
             $table->softDeletes();
@@ -39,6 +41,9 @@ return new class extends Migration
             $table->index('coupon_id');
             $table->index('order_type');
             $table->index('status');
+            $table->index('created_by');
+            $table->index('updated_by');
+            $table->index('deleted_by');
         });
     }
 

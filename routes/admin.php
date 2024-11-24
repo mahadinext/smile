@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FaqsController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\HomePageController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PermissionsController;
 use App\Http\Controllers\Admin\PrivacyPolicyController;
 use App\Http\Controllers\Admin\RolesController;
@@ -79,6 +80,17 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
             Route::get('/', [TeacherApprovalController::class, 'index'])->name('index');
             Route::get('/update/{id}', [TeacherApprovalController::class, 'update'])->name('update');
         });
+    });
+
+    // Orders
+    Route::group(['prefix' => 'orders', 'as' => 'orders.', 'middleware' => ['auth']], function () {
+        Route::get('/', [OrderController::class, 'index'])->name('index');
+        Route::get('/show/{id}', [OrderController::class, 'show'])->name('show');
+        Route::get('/create', [OrderController::class, 'create'])->name('create');
+        Route::post('/store', [OrderController::class, 'store'])->name('store');
+        Route::get('/delete/{id}', [OrderController::class, 'delete'])->name('delete');
+
+        Route::post('/total-cost', [OrderController::class, 'calculateTotalCost'])->name('total-cost');
     });
 
     // Audit Logs

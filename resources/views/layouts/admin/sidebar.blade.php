@@ -95,6 +95,25 @@
                     </li>
                 @endcan
 
+                @can('access_order_management')
+                    <li class="nav-item">
+                        <a class="nav-link menu-link {{ request()->is('admin/orders*') ? 'collapsed active' : '' }}" href="#orderManagementPages" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="orderManagementPages">
+                            <i class="mdi mdi-sticker-text-outline"></i> <span data-key="t-pages">Order Management</span>
+                        </a>
+                        <div class="collapse menu-dropdown {{ request()->is('admin/orders*') ? 'show' : '' }}" id="orderManagementPages">
+                            <ul class="nav nav-sm flex-column">
+                                @can('access_teacher')
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.orders.index') }}" class="nav-link {{ request()->is('admin/orders','admin/orders/*') ? 'active' : '' }}">
+                                            <i class="mdi mdi-account"></i> <span >Manage Order</span>
+                                        </a>
+                                    </li>
+                                @endcan
+                            </ul>
+                        </div>
+                    </li>
+                @endcan
+
                 @can('access_web_elements')
                     <li class="nav-item">
                         <a class="nav-link menu-link {{ request()->is('admin/web/image*', 'admin/web/color*', 'admin/web/typography*', 'admin/web/meta-contents*') ? 'collapsed active' : '' }}" href="#webElementManagementPages" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="webElementManagementPages">
