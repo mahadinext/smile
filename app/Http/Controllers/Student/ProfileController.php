@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Teacher;
+namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UpdateTeacherProfileRequest;
-use App\Models\Teacher\Teachers;
+use App\Http\Requests\UpdateStudentProfileRequest;
+use App\Models\Student\Students;
 use App\Models\User;
-use App\Services\Teacher\ProfileService;
+use App\Services\Student\ProfileService;
 use App\Traits\Auditable;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -23,7 +23,7 @@ class ProfileController extends Controller
      */
     public $profileService;
 
-    public $layoutFolder = "teacher.profile";
+    public $layoutFolder = "student.profile";
 
     public $routePrefix = "";
 
@@ -36,9 +36,8 @@ class ProfileController extends Controller
     {
         if (isset(app('admin')->id)) {
             $this->routePrefix = "admin.teachers";
-        }
-        else if (isset(app('teacher')->id)) {
-            $this->routePrefix = "teacher.profile";
+        } else if (isset(app('student')->id)) {
+            $this->routePrefix = "student.profile";
         }
     }
 
@@ -48,14 +47,14 @@ class ProfileController extends Controller
      * @param Request $request
      * @return \Illuminate\View\View
      */
-    public function index(Request $request, $teacherId = null)
+    public function index(Request $request, $studentId = null)
     {
         try {
-            $userId = (Auth::user()->user_type == User::ADMIN) ? $teacherId : Auth::user()->id;
-            $teacher = Teachers::where('user_id', $userId)->first();
+            $userId = (Auth::user()->user_type == User::ADMIN) ? $studentId : Auth::user()->id;
+            $teacher = Students::where('user_id', $userId)->first();
 
             $data = [
-                "teacher" => $teacher,
+                "student" => $teacher,
             ];
 
             return view("{$this->layoutFolder}.edit", $data);
@@ -67,19 +66,19 @@ class ProfileController extends Controller
     /**
      * Update in DB
      *
-     * @param UpdateTeacherProfileRequest $request
+     * @param UpdateStudentProfileRequest $request
      * @param integer $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(UpdateTeacherProfileRequest $request, int $id)
+    public function update(UpdateStudentProfileRequest $request, int $id)
     {
         try {
             $this->setRoutePrefix();
-            $teacher = Teachers::findOrFail($id);
-            $teacherUpdate = $this->profileService->update($request, $teacher);
-            if ($teacherUpdate) {
-                $this->auditLogEntry("teacher:updated", $teacher->id, 'teacher-update', $teacherUpdate);
-                return redirect()->route($this->routePrefix . '.index')->with('success', "Teacher Info updated successfully");
+            $student = Students::findOrFail($id);
+            $studentUpdate = $this->profileService->update($request, $student);
+            if ($studentUpdate) {
+                $this->auditLogEntry("student:updated", $student->id, 'student-update', $studentUpdate);
+                return redirect()->route($this->routePrefix . '.index')->with('success', "Student Info updated successfully");
             }
 
             return redirect()->route($this->routePrefix . '.index')->with('error', "Something went wrong!");

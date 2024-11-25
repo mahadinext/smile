@@ -34,6 +34,8 @@ class ChangePasswordController extends Controller
             $this->routePrefix = "admin.teachers";
         } else if (isset(app('teacher')->id)) {
             $this->routePrefix = "teacher.change-password";
+        } else if (isset(app('student')->id)) {
+            $this->routePrefix = "student.change-password";
         }
     }
 
@@ -49,7 +51,7 @@ class ChangePasswordController extends Controller
             $user = User::findOrFail(Auth::user()->id);
 
             $data = [
-                "teacher" => $user,
+                "user" => $user,
             ];
 
             return view("{$this->layoutFolder}.index", $data);

@@ -11,7 +11,7 @@
             </div>
 
             <div class="row">
-                <form method="POST" action="{{ route("teacher.change-password.update", $user->id) }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route("student.change-password.update", $user->id) }}" enctype="multipart/form-data">
                     @csrf
                     <div class="col-lg-12" id="password-section">
                         <div class="card">
