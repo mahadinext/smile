@@ -4,6 +4,7 @@ namespace App\Services\Student;
 
 use App\Http\Requests\StoreCourseRequest;
 use App\Http\Requests\UpdateCourseRequest;
+use App\Models\CourseEnrollment;
 use App\Models\Course;
 use App\Models\CourseContents;
 use App\Traits\Auditable;
@@ -29,8 +30,6 @@ class CourseService
     public function filter(Request $request, $query)
     {
         try {
-            $query = $this->filterByRequest($request, $query);
-
             $orderBy = $request->order_by ?? 'DESC';
             $filterOption = $request->filter_option ?? 'id';
             $paginate = $request->paginate ?? 10;
@@ -43,32 +42,10 @@ class CourseService
             ];
         } catch (Exception $exception) {
             Log::error("CourseService::filter()", [$exception]);
-            return [];
-        }
-    }
-
-    /**
-     * filter course by request params
-     *
-     * @param Request $request
-     * @param $query
-     * @return object
-     */
-    public function filterByRequest(Request $request, $query)
-    {
-        try {
-            if ($request->filled('course_category')) {
-                $query->where('category_id', $request->course_category);
-            }
-
-            if ($request->filled('course_title')) {
-                $query->where('title', 'LIKE', '%' . $request->course_title . '%');
-            }
-
-            return $query;
-        } catch (Exception $exception) {
-            Log::error("CourseService::filterByRequest()", [$exception]);
-            return [];
+            return [
+                "enrolledCourses" => CourseEnrollment::whereRaw('1!=1')->paginate(),
+                "totalEnrolledCourses" => 0,
+            ];
         }
     }
 

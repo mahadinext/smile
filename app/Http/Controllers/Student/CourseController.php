@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateCourseRequest;
 use App\Models\Course;
 use App\Models\CourseCategory;
 use App\Models\CourseContents;
+use App\Models\CourseEnrollment;
 use App\Models\Order;
 use App\Models\Student\Students;
 use App\Models\User;
@@ -58,14 +59,13 @@ class CourseController extends Controller
     {
         try {
             $this->setRoutePrefix();
-            $query = Order::query()
-            ->with('courseEnrollment','courseEnrollment.courses')
+            $query = CourseEnrollment::query()
+            ->with('courses','order')
             ->where(function ($query) {
                 if (Auth::user()->user_type == User::STUDENT) {
-                    $query->where('student_id', Auth::user()->id);
+                    $query->where('order.student_id', Auth::user()->id);
                 }
-            })
-            ->whereNull('orders.deleted_at');
+            });
 
             $result = (new CourseService)->filter($request, $query);
 
