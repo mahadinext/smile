@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\ChangePasswordController;
+use App\Http\Controllers\Teacher\CourseContentController;
 use App\Http\Controllers\Teacher\CourseController;
 use App\Http\Controllers\Teacher\DashboardController;
 use App\Http\Controllers\Teacher\ProfileController;
@@ -29,6 +30,25 @@ Route::group(['prefix' => 'teacher', 'as' => 'teacher.', 'middleware' => ['auth'
         Route::post('/update/{id}', [CourseController::class, 'update'])->name('update');
         Route::get('/delete/{id}', [CourseController::class, 'delete'])->name('delete');
     });
+
+    Route::group(['prefix' => 'course-contents', 'as' => 'course-contents.', 'middleware' => ['auth']], function () {
+        Route::get('/', [CourseContentController::class, 'index'])->name('index');
+        Route::get('/create', [CourseContentController::class, 'create'])->name('create');
+        Route::post('/store', [CourseContentController::class, 'store'])->name('store');
+        Route::get('/edit/{id}', [CourseContentController::class, 'edit'])->name('edit');
+        Route::post('/update/{id}', [CourseContentController::class, 'update'])->name('update');
+        Route::get('/delete/{id}', [CourseContentController::class, 'delete'])->name('delete');
+    });
+
+    // Route::group(['prefix' => 'course-materials', 'as' => 'course-materials.', 'middleware' => ['auth']], function () {
+    //     Route::get('/', [CourseContentController::class, 'index'])->name('index');
+    //     Route::get('/show/{id}', [CourseContentController::class, 'show'])->name('show');
+    //     Route::get('/create', [CourseContentController::class, 'create'])->name('create');
+    //     Route::post('/store', [CourseContentController::class, 'store'])->name('store');
+    //     Route::get('/edit/{id}', [CourseContentController::class, 'edit'])->name('edit');
+    //     Route::post('/update/{id}', [CourseContentController::class, 'update'])->name('update');
+    //     Route::get('/delete/{id}', [CourseContentController::class, 'delete'])->name('delete');
+    // });
 
     Route::group(['prefix' => 'profile', 'as' => 'profile.', 'middleware' => ['auth']], function () {
         Route::get('/', [ProfileController::class, 'index'])->name('index');

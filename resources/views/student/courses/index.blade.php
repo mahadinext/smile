@@ -14,102 +14,50 @@
 
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-header">
-                            Total Course- {{ $totalCourses }}
+                    <div class="d-lg-flex align-items-center mb-4">
+                        <div class="flex-grow-1">
+                            <h5 class="card-title mb-0 fw-semibold fs-16">Total Course- {{ $totalCourses }}</h5>
                         </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <form action="{{ route('student.courses.index') }}" method="GET">
-                                        <div class="row d-flex flex-row align-items-center card-body">
-
-                                            <div class="col-md-4">
-                                                <div class="mb-3">
-                                                    <label class="" for="course_category">Course Category</label>
-                                                    <select class="form-control search select2 {{ $errors->has('course_category') ? 'is-invalid' : '' }}" name="course_category" id="course_category">
-                                                        <option value="">Select</option>
-                                                        @foreach ($courseCategory as $key => $value)
-                                                            <option value="{{ $key }}" {{ request('course_category', '') == $key ? 'selected' : '' }}>{{ $value }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-4">
-                                                <div class="mb-3">
-                                                    <label for="course_title">Title</label>
-                                                    <input class="form-control" value="{{ request('course_title') }}" type="text" name="course_title" id="course_title">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-4 mt-3">
-                                                <button type="submit" class="btn btn-success btn-md mr-3" style="padding: 6px 19px;"><i class="mdi mdi-file-search-outline"></i> Search</button>
-                                                <a href="{{ route('student.courses.index') }}" class="btn btn-warning btn-md">Clear</a>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
+                        <div class="flex-shrink-0 mt-4 mt-lg-0">
+                            <a href="apps-nft-creators.html" class="btn btn-soft-primary">View All <i class="ri-arrow-right-line align-bottom"></i></a>
                         </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4>Course List</h4>
-                        </div>
-                        <div class="card-body">
-                            <table class="table table-bordered dt-responsive table-striped align-middle"
-                                style="width:100%">
-                                @if (!($enrolledCourses->isEmpty()))
-                                    <thead>
-                                        <tr>
-                                            <th>Id</th>
-                                            {{-- <th>Title</th> --}}
-                                            {{-- <th>Action</th> --}}
-                                        </tr>
-                                    </thead>
-                                    <tbody id="filteredData">
-                                        @foreach ($enrolledCourses as $key => $data)
-                                        <tr>
-                                            {{-- <td>{{ $enrolledCourses->firstItem() + $key }}</td> --}}
-                                            <td>{{ ($enrolledCourses->currentPage() - 1) * $enrolledCourses->perPage() + $loop->iteration }}</td>
-                                            {{-- <td>{{ $data->courseEnrollment->courses ? $data->courseEnrollment->courses->title : null}}</td>
-                                            <td>{{ $data->courseEnrollment->courses ? $data->courseEnrollment->courses->price : null }}</td> --}}
-                                            {{-- <td>
-                                               <a class="btn btn-sm btn-primary mt-2"
-                                                    href="{{ route('student.courses.show', $data->id) }}">
-                                                    {{ trans('global.view') }}
-                                                </a>
-
-                                                <a class="btn btn-sm btn-info mt-2"
-                                                    href="{{ route('student.courses.edit', $data->id) }}">
-                                                    {{ trans('global.edit') }}
-                                                </a>
-
-                                                <a class="btn btn-sm btn-danger mt-2" onclick="return confirm('{{ trans('global.areYouSure') }}');"
-                                                    href ="{{ route('student.courses.delete', $data->id) }}">
-                                                    {{ trans('global.delete') }}
-                                                </a>
-                                            </td> --}}
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                @else
-                                    <tr>
-                                        <td rowspan="5">
-                                            <h5 class="text-center">Not available</h5>
-                                        </td>
-                                    </tr>
-                                @endif
-                            </table>
-                        </div>
-                        {{ $enrolledCourses->withQueryString()->links('pagination::bootstrap-5') }}
                     </div>
                 </div>
             </div>
+
+            <div class="row row-cols-xl-3 row-cols-lg-4 row-cols-md-6 row-cols-1">
+                @if (!($enrolledCourses->isEmpty()))
+                    @foreach ($enrolledCourses as $key => $data)
+                        <div class="col">
+                            <div class="card explore-box card-animate">
+                                <div class="explore-place-bid-img">
+                                    <img src="{{ $data->courses->promotional_image }}" alt="" class="card-img-top explore-img" />
+                                    <div class="bg-overlay"></div>
+                                    <div class="place-bid-btn">
+                                        <a href="{{ route('student.courses.show', $data->courses->id) }}" class="btn btn-success"><i class="mdi-view-agenda align-bottom me-1"></i> View Details</a>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="mb-1"><a href="apps-nft-item-details.html">{{ $data->title }}</a></h5>
+                                    <p class="text-muted mb-0">{{ $data->courses->courseTeacher->first_name . " " . $data->courses->courseTeacher->last_name }}</p>
+                                </div>
+                                <div class="card-footer border-top border-top-dashed">
+                                    <div class="d-flex align-items-center">
+                                        <div class="flex-grow-1 fs-14">
+                                            <i class="ri-book-fill text-warning align-bottom me-1"></i> Lessons: <span class="fw-medium">{{ $data->courses->total_class }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                @else
+                    <h5 class="text-center">Not available</h5>
+                @endif
+            </div>
+
+            {{ $enrolledCourses->withQueryString()->links('pagination::bootstrap-5') }}
+
         </div>
     @endsection
     @section('scripts')

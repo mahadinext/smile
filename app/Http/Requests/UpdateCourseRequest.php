@@ -44,23 +44,32 @@ class UpdateCourseRequest extends FormRequest
                 'required',
                 'date_format:' . config('panel.date_format') . ' ' . config('panel.time_format'),
             ],
-            'content_title' => [
-                'required',
-                'array',
-            ],
-            'content_title.*' => [
-                'required',
-                'string',
-                'max:50',
-            ],
-            'content_description' => [
-                'required',
-                'array',
-            ],
-            'content_description.*' => [
-                'required',
-                'string',
-            ],
+            // 'content_no' => [
+            //     'required',
+            //     'array',
+            // ],
+            // 'content_no.*' => [
+            //     'required',
+            //     'integer',
+            //     'max:150',
+            // ],
+            // 'content_title' => [
+            //     'required',
+            //     'array',
+            // ],
+            // 'content_title.*' => [
+            //     'required',
+            //     'string',
+            //     'max:50',
+            // ],
+            // 'content_description' => [
+            //     'required',
+            //     'array',
+            // ],
+            // 'content_description.*' => [
+            //     'required',
+            //     'string',
+            // ],
             'requirments' => [
                 'required',
                 'string',

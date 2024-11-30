@@ -179,12 +179,14 @@ class CourseController extends Controller
             $this->setRoutePrefix();
             $course = Course::findOrFail($id);
             $courseContents = CourseContents::where('course_id', $id)->get();
+            $contentNumbers = $courseContents->pluck('content_no')->toArray();
             $contentTitles = $courseContents->pluck('title')->toArray();
             $contentDescriptions = $courseContents->pluck('description')->toArray();
             $teachers = Teachers::select('id','first_name','last_name','user_id')->get();
 
             $data = [
                 "course" => $course,
+                "contentNumbers" => $contentNumbers,
                 "contentTitles" => $contentTitles,
                 "contentDescriptions" => $contentDescriptions,
                 "courseCategory" => Helper::getAllCourseCategory(),

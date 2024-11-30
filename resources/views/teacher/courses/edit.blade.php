@@ -95,7 +95,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-12" id="course-content-section">
+                    {{-- <div class="col-lg-12" id="course-content-section">
                         <div class="card" id="content-card-template">
                             <div class="card-header align-items-center d-flex">
                                 <h4 class="card-title mb-0 flex-grow-1">Course Content</h4>
@@ -107,6 +107,16 @@
                                 </div>
                             </div>
                             <div class="card-body">
+                                <div class="mb-3">
+                                    <label class="required" for="content_no">No</label>
+                                    <input class="form-control {{ $errors->has('content_no') ? 'is-invalid' : '' }}" type="number" name="content_no[]" id="content_no" required>
+                                    @if($errors->has('content_no'))
+                                        <div class="invalid-feedback">
+                                            {{ $errors->first('content_no') }}
+                                        </div>
+                                    @endif
+                                </div>
+
                                 <div class="mb-3">
                                     <label class="required" for="content_title">Title</label>
                                     <input class="form-control {{ $errors->has('content_title') ? 'is-invalid' : '' }}" type="text" name="content_title[]" id="content_title" required>
@@ -129,9 +139,10 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <!-- Hidden inputs to store old values -->
                     @php
+                        $oldContentNo = old('content_no', []);
                         $oldContentTitles = old('content_title', []);
                         $oldContentDescriptions = old('content_description', []);
                     @endphp
@@ -429,23 +440,26 @@
 
     <script>
         $(document).ready(function() {
-            var contentTitles = @json($contentTitles);
-            var contentDescriptions = @json($contentDescriptions);
+            // var contentNumbers = @json($contentNumbers);
+            // var contentTitles = @json($contentTitles);
+            // var contentDescriptions = @json($contentDescriptions);
 
-            if (contentTitles.length > 0) {
-                for (var i = 0; i < contentTitles.length; i++) {
-                    if (i == 0) {
-                        const firstCard = document.getElementById('content-card-template');
-                        const firstTitleInput = firstCard.querySelector('input[type="text"]');
-                        const firstDescriptionTextarea = firstCard.querySelector('textarea');
-                        // Set the values for the first card
-                        firstTitleInput.value = contentTitles[0];
-                        firstDescriptionTextarea.value = contentDescriptions[0];
-                    } else {
-                        addCard(contentTitles[i], contentDescriptions[i]);
-                    }
-                }
-            }
+            // if (contentTitles.length > 0) {
+            //     for (var i = 0; i < contentTitles.length; i++) {
+            //         if (i == 0) {
+            //             const firstCard = document.getElementById('content-card-template');
+            //             const firstNoInput = firstCard.querySelector('input[type="number"]');
+            //             const firstTitleInput = firstCard.querySelector('input[type="text"]');
+            //             const firstDescriptionTextarea = firstCard.querySelector('textarea');
+            //             // Set the values for the first card
+            //             firstNoInput.value = contentNumbers[0];
+            //             firstTitleInput.value = contentTitles[0];
+            //             firstDescriptionTextarea.value = contentDescriptions[0];
+            //         } else {
+            //             addCard(contentNumbers[i], contentTitles[i], contentDescriptions[i]);
+            //         }
+            //     }
+            // }
         });
     </script>
 @endsection

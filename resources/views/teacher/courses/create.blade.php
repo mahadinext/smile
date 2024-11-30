@@ -105,7 +105,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-12" id="course-content-section">
+                {{-- <div class="col-lg-12" id="course-content-section">
                     <div class="card" id="content-card-template">
                         <div class="card-header align-items-center d-flex">
                             <h4 class="card-title mb-0 flex-grow-1">Course Content</h4>
@@ -117,6 +117,16 @@
                             </div>
                         </div>
                         <div class="card-body">
+                            <div class="mb-3">
+                                <label class="required" for="content_no">No</label>
+                                <input class="form-control {{ $errors->has('content_no') ? 'is-invalid' : '' }}" type="number" name="content_no[]" id="content_no" required>
+                                @if($errors->has('content_no'))
+                                    <div class="invalid-feedback">
+                                        {{ $errors->first('content_no') }}
+                                    </div>
+                                @endif
+                            </div>
+
                             <div class="mb-3">
                                 <label class="required" for="content_title">Title</label>
                                 <input class="form-control {{ $errors->has('content_title') ? 'is-invalid' : '' }}" type="text" name="content_title[]" id="content_title" required>
@@ -139,9 +149,10 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 <!-- Hidden inputs to store old values -->
                 @php
+                    $oldContentNo = old('content_no', []);
                     $oldContentTitles = old('content_title', []);
                     $oldContentDescriptions = old('content_description', []);
                 @endphp

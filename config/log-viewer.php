@@ -117,9 +117,9 @@ return [
 
     'api_middleware' => [
         \Opcodes\LogViewer\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
-        \Opcodes\LogViewer\Http\Middleware\AuthorizeLogViewer::class,
-        'auth',
-        'check.log.viewer.permission',
+        // \Opcodes\LogViewer\Http\Middleware\AuthorizeLogViewer::class,
+        // 'auth',
+        // 'check.log.viewer.permission',
     ],
 
     'api_stateful_domains' => env('LOG_VIEWER_API_STATEFUL_DOMAINS') ? explode(',', env('LOG_VIEWER_API_STATEFUL_DOMAINS')) : null,

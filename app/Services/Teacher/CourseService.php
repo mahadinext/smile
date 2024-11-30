@@ -142,7 +142,7 @@ class CourseService
             DB::beginTransaction();
             $course = Course::create($courseCreate);
 
-            $this->storeCourseContents($request, $course->id);
+            // $this->storeCourseContents($request, $course->id);
 
             DB::commit();
 
@@ -168,6 +168,7 @@ class CourseService
                 $courseContents[] = [
                     'course_id' => $courseId,
                     'title' => $value,
+                    'content_no' => $request->content_no[$key],
                     'description' => $request->content_description[$key],
                     'status' => CourseContents::STATUS_INCOMPLETE,
                 ];
@@ -238,7 +239,7 @@ class CourseService
 
             $course->save();
 
-            $this->deleteAndUpdateCourseInfos($course->id, $request);
+            // $this->deleteAndUpdateCourseInfos($course->id, $request);
 
             DB::commit();
 

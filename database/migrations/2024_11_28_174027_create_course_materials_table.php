@@ -11,15 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('course_contents', function (Blueprint $table) {
+        Schema::create('course_materials', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('course_id');
-            $table->integer('content_no');
             $table->string('title');
-            $table->text('description');
-            $table->tinyInteger('status');
-            $table->timestamp('class_time')->nullable();
-            $table->string('class_link')->nullable();
+            $table->tinyInteger('type');
+            $table->string('file')->nullable();
+            $table->string('url')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
@@ -29,7 +27,6 @@ return new class extends Migration
 
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
             $table->index('course_id');
-            $table->index('status');
         });
     }
 
@@ -38,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('course_contents');
+        Schema::dropIfExists('course_materials');
     }
 };

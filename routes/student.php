@@ -27,6 +27,7 @@ Route::group(['prefix' => 'student', 'as' => 'student.', 'middleware' => ['auth'
 
     Route::group(['prefix' => 'courses', 'as' => 'courses.', 'middleware' => ['auth']], function () {
         Route::get('/', [CourseController::class, 'index'])->name('index');
+        Route::get('/show/{id}', [CourseController::class, 'show'])->name('show');
     });
 
     Route::group(['prefix' => 'profile', 'as' => 'profile.', 'middleware' => ['auth']], function () {

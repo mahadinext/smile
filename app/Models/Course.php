@@ -124,6 +124,11 @@ class Course extends Model
         return $this->hasMany(CourseContents::class, 'course_id');
     }
 
+    public function courseMaterials()
+    {
+        return $this->hasMany(CourseMaterials::class, 'course_id');
+    }
+
     public function courseStudents()
     {
         return $this->hasMany(CourseEnrollment::class, 'course_id');
