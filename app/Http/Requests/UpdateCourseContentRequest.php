@@ -40,6 +40,7 @@ class UpdateCourseContentRequest extends FormRequest
             'class_link' => [
                 'nullable',
                 'string',
+                'url',
             ],
             'content_status' => [
                 'required',

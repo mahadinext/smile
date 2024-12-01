@@ -18,9 +18,9 @@
                         <div class="flex-grow-1">
                             <h5 class="card-title mb-0 fw-semibold fs-16">Total Course- {{ $totalCourses }}</h5>
                         </div>
-                        <div class="flex-shrink-0 mt-4 mt-lg-0">
-                            <a href="apps-nft-creators.html" class="btn btn-soft-primary">View All <i class="ri-arrow-right-line align-bottom"></i></a>
-                        </div>
+                        {{-- <div class="flex-shrink-0 mt-4 mt-lg-0">
+                            <a href="#" class="btn btn-soft-primary">View All <i class="ri-arrow-right-line align-bottom"></i></a>
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -38,7 +38,7 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <h5 class="mb-1"><a href="apps-nft-item-details.html">{{ $data->title }}</a></h5>
+                                    <h5 class="mb-1"><a href="{{ route('student.courses.show', $data->courses->id) }}">{{ Str::limit($data->courses->title, 35) }}</a></h5>
                                     <p class="text-muted mb-0">{{ $data->courses->courseTeacher->first_name . " " . $data->courses->courseTeacher->last_name }}</p>
                                 </div>
                                 <div class="card-footer border-top border-top-dashed">

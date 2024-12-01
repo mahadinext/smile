@@ -22,7 +22,7 @@
                             <div class="card-body">
                                 <div class="mb-3">
                                     <label class="required" for="course_id">Course</label>
-                                    <select class="form-control js-example-basic-single {{ $errors->has('course_id') ? 'is-invalid' : '' }}" name="course_id" id="course_id">
+                                    <select class="form-control js-example-basic-single {{ $errors->has('course_id') ? 'is-invalid' : '' }}" name="course_id" id="course_id" required>
                                         <option value="">Select</option>
                                         @foreach ($courses as $key => $data)
                                             <option value="{{ $data->id }}"  {{ (old('course_id') == $data->id || $courseContent->course_id == $data->id) ? 'selected' : '' }}>

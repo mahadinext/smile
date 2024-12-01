@@ -57,11 +57,11 @@
                                     </a>
                                 </li>
 
-                                {{-- <li class="nav-item">
+                                <li class="nav-item">
                                     <a href="{{ route('teacher.course-materials.index') }}" class="nav-link {{ request()->is('teacher/course-materials','teacher/course-materials/*') ? 'active' : '' }}">
                                         <i class="mdi mdi-book-open"></i> <span >Course Materials</span>
                                     </a>
-                                </li> --}}
+                                </li>
                             </ul>
                         </div>
                     </li>

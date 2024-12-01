@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0">{{ trans('global.show') }} Course</h4>
+                        <h4 class="mb-sm-0">{{ trans('global.show') }} Course [{{ $enrolledCourse->title }}]</h4>
                     </div>
                 </div>
             </div>
@@ -92,8 +92,8 @@
                                         </div>
                                         <div class="flex-grow-1 ms-3">
                                             <h6 class="mb-1">{{ $data->title }}</h6>
-                                            <a class="badge bg-success-subtle text-success fs-12" style="background-color: #e3f7ed !important;" href="#">
-                                                <i class="ri-arrow-right-s-line fs-13 align-middle me-1"></i>Class Material
+                                            <a class="badge bg-success-subtle text-success fs-12 view-material-files" style="background-color: #e3f7ed !important;" href="#" data-class-id="{{ $data->id }}">
+                                                <i class="ri-arrow-right-s-line fs-13 align-middle me-1"></i>View Class Material
                                             </a>
                                         </div>
                                         <div class="flex-shrink-0">
@@ -135,7 +135,7 @@
                                         </div>
                                         <div class="flex-grow-1 ms-3">
                                             <h6 class="mb-1">{{ $data->title }}</h6>
-                                            <a class="badge bg-success-subtle text-success fs-12" style="background-color: #e3f7ed !important;" href="#">
+                                            <a class="badge bg-success-subtle text-success fs-12" style="background-color: #e3f7ed !important;" href="{{ $data->class_link }}">
                                                 <i class="ri-arrow-right-s-line fs-13 align-middle me-1"></i>Class URL
                                             </a>
                                         </div>
@@ -161,7 +161,33 @@
                     </div>
                 </div>
             </div>
+        </div>
 
+        <div id="materialModal" class="modal fade" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalLabel">Material Lists</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> </button>
+                    </div>
+                    <div class="modal-body" id="materials-table">
+                        <table class="table table-bordered dt-responsive table-striped align-middle">
+                            <thead>
+                                <th>ID</th>
+                                <th>Title</th>
+                                <th>Material</th>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary ">Save Changes</button>
+                    </div>
+
+                </div>
+            </div>
         </div>
 @endsection
 
@@ -169,6 +195,37 @@
     @parent
     <script>
         $(document).ready(function() {
+            $('.view-material-files').on('click', function(e) {
+                e.preventDefault();
+                let classId = $(this).data('class-id');
+                var courseMaterials = @json($courseMaterials);
+                let counter = 1;
+
+                // Populate the modal table
+                let tableBody = $('#materials-table tbody');
+                tableBody.empty();
+                courseMaterials.forEach(material => {
+                    let row = $('<tr></tr>');
+                    row.append('<td>' + counter + '</td>');
+                    row.append('<td>' + material.title + '</td>');
+
+                    let contentCell = $('<td></td>');
+                    if (material.type == '{{ App\Models\CourseMaterials::TYPE_FILE }}') {
+                        contentCell.append('<a href="' + material.file + '" target="_blank">View Material</a>');
+                    } else if (material.type == '{{ App\Models\CourseMaterials::TYPE_URL }}') {
+                        contentCell.append('<a href="' + material.url + '" target="_blank">View Material</a>');
+                    } else {
+                        contentCell.text('N/A');
+                    }
+                    row.append(contentCell);
+
+                    tableBody.append(row);
+                    counter++;
+                });
+
+                // Show the modal
+                $('#materialModal').modal('show');
+            });
         });
     </script>
 @endsection

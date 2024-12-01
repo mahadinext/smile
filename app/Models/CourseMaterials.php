@@ -13,6 +13,14 @@ class CourseMaterials extends Model
 
     public $table = 'course_materials';
 
+    public const TYPE_FILE = 1;
+    public const TYPE_URL = 2;
+
+    public const UPLOAD_TYPE = [
+        CourseMaterials::TYPE_FILE     => 'File',
+        CourseMaterials::TYPE_URL     => 'URL',
+    ];
+
     protected $dates = [
         'created_at',
         'updated_at',

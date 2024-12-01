@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\CourseContents;
 use App\Models\CourseEnrollment;
+use App\Models\CourseMaterials;
 use App\Models\User;
 use App\Services\Student\CourseService;
 use App\Traits\Auditable;
@@ -95,6 +96,7 @@ class CourseController extends Controller
             $completedClassCount = $completedClass->count();
             $incompleteClass = $courseContents->where('status', CourseContents::STATUS_INCOMPLETE); // Filter by status
             $incompleteClassCount = $incompleteClass->count();
+            $courseMaterials = CourseMaterials::where('course_id', $id)->get();
 
             $data = [
                 "enrolledCourse" => $course,
@@ -103,6 +105,7 @@ class CourseController extends Controller
                 "completedClassCount" => $completedClassCount,
                 "incompleteClass" => $incompleteClass,
                 "incompleteClassCount" => $incompleteClassCount,
+                "courseMaterials" => $courseMaterials,
             ];
 
             return view("{$this->layoutFolder}.show", $data);

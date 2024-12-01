@@ -91,16 +91,16 @@ class Helper
      *
      * @param \Illuminate\Http\UploadedFile $imageRequest The uploaded image file.
      * @param string $directory The directory where the image should be stored.
-     * @param string $imageName The name of the image file to store.
+     * @param string $fileName The name of the image file to store.
      * @return string|null The URL of the saved image or null if there was an error.
      */
-    public static function saveImage($imageRequest, $directory, $imageName)
+    public static function saveFile($fileRequest, $directory, $fileName)
     {
         try {
-            $imagePath = $imageRequest->storeAs($directory, $imageName, 'public');
-            return Storage::url($imagePath);
+            $filePath = $fileRequest->storeAs($directory, $fileName, 'public');
+            return Storage::url($filePath);
         } catch (Exception $exception) {
-            Log::error("Helper::saveImage()", [$exception]);
+            Log::error("Helper::saveFile()", [$exception]);
             return null;
         }
     }
@@ -142,7 +142,5 @@ class Helper
         else if (isset(app('teacher')->id)) {
             $routePrefix = "teacher";
         }
-
-        dd($routePrefix);
     }
 }

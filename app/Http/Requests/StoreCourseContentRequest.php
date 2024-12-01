@@ -40,6 +40,7 @@ class StoreCourseContentRequest extends FormRequest
             'class_link' => [
                 'nullable',
                 'string',
+                'url',
             ],
         ];
     }
