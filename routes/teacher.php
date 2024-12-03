@@ -5,6 +5,7 @@ use App\Http\Controllers\Teacher\CourseContentController;
 use App\Http\Controllers\Teacher\CourseController;
 use App\Http\Controllers\Teacher\CourseMaterialController;
 use App\Http\Controllers\Teacher\DashboardController;
+use App\Http\Controllers\Teacher\MyStudentsController;
 use App\Http\Controllers\Teacher\ProfileController;
 use App\Http\Controllers\Teacher\ReviewController;
 use App\Http\Controllers\Web\TeacherAuthController;
@@ -48,6 +49,10 @@ Route::group(['prefix' => 'teacher', 'as' => 'teacher.', 'middleware' => ['auth'
         Route::get('/edit/{id}', [CourseMaterialController::class, 'edit'])->name('edit');
         Route::post('/update/{id}', [CourseMaterialController::class, 'update'])->name('update');
         Route::get('/delete/{id}', [CourseMaterialController::class, 'delete'])->name('delete');
+    });
+
+    Route::group(['prefix' => 'my-students', 'as' => 'my-students.', 'middleware' => ['auth']], function () {
+        Route::get('/', [MyStudentsController::class, 'index'])->name('index');
     });
 
     Route::group(['prefix' => 'profile', 'as' => 'profile.', 'middleware' => ['auth']], function () {

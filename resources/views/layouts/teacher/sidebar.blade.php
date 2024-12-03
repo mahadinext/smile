@@ -67,6 +67,12 @@
                     </li>
 
                     <li class="nav-item">
+                        <a href="{{ route('teacher.my-students.index') }}" class="nav-link {{ request()->is('teacher/my-students') || request()->is('teacher/my-students/*') ? 'active' : '' }}">
+                            <i class="mdi mdi-star"></i> <span >My Students</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
                         <a href="{{ route('teacher.reviews.index') }}" class="nav-link {{ request()->is('teacher/reviews') || request()->is('teacher/reviews/*') ? 'active' : '' }}">
                             <i class="mdi mdi-star"></i> <span >Reviews</span>
                         </a>

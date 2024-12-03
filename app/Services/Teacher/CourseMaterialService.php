@@ -75,11 +75,6 @@ class CourseMaterialService
                 });
             }
 
-            // Filter by status
-            if ($request->filled('material_status')) {
-                $query->where('status', $request->material_status);
-            }
-
             return $query;
         } catch (Exception $exception) {
             Log::error("CourseMaterialService::filterByRequest()", [$exception]);
