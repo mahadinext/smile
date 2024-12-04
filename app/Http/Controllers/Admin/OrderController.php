@@ -92,7 +92,10 @@ class OrderController extends Controller
     public function create()
     {
         try {
-            abort_if(Gate::denies('create_order'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+            if (Gate::denies('create_order')) {
+                return redirect()->back()->with('error', 'You are not authorized to access this page.');
+            }
+
             $this->setRoutePrefix();
 
             $students = User::select('id','name','email')
@@ -150,7 +153,10 @@ class OrderController extends Controller
     public function delete(int $id)
     {
         try {
-            abort_if(Gate::denies('delete_order'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+            if (Gate::denies('delete_order')) {
+                return redirect()->back()->with('error', 'You are not authorized to access this page.');
+            }
+
             $this->setRoutePrefix();
 
             $order = Order::findOrFail($id);

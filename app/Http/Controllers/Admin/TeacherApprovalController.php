@@ -79,7 +79,9 @@ class TeacherApprovalController extends Controller
     public function update(int $id)
     {
         try {
-            abort_if(Gate::denies('approve_new_teacher_requests'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+            if (Gate::denies('approve_new_teacher_requests')) {
+                return redirect()->back()->with('error', 'You are not authorized to access.');
+            }
 
             $teacherUser = User::findOrFail($id);
             $teacherUpdate = $this->profileService->approveTeacherUser($teacherUser);

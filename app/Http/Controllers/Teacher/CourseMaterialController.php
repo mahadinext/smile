@@ -16,7 +16,9 @@ use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
+use Symfony\Component\HttpFoundation\Response;
 
 class CourseMaterialController extends Controller
 {
@@ -55,6 +57,10 @@ class CourseMaterialController extends Controller
     public function index(Request $request)
     {
         try {
+            if (Auth::check() && Auth::user()->user_type == User::ADMIN && Gate::denies('view_course_material')) {
+                return redirect()->back()->with('error', 'You are not authorized to access this page.');
+            }
+
             $this->setRoutePrefix();
             $query = CourseMaterials::query()
             ->with('course')
@@ -98,6 +104,10 @@ class CourseMaterialController extends Controller
     public function create()
     {
         try {
+            if (Auth::check() && Auth::user()->user_type == User::ADMIN && Gate::denies('create_course_material')) {
+                return redirect()->back()->with('error', 'You are not authorized to create course material.');
+            }
+
             $this->setRoutePrefix();
             $courses = Course::query()
             ->with('courseTeacher')
@@ -153,6 +163,10 @@ class CourseMaterialController extends Controller
     public function edit(int $id)
     {
         try {
+            if (Auth::check() && Auth::user()->user_type == User::ADMIN && Gate::denies('edit_course_material')) {
+                return redirect()->back()->with('error', 'You are not authorized to edit course material.');
+            }
+
             $this->setRoutePrefix();
             $courseMaterial = CourseMaterials::findOrFail($id);
             $courses = Course::query()
@@ -217,6 +231,12 @@ class CourseMaterialController extends Controller
     public function delete(int $id)
     {
         try {
+            if (Auth::check() && Auth::user()->user_type == User::ADMIN) {
+                if (Gate::denies('delete_course_material')) {
+                    return redirect()->back()->with('error', 'You are not authorized to delete course material.');
+                }
+            }
+
             $this->setRoutePrefix();
             $courseMaterial = CourseMaterials::findOrFail($id);
             $this->courseMaterialService->delete($courseMaterial);

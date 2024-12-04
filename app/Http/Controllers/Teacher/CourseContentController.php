@@ -16,7 +16,9 @@ use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
+use Symfony\Component\HttpFoundation\Response;
 
 class CourseContentController extends Controller
 {
@@ -55,6 +57,10 @@ class CourseContentController extends Controller
     public function index(Request $request)
     {
         try {
+            if (Auth::check() && Auth::user()->user_type == User::ADMIN && Gate::denies('view_course_content')) {
+                return redirect()->back()->with('error', 'You are not authorized to access this page.');
+            }
+
             $this->setRoutePrefix();
             $query = CourseContents::query()
             ->with('course')
@@ -99,6 +105,10 @@ class CourseContentController extends Controller
     public function create()
     {
         try {
+            if (Auth::check() && Auth::user()->user_type == User::ADMIN && Gate::denies('create_course_content')) {
+                return redirect()->back()->with('error', 'You are not authorized to create course content.');
+            }
+
             $this->setRoutePrefix();
             $courses = Course::query()
             ->with('courseTeacher')
@@ -154,6 +164,10 @@ class CourseContentController extends Controller
     public function edit(int $id)
     {
         try {
+            if (Auth::check() && Auth::user()->user_type == User::ADMIN && Gate::denies('edit_course_content')) {
+                return redirect()->back()->with('error', 'You are not authorized to edit course content.');
+            }
+
             $this->setRoutePrefix();
             $courseContent = CourseContents::findOrFail($id);
             $courses = Course::query()
@@ -219,6 +233,10 @@ class CourseContentController extends Controller
     public function delete(int $id)
     {
         try {
+            if (Auth::check() && Auth::user()->user_type == User::ADMIN && Gate::denies('delete_course_content')) {
+                return redirect()->back()->with('error', 'You are not authorized to delete course content.');
+            }
+
             $this->setRoutePrefix();
             $courseContent = CourseContents::findOrFail($id);
             $this->courseContentService->delete($courseContent);

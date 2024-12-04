@@ -17,7 +17,9 @@ use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
+use Symfony\Component\HttpFoundation\Response;
 
 class CourseController extends Controller
 {
@@ -56,6 +58,10 @@ class CourseController extends Controller
     public function index(Request $request)
     {
         try {
+            if (Auth::check() && Auth::user()->user_type == User::ADMIN && Gate::denies('access_course')) {
+                return redirect()->back()->with('error', 'You are not authorized to access this page.');
+            }
+
             $this->setRoutePrefix();
             $query = Course::query()
             ->with('courseTeacher','courseCategory','createdBy')
@@ -128,6 +134,12 @@ class CourseController extends Controller
     public function create()
     {
         try {
+            if (Auth::check() && Auth::user()->user_type == User::ADMIN) {
+                if (Gate::denies('create_course')) {
+                    return redirect()->back()->with('error', 'You are not authorized to create course.');
+                }
+            }
+
             $this->setRoutePrefix();
             $courseCategory = Helper::getAllCourseCategory();
             $teachers = Teachers::select('id','first_name','last_name','user_id')->get();
@@ -176,6 +188,12 @@ class CourseController extends Controller
     public function edit(int $id)
     {
         try {
+            if (Auth::check() && Auth::user()->user_type == User::ADMIN) {
+                if (Gate::denies('edit_course')) {
+                    return redirect()->back()->with('error', 'You are not authorized to edit course.');
+                }
+            }
+
             $this->setRoutePrefix();
             $course = Course::findOrFail($id);
             $courseContents = CourseContents::where('course_id', $id)->get();
@@ -240,6 +258,12 @@ class CourseController extends Controller
     public function delete(int $id)
     {
         try {
+            if (Auth::check() && Auth::user()->user_type == User::ADMIN) {
+                if (Gate::denies('delete_course')) {
+                    return redirect()->back()->with('error', 'You are not authorized to delete course.');
+                }
+            }
+
             $this->setRoutePrefix();
             $course = Course::findOrFail($id);
             $this->courseService->delete($course);

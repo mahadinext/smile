@@ -82,11 +82,46 @@
                                         </a>
                                     </li>
                                 @endcan
+                            </ul>
+                        </div>
+                    </li>
+                @endcan
 
-                                @can('access_course')
+                @can('access_course_management')
+                    <li class="nav-item">
+                        <a class="nav-link menu-link {{ request()->is('admin/courses*','admin/course-contents*','admin.course-materials*') ? 'collapsed active' : '' }}" href="#manageCoursesPages" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="manageCoursesPages">
+                            <i class="mdi mdi-sticker-text-outline"></i> <span data-key="t-pages">Manage Courses</span>
+                        </a>
+                        <div class="collapse menu-dropdown {{ request()->is('admin/courses*','admin/course-contents*','admin/course-materials*') ? 'show' : '' }}" id="manageCoursesPages">
+                            <ul class="nav nav-sm flex-column">
+                                @can('view_course')
                                     <li class="nav-item">
-                                        <a href="{{ route('admin.courses.index') }}" class="nav-link {{ request()->is('admin/courses*','teacher/courses*') ? 'active' : '' }}">
-                                            <i class="mdi mdi-book-open"></i> <span >Courses</span>
+                                        <a href="{{ route('admin.courses.index') }}" class="nav-link {{ request()->is('admin/courses','admin/courses/*') ? 'active' : '' }}">
+                                            <i class="mdi mdi-book-open"></i> <span >My Courses</span>
+                                        </a>
+                                    </li>
+                                @endcan
+
+                                @can('view_course_content')
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.course-contents.index') }}" class="nav-link {{ request()->is('admin/course-contents','admin/course-contents/*') ? 'active' : '' }}">
+                                            <i class="mdi mdi-book-open"></i> <span >Course Contents</span>
+                                        </a>
+                                    </li>
+                                @endcan
+
+                                @can('view_course_material')
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.course-materials.index') }}" class="nav-link {{ request()->is('admin/course-materials','admin/course-materials/*') ? 'active' : '' }}">
+                                            <i class="mdi mdi-book-open"></i> <span >Course Materials</span>
+                                        </a>
+                                    </li>
+                                @endcan
+
+                                @can('view_course_category')
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.course-materials.index') }}" class="nav-link {{ request()->is('admin/course-materials','admin/course-materials/*') ? 'active' : '' }}">
+                                            <i class="mdi mdi-book-open"></i> <span >Course Category</span>
                                         </a>
                                     </li>
                                 @endcan

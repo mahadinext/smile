@@ -14,7 +14,9 @@ use App\Http\Controllers\Admin\TeacherApprovalController;
 use App\Http\Controllers\Admin\TeacherController;
 use App\Http\Controllers\Admin\WebElementController;
 use App\Http\Controllers\Auth\ChangePasswordController;
+use App\Http\Controllers\Teacher\CourseContentController;
 use App\Http\Controllers\Teacher\CourseController;
+use App\Http\Controllers\Teacher\CourseMaterialController;
 use App\Http\Controllers\Teacher\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -64,6 +66,26 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
         Route::get('/edit/{id}', [CourseController::class, 'edit'])->name('edit');
         Route::post('/update/{id}', [CourseController::class, 'update'])->name('update');
         Route::get('/delete/{id}', [CourseController::class, 'delete'])->name('delete');
+    });
+
+    // Course Contents
+    Route::group(['prefix' => 'course-contents', 'as' => 'course-contents.', 'middleware' => ['auth']], function () {
+        Route::get('/', [CourseContentController::class, 'index'])->name('index');
+        Route::get('/create', [CourseContentController::class, 'create'])->name('create');
+        Route::post('/store', [CourseContentController::class, 'store'])->name('store');
+        Route::get('/edit/{id}', [CourseContentController::class, 'edit'])->name('edit');
+        Route::post('/update/{id}', [CourseContentController::class, 'update'])->name('update');
+        Route::get('/delete/{id}', [CourseContentController::class, 'delete'])->name('delete');
+    });
+
+    // Course Materials
+    Route::group(['prefix' => 'course-materials', 'as' => 'course-materials.', 'middleware' => ['auth']], function () {
+        Route::get('/', [CourseMaterialController::class, 'index'])->name('index');
+        Route::get('/create', [CourseMaterialController::class, 'create'])->name('create');
+        Route::post('/store', [CourseMaterialController::class, 'store'])->name('store');
+        Route::get('/edit/{id}', [CourseMaterialController::class, 'edit'])->name('edit');
+        Route::post('/update/{id}', [CourseMaterialController::class, 'update'])->name('update');
+        Route::get('/delete/{id}', [CourseMaterialController::class, 'delete'])->name('delete');
     });
 
     // Teacher

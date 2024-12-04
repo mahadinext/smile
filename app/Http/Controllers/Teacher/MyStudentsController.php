@@ -6,7 +6,6 @@ use App\Helper\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\CourseEnrollment;
-use App\Models\CourseMaterials;
 use App\Models\Teacher\Teachers;
 use App\Models\User;
 use App\Services\Teacher\MyStudentsService;
