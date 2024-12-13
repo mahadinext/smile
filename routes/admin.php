@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AboutUsController;
 use App\Http\Controllers\Admin\ContactUsController;
+use App\Http\Controllers\Admin\CourseCategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FaqsController;
 use App\Http\Controllers\Admin\HomeController;
@@ -86,6 +87,16 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
         Route::get('/edit/{id}', [CourseMaterialController::class, 'edit'])->name('edit');
         Route::post('/update/{id}', [CourseMaterialController::class, 'update'])->name('update');
         Route::get('/delete/{id}', [CourseMaterialController::class, 'delete'])->name('delete');
+    });
+
+    // Course Category
+    Route::group(['prefix' => 'course-category', 'as' => 'course-category.', 'middleware' => ['auth']], function () {
+        Route::get('/', [CourseCategoryController::class, 'index'])->name('index');
+        Route::get('/create', [CourseCategoryController::class, 'create'])->name('create');
+        Route::post('/store', [CourseCategoryController::class, 'store'])->name('store');
+        Route::get('/edit/{id}', [CourseCategoryController::class, 'edit'])->name('edit');
+        Route::post('/update/{id}', [CourseCategoryController::class, 'update'])->name('update');
+        Route::get('/delete/{id}', [CourseCategoryController::class, 'delete'])->name('delete');
     });
 
     // Teacher

@@ -34,7 +34,7 @@ class UpdateCourseMaterialRequest extends FormRequest
             ],
             'file' => [
                 Rule::requiredIf(function () {
-                    return $this->type == CourseMaterials::TYPE_FILE;
+                    return $this->upload_type == CourseMaterials::TYPE_FILE;
                 }),
                 'nullable',
                 'file',
@@ -42,7 +42,7 @@ class UpdateCourseMaterialRequest extends FormRequest
             ],
             'url' => [
                 Rule::requiredIf(function () {
-                    return $this->type == CourseMaterials::TYPE_URL;
+                    return $this->upload_type == CourseMaterials::TYPE_URL;
                 }),
                 'nullable',
                 'string',

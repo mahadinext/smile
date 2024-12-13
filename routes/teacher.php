@@ -6,6 +6,7 @@ use App\Http\Controllers\Teacher\CourseController;
 use App\Http\Controllers\Teacher\CourseMaterialController;
 use App\Http\Controllers\Teacher\DashboardController;
 use App\Http\Controllers\Teacher\MyStudentsController;
+use App\Http\Controllers\Teacher\MyContentsController;
 use App\Http\Controllers\Teacher\ProfileController;
 use App\Http\Controllers\Teacher\ReviewController;
 use App\Http\Controllers\Web\TeacherAuthController;
@@ -53,6 +54,15 @@ Route::group(['prefix' => 'teacher', 'as' => 'teacher.', 'middleware' => ['auth'
 
     Route::group(['prefix' => 'my-students', 'as' => 'my-students.', 'middleware' => ['auth']], function () {
         Route::get('/', [MyStudentsController::class, 'index'])->name('index');
+    });
+
+    Route::group(['prefix' => 'my-contents', 'as' => 'my-contents.', 'middleware' => ['auth']], function () {
+        Route::get('/', [MyContentsController::class, 'index'])->name('index');
+        Route::get('/create', [MyContentsController::class, 'create'])->name('create');
+        Route::post('/store', [MyContentsController::class, 'store'])->name('store');
+        Route::get('/edit/{id}', [MyContentsController::class, 'edit'])->name('edit');
+        Route::post('/update/{id}', [MyContentsController::class, 'update'])->name('update');
+        Route::get('/delete/{id}', [MyContentsController::class, 'delete'])->name('delete');
     });
 
     Route::group(['prefix' => 'profile', 'as' => 'profile.', 'middleware' => ['auth']], function () {

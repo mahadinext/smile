@@ -2,11 +2,13 @@
 
 namespace App\Http\Requests;
 
-use App\Models\CourseMaterials;
+use App\Models\TeacherContents;
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
-class StoreCourseMaterialRequest extends FormRequest
+class StoreTeacherContentRequest extends FormRequest
 {
     public function authorize()
     {
@@ -16,25 +18,26 @@ class StoreCourseMaterialRequest extends FormRequest
     public function rules()
     {
         return [
-            'course_id' => [
-                'required',
-                'exists:courses,id', // Ensure it exists in the database
-            ],
-            'title' => [
+            'teacher_id' => [
+                Rule::requiredIf(function () {
+                    return Auth::user()->user_type == User::ADMIN;
+                }),
                 'nullable',
-                'string',
-                'max:255',
+            ],
+            'content_type' => [
+                'required',
+                'integer',
             ],
             'upload_type' => [
                 'required',
                 'integer',
                 Rule::in([
-                    CourseMaterials::TYPE_FILE, CourseMaterials::TYPE_URL,
+                    TeacherContents::TYPE_FILE, TeacherContents::TYPE_URL,
                 ]),
             ],
             'file' => [
                 Rule::requiredIf(function () {
-                    return $this->upload_type == CourseMaterials::TYPE_FILE;
+                    return $this->upload_type == TeacherContents::TYPE_FILE;
                 }),
                 'nullable',
                 'file',
@@ -42,11 +45,17 @@ class StoreCourseMaterialRequest extends FormRequest
             ],
             'url' => [
                 Rule::requiredIf(function () {
-                    return $this->upload_type == CourseMaterials::TYPE_URL;
+                    return $this->upload_type == TeacherContents::TYPE_URL;
                 }),
                 'nullable',
                 'string',
                 'url',
+            ],
+            'thumbnail' => [
+                'required',
+                'file',
+                'max:2048',
+                'dimensions:min_width=650,min_height=650,max_width=650,max_height=650',
             ],
         ];
     }

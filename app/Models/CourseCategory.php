@@ -13,6 +13,14 @@ class CourseCategory extends Model
 
     public $table = 'course_categories';
 
+    public const STATUS_ENABLE = 1;
+    public const STATUS_DISABLE = 0;
+
+    public const STATUS_SELECT = [
+        1 => 'Active',
+        0 => 'Inactive',
+    ];
+
     protected $dates = [
         'created_at',
         'updated_at',
@@ -33,5 +41,17 @@ class CourseCategory extends Model
     public function courses()
     {
         return $this->hasMany(Course::class, 'category_id');
+    }
+
+    public function createdBy()
+    {
+        return $this->belongsTo(User::class, 'created_by')
+        ->select(['id', 'name', 'email']);
+    }
+
+    public function updatedBy()
+    {
+        return $this->belongsTo(User::class, 'updated_by')
+        ->select(['id', 'name', 'email']);
     }
 }

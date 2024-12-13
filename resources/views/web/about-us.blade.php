@@ -158,24 +158,44 @@
                 </div>
             </div>
             <div class="row row--15 mt_dec--30">
+                <div class="col-lg-12">
+                    <div class="swiper category-activation-three rbt-arrow-between icon-bg-gray gutter-swiper-30 ptb--20">
+                        <div class="swiper-wrapper">
+                            @foreach($teachers as $key => $data)
+                                <div class="swiper-slide">
+                                    <div class="single-slide">
+                                        <div class="rbt-cat-box rbt-cat-box-1 variation-2 text-center">
+                                            <a href="{{ route('instructor-profile', $data->user_id) }}">
+                                                <div class="team">
+                                                    <div class="thumbnail"><img src="{{ $data->image }}" alt="{{ $data->first_name . ' ' . $data->last_name }}">
+                                                    </div>
+                                                    <div class="content">
+                                                        <h4 class="title">{{ $data->first_name . ' ' . $data->last_name }}</h4>
+                                                        {{-- <p class="designation"></p> --}}
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
 
-                @foreach($teachers as $key => $data)
-                    <!-- Start Single Team  -->
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-12 mt--30">
-                        <a href="{{ route('instructor-profile', $data->user_id) }}">
-                            <div class="team">
-                                <div class="thumbnail"><img src="{{ $data->image }}" alt="{{ $data->first_name . ' ' . $data->last_name }}">
-                                </div>
-                                <div class="content">
-                                    <h4 class="title">{{ $data->first_name . ' ' . $data->last_name }}</h4>
-                                    {{-- <p class="designation"></p> --}}
-                                </div>
+                        <div class="rbt-swiper-arrow rbt-arrow-left">
+                            <div class="custom-overfolow">
+                                <i class="rbt-icon feather-arrow-left"></i>
+                                <i class="rbt-icon-top feather-arrow-left"></i>
                             </div>
-                        </a>
-                    </div>
-                    <!-- End Single Team  -->
-                @endforeach
+                        </div>
 
+                        <div class="rbt-swiper-arrow rbt-arrow-right">
+                            <div class="custom-overfolow">
+                                <i class="rbt-icon feather-arrow-right"></i>
+                                <i class="rbt-icon-top feather-arrow-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

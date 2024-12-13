@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\Teacher\Teachers;
+use App\Models\TeacherContents;
 use App\Models\User;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -33,10 +34,10 @@ class TeacherController extends Controller
                 "teachers" => $teachers,
             ];
 
-            return view("web.instructors.index", $data);
+            return view("web.teacher.instructors", $data);
         } catch (Exception $exception) {
             Log::error("TeacherController::index()", [$exception]);
-            return redirect()->back()->with('error', $exception->getMessage());
+            return redirect()->back()->with('error', "Something went wrong");
         }
     }
 
@@ -55,18 +56,49 @@ class TeacherController extends Controller
             ->orderBy("id", "DESC")
             ->paginate(6);
 
+            $contents = TeacherContents::query()
+            ->where('status', TeacherContents::STATUS_ENABLE)
+            ->orderBy('id', 'desc')
+            ->limit(4)
+            ->get();
+
             $data = [
                 "teacher" => $teacher,
+                "contents" => $contents,
                 "teacherCourses" => $teacherCourses,
             ];
 
-            return view('web.instructors.profile', $data);
+            return view('web.teacher.profile', $data);
         } catch (ModelNotFoundException $exception) {
             Log::error("TeacherController::profile()", [$exception]);
-            return redirect()->back()->with('error', $exception->getMessage());
+            return redirect()->back()->with('error', "Something went wrong");
         }  catch (Exception $exception) {
             Log::error("TeacherController::profile()", [$exception]);
-            return redirect()->back()->with('error', $exception->getMessage());
+            return redirect()->back()->with('error', "Something went wrong");
+        }
+    }
+
+    /**
+     * @param integer $id
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function contents(int $id)
+    {
+        try {
+            $contents = TeacherContents::query()
+            ->where('teacher_id', $id)
+            ->where('status', TeacherContents::STATUS_ENABLE)
+            ->orderBy('id', 'desc')
+            ->paginate(8);
+
+            $data = [
+                "contents" => $contents,
+            ];
+
+            return view("web.teacher.contents", $data);
+        } catch (Exception $exception) {
+            Log::error("TeacherController::contents()", [$exception]);
+            return redirect()->back()->with('error', "Something went wrong");
         }
     }
 }

@@ -36,6 +36,7 @@ Route::controller(TeacherController::class)->group(function () {
     Route::prefix('instructors')->group(function () {
         Route::get('/', 'index')->name('instructors');
         Route::get('/{id}/profile', 'profile')->name('instructor-profile');
+        Route::get('/{id}/contents', 'contents')->name('instructor-contents');
     });
 });
 

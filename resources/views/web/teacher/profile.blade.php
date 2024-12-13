@@ -95,12 +95,74 @@
                 </div>
             </div>
 
+            <div class="rbt-program-area rbt-section-gapTop bg-color-white" id="program">
+                <div class="container">
+                    <div class="row g-5 align-items-end mb--60">
+                        <div class="col-lg-6 col-md-12 col-12">
+                            <div class="section-title text-start">
+                                <h4 class="rbt-title-style-3">My Contents</h4>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12 col-12">
+                            <div class="load-more-btn text-start text-lg-end">
+                                <a class="rbt-btn-link" href="{{ route('instructor-contents', $teacher->user_id) }}">Browse all<i class="feather-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row g-5">
+                        @foreach ($contents as $key => $data)
+                            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                                <div class="rbt-category-gallery">
+                                    <div class="thumbnail">
+                                        <a href="#">
+                                            <img src="{!! asset('web/assets/images/gallery/gallery-03.jpg') !!}" alt="Gallery Images">
+                                            <div class="rbt-bg-overlay"></div>
+                                        </a>
+                                        <div class="hover-content">
+                                            <h3 class="title"><a href="#">Vue-Js</a></h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                            <div class="rbt-category-gallery">
+                                <div class="thumbnail">
+                                    <a href="#">
+                                        <img src="{!! asset('web/assets/images/gallery/gallery-01.jpg') !!}" alt="Gallery Images">
+                                        <div class="rbt-bg-overlay"></div>
+                                    </a>
+                                    <div class="hover-content">
+                                        <h3 class="title"><a href="#">React Js</a></h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                            <div class="rbt-category-gallery">
+                                <div class="thumbnail">
+                                    <a href="#">
+                                        <img src="{!! asset('web/assets/images/gallery/gallery-05.jpg') !!}" alt="Gallery Images">
+                                        <div class="rbt-bg-overlay"></div>
+                                    </a>
+                                    <div class="hover-content">
+                                        <h3 class="title"><a href="#">Javascript</a></h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Start Card Area -->
             <div class="rbt-profile-course-area mt--60">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="sction-title">
-                            <h2 class="rbt-title-style-3">Courses</h2>
+                            <h4 class="rbt-title-style-3">Courses</h4>
                         </div>
                     </div>
                 </div>
