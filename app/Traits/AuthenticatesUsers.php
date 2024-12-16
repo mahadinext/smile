@@ -141,6 +141,7 @@ trait AuthenticatesUsers
                 return redirect()->intended($request->session()->get('url.intended'))->withSuccess('Signed in');
             }
 
+            // return redirect()->intended(route('student.dashboard'));
             return redirect('/student')->withSuccess('Signed in');
         }
 

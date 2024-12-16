@@ -2,11 +2,13 @@
 
 namespace App\Helper;
 
+use App\Models\Cart;
 use App\Models\CourseCategory;
 use App\Models\User;
 use App\Models\WebColor;
 use App\Models\WebImage;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -141,6 +143,22 @@ class Helper
         }
         else if (isset(app('teacher')->id)) {
             $routePrefix = "teacher";
+        }
+    }
+
+    public static function getCartCount()
+    {
+        try {
+            if (Auth::check()) {
+                $count = Cart::where('user_id', Auth::user()->id)->count();
+            } else {
+                $count = 0;
+            }
+
+            return $count;
+        } catch (Exception $exception) {
+            Log::error("Helper::getCartCount()", [$exception]);
+            return 0;
         }
     }
 }

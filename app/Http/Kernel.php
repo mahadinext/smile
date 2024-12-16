@@ -67,5 +67,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'checkIfLoggedIn' => \App\Http\Middleware\CheckIfLoggedIn::class,
         'check.log.viewer.permission' => \App\Http\Middleware\CheckLogViewerPermissions::class,
+        'web.auth' => \App\Http\Middleware\WebAuth::class,
     ];
 }

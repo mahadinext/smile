@@ -54,11 +54,11 @@
                                 </a>
                             </li>
 
-                            <li class="access-icon">
+                            {{-- <li class="access-icon">
                                 <a class="rbt-round-btn" href="#">
                                     <i class="feather-heart"></i>
                                 </a>
-                            </li>
+                            </li> --}}
                         </ul>
                     </div>
                 </div>
@@ -73,6 +73,24 @@
 
                 <div class="rbt-main-navigation d-none d-xl-block">
                     @include('web.include.navbar')
+                </div>
+
+                <style>
+                    @media (max-width: 1200px) {
+                        #mod-header-right {
+                            display: none!important;
+                        }
+                    }
+                </style>
+                <div class="header-right" id="mod-header-right">
+                    <ul class="quick-access">
+                        <li class="access-icon rbt-mini-cart">
+                            <a class="rbt-round-btn" href="{{ route('cart') }}">
+                                <i class="feather-shopping-cart"></i>
+                                <span class="rbt-cart-count">{{ App\Helper\Helper::getCartCount() }}</span>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
 
                 @include('web.include.mobile-topbar')

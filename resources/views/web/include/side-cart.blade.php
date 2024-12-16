@@ -14,63 +14,10 @@
         <nav class="side-nav w-100">
             <ul class="rbt-minicart-wrapper">
                 <li class="minicart-item">
-                    <div class="thumbnail">
-                        <a href="#">
-                            <img src="{!! asset('web/assets/images/product/1.jpg') !!}" alt="Product Images">
-                        </a>
-                    </div>
                     <div class="product-content">
-                        <h6 class="title"><a href="single-product.html.htm">Miracle Morning</a></h6>
+                        <h6 class="title"><a href="single-product.html.htm">Course Title</a></h6>
 
-                        <span class="quantity">1 * <span class="price">$22</span></span>
-                    </div>
-                    <div class="close-btn">
-                        <button class="rbt-round-btn"><i class="feather-x"></i></button>
-                    </div>
-                </li>
-
-                <li class="minicart-item">
-                    <div class="thumbnail">
-                        <a href="#">
-                            <img src="{!! asset('web/assets/images/product/7.jpg') !!}" alt="Product Images">
-                        </a>
-                    </div>
-                    <div class="product-content">
-                        <h6 class="title"><a href="single-product.html.htm">Happy Strong</a></h6>
-
-                        <span class="quantity">1 * <span class="price">$30</span></span>
-                    </div>
-                    <div class="close-btn">
-                        <button class="rbt-round-btn"><i class="feather-x"></i></button>
-                    </div>
-                </li>
-
-                <li class="minicart-item">
-                    <div class="thumbnail">
-                        <a href="#">
-                            <img src="{!! asset('web/assets/images/product/3.jpg') !!}" alt="Product Images">
-                        </a>
-                    </div>
-                    <div class="product-content">
-                        <h6 class="title"><a href="single-product.html.htm">Rich Dad Poor Dad</a></h6>
-
-                        <span class="quantity">1 * <span class="price">$50</span></span>
-                    </div>
-                    <div class="close-btn">
-                        <button class="rbt-round-btn"><i class="feather-x"></i></button>
-                    </div>
-                </li>
-
-                <li class="minicart-item">
-                    <div class="thumbnail">
-                        <a href="#">
-                            <img src="{!! asset('web/assets/images/product/4.jpg') !!}" alt="Product Images">
-                        </a>
-                    </div>
-                    <div class="product-content">
-                        <h6 class="title"><a href="single-product.html.htm">Momentum Theorem</a></h6>
-
-                        <span class="quantity">1 * <span class="price">$50</span></span>
+                        <span class="quantity">1 * <span class="price">৳100</span></span>
                     </div>
                     <div class="close-btn">
                         <button class="rbt-round-btn"><i class="feather-x"></i></button>
@@ -83,7 +30,7 @@
             <hr class="mb--0">
             <div class="rbt-cart-subttotal">
                 <p class="subtotal"><strong>Subtotal:</strong></p>
-                <p class="price">$121</p>
+                <p class="price">৳100</p>
             </div>
             <hr class="mb--0">
             <div class="rbt-minicart-bottom mt--20">

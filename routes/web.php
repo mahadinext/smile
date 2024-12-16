@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Web\AboutUsController;
+use App\Http\Controllers\Web\CartController;
 use App\Http\Controllers\Web\ContactUsController;
 use App\Http\Controllers\Web\CourseController;
 use App\Http\Controllers\Web\FaqsController;
@@ -8,8 +9,8 @@ use App\Http\Controllers\Web\HomeController;
 use App\Http\Controllers\Web\PrivacyPolicyController;
 use App\Http\Controllers\Web\StudentAuthController;
 use App\Http\Controllers\Web\TeacherController;
+use App\Http\Controllers\Web\WishlistController;
 use Illuminate\Support\Facades\Route;
-
 
 
 /*
@@ -49,6 +50,12 @@ Route::get('/faqs', [FaqsController::class, 'index'])->name('faqs');
 
 Route::get('/privacy-policy', [PrivacyPolicyController::class, 'index'])->name('privacy-policy');
 
-// Route::get('/cart/{id}', [ContactUsController::class, 'index'])->name('cart');
+Route::group(['middleware' => ['web.auth']], function () {
+    Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist');
+    Route::get('/wishlist/store/{id}', [WishlistController::class, 'store'])->name('wishlist.store');
+    Route::get('/wishlist/delete/{id}', [WishlistController::class, 'delete'])->name('wishlist.delete');
 
-// Route::get('/wishlist/{id}', [TeacherController::class, 'profile'])->name('wishlist');
+    Route::get('/cart', [CartController::class, 'index'])->name('cart');
+    Route::get('/cart/store/{id}', [CartController::class, 'store'])->name('cart.store');
+    Route::get('/cart/delete/{id}', [CartController::class, 'delete'])->name('cart.delete');
+});

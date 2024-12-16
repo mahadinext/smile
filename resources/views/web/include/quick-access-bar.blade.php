@@ -5,6 +5,22 @@
             <span class="rbt-cart-count">5</span>
         </a>
     </li> --}}
+
+    <style>
+        @media (min-width: 1200px) {
+            #mod-cart-list {
+                display: none!important;
+            }
+        }
+    </style>
+
+    <li class="access-icon rbt-mini-cart" id="mod-cart-list">
+        <a class="rbt-round-btn" href="{{ route('cart') }}">
+            <i class="feather-shopping-cart"></i>
+            <span class="rbt-cart-count">{{ App\Helper\Helper::getCartCount() }}</span>
+        </a>
+    </li>
+
     <li class="access-icon rbt-user-wrapper right-align-dropdown">
         <a class="rbt-round-btn" href="#">
             <i class="feather-user"></i>
@@ -14,7 +30,7 @@
                 @if (isset(app('admin')->id))
                     <div class="rbt-admin-profile">
                         <div class="admin-thumbnail">
-                            <img src="{!! asset('web/assets/images/team/avatar.jpg') !!}" alt="User Images">
+                            <img src="{!! asset('web/assets/images/team/user-avatar.png') !!}" alt="User Images">
                         </div>
                         <div class="admin-info">
                             <span class="name">{{Auth::user()->name}}</span>
@@ -42,7 +58,7 @@
                 @elseif (isset(app('student')->id))
                     <div class="rbt-admin-profile">
                         <div class="admin-thumbnail">
-                            <img src="{!! asset('web/assets/images/team/avatar.jpg') !!}" alt="User Images">
+                            <img src="{!! asset('web/assets/images/team/user-avatar.png') !!}" alt="User Images">
                         </div>
                         <div class="admin-info">
                             <span class="name">{{Auth::user()->name}}</span>
@@ -58,13 +74,13 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="{{ route('student.courses.index') }}">
                                 <i class="feather-shopping-bag"></i>
                                 <span>Enrolled Courses</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="{{ route('wishlist') }}">
                                 <i class="feather-heart"></i>
                                 <span>Wishlist</span>
                             </a>
@@ -88,7 +104,7 @@
                 @elseif (isset(app('teacher')->id))
                     <div class="rbt-admin-profile">
                         <div class="admin-thumbnail">
-                            <img src="{!! asset('web/assets/images/team/avatar.jpg') !!}" alt="User Images">
+                            <img src="{!! asset('web/assets/images/team/user-avatar.png') !!}" alt="User Images">
                         </div>
                         <div class="admin-info">
                             <span class="name">{{Auth::user()->name}}</span>
@@ -104,6 +120,24 @@
                             </a>
                         </li>
                         <li>
+                            <a href="{{ route('teacher.change-password.index') }}">
+                                <i class="feather-home"></i>
+                                <span>Change Password</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('teacher.courses.index') }}">
+                                <i class="feather-home"></i>
+                                <span>My Courses</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('teacher.my-students.index') }}">
+                                <i class="feather-home"></i>
+                                <span>My Students</span>
+                            </a>
+                        </li>
+                        {{-- <li>
                             <a href="#">
                                 <i class="feather-star"></i>
                                 <span>Reviews</span>
@@ -114,7 +148,7 @@
                                 <i class="feather-clock"></i>
                                 <span>Order History</span>
                             </a>
-                        </li>
+                        </li> --}}
                     </ul>
                     <hr class="mt--10 mb--10">
                     <ul class="user-list-wrapper">

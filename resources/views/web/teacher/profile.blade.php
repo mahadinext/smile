@@ -95,146 +95,120 @@
                 </div>
             </div>
 
-            <div class="rbt-program-area rbt-section-gapTop bg-color-white" id="program">
-                <div class="container">
-                    <div class="row g-5 align-items-end mb--60">
-                        <div class="col-lg-6 col-md-12 col-12">
-                            <div class="section-title text-start">
-                                <h4 class="rbt-title-style-3">My Contents</h4>
+            @if(!$contents->isEmpty())
+                <div class="rbt-program-area rbt-section-gapTop bg-color-white" id="program">
+                    <div class="container">
+                        <div class="row g-5 align-items-end mb--60">
+                            <div class="col-lg-6 col-md-12 col-12">
+                                <div class="section-title text-start">
+                                    <h4 class="rbt-title-style-3">My Contents</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12 col-12">
+                                <div class="load-more-btn text-start text-lg-end">
+                                    <a class="rbt-btn-link" href="{{ route('instructor-contents', $teacher->user_id) }}">Browse all<i class="feather-arrow-right"></i></a>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-12 col-12">
-                            <div class="load-more-btn text-start text-lg-end">
-                                <a class="rbt-btn-link" href="{{ route('instructor-contents', $teacher->user_id) }}">Browse all<i class="feather-arrow-right"></i></a>
+                        <div class="row g-5">
+                            @foreach ($contents as $key => $data)
+                                <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                                    <div class="rbt-category-gallery">
+                                        <div class="thumbnail">
+                                            <a href="#">
+                                                <img src="{!! asset('web/assets/images/gallery/gallery-03.jpg') !!}" alt="Gallery Images">
+                                                <div class="rbt-bg-overlay"></div>
+                                            </a>
+                                            {{-- <div class="hover-content">
+                                                <h3 class="title"><a href="#"></a></h3>
+                                            </div> --}}
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            @endif
+
+            @if(!$teacherCourses->isEmpty())
+                <div class="rbt-profile-course-area mt--60">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="sction-title">
+                                <h4 class="rbt-title-style-3">Courses</h4>
                             </div>
                         </div>
                     </div>
-                    <div class="row g-5">
-                        @foreach ($contents as $key => $data)
-                            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-                                <div class="rbt-category-gallery">
-                                    <div class="thumbnail">
-                                        <a href="#">
-                                            <img src="{!! asset('web/assets/images/gallery/gallery-03.jpg') !!}" alt="Gallery Images">
-                                            <div class="rbt-bg-overlay"></div>
+                    <div class="row g-5 mt--5">
+
+                        @foreach ($teacherCourses as $key => $data)
+                            <!-- Start Single Card  -->
+                            <div class="col-lg-4 col-md-6 col-sm-12 col-12" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
+                                <div class="rbt-card variation-01 rbt-hover">
+                                    <div class="rbt-card-img">
+                                        <a href="{{ route('course-details', $data->id) }}">
+                                            <img src="{{ $data->card_image }}" alt="Card image">
+                                            {{-- <div class="rbt-badge-3 bg-white">
+                                                <span>-{{ $data->discount_amount . App\Models\Course::TYPE_ARRAY[$data->discount_type] }}</span>
+                                                <span>Off</span>
+                                            </div> --}}
                                         </a>
-                                        <div class="hover-content">
-                                            <h3 class="title"><a href="#">Vue-Js</a></h3>
+                                    </div>
+                                    <div class="rbt-card-body">
+                                        <div class="rbt-card-top">
+                                            <div class="rbt-bookmark-btn">
+                                                <a class="rbt-round-btn" title="Bookmark" href="#"><i class="feather-bookmark"></i></a>
+                                            </div>
+                                            <div class="rbt-review">
+                                                <a class="rbt-round-btn left-icon" title="Add To Cart" href="#"><i class="feather-shopping-cart"></i></a>
+                                            </div>
+                                        </div>
+
+                                        <h4 class="rbt-card-title"><a href="{{ route('course-details', $data->id) }}">{{ $data->title }}</a>
+                                        </h4>
+
+                                        <ul class="rbt-meta">
+                                            <li><i class="feather-book"></i>{{ $data->total_class }} Lessons</li>
+                                            <li><i class="feather-users"></i>{{ $data->courseStudents->count() }} Students</li>
+                                        </ul>
+
+                                        <p class="rbt-card-text">{!! $data->short_description !!}</p>
+                                        <div class="rbt-author-meta mb--10">
+                                            <div class="rbt-avater">
+                                                <a href="#">
+                                                    <img src="{{ $data->courseTeacher->image }}" alt="{{ $data->courseTeacher->first_name }}">
+                                                </a>
+                                            </div>
+                                            <div class="rbt-author-info">
+                                                By <a href="{{ route('instructor-profile', $data->courseTeacher->user_id) }}">{{ $data->courseTeacher->first_name }}</a>
+                                            </div>
+                                        </div>
+                                        <div class="rbt-card-bottom">
+                                            <div class="rbt-price">
+                                                <span class="current-price">৳{{ $data->price }}</span>
+                                                {{-- <span class="off-price">৳{{ $data->price }}</span> --}}
+                                            </div>
+                                            <a class="rbt-btn-link" href="{{ route('course-details', $data->id) }}">Learn
+                                                More<i class="feather-arrow-right"></i></a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <!-- End Single Card  -->
                         @endforeach
 
-                        <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-                            <div class="rbt-category-gallery">
-                                <div class="thumbnail">
-                                    <a href="#">
-                                        <img src="{!! asset('web/assets/images/gallery/gallery-01.jpg') !!}" alt="Gallery Images">
-                                        <div class="rbt-bg-overlay"></div>
-                                    </a>
-                                    <div class="hover-content">
-                                        <h3 class="title"><a href="#">React Js</a></h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-                            <div class="rbt-category-gallery">
-                                <div class="thumbnail">
-                                    <a href="#">
-                                        <img src="{!! asset('web/assets/images/gallery/gallery-05.jpg') !!}" alt="Gallery Images">
-                                        <div class="rbt-bg-overlay"></div>
-                                    </a>
-                                    <div class="hover-content">
-                                        <h3 class="title"><a href="#">Javascript</a></h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Start Card Area -->
-            <div class="rbt-profile-course-area mt--60">
                 <div class="row">
-                    <div class="col-lg-12">
-                        <div class="sction-title">
-                            <h4 class="rbt-title-style-3">Courses</h4>
-                        </div>
+                    <div class="col-lg-12 mt--60">
+                        <nav>
+                            {{ $teacherCourses->withQueryString()->links('web.include.paginator') }}
+                        </nav>
                     </div>
                 </div>
-                <div class="row g-5 mt--5">
-
-                    @foreach ($teacherCourses as $key => $data)
-                        <!-- Start Single Card  -->
-                        <div class="col-lg-4 col-md-6 col-sm-12 col-12" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
-                            <div class="rbt-card variation-01 rbt-hover">
-                                <div class="rbt-card-img">
-                                    <a href="{{ route('course-details', $data->id) }}">
-                                        <img src="{{ $data->card_image }}" alt="Card image">
-                                        {{-- <div class="rbt-badge-3 bg-white">
-                                            <span>-{{ $data->discount_amount . App\Models\Course::TYPE_ARRAY[$data->discount_type] }}</span>
-                                            <span>Off</span>
-                                        </div> --}}
-                                    </a>
-                                </div>
-                                <div class="rbt-card-body">
-                                    <div class="rbt-card-top">
-                                        <div class="rbt-bookmark-btn">
-                                            <a class="rbt-round-btn" title="Bookmark" href="#"><i class="feather-bookmark"></i></a>
-                                        </div>
-                                        <div class="rbt-review">
-                                            <a class="rbt-round-btn left-icon" title="Add To Cart" href="#"><i class="feather-shopping-cart"></i></a>
-                                        </div>
-                                    </div>
-
-                                    <h4 class="rbt-card-title"><a href="{{ route('course-details', $data->id) }}">{{ $data->title }}</a>
-                                    </h4>
-
-                                    <ul class="rbt-meta">
-                                        <li><i class="feather-book"></i>{{ $data->total_class }} Lessons</li>
-                                        <li><i class="feather-users"></i>{{ $data->courseStudents->count() }} Students</li>
-                                    </ul>
-
-                                    <p class="rbt-card-text">{!! $data->short_description !!}</p>
-                                    <div class="rbt-author-meta mb--10">
-                                        <div class="rbt-avater">
-                                            <a href="#">
-                                                <img src="{{ $data->courseTeacher->image }}" alt="{{ $data->courseTeacher->first_name }}">
-                                            </a>
-                                        </div>
-                                        <div class="rbt-author-info">
-                                            By <a href="{{ route('instructor-profile', $data->courseTeacher->user_id) }}">{{ $data->courseTeacher->first_name }}</a>
-                                        </div>
-                                    </div>
-                                    <div class="rbt-card-bottom">
-                                        <div class="rbt-price">
-                                            <span class="current-price">৳{{ $data->price }}</span>
-                                            {{-- <span class="off-price">৳{{ $data->price }}</span> --}}
-                                        </div>
-                                        <a class="rbt-btn-link" href="{{ route('course-details', $data->id) }}">Learn
-                                            More<i class="feather-arrow-right"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End Single Card  -->
-                    @endforeach
-
-                </div>
-            </div>
-            <!-- End Card Area -->
-
-            <div class="row">
-                <div class="col-lg-12 mt--60">
-                    <nav>
-                        {{ $teacherCourses->withQueryString()->links('web.include.paginator') }}
-                    </nav>
-                </div>
-            </div>
+            @endif
         </div>
     </div>
 

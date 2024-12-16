@@ -31,8 +31,9 @@
                 <li><a href="{{ route('contact-us') }}">Contact Us</a></li>
                 <li><a href="{{ route('faqs') }}">FAQs</a></li>
                 <li><a href="{{ route('privacy-policy') }}">Privacy Policy</a></li>
-                {{-- <li><a href="#">404 Page</a></li>
-                <li><a href="#">Wishlist Page</a></li> --}}
+                <li><a href="{{ route('cart') }}">Cart</a></li>
+                <li><a href="{{ route('wishlist') }}">Wishlist</a></li>
+                {{-- <li><a href="#">404 Page</a></li> --}}
             </ul>
         </li>
     </ul>

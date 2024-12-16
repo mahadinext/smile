@@ -42,7 +42,7 @@
             <div class="row g-5">
 
                 @foreach($contents as $key => $data)
-                    <div class="col-lg-3 col-md-6 col-12">
+                    <div class="col-lg-6 col-md-6 col-12">
                         <div class="rbt-team team-style-default style-three small-layout rbt-hover">
                             <video
                                 id="video-{{ $data->id }}"
@@ -80,12 +80,15 @@
     <script src="https://vjs.zencdn.net/8.0.4/video.min.js"></script>
     <script>
         $(document).ready(function() {
-            const player = videojs('my-video', {
-                autoplay: false,
-                controls: true,
-                responsive: true,
-                fluid: true, // Makes the player responsive
-                playbackRates: [0.5, 1, 1.5, 2], // Add playback speed options
+            const videoElements = document.querySelectorAll('.video-player');
+            videoElements.forEach((videoElement) => {
+                videojs(videoElement.id, {
+                    autoplay: false,
+                    controls: true,
+                    responsive: true,
+                    fluid: true, // Makes the player responsive
+                    playbackRates: [0.5, 1, 1.5, 2], // Add playback speed options
+                });
             });
         });
     </script>

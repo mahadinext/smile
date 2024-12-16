@@ -155,10 +155,10 @@
 
                                 <div class="rbt-card-top">
                                     <div class="rbt-bookmark-btn">
-                                        <a class="rbt-round-btn" title="Bookmark" href="#"><i class="feather-bookmark"></i></a>
+                                        <a class="rbt-round-btn" title="Bookmark" href="{{ route('wishlist.store', $data->id) }}"><i class="feather-bookmark"></i></a>
                                     </div>
                                     <div class="rbt-review">
-                                        <a class="rbt-round-btn left-icon" title="Add To Cart" href="#"><i class="feather-shopping-cart"></i></a>
+                                        <a class="rbt-round-btn left-icon" title="Add To Cart" href="{{ route('cart.store', $data->id) }}"><i class="feather-shopping-cart"></i></a>
                                     </div>
                                 </div>
 
