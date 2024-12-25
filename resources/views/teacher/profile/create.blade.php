@@ -11,7 +11,7 @@
             </div>
 
             <div class="row">
-                <form method="POST" action="{{ route("admin.teachers.create") }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route("admin.teachers.store") }}" enctype="multipart/form-data">
                     @csrf
                     <div class="col-lg-12" id="account-info-section">
                         <div class="card">
