@@ -172,7 +172,7 @@
                                     </li>
                                 @endcan
 
-                                @can('access_typography')
+                                {{-- @can('access_typography')
                                     <li class="nav-item">
                                         <a href="{{ route('admin.web.typography') }}" class="nav-link {{ request()->is('admin/web/typography') || request()->is('admin/web/typography/*') ? 'active' : '' }}">
                                             <span >Typography</span>
@@ -186,7 +186,7 @@
                                             <span >Meta Contents</span>
                                         </a>
                                     </li>
-                                @endcan
+                                @endcan --}}
                             </ul>
                         </div>
                     </li>
