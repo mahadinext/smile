@@ -2,6 +2,7 @@
 
 namespace App\Services\Web;
 
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -25,6 +26,7 @@ class CourseService
             $paginate = $request->paginate ?? 10;
 
             $courses = $query->orderBy($filterOption, $orderBy)->paginate($paginate);
+            // dd($courses->toArray());
 
             return [
                 "courses" => $courses,

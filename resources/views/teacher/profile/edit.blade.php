@@ -193,7 +193,7 @@
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="mb-3">
-                                            <label class="required" for="email">NID No</label>
+                                            <label class="" for="email">NID No</label>
                                             <input id="nid_no" name="nid_no" type="text" class="form-control {{ $errors->has('nid_no') ? ' is-invalid' : '' }}" value="{{ old('nid_no', $teacher->nid_no ?? '') }}" required>
                                             @if($errors->has('nid_no'))
                                                 <div class="invalid-feedback">

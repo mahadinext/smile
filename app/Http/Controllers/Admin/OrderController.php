@@ -104,7 +104,8 @@ class OrderController extends Controller
             ->get();
 
             $courses = Course::select('id','title','price','course_start_date')
-            ->where('course_start_date', '<', Carbon::now())
+            ->where('status', Course::STATUS_ENABLE)
+            // ->where('course_start_date', '<', Carbon::now())
             ->get();
 
             $data = [

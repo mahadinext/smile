@@ -1,4 +1,18 @@
 @extends('web.include.master')
+@section('css')
+    @parent
+    <link href="https://vjs.zencdn.net/8.0.4/video-js.css" rel="stylesheet">
+    <style>
+        .video-js {
+            font-size: 16px; /* Customize player text size */
+            color: #fff; /* Customize player text color */
+        }
+
+        .video-js .vjs-control-bar {
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent control bar */
+        }
+    </style>
+@endsection
 @section('content')
 
     <div class="rbt-page-banner-wrapper">
@@ -101,7 +115,7 @@
                         <div class="row g-5 align-items-end mb--60">
                             <div class="col-lg-6 col-md-12 col-12">
                                 <div class="section-title text-start">
-                                    <h4 class="rbt-title-style-3">My Contents</h4>
+                                    <h4 class="rbt-title-style-3">Contents</h4>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-12 col-12">
@@ -113,15 +127,24 @@
                         <div class="row g-5">
                             @foreach ($contents as $key => $data)
                                 <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-                                    <div class="rbt-category-gallery">
+                                    <div class="">
                                         <div class="thumbnail">
                                             <a href="#">
-                                                <img src="{!! asset('web/assets/images/gallery/gallery-03.jpg') !!}" alt="Gallery Images">
+                                                <video
+                                                    id="video-{{ $data->id }}"
+                                                    class="video-js vjs-default-skin"
+                                                    controls
+                                                    preload="auto"
+                                                    width="100%"
+                                                    {{-- height="360" --}}
+                                                    poster="{{ $data->thumbnail }}"
+                                                    data-setup='{}'>
+                                                    <source src="{{ $data->file_path }}" type="video/mp4" />
+                                                    Your browser does not support the video tag.
+                                                </video>
+                                                {{-- <img src="{!! asset('web/assets/images/gallery/gallery-03.jpg') !!}" alt="Gallery Images"> --}}
                                                 <div class="rbt-bg-overlay"></div>
                                             </a>
-                                            {{-- <div class="hover-content">
-                                                <h3 class="title"><a href="#"></a></h3>
-                                            </div> --}}
                                         </div>
                                     </div>
                                 </div>
@@ -186,8 +209,10 @@
                                         </div>
                                         <div class="rbt-card-bottom">
                                             <div class="rbt-price">
-                                                <span class="current-price">৳{{ $data->price }}</span>
-                                                {{-- <span class="off-price">৳{{ $data->price }}</span> --}}
+                                                <span class="current-price">৳{{ $data->discounted_price ?? $data->price }}</span>
+                                                @if ($data->discounted_price)
+                                                    <span class="off-price">৳{{ $data->price }}</span>
+                                                @endif
                                             </div>
                                             <a class="rbt-btn-link" href="{{ route('course-details', $data->id) }}">Learn
                                                 More<i class="feather-arrow-right"></i></a>
@@ -218,4 +243,8 @@
         </div>
     </div>
 
-    @endsection
+@endsection
+@section('scripts')
+    @parent
+    {{-- <script src="https://vjs.zencdn.net/8.0.4/video.min.js"></script> --}}
+@endsection

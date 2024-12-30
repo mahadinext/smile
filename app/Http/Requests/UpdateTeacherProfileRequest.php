@@ -25,12 +25,12 @@ class UpdateTeacherProfileRequest extends FormRequest
             'first_name' => [
                 'string',
                 'required',
-                'max:15'
+                'max:30'
             ],
             'last_name' => [
                 'string',
                 'required', // Made required since it is marked as required in the form
-                'max:15',
+                'max:50',
             ],
             'email' => [
                 'nullable',
@@ -105,17 +105,19 @@ class UpdateTeacherProfileRequest extends FormRequest
                 'dimensions:min_width=2610,min_height=700,max_width=2610,max_height=700',
             ],
             'nid_no' => [
-                'required',
+                'nullable',
                 'digits:10', // Assuming a 10-digit NID number (adjust if necessary)
             ],
             'nid_front_image' => [
-                $currentNidFrontImage ? 'nullable' : 'required',
+                // $currentNidFrontImage ? 'nullable' : 'required',
+                'nullable',
                 'file',
                 'mimes:jpeg,png,jpg,gif',
                 'max:2048', // Max file size of 2MB
             ],
             'nid_back_image' => [
-                $currentNidBackImage ? 'nullable' : 'required',
+                // $currentNidBackImage ? 'nullable' : 'required',
+                'nullable',
                 'file',
                 'mimes:jpeg,png,jpg,gif',
                 'max:2048', // Max file size of 2MB

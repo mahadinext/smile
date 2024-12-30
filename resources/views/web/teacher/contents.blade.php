@@ -37,29 +37,37 @@
     </div>
     <!-- End Breadcrumb Area -->
 
-    <div class="rbt-team-area bg-color-extra2 rbt-section-gap" style="background:#f38b051f;">
+    <div class="rbt-program-area rbt-section-gapTop bg-color-extra2 rbt-section-gap" style="background:#f38b051f;">
         <div class="container">
             <div class="row g-5">
+                @foreach ($contents as $key => $data)
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                        <div class="">
+                            <div class="thumbnail">
+                                <a href="#">
+                                    <video
+                                        id="video-{{ $data->id }}"
+                                        class="video-js vjs-default-skin"
+                                        controls
+                                        preload="auto"
+                                        width="100%"
+                                        {{-- height="360" --}}
+                                        poster="{{ $data->thumbnail }}"
+                                        data-setup='{}'>
+                                        <source src="{{ $data->file_path }}" type="video/mp4" />
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    {{-- <img src="{!! asset('web/assets/images/gallery/gallery-03.jpg') !!}" alt="Gallery Images"> --}}
+                                    <div class="rbt-bg-overlay"></div>
+                                </a>
 
-                @foreach($contents as $key => $data)
-                    <div class="col-lg-6 col-md-6 col-12">
-                        <div class="rbt-team team-style-default style-three small-layout rbt-hover">
-                            <video
-                                id="video-{{ $data->id }}"
-                                class="video-js vjs-default-skin"
-                                controls
-                                preload="auto"
-                                width="640"
-                                height="360"
-                                poster="{{ $data->thumbnail }}"
-                                data-setup='{}'>
-                                <source src="{{ $data->file_path }}" type="video/mp4" />
-                                Your browser does not support the video tag.
-                            </video>
+                                {{-- <div class="hover-content">
+                                    <h3 class="title"><a href="#"></a></h3>
+                                </div> --}}
+                            </div>
                         </div>
                     </div>
                 @endforeach
-
             </div>
 
             <div class="row">
@@ -69,7 +77,6 @@
                     </nav>
                 </div>
             </div>
-
         </div>
     </div>
 
@@ -77,19 +84,19 @@
 
 @section('scripts')
     @parent
-    <script src="https://vjs.zencdn.net/8.0.4/video.min.js"></script>
+    {{-- <script src="https://vjs.zencdn.net/8.0.4/video.min.js"></script> --}}
     <script>
-        $(document).ready(function() {
-            const videoElements = document.querySelectorAll('.video-player');
-            videoElements.forEach((videoElement) => {
-                videojs(videoElement.id, {
-                    autoplay: false,
-                    controls: true,
-                    responsive: true,
-                    fluid: true, // Makes the player responsive
-                    playbackRates: [0.5, 1, 1.5, 2], // Add playback speed options
-                });
-            });
-        });
+        // $(document).ready(function() {
+        //     // const videoElements = document.querySelectorAll('.video-js');
+        //     videoElements.forEach((videoElement) => {
+        //         videojs(videoElement.id, {
+        //             autoplay: false,
+        //             controls: true,
+        //             responsive: true,
+        //             fluid: true, // Makes the player responsive
+        //             playbackRates: [0.5, 1, 1.5, 2], // Add playback speed options
+        //         });
+        //     });
+        // });
     </script>
 @endsection

@@ -217,7 +217,7 @@
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="mb-3">
-                                            <label class="required" for="email">NID No</label>
+                                            <label class="" for="email">NID No</label>
                                             <input id="nid_no" name="nid_no" type="text" class="form-control {{ $errors->has('nid_no') ? ' is-invalid' : '' }}" value="{{ old('nid_no', '') }}" required>
                                             @if($errors->has('nid_no'))
                                                 <div class="invalid-feedback">
@@ -229,7 +229,7 @@
 
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="mb-3">
-                                            <label class="required" for="nid_front_image">NID Front Image</label>
+                                            <label class="" for="nid_front_image">NID Front Image</label>
                                             <input class="form-control mb-3 {{ $errors->has('nid_front_image') ? 'is-invalid' : '' }}" type="file" name="nid_front_image" id="nid_front_image" accept="image/*">
                                             @if($errors->has('nid_front_image'))
                                                 <div class="invalid-feedback">
@@ -241,7 +241,7 @@
 
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="mb-3">
-                                            <label class="required" for="nid_back_image">NID Back Image</label>
+                                            <label class="" for="nid_back_image">NID Back Image</label>
                                             <input class="form-control mb-3 {{ $errors->has('nid_back_image') ? 'is-invalid' : '' }}" type="file" name="nid_back_image" id="nid_back_image" accept="image/*">
                                             @if($errors->has('nid_back_image'))
                                                 <div class="invalid-feedback">

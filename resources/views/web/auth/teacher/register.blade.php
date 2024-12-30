@@ -253,7 +253,7 @@
 
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-12 my-3">
                                     <div class="rbt-form-group">
-                                        <label for="nid_front_image">NID Front Image <span style="color:red">*</span></label>
+                                        <label for="nid_front_image">NID Front Image</label>
                                         <input type="file" class="form-control form-control-file {{ $errors->has('nid_front_image') ? ' is-invalid' : '' }}" name="nid_front_image" id="nid_front_image" accept=".jpeg, .jpg, .png, .gif">
                                         @if($errors->has('nid_front_image'))
                                             <div class="invalid-feedback">
@@ -269,7 +269,7 @@
 
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-12 my-3">
                                     <div class="rbt-form-group">
-                                        <label for="nid_back_image">NID Back Image <span style="color:red">*</span></label>
+                                        <label for="nid_back_image">NID Back Image</label>
                                         <input type="file" class="form-control form-control-file {{ $errors->has('nid_back_image') ? ' is-invalid' : '' }}" name="nid_back_image" id="nid_back_image" accept=".jpeg, .jpg, .png, .gif">
                                         @if($errors->has('nid_back_image'))
                                             <div class="invalid-feedback">

@@ -25,12 +25,12 @@ class StoreTeacherRequest extends FormRequest
             'first_name' => [
                 'string',
                 'required',
-                'max:15'
+                'max:30'
             ],
             'last_name' => [
                 'string',
                 'required', // Made required since it is marked as required in the form
-                'max:15',
+                'max:50',
             ],
             'email' => [
                 'required',
@@ -84,17 +84,17 @@ class StoreTeacherRequest extends FormRequest
                 'dimensions:min_width=1500,min_height=1500,max_width=1500,max_height=1500',
             ],
             'nid_no' => [
-                'required',
+                'nullable',
                 'digits:10', // Assuming a 10-digit NID number (adjust if necessary)
             ],
             'nid_front_image' => [
-                'required',
+                'nullable',
                 'file',
                 'mimes:jpeg,png,jpg,gif',
                 'max:2048', // Max file size of 2MB
             ],
             'nid_back_image' => [
-                'required',
+                'nullable',
                 'file',
                 'mimes:jpeg,png,jpg,gif',
                 'max:2048', // Max file size of 2MB
@@ -109,7 +109,7 @@ class StoreTeacherRequest extends FormRequest
             'bio' => [
                 $isBioRequired,
                 'string',
-                'max:200',
+                'max:250',
             ],
             'detailed_info' => [
                 $isDetailedInfoRequired,

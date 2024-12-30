@@ -50,8 +50,9 @@ class TeacherController extends Controller
         try {
             $teacher = Teachers::where('user_id', $id)->first();
 
-            $teacherCourses = Course::with('courseTeacher','courseCategory','courseStudents','courseRatings')
-            ->select('id','card_image','title','total_class','short_description','teacher_id','price')
+            $teacherCourses = Course::query()
+            ->with('courseTeacher','courseCategory','courseStudents','courseRatings')
+            ->select('id','card_image','title','total_class','short_description','teacher_id','price','discount_type','discount_amount','discount_start_date','discount_expiry_date')
             ->where("teacher_id", $id)
             ->orderBy("id", "DESC")
             ->paginate(6);

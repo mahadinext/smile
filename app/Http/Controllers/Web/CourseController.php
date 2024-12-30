@@ -9,6 +9,7 @@ use App\Models\CourseCategory;
 use App\Models\CourseContents;
 use App\Models\Teacher\Teachers;
 use App\Services\Web\CourseService;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -26,10 +27,29 @@ class CourseController extends Controller
     public function index(Request $request)
     {
         try {
+            $now = Carbon::now()->format('Y-m-d H:i:s');
+
             $query = Course::query()
                 ->with('courseTeacher','courseCategory',
                 'courseStudents','courseRatings')
-                ->select('id','card_image','title','total_class','short_description','teacher_id','price')
+                ->select('id','card_image','title','total_class','short_description','teacher_id','price','discount_type','discount_amount','discount_start_date','discount_expiry_date')
+                // ->selectRaw("
+                //     IF(
+                //         discount_type IS NOT NULL
+                //         AND discount_amount IS NOT NULL
+                //         AND discount_start_date IS NOT NULL
+                //         AND discount_expiry_date IS NOT NULL
+                //         AND STR_TO_DATE(?, '%Y-%m-%d %H:%i:%s') > discount_start_date
+                //         AND STR_TO_DATE(?, '%Y-%m-%d %H:%i:%s') < discount_expiry_date,
+                //         CASE
+                //             WHEN discount_type = 1 THEN GREATEST(0, price - discount_amount)
+                //             WHEN discount_type = 2 THEN GREATEST(0, price - (price * discount_amount / 100))
+                //             ELSE NULL
+                //         END,
+                //         NULL
+                //     ) AS discounted_price
+                //     ", [$now, $now]
+                // )
                 ->whereNull('courses.deleted_at');
             $result = (new CourseService)->filter($request, $query);
 
@@ -104,16 +124,20 @@ class CourseController extends Controller
             ->where("user_id", $course->teacher_id)
             ->first();
 
-            $teacherCourses = Course::with('courseTeacher','courseCategory','courseStudents','courseRatings')
-            ->select('id','card_image','title','total_class','short_description','teacher_id','price')
+            $teacherCourses = Course::query()
+            ->with('courseTeacher','courseCategory','courseStudents','courseRatings')
+            ->select('id','card_image','title','total_class','short_description','teacher_id','price','discount_type','discount_amount','discount_start_date','discount_expiry_date')
             ->where("teacher_id", $course->teacher_id)
+            ->whereNot("id", $id)
             ->orderBy("id", "DESC")
             ->limit(2)
             ->get();
 
-            $relatedCourses = Course::with('courseTeacher','courseCategory','courseStudents','courseRatings')
-            ->select('id','card_image','title','total_class','short_description','teacher_id','price')
+            $relatedCourses = Course::query()
+            ->with('courseTeacher','courseCategory','courseStudents','courseRatings')
+            ->select('id','card_image','title','total_class','short_description','teacher_id','price','discount_type','discount_amount','discount_start_date','discount_expiry_date')
             ->where("category_id", $course->category_id)
+            ->whereNot("id", $id)
             ->orderBy("id", "DESC")
             ->limit(3)
             ->get();

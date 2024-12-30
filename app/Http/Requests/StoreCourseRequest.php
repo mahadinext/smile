@@ -34,7 +34,7 @@ class StoreCourseRequest extends FormRequest
             'short_description' => [
                 'required',
                 'string',
-                'max:150',
+                'max:250',
             ],
             'long_description' => [
                 'required',
@@ -137,7 +137,7 @@ class StoreCourseRequest extends FormRequest
             ],
             'discount_start_date' => [
                 'nullable',
-                'after_or_equal:course_start_date',
+                // 'after_or_equal:course_start_date',
                 'date_format:' . config('panel.date_format') . ' ' . config('panel.time_format'),
                 'before:discount_expiry_date', // Ensure start_date is before expiry_date
                 'required_with:discount_type,discount_amount,discount_expiry_date', // Required if these fields are present

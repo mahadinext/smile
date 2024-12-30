@@ -183,8 +183,10 @@
                                         </div>
                                         <div class="rbt-card-bottom">
                                             <div class="rbt-price">
-                                                <span class="current-price">৳{{ $data->price }}</span>
-                                                {{-- <span class="off-price">৳{{ $data->price }}</span> --}}
+                                                <span class="current-price">৳{{ $data->discounted_price ?? $data->price }}</span>
+                                                @if ($data->discounted_price)
+                                                    <span class="off-price">৳{{ $data->price }}</span>
+                                                @endif
                                             </div>
                                             <a class="rbt-btn-link" href="{{ route('course-details', $data->id) }}">Learn
                                                 More<i class="feather-arrow-right"></i></a>

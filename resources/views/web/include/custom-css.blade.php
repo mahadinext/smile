@@ -27,4 +27,27 @@
     .rbt-accordion-style.rbt-accordion-04 .card .card-body {
         border-top: 2px solid #f38b051f;
     }
+
+    body {
+        color: #000000c9;
+    }
+
+    .page-list li .icon-right i {
+        color: #ffffff;
+    }
+
+    .rbt-swiper-pagination .swiper-pagination-bullet {
+        box-shadow: inset 0 0 0 5px #000000;
+    }
+
+    .rbt-swiper-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active {
+        box-shadow: inset 0 0 0 1px #ffffff;
+    }
+
+    .rbt-author-meta .rbt-author-info a:hover {
+        color: #000000;
+        transition: all 0.3s ease;
+        font-weight: bold;
+        font-size: 1.1em;
+    }
 </style>

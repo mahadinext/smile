@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class Course extends Model
 {
@@ -106,6 +107,36 @@ class Course extends Model
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');
+    }
+
+    public function getDiscountedPriceAttribute()
+    {
+        Log::info('Calculating discounted price for course: ' . $this->id);
+        $price = null;
+
+        // Check if discount is applicable
+        if ($this->discount_type && $this->discount_amount) {
+            $now = Carbon::now()->format('Y-m-d H:i:s');
+            $startDate = $this->discount_start_date ? Carbon::parse($this->discount_start_date) : null;
+            $expiryDate = $this->discount_expiry_date ? Carbon::parse($this->discount_expiry_date) : null;
+
+            // Check if within discount period or if no dates are set
+            $isWithinPeriod = (!$startDate && !$expiryDate) ||
+                ((!$startDate || $now >= $startDate) && (!$expiryDate || $now <= $expiryDate));
+
+            if ($isWithinPeriod) {
+                // Type 1 is flat, Type 2 is percentage
+                if ($this->discount_type == 1) {
+                    $price = max(0, $this->price - $this->discount_amount);
+                } else if ($this->discount_type == 2) {
+                    $price = max(0, $this->price - ($this->price * ($this->discount_amount / 100)));
+                }
+            }
+        }
+
+        Log::debug("Discount Price: ", [$price]);
+
+        return $price;
     }
 
     public function courseTeacher()
