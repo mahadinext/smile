@@ -1,14 +1,14 @@
 <nav class="mainmenu-nav">
     <ul class="mainmenu">
-        <li class="with-megamenu position-static">
+        <li class="position-static">
             <a href="{{ route('home') }}">Home</a>
         </li>
 
-        <li class="with-megamenu">
+        <li>
             <a href="{{ route('courses') }}">Browse Courses</a>
         </li>
 
-        <li class="with-megamenu">
+        <li>
             <a href="{{ route('instructors') }}">Our Instructors</a>
         </li>
 
