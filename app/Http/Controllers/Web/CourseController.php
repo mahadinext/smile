@@ -67,6 +67,7 @@ class CourseController extends Controller
             // });
 
             $courseCategories = DB::table('course_categories')
+            ->whereNull('course_categories.deleted_at')
             ->leftJoin('courses', function ($join) {
                 $join->on('course_categories.id', '=', 'courses.category_id')
                     ->whereNull('courses.deleted_at');  // Exclude soft-deleted courses
@@ -77,6 +78,7 @@ class CourseController extends Controller
             // dd($courseCategories);
 
             $teachers = DB::table('teachers')
+            ->whereNull('teachers.deleted_at')
             ->leftJoin('courses', function ($join) {
                 $join->on('teachers.user_id', '=', 'courses.teacher_id')
                     ->whereNull('courses.deleted_at');  // Exclude soft-deleted courses
@@ -123,11 +125,13 @@ class CourseController extends Controller
 
             $courseContents = CourseContents::select('title', 'description')
             ->where('course_id', $id)
+            ->whereNull('deleted_at')
             ->get();
 
             $teacher = Teachers::with(['courses:id,teacher_id'])
             ->select('teachers.id','teachers.user_id','bio')
             ->where("user_id", $course->teacher_id)
+            ->whereNull('deleted_at')
             ->first();
 
             $teacherCourses = Course::query()
@@ -135,6 +139,7 @@ class CourseController extends Controller
             ->select('id','card_image','title','total_class','short_description','teacher_id','price','discount_type','discount_amount','discount_start_date','discount_expiry_date')
             ->where("teacher_id", $course->teacher_id)
             ->whereNot("id", $id)
+            ->whereNull('courses.deleted_at')
             ->orderBy("id", "DESC")
             ->limit(2)
             ->get();
@@ -144,6 +149,7 @@ class CourseController extends Controller
             ->select('id','card_image','title','total_class','short_description','teacher_id','price','discount_type','discount_amount','discount_start_date','discount_expiry_date')
             ->where("category_id", $course->category_id)
             ->whereNot("id", $id)
+            ->whereNull('courses.deleted_at')
             ->orderBy("id", "DESC")
             ->limit(3)
             ->get();
