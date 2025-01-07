@@ -152,8 +152,8 @@
             <div class="row mb--60">
                 <div class="col-lg-12">
                     <div class="section-title text-center">
-                        <span class="subtitle bg-coral-opacity">Our Instructor</span>
-                        <h2 class="title">Some of our Best Instructor</h2>
+                        <span class="subtitle bg-coral-opacity">Our Instructors</span>
+                        <h2 class="title">Meet Our Finest Instructors</h2>
                     </div>
                 </div>
             </div>

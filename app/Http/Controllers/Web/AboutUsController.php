@@ -20,7 +20,8 @@ class AboutUsController extends Controller
             $sectionOneContent = AboutUsContents::where("section_id", AboutUsContents::ABOUT_DESCRIPTION)->first();
             $sectionTwoContent = AboutUsContents::where("section_id", AboutUsContents::APPLICATION_PROCEDURE)->get();
             $sectionThreeContent = AboutUsContents::where("section_id", AboutUsContents::COURSE_FEATURES)->get();
-            $teachers = Teachers::limit(4)->get();
+            // $teachers = Teachers::limit(4)->get();
+            $teachers = Teachers::select('id','user_id','image','first_name','last_name')->get();
 
             $data = [
                 "sectionOneContent" => $sectionOneContent,
