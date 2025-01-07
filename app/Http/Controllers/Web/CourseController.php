@@ -67,14 +67,20 @@ class CourseController extends Controller
             // });
 
             $courseCategories = DB::table('course_categories')
-            ->leftJoin('courses', 'course_categories.id', '=', 'courses.category_id')
+            ->leftJoin('courses', function ($join) {
+                $join->on('course_categories.id', '=', 'courses.category_id')
+                    ->whereNull('courses.deleted_at');  // Exclude soft-deleted courses
+            })
             ->select('course_categories.id', 'course_categories.name', DB::raw('COUNT(courses.id) as courses_count'))
             ->groupBy('course_categories.id', 'course_categories.name')
             ->get();
             // dd($courseCategories);
 
             $teachers = DB::table('teachers')
-            ->leftJoin('courses', 'teachers.user_id', '=', 'courses.teacher_id')
+            ->leftJoin('courses', function ($join) {
+                $join->on('teachers.user_id', '=', 'courses.teacher_id')
+                    ->whereNull('courses.deleted_at');  // Exclude soft-deleted courses
+            })
             ->select('teachers.id', 'teachers.user_id', 'teachers.first_name', 'teachers.last_name', DB::raw('COUNT(courses.id) as courses_count'))
             ->groupBy('teachers.id', 'teachers.user_id', 'teachers.first_name', 'teachers.last_name')
             ->get();

@@ -2,7 +2,7 @@
 @section('content')
 
     <!-- Start Banner Area -->
-    <div class="rbt-banner-area rbt-banner-1 variation-2 height-750 mb-5">
+    <div class="rbt-banner-area rbt-banner-1 variation-2 height-750 mb-5" style="height: 850px">
         <div class="container">
             <div class="row justify-content-between align-items-center">
                 <div class="col-lg-8">
@@ -74,7 +74,7 @@
                                     <!-- End Single Card  -->
                                 @endforeach
                             </div>
-                            <div class="rbt-swiper-pagination"></div>
+                            {{-- <div class="rbt-swiper-pagination"></div> --}}
                         </div>
                     </div>
                 </div>
@@ -309,5 +309,48 @@
         </div>
     </div>
     <!-- End Campain Area  -->
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const swiper = new Swiper('.banner-swiper-active', {
+                loop: true, // Enable infinite looping
+                autoplay: {
+                    delay: 3000, // 3 seconds interval
+                    disableOnInteraction: false,
+                },
+                // effect: 'fade', // Use fade effect for a smooth transition without sliding
+                // fadeEffect: {
+                //     crossFade: true, // Ensure a smooth fading effect
+                // },
+                effect: 'cards',
+                cardsEffect: {
+                    rotate: false, // Prevent rotation for a simple card flip
+                    slideShadows: false, // Remove shadows for a cleaner appearance
+                },
+                pagination: {
+                    el: '.rbt-swiper-pagination',
+                    clickable: true,
+                    type: 'bullets',  // Explicitly set pagination type
+                    renderBullet: function (index, className) {
+                        return '<span class="' + className + '"></span>';
+                    },
+                },
+                slidesPerView: 1, // Show one slide at a time
+                spaceBetween: 0, // No space between slides for fade effect
+                observer: true,
+                observeParents: true,
+                on: {
+                    init: function() {
+                        this.pagination.update(); // Update pagination on init
+                    },
+                    slideChange: function() {
+                        this.pagination.update(); // Update pagination on slide change
+                        const activeIndex = this.realIndex + 1;
+                        // console.log(`Current active slide is: ${activeIndex}`);
+                    },
+                },
+            });
+        });
+    </script>
 
 @endsection

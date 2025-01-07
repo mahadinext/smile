@@ -119,8 +119,11 @@
                                     <ul class="rbt-sidebar-list-wrapper instructor-list-check">
                                         @foreach ($teachers as $key => $data)
                                             <li class="rbt-check-group">
-                                                <input id="ins-list-1" type="checkbox" name="course_instructors[]" value="{{ $data->user_id }}" {{ in_array($data->user_id, request('course_instructors', [])) ? 'checked' : '' }}>
-                                                <label for="ins-list-1">{{ $data->first_name . " " . $data->last_name }} <span class="rbt-lable count">{{ $data->courses_count }}</span></label>
+                                                <input id="ins-list-{{ $data->user_id }}" type="checkbox" name="course_instructors[]" value="{{ $data->user_id }}" {{ in_array($data->user_id, request('course_instructors', [])) ? 'checked' : '' }}>
+                                                <label for="ins-list-{{ $data->user_id }}">
+                                                    {{ $data->first_name . " " . $data->last_name }}
+                                                    <span class="rbt-lable count">{{ $data->courses_count }}</span>
+                                                </label>
                                             </li>
                                         @endforeach
                                     </ul>
