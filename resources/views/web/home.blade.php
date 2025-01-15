@@ -2,10 +2,10 @@
 @section('content')
 
     <!-- Start Banner Area -->
-    <div class="rbt-banner-area rbt-banner-1 variation-2 height-750 mb-5" style="height: 850px">
+    <div class="rbt-banner-area rbt-banner-1 variation-2 height-750 mb-5 hero-section-banner-area">
         <div class="container">
-            <div class="row justify-content-between align-items-center">
-                <div class="col-lg-8">
+            <div class="row justify-content-between align-items-center hero-section-row">
+                <div class="col-lg-8 col-md-12 col-sm-12 col-12">
                     <div class="content">
                         <div class="inner">
                             <div class="rbt-new-badge rbt-new-badge-one">
@@ -25,7 +25,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-4 col-md-12 col-sm-12 col-12">
                     <div class="content">
                         <div class="banner-card pb--60 swiper rbt-dot-bottom-center banner-swiper-active">
                             <div class="swiper-wrapper">

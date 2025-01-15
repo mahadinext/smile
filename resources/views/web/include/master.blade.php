@@ -2,6 +2,16 @@
 <html lang="en">
 
     <head>
+        <!-- Google Tag Manager -->
+        <script>
+            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-5BN46DR7');
+        </script>
+        <!-- End Google Tag Manager -->
+
         @include('web.include.title-meta')
 
         @include('web.include.head-css')
@@ -17,6 +27,12 @@
     </head>
 
     <body class="rbt-header-sticky">
+        <!-- Google Tag Manager (noscript) -->
+        <noscript>
+            <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5BN46DR7" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+        </noscript>
+        <!-- End Google Tag Manager (noscript) -->
+
         @include('web.include.color')
         {{-- @include('web.include.campaign') --}}
         @include('web.include.header')
