@@ -29,7 +29,7 @@
                         </div>
 
                         <div class="header-info">
-                            <a class="rbt-btn rbt-switch-btn btn-gradient btn-sm hover-transform-none" href="#">
+                            <a class="rbt-btn rbt-switch-btn btn-gradient btn-sm hover-transform-none" href="https://forms.gle/RsTnbwaBQJ2hszEVA">
                                 <span data-text="Get Free Course">Get Free Course</span>
                             </a>
                         </div>

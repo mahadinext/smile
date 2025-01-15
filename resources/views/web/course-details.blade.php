@@ -699,7 +699,7 @@
                                 </div> --}}
 
                                 <div class="buy-now-btn mt--15">
-                                    <a class="rbt-btn btn-border icon-hover w-100 d-block text-center" href="#">
+                                    <a class="rbt-btn btn-border icon-hover w-100 d-block text-center" href="https://forms.gle/RsTnbwaBQJ2hszEVA">
                                         <span class="btn-text">Enroll Now</span>
                                         <span class="btn-icon"><i class="feather-arrow-right"></i></span>
                                     </a>
@@ -917,7 +917,7 @@
                             @endif
                         </div>
                         <div class="rbt-single-list action-btn">
-                            <a class="rbt-btn btn-gradient hover-icon-reverse btn-md" href="#">
+                            <a class="rbt-btn btn-gradient hover-icon-reverse btn-md" href="https://forms.gle/RsTnbwaBQJ2hszEVA">
                                 <span class="icon-reverse-wrapper">
                                 <span class="btn-text">Enroll Now</span>
                                 <span class="btn-icon"><i class="feather-arrow-right"></i></span>
