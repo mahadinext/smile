@@ -33,6 +33,16 @@
         </noscript>
         <!-- End Google Tag Manager (noscript) -->
 
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-M44QQNE7Y4"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-M44QQNE7Y4');
+        </script>
+
         @include('web.include.color')
         {{-- @include('web.include.campaign') --}}
         @include('web.include.header')
