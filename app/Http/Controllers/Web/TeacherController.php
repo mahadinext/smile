@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers\Web;
 
-use App\Http\Controllers\Controller;
-use App\Models\Course;
-use App\Models\Teacher\Teachers;
-use App\Models\TeacherContents;
-use App\Models\User;
 use Exception;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Models\User;
+use App\Models\Course;
 use Illuminate\Http\Request;
+use App\Models\TeacherContents;
+use App\Models\Teacher\Teachers;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
+use App\Services\Web\TeacherService;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class TeacherController extends Controller
 {
@@ -21,17 +23,54 @@ class TeacherController extends Controller
     public function index(Request $request)
     {
         try {
-            $teachers = Teachers::query()
-                ->select('id','user_id','first_name','last_name','email','phone_no','image')
-                ->where('status', Teachers::STATUS_ACTIVE)
-                ->whereHas('user', function ($query) {
-                    $query->where('approved', User::STATUS_APPROVED);
-                })
-                ->orderBy('id', 'desc')
-                ->paginate(8);
+            $query = Teachers::query()
+            ->select('id','user_id','first_name','last_name','email','phone_no','image')
+            ->where('status', Teachers::STATUS_ACTIVE)
+            ->whereHas('user', function ($query) {
+                $query->where('approved', User::STATUS_APPROVED);
+            });
+            $result = (new TeacherService)->filter($request, $query);
+
+            $courseCategories = DB::table('course_categories')
+            ->whereNull('course_categories.deleted_at')
+            ->leftJoin('courses', function ($join) {
+                $join->on('course_categories.id', '=', 'courses.category_id')
+                ->whereNull('courses.deleted_at')
+                ->where('courses.status', Course::STATUS_ENABLE);
+            })
+            ->select('course_categories.id', 'course_categories.name', DB::raw('COUNT(courses.id) as courses_count'))
+            ->groupBy('course_categories.id', 'course_categories.name')
+            ->get();
+            // dd($courseCategories);
+
+            $courseSubjects = DB::table('course_subjects')
+            ->whereNull('course_subjects.deleted_at')
+            ->leftJoin('courses', function ($join) {
+                $join->on('course_subjects.id', '=', 'courses.subject_id')
+                ->whereNull('courses.deleted_at')
+                ->where('courses.status', Course::STATUS_ENABLE);
+            })
+            ->select('course_subjects.id', 'course_subjects.name', DB::raw('COUNT(courses.id) as courses_count'))
+            ->groupBy('course_subjects.id', 'course_subjects.name')
+            ->get();
+
+            $courseLevels = DB::table('course_levels')
+            ->whereNull('course_levels.deleted_at')
+            ->leftJoin('courses', function ($join) {
+                $join->on('course_levels.id', '=', 'courses.level_id')
+                ->whereNull('courses.deleted_at')
+                ->where('courses.status', Course::STATUS_ENABLE);
+            })
+            ->select('course_levels.id', 'course_levels.name', DB::raw('COUNT(courses.id) as courses_count'))
+            ->groupBy('course_levels.id', 'course_levels.name')
+            ->get();
 
             $data = [
-                "teachers" => $teachers,
+                "teachers" => isset($result['teachers']) ? $result['teachers'] : [],
+                "totalTeachers" => isset($result['totalTeachers']) ? $result['totalTeachers'] : 0,
+                "courseCategories" => $courseCategories,
+                "courseSubjects" => $courseSubjects,
+                "courseLevels" => $courseLevels,
             ];
 
             return view("web.teacher.instructors", $data);
@@ -54,6 +93,7 @@ class TeacherController extends Controller
             ->with('courseTeacher','courseCategory','courseStudents','courseRatings')
             ->select('id','card_image','title','total_class','short_description','teacher_id','price','discount_type','discount_amount','discount_start_date','discount_expiry_date')
             ->where("teacher_id", $id)
+            ->where('courses.status', Course::STATUS_ENABLE)
             ->orderBy("id", "DESC")
             ->paginate(6);
 

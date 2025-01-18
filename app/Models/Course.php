@@ -20,10 +20,12 @@ class Course extends Model
 
     public const STATUS_ENABLE = 1;
     public const STATUS_DISABLE = 0;
+    public const STATUS_PENDING = 2;
 
     public const STATUS_SELECT = [
-        1 => 'Active',
-        0 => 'Inactive',
+        self::STATUS_ENABLE => 'Active',
+        self::STATUS_DISABLE => 'Inactive',
+        self::STATUS_PENDING => 'Pending',
     ];
 
     public const TYPE_ARRAY = [
@@ -43,6 +45,8 @@ class Course extends Model
     protected $fillable = [
         'teacher_id',
         'category_id',
+        'subject_id',
+        'level_id',
         'title',
         'short_description',
         'long_description',
@@ -111,7 +115,6 @@ class Course extends Model
 
     public function getDiscountedPriceAttribute()
     {
-        Log::info('Calculating discounted price for course: ' . $this->id);
         $price = null;
 
         // Check if discount is applicable
@@ -134,8 +137,6 @@ class Course extends Model
             }
         }
 
-        Log::debug("Discount Price: ", [$price]);
-
         return $price;
     }
 
@@ -148,6 +149,16 @@ class Course extends Model
     public function courseCategory()
     {
         return $this->belongsTo(CourseCategory::class, 'category_id');
+    }
+
+    public function courseSubject()
+    {
+        return $this->belongsTo(CourseSubject::class, 'subject_id');
+    }
+
+    public function courseLevel()
+    {
+        return $this->belongsTo(CourseLevel::class, 'level_id');
     }
 
     public function courseContents()

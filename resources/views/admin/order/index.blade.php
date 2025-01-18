@@ -133,13 +133,27 @@
                                         <tr>
                                             {{-- <td>{{ $orders->firstItem() + $key }}</td> --}}
                                             <td>{{ ($orders->currentPage() - 1) * $orders->perPage() + $loop->iteration }}</td>
-                                            <td>{{ $order->student->email }}</td>
+                                            <td>{{ $order->student ? $order->student->email : '' }}</td>
                                             <td>{{ $order->total }}</td>
                                             <td>{{ $order->transaction_id }}</td>
                                             <td>{{ $order->order_type }}</td>
-                                            <td>{{ App\Models\Order::STATUS_SELECT[$order->status] }}</td>
+                                            <td>
+                                                @if ($order->status == App\Models\Order::STATUS_PENDING)
+                                                    <span class="badge bg-warning">{{ App\Models\Order::STATUS_SELECT[$order->status] }}</span>
+                                                @elseif ($order->status == App\Models\Order::STATUS_ENABLE)
+                                                    <span class="badge bg-success">{{ App\Models\Order::STATUS_SELECT[$order->status] }}</span>
+                                                @elseif ($order->status == App\Models\Order::STATUS_DISABLE)
+                                                    <span class="badge bg-danger">{{ App\Models\Order::STATUS_SELECT[$order->status] }}</span>
+                                                    {{ App\Models\Order::STATUS_SELECT[$order->status] }}
+                                                @endif
+                                            </td>
                                             <td>{{ ($order->createdBy) ? $order->createdBy->email : '' }}</td>
                                             <td>
+                                                @can('edit_order')
+                                                    <a class="btn btn-sm btn-primary mt-2" href="{{ route('admin.orders.edit', $order->id) }}">
+                                                        {{ trans('global.edit') }}
+                                                    </a>
+                                                @endcan
                                                 @can('delete_order')
                                                     <a class="btn btn-sm btn-danger mt-2" onclick="return confirm('{{ trans('global.areYouSure') }}');"
                                                         href="{{ route('admin.orders.delete', $order->id) }}">

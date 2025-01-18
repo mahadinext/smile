@@ -17,6 +17,8 @@ class CreateCoursesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('teacher_id');
             $table->unsignedBigInteger('category_id');
+            $table->unsignedInteger('subject_id')->nullable();
+            $table->unsignedInteger('level_id')->nullable();
             $table->string('title');
             $table->text('short_description');
             $table->longText('long_description');
@@ -51,9 +53,13 @@ class CreateCoursesTable extends Migration
 
             $table->foreign('teacher_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('category_id')->references('id')->on('course_categories')->onDelete('cascade');
+            $table->foreign('subject_id')->references('id')->on('course_subjects')->onDelete('cascade');
+            $table->foreign('level_id')->references('id')->on('course_levels')->onDelete('cascade');
 
             $table->index('teacher_id');
             $table->index('category_id');
+            $table->index('subject_id');
+            $table->index('level_id');
             $table->index('discount_type');
             $table->index('status');
         });

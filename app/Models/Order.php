@@ -41,7 +41,7 @@ class Order extends Model
     public const STATUS_DISABLE = 0;
     public const STATUS_ENABLE  = 1;
     public const STATUS_PENDING = 2;
-
+    public const STATUS_CANCELLED = 3;
 
     public const NEW_PAID_ORDER = 1;
     public const FREE_ORDER  = 2;
@@ -54,8 +54,10 @@ class Order extends Model
     ];
 
     public const STATUS_SELECT = [
-        1 => 'Active',
-        0 => 'Inactive',
+        Order::STATUS_ENABLE => 'Enable',
+        Order::STATUS_DISABLE => 'Disable',
+        Order::STATUS_PENDING => 'Pending',
+        Order::STATUS_CANCELLED => 'Cancelled',
     ];
 
     public function student()

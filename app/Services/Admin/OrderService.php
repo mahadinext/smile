@@ -150,6 +150,7 @@ class OrderService
                     'order_id' => $orderId,
                     'course_id' => $value,
                     'teacher_id' => $teachers[$value],
+                    'status' => CourseEnrollment::STATUS_ENABLE,
                 ];
             }
 
@@ -157,6 +158,34 @@ class OrderService
         } catch (Exception $exception) {
             Log::error("OrderService::storeOrderCourses()", [$exception]);
             throw $exception;
+        }
+    }
+
+    /**
+     * update order
+     *
+     * @param UpdateOrderRequest $request
+     * @param Order $order
+     * @return Order|null
+     */
+    public function update(UpdateOrderRequest $request, Order $order): Order|null
+    {
+        try {
+            DB::beginTransaction();
+            $order->status = $request->status;
+            $order->remarks = $request->remarks;
+            $order->updated_by = Auth::user()->id;
+            $order->save();
+
+            CourseEnrollment::where('order_id', $order->id)->update(['status' => $request->status]);
+
+            DB::commit();
+
+            return $order;
+        } catch (Exception $exception) {
+            Log::error("OrderService::update()", [$exception]);
+            DB::rollback();
+            return null;
         }
     }
 

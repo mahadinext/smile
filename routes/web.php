@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Web\AboutUsController;
 use App\Http\Controllers\Web\CartController;
+use App\Http\Controllers\Web\CheckoutController;
 use App\Http\Controllers\Web\ContactUsController;
 use App\Http\Controllers\Web\CourseController;
 use App\Http\Controllers\Web\FaqsController;
@@ -58,4 +59,8 @@ Route::group(['middleware' => ['web.auth']], function () {
     Route::get('/cart', [CartController::class, 'index'])->name('cart');
     Route::get('/cart/store/{id}', [CartController::class, 'store'])->name('cart.store');
     Route::get('/cart/delete/{id}', [CartController::class, 'delete'])->name('cart.delete');
+
+    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
+    Route::post('/checkout/store', [CheckoutController::class, 'store'])->name('checkout.store');
+    Route::get('/checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');
 });

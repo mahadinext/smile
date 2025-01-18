@@ -49,6 +49,26 @@
                             </div>
 
                             <div class="mb-3">
+                                <label class="required" for="subject_id">Subject</label>
+                                <select class="form-control search select2 {{ $errors->has('subject_id') ? 'is-invalid' : '' }}" name="subject_id" id="subject_id" disabled>
+                                    <option value="">Select</option>
+                                    @foreach ($courseSubject as $key => $value)
+                                        <option value="{{ $key }}" {{ (old('subject_id') == $key || $course->subject_id == $key) ? 'selected' : '' }}>{{ $value }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="required" for="level_id">Level</label>
+                                <select class="form-control search select2 {{ $errors->has('level_id') ? 'is-invalid' : '' }}" name="level_id" id="level_id" disabled>
+                                    <option value="">Select</option>
+                                    @foreach ($courseLevel as $key => $value)
+                                        <option value="{{ $key }}" {{ (old('level_id') == $key || $course->level_id == $key) ? 'selected' : '' }}>{{ $value }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
                                 <label class="required" for="title">Title</label>
                                 <input class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" type="text" name="title" id="title" value="{{ old('title', $course->title ?? '') }}" disabled>
                                 @if($errors->has('title'))

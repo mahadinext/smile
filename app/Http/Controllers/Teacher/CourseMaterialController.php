@@ -80,6 +80,7 @@ class CourseMaterialController extends Controller
                 }
             })
             ->whereNull('courses.deleted_at')
+            ->where('courses.status', Course::STATUS_ENABLE)
             ->get();
 
             $data = [
@@ -118,6 +119,7 @@ class CourseMaterialController extends Controller
                 }
             })
             ->whereNull('courses.deleted_at')
+            ->where('courses.status', Course::STATUS_ENABLE)
             ->get();
 
             $data = [
@@ -178,6 +180,7 @@ class CourseMaterialController extends Controller
                 }
             })
             ->whereNull('courses.deleted_at')
+            ->where('courses.status', Course::STATUS_ENABLE)
             ->get();
 
             $data = [

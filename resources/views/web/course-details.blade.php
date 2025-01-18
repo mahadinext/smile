@@ -41,9 +41,9 @@
                                 <a class="rbt-badge-4" href="#">215,475 rating</a>
                             </div> --}}
 
-                            <div class="feature-sin total-student">
+                            {{-- <div class="feature-sin total-student">
                                 <span>{{ $course->courseStudents->count() }} students</span>
-                            </div>
+                            </div> --}}
 
                         </div>
 
@@ -606,10 +606,10 @@
                                             <div class="rbt-card-body">
                                                 <div class="rbt-card-top">
                                                     <div class="rbt-bookmark-btn">
-                                                        <a class="rbt-round-btn" title="Bookmark" href="#"><i class="feather-bookmark"></i></a>
+                                                        <a class="rbt-round-btn" title="Bookmark" href="{{ route('wishlist.store', $data->id) }}"><i class="feather-bookmark"></i></a>
                                                     </div>
                                                     <div class="rbt-review">
-                                                        <a class="rbt-round-btn left-icon" title="Add To Cart" href="#"><i class="feather-shopping-cart"></i></a>
+                                                        <a class="rbt-round-btn left-icon" title="Add To Cart" href="{{ route('cart.store', $data->id) }}"><i class="feather-shopping-cart"></i></a>
                                                     </div>
                                                 </div>
 
@@ -699,8 +699,13 @@
                                 </div> --}}
 
                                 <div class="buy-now-btn mt--15">
-                                    <a class="rbt-btn btn-border icon-hover w-100 d-block text-center" href="https://forms.gle/RsTnbwaBQJ2hszEVA">
-                                        <span class="btn-text">Enroll Now</span>
+                                    <a class="rbt-btn btn-border icon-hover w-100 d-block text-center mb-3" href="{{ route('cart.store', $course->id) }}">
+                                        <span class="btn-text">Add to Cart</span>
+                                        <span class="btn-icon"><i class="feather-arrow-right"></i></span>
+                                    </a>
+
+                                    <a class="rbt-btn btn-gradient hover-icon-reverse w-100 d-block text-center mb-3" href="https://forms.gle/RsTnbwaBQJ2hszEVA">
+                                        <span class="btn-text">Get Free Trial Course</span>
                                         <span class="btn-icon"><i class="feather-arrow-right"></i></span>
                                     </a>
                                 </div>
@@ -853,10 +858,10 @@
                                 <div class="rbt-card-body">
                                     <div class="rbt-card-top">
                                         <div class="rbt-bookmark-btn">
-                                            <a class="rbt-round-btn" title="Bookmark" href="#"><i class="feather-bookmark"></i></a>
+                                            <a class="rbt-round-btn" title="Bookmark" href="{{ route('wishlist.store', $data->id) }}"><i class="feather-bookmark"></i></a>
                                         </div>
                                         <div class="rbt-review">
-                                            <a class="rbt-round-btn left-icon" title="Add To Cart" href="#"><i class="feather-shopping-cart"></i></a>
+                                            <a class="rbt-round-btn left-icon" title="Add To Cart" href="{{ route('cart.store', $data->id) }}"><i class="feather-shopping-cart"></i></a>
                                         </div>
                                     </div>
 
@@ -917,9 +922,9 @@
                             @endif
                         </div>
                         <div class="rbt-single-list action-btn">
-                            <a class="rbt-btn btn-gradient hover-icon-reverse btn-md" href="https://forms.gle/RsTnbwaBQJ2hszEVA">
+                            <a class="rbt-btn btn-gradient hover-icon-reverse btn-md" href="{{ route('cart.store', $course->id) }}">
                                 <span class="icon-reverse-wrapper">
-                                <span class="btn-text">Enroll Now</span>
+                                <span class="btn-text">Add to Cart</span>
                                 <span class="btn-icon"><i class="feather-arrow-right"></i></span>
                                 <span class="btn-icon"><i class="feather-arrow-right"></i></span>
                                 </span>

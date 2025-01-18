@@ -91,6 +91,15 @@
                                     @endif
                                 </div>
 
+                                <div class="mb-3">
+                                    <label class="" for="remarks">Remarks</label>
+                                    <textarea class="form-control {{ $errors->has('remarks') ? 'is-invalid' : '' }}" name="remarks" id="remarks">{{ old('remarks', $courseMaterial->remarks) }}</textarea>
+                                    @if($errors->has('remarks'))
+                                        <div class="invalid-feedback">
+                                            {{ $errors->first('remarks') }}
+                                        </div>
+                                    @endif
+                                </div>
                             </div>
                         </div>
                     </div>

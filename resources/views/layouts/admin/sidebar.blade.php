@@ -89,10 +89,10 @@
 
                 @can('access_course_management')
                     <li class="nav-item">
-                        <a class="nav-link menu-link {{ request()->is('admin/courses*','admin/course-contents*','admin.course-materials*','admin/course-category*') ? 'collapsed active' : '' }}" href="#manageCoursesPages" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="manageCoursesPages">
+                        <a class="nav-link menu-link {{ request()->is('admin/courses*','admin/course-contents*','admin.course-materials*','admin/course-category*','admin/course-subject*','admin/course-level*') ? 'collapsed active' : '' }}" href="#manageCoursesPages" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="manageCoursesPages">
                             <i class="mdi mdi-sticker-text-outline"></i> <span data-key="t-pages">Manage Courses</span>
                         </a>
-                        <div class="collapse menu-dropdown {{ request()->is('admin/courses*','admin/course-contents*','admin/course-materials*','admin/course-category*') ? 'show' : '' }}" id="manageCoursesPages">
+                        <div class="collapse menu-dropdown {{ request()->is('admin/courses*','admin/course-contents*','admin/course-materials*','admin/course-category*','admin/course-subject*','admin/course-level*') ? 'show' : '' }}" id="manageCoursesPages">
                             <ul class="nav nav-sm flex-column">
                                 @can('view_course')
                                     <li class="nav-item">
@@ -122,6 +122,22 @@
                                     <li class="nav-item">
                                         <a href="{{ route('admin.course-category.index') }}" class="nav-link {{ request()->is('admin/course-category','admin/course-category/*') ? 'active' : '' }}">
                                             <i class="mdi mdi-book-open"></i> <span >Course Category</span>
+                                        </a>
+                                    </li>
+                                @endcan
+
+                                @can('view_course_subject')
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.course-subject.index') }}" class="nav-link {{ request()->is('admin/course-subject','admin/course-subject/*') ? 'active' : '' }}">
+                                            <i class="mdi mdi-book-open"></i> <span >Course Subject</span>
+                                        </a>
+                                    </li>
+                                @endcan
+
+                                @can('view_course_level')
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.course-level.index') }}" class="nav-link {{ request()->is('admin/course-level','admin/course-level/*') ? 'active' : '' }}">
+                                            <i class="mdi mdi-book-open"></i> <span >Course Level</span>
                                         </a>
                                     </li>
                                 @endcan

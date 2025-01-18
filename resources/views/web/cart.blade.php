@@ -24,7 +24,7 @@
         <div class="cart_area">
             <div class="container">
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-lg-7 col-md-8 col-sm-12 col-12">
                         <form action="#">
                             <!-- Cart Table -->
                             <div class="cart-table table-responsive mb--60">
@@ -40,7 +40,7 @@
                                         @foreach($courses as $data)
                                             <tr>
                                                 <td class="pro-title"><a href="#">{{ $data->course->title }}</a></td>
-                                                <td class="pro-price"><span>৳{{ $data->course->price }}</span></td>
+                                                <td class="pro-price"><span>৳{{ $data->course->discounted_price ?? $data->course->price }}</span></td>
                                                 <td class="pro-remove"><a href="{{ route('cart.delete', $data->id) }}"><i class="feather-x"></i></a>
                                                 </td>
                                             </tr>
@@ -49,38 +49,37 @@
                                 </table>
                             </div>
                         </form>
+                    </div>
 
-                        <div class="row g-5">
-                            <div class="col-lg-7 col-12">
-                                <div class="cart-summary">
-                                    <div class="cart-summary-wrap">
-                                        <div class="section-title text-start">
-                                            <h4 class="title mb--30">Cart Summary</h4>
-                                        </div>
-                                        <p>Sub Total <span>৳{{ $totalPrice }}</span></p>
-                                        <h2>Grand Total <span>৳{{ $totalPrice }}</span></h2>
-                                    </div>
 
-                                    <div class="cart-submit-btn-group">
-                                        <div class="single-button w-50">
-                                            <a class="rbt-btn btn-gradient rbt-switch-y icon-hover w-100 text-center" href="#">
-                                                <span class="btn-text">Checkout</span>
-                                                <span class="btn-icon"><i class="feather-arrow-right"></i></span>
-                                            </a>
-                                        </div>
-                                        <div class="single-button w-50">
-                                            <a class="rbt-btn btn-border rbt-switch-y icon-hover w-100 text-center" href="#">
-                                                <span class="btn-text">Continue Purchasing</span>
-                                                <span class="btn-icon"><i class="feather-arrow-right"></i></span>
-                                            </a>
-                                        </div>
-
-                                    </div>
+                    <div class="col-lg-5 col-md-4 col-sm-12 col-12">
+                        <div class="cart-summary">
+                            <div class="cart-summary-wrap">
+                                <div class="section-title text-start">
+                                    <h4 class="title mb--30">Cart Summary</h4>
                                 </div>
+                                <p>Sub Total <span>৳{{ $totalPrice }}</span></p>
+                                <h2>Grand Total <span>৳{{ $totalPrice }}</span></h2>
                             </div>
 
+                            <div class="cart-submit-btn-group">
+                                <div class="single-button w-50">
+                                    <a class="rbt-btn btn-gradient rbt-switch-y icon-hover w-100 text-center" href="{{ route('checkout')}}">
+                                        <span class="btn-text">Checkout</span>
+                                        <span class="btn-icon"><i class="feather-arrow-right"></i></span>
+                                    </a>
+                                </div>
+                                <div class="single-button w-50">
+                                    <a class="rbt-btn btn-border rbt-switch-y icon-hover w-100 text-center" href="{{ route('courses')}}">
+                                        <span class="btn-text">Continue Purchasing</span>
+                                        <span class="btn-icon"><i class="feather-arrow-right"></i></span>
+                                    </a>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>

@@ -51,6 +51,26 @@
                                 </div>
 
                                 <div class="mb-3">
+                                    <label class="required" for="subject_id">Subject</label>
+                                    <select class="form-control search select2 {{ $errors->has('subject_id') ? 'is-invalid' : '' }}" name="subject_id" id="subject_id" required>
+                                        <option value="">Select</option>
+                                        @foreach ($courseSubject as $key => $value)
+                                            <option value="{{ $key }}" {{ old('subject_id') || $course->subject_id == $key ? 'selected' : '' }}>{{ $value }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="required" for="level_id">Level</label>
+                                    <select class="form-control search select2 {{ $errors->has('level_id') ? 'is-invalid' : '' }}" name="level_id" id="level_id" required>
+                                        <option value="">Select</option>
+                                        @foreach ($courseLevel as $key => $value)
+                                            <option value="{{ $key }}" {{ old('level_id') || $course->level_id == $key ? 'selected' : '' }}>{{ $value }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
                                     <label class="required" for="title">Title</label>
                                     <input class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" type="text" name="title" id="title" value="{{ old('title', $course->title ?? '') }}" required>
                                     @if($errors->has('title'))
@@ -391,7 +411,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-12" id="course-status-section">
+                    {{-- <div class="col-lg-12" id="course-status-section">
                         <div class="card">
                             <div class="card-header align-items-center d-flex">
                                 <h4 class="card-title mb-0 flex-grow-1">Course Status</h4>
@@ -418,7 +438,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
                     <div class="mb-3 text-start">
                         <button class="btn btn-primary" type="submit" id="update-button">

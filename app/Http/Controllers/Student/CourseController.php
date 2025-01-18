@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use App\Models\Order;
 
 class CourseController extends Controller
 {
@@ -57,9 +58,11 @@ class CourseController extends Controller
             $this->setRoutePrefix();
             $query = CourseEnrollment::query()
             ->with('courses','order','courses.courseTeacher')
+            ->where('status', CourseEnrollment::STATUS_ENABLE)
             ->whereHas('order', function ($query) {
                 if (Auth::user()->user_type == User::STUDENT) {
-                    $query->where('student_id', Auth::user()->id);
+                    $query->where('student_id', Auth::user()->id)
+                    ->where('status', Order::STATUS_ENABLE);
                 }
             });
 

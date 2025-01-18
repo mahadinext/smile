@@ -88,6 +88,39 @@
                             </div>
                             <!-- End Course Categories Widget Area  -->
 
+                            <!-- Start Course Subjects Widget Area  -->
+                            <div class="rbt-single-widget rbt-widget-categories has-show-more">
+                                <div class="inner">
+                                    <h4 class="rbt-widget-title">Subjects</h4>
+                                    <ul class="rbt-sidebar-list-wrapper categories-list-check has-show-more-inner-content">
+                                        @foreach ($courseSubjects as $key => $data)
+                                            <li class="rbt-check-group">
+                                                <input id="subject-{{ $data->id }}" type="checkbox" name="course_subjects[]" value="{{ $data->id }}" {{ in_array($data->id, request('course_subjects', [])) ? 'checked' : '' }}>
+                                                <label for="subject-{{ $data->id }}">{{ $data->name }} <span class="rbt-lable count">{{ $data->courses_count }}</span></label>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                                <div class="rbt-show-more-btn">Show More</div>
+                            </div>
+                            <!-- End Course Subjects Widget Area  -->
+
+                            <!-- Start Course Levels Widget Area  -->
+                            <div class="rbt-single-widget rbt-widget-categories has-show-more">
+                                <div class="inner">
+                                    <h4 class="rbt-widget-title">Levels</h4>
+                                    <ul class="rbt-sidebar-list-wrapper categories-list-check has-show-more-inner-content">
+                                        @foreach ($courseLevels as $key => $data)
+                                            <li class="rbt-check-group">
+                                                <input id="level-{{ $data->id }}" type="checkbox" name="course_levels[]" value="{{ $data->id }}" {{ in_array($data->id, request('course_levels', [])) ? 'checked' : '' }}>
+                                                <label for="level-{{ $data->id }}">{{ $data->name }} <span class="rbt-lable count">{{ $data->courses_count }}</span></label>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- End Course Levels Widget Area  -->
+
                             <!-- Start Rating Widget Area  -->
                             {{-- <div class="rbt-single-widget rbt-widget-rating">
                                 <div class="inner">
@@ -158,10 +191,10 @@
                                     <div class="rbt-card-body">
                                         <div class="rbt-card-top">
                                             <div class="rbt-bookmark-btn">
-                                                <a class="rbt-round-btn" title="Bookmark" href="#"><i class="feather-bookmark"></i></a>
+                                                <a class="rbt-round-btn" title="Bookmark" href="{{ route('wishlist.store', $data->id) }}"><i class="feather-bookmark"></i></a>
                                             </div>
                                             <div class="rbt-review">
-                                                <a class="rbt-round-btn left-icon" title="Add To Cart" href="#"><i class="feather-shopping-cart"></i></a>
+                                                <a class="rbt-round-btn left-icon" title="Add To Cart" href="{{ route('cart.store', $data->id) }}"><i class="feather-shopping-cart"></i></a>
                                             </div>
                                         </div>
 
@@ -202,14 +235,16 @@
 
                     </div>
 
-                    <div class="row">
-                        <div class="col-lg-12 mt--60">
-                            <nav>
-                                {{-- {{ $courses->withQueryString()->links('pagination::bootstrap-5') }} --}}
-                                {{ $courses->withQueryString()->links('web.include.paginator') }}
-                            </nav>
+                    @if ($courses->count() > 0)
+                        <div class="row">
+                            <div class="col-lg-12 mt--60">
+                                <nav>
+                                    {{-- {{ $courses->withQueryString()->links('pagination::bootstrap-5') }} --}}
+                                    {{ $courses->withQueryString()->links('web.include.paginator') }}
+                                </nav>
+                            </div>
                         </div>
-                    </div>
+                    @endif
                 </div>
             </div>
         </div>

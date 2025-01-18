@@ -64,7 +64,7 @@ class CourseController extends Controller
 
             $this->setRoutePrefix();
             $query = Course::query()
-            ->with('courseTeacher','courseCategory','createdBy')
+            ->with('courseTeacher','courseCategory','createdBy','courseSubject','courseLevel')
             ->select('id','price','title','category_id','teacher_id','course_start_date','status','created_by')
             ->where(function ($query) {
                 if (Auth::user()->user_type == User::TEACHER) {
@@ -76,12 +76,16 @@ class CourseController extends Controller
             $result = (new CourseService)->filter($request, $query);
 
             $courseCategory = Helper::getAllCourseCategory();
+            $courseSubject = Helper::getAllCourseSubject();
+            $courseLevel = Helper::getAllCourseLevel();
             $teachers = Teachers::select('id','first_name','last_name','user_id')->get();
 
             $data = [
                 "courses" => isset($result['courses']) ? $result['courses'] : [],
                 "totalCourses" => isset($result['totalCourses']) ? $result['totalCourses'] : 0,
                 "courseCategory" => $courseCategory,
+                "courseSubject" => $courseSubject,
+                "courseLevel" => $courseLevel,
                 "courseStatus" => Course::STATUS_SELECT,
                 "teachers" => $teachers,
             ];
@@ -113,6 +117,8 @@ class CourseController extends Controller
                 "contentTitles" => $contentTitles,
                 "contentDescriptions" => $contentDescriptions,
                 "courseCategory" => Helper::getAllCourseCategory(),
+                "courseSubject" => Helper::getAllCourseSubject(),
+                "courseLevel" => Helper::getAllCourseLevel(),
                 "courseStatus" => Course::STATUS_SELECT,
                 "teachers" => $teachers,
             ];
@@ -142,9 +148,13 @@ class CourseController extends Controller
 
             $this->setRoutePrefix();
             $courseCategory = Helper::getAllCourseCategory();
+            $courseSubject = Helper::getAllCourseSubject();
+            $courseLevel = Helper::getAllCourseLevel();
             $teachers = Teachers::select('id','first_name','last_name','user_id')->get();
             $data = [
                 "courseCategory" => $courseCategory,
+                "courseSubject" => $courseSubject,
+                "courseLevel" => $courseLevel,
                 "teachers" => $teachers,
             ];
 
@@ -208,6 +218,8 @@ class CourseController extends Controller
                 "contentTitles" => $contentTitles,
                 "contentDescriptions" => $contentDescriptions,
                 "courseCategory" => Helper::getAllCourseCategory(),
+                "courseSubject" => Helper::getAllCourseSubject(),
+                "courseLevel" => Helper::getAllCourseLevel(),
                 "courseStatus" => Course::STATUS_SELECT,
                 "teachers" => $teachers,
             ];

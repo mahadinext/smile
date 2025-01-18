@@ -23,7 +23,7 @@ class HomeController extends Controller
             $heroSection = HomeContents::where("section_id", HomeContents::HERO_SECTION)->first();
             $campaignSection = HomeContents::where("section_id", HomeContents::CAMPAIGN_SECTION)->first();
             $aboutSection = AboutUsContents::where("section_id", AboutUsContents::ABOUT_DESCRIPTION)->first();
-            $latestCourses = Course::limit(6)->orderby("id", "DESC")->get();
+            $latestCourses = Course::where('status', Course::STATUS_ENABLE)->limit(6)->orderby("id", "DESC")->get();
 
             $data = [
                 "heroSection" => $heroSection,

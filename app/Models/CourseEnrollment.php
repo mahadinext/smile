@@ -30,6 +30,7 @@ class CourseEnrollment extends Model
 
     public const STATUS_DISABLE = 0;
     public const STATUS_ENABLE  = 1;
+    public const STATUS_PENDING = 2;
 
     public function courses()
     {

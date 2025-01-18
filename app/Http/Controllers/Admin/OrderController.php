@@ -7,7 +7,7 @@ use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 use App\Models\Course;
 use App\Models\Order;
-use App\Models\Student\Students;
+use App\Models\CourseEnrollment;
 use App\Models\User;
 use App\Services\Admin\OrderService;
 use App\Services\ResponseService;
@@ -141,6 +141,74 @@ class OrderController extends Controller
             return redirect()->route($this->routePrefix . '.orders.index')->with('error', "Something went wrong!");
         } catch (Exception $exception) {
             Log::error("OrderController::store()", [$exception]);
+            return redirect()->route($this->routePrefix . '.orders.index')->with('error', [$exception->getMessage()]);
+        }
+    }
+
+    /**
+     * Get edit page
+     *
+     * @param integer $id
+     * @return \Illuminate\View\View|\Illuminate\Http\RedirectResponse
+     */
+    public function edit(int $id)
+    {
+        try {
+            if (Gate::denies('edit_order')) {
+                return redirect()->back()->with('error', 'You are not authorized to access this page.');
+            }
+
+            $this->setRoutePrefix();
+            $order = Order::findOrFail($id);
+            $enrollments = CourseEnrollment::where('order_id', $order->id)->pluck('course_id')->toArray();
+
+            $students = User::select('id','name','email')
+            ->where('user_type', User::STUDENT)
+            ->whereNotNull('email_verified_at')
+            ->get();
+
+            $courses = Course::select('id','title','price','course_start_date')
+            ->where('status', Course::STATUS_ENABLE)
+            // ->where('course_start_date', '<', Carbon::now())
+            ->get();
+
+            $data = [
+                "orderType" => Order::ORDER_TYPE_SELECT,
+                "students" => $students,
+                "courses" => $courses,
+                "order" => $order,
+                "enrollments" => $enrollments,
+                "orderStatus" => Order::STATUS_SELECT,
+            ];
+
+            return view("{$this->layoutFolder}.edit", $data);
+        } catch (Exception $exception) {
+            Log::error("OrderController::edit()", [$exception]);
+        }
+    }
+
+    /**
+     * Update order
+     *
+     * @param UpdateOrderRequest $request
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(UpdateOrderRequest $request, int $id)
+    {
+        try {
+            $this->setRoutePrefix();
+            $order = Order::findOrFail($id);
+            $order = $this->orderService->update($request, $order);
+
+            if ($order) {
+                $this->auditLogEntry("order:updated", $order->id, 'order-update', $order);
+                return redirect()->route($this->routePrefix . '.orders.index')->with('success', "Order updated successfully!");
+            }
+
+            return redirect()->route($this->routePrefix . '.orders.index')->with('error', "Something went wrong!");
+        } catch (Exception $exception) {
+            Log::error("OrderController::update()", [$exception]);
             return redirect()->route($this->routePrefix . '.orders.index')->with('error', [$exception->getMessage()]);
         }
     }

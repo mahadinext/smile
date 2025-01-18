@@ -65,6 +65,14 @@ class CourseService
                 $query->where('category_id', $request->course_category);
             }
 
+            if ($request->filled('subject_id')) {
+                $query->where('subject_id', $request->subject_id);
+            }
+
+            if ($request->filled('level_id')) {
+                $query->where('level_id', $request->level_id);
+            }
+
             if ($request->filled('course_title')) {
                 $query->where('title', 'LIKE', '%' . $request->course_title . '%');
             }
@@ -93,6 +101,8 @@ class CourseService
             $courseCreate = [
                 'teacher_id' => $request->teacher_id ?? Auth::user()->id,
                 'category_id' => $request->course_category,
+                'subject_id' => $request->subject_id,
+                'level_id' => $request->level_id,
                 'title' => $request->title,
                 'short_description' => $request->short_description,
                 'long_description' => $request->long_description,
@@ -112,7 +122,7 @@ class CourseService
                 'discount_start_date' => $request->discount_start_date ?? null,
                 'discount_expiry_date' => $request->discount_expiry_date ?? null,
                 'promotional_video' => $request->promo_video,
-                'status' => Course::STATUS_ENABLE, // Set default status or from request
+                'status' => Course::STATUS_PENDING,
             ];
 
             $teacherId = $request->teacher_id ?? Auth::user()->id;
@@ -196,6 +206,8 @@ class CourseService
 
             $course->teacher_id = $request->teacher_id ?? Auth::user()->id;
             $course->category_id = $request->course_category;
+            $course->subject_id = $request->subject_id;
+            $course->level_id = $request->level_id;
             $course->title = $request->title;
             $course->short_description = $request->short_description;
             $course->long_description = $request->long_description;
@@ -215,7 +227,8 @@ class CourseService
             $course->discount_start_date = $request->discount_start_date ?? null;
             $course->discount_expiry_date = $request->discount_expiry_date ?? null;
             $course->promotional_video = $request->promo_video;
-            $course->status = $request->course_status;
+            // $course->status = $request->course_status;
+            $course->status = Course::STATUS_PENDING;
             $course->updated_by = Auth::user()->id;
 
             $teacherId = $request->teacher_id ?? Auth::user()->id;

@@ -26,6 +26,14 @@ class StoreCourseRequest extends FormRequest
                 'required',
                 'exists:course_categories,id', // Ensure it exists in the database
             ],
+            'subject_id' => [
+                'required',
+                'exists:course_subjects,id', // Ensure it exists in the database
+            ],
+            'level_id' => [
+                'required',
+                'exists:course_levels,id', // Ensure it exists in the database
+            ],
             'title' => [
                 'required',
                 'string',

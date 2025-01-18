@@ -20,10 +20,11 @@ return new class extends Migration
             $table->tinyInteger('gateway')->nullable();
             $table->string('transaction_id')->nullable();
             $table->string("tracking_no")->nullable();
-            $table->float('total', 12, 2);
+            $table->string('bkash_no')->nullable();
+            $table->float('total', 12, 2)->default(0);
             $table->float('discount', 12, 2)->nullable();
             $table->float('commission', 12, 2)->default(0);
-            $table->float('grand_total', 12, 2);
+            $table->float('grand_total', 12, 2)->default(0);
             $table->tinyInteger('status');
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();

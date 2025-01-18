@@ -71,6 +71,30 @@
 
                                             <div class="col-md-4">
                                                 <div class="mb-3">
+                                                    <label class="" for="subject_id">Subject</label>
+                                                    <select class="form-control search select2 {{ $errors->has('subject_id') ? 'is-invalid' : '' }}" name="subject_id" id="subject_id">
+                                                        <option value="">Select</option>
+                                                        @foreach ($courseSubject as $key => $value)
+                                                            <option value="{{ $key }}" {{ request('subject_id', '') == $key ? 'selected' : '' }}>{{ $value }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <div class="mb-3">
+                                                    <label class="" for="level_id">Level</label>
+                                                    <select class="form-control search select2 {{ $errors->has('level_id') ? 'is-invalid' : '' }}" name="level_id" id="level_id">
+                                                        <option value="">Select</option>
+                                                        @foreach ($courseLevel as $key => $value)
+                                                            <option value="{{ $key }}" {{ request('level_id', '') == $key ? 'selected' : '' }}>{{ $value }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <div class="mb-3">
                                                     <label for="course_title">Title</label>
                                                     <input class="form-control" value="{{ request('course_title') }}" type="text" name="course_title" id="course_title">
                                                 </div>
@@ -114,6 +138,8 @@
                                             <th>Id</th>
                                             <th>Title</th>
                                             <th>Category</th>
+                                            <th>Subject</th>
+                                            <th>Level</th>
                                             <th>Instructor</th>
                                             <th>Price</th>
                                             <th>Status</th>
@@ -128,9 +154,19 @@
                                             <td>{{ ($courses->currentPage() - 1) * $courses->perPage() + $loop->iteration }}</td>
                                             <td>{{ $course->title }}</td>
                                             <td>{{ ($course->courseCategory) ? $course->courseCategory->name : '' }}</td>
+                                            <td>{{ ($course->courseSubject) ? $course->courseSubject->name : '' }}</td>
+                                            <td>{{ ($course->courseLevel) ? $course->courseLevel->name : '' }}</td>
                                             <td>{{ ($course->courseTeacher) ? $course->courseTeacher->email : '' }}</td>
                                             <td>{{ $course->price }}</td>
-                                            <td>{{ App\Models\Course::STATUS_SELECT[$course->status] }}</td>
+                                            <td>
+                                                @if ($course->status == App\Models\Course::STATUS_ENABLE)
+                                                    <span class="badge bg-success">{{ App\Models\Course::STATUS_SELECT[$course->status] }}</span>
+                                                @elseif ($course->status == App\Models\Course::STATUS_DISABLE)
+                                                    <span class="badge bg-danger">{{ App\Models\Course::STATUS_SELECT[$course->status] }}</span>
+                                                @elseif ($course->status == App\Models\Course::STATUS_PENDING)
+                                                    <span class="badge bg-warning">{{ App\Models\Course::STATUS_SELECT[$course->status] }}</span>
+                                                @endif
+                                            </td>
                                             {{-- <td>{{ ($course->createdBy) ? $course->createdBy->email : '' }}</td> --}}
                                             <td>
                                                 <a class="btn btn-sm btn-primary mt-2"

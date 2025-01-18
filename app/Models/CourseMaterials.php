@@ -33,6 +33,7 @@ class CourseMaterials extends Model
         'type',
         'file',
         'url',
+        'remarks',
         'created_at',
         'updated_at',
         'deleted_at',

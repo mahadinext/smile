@@ -62,6 +62,26 @@ class CourseService
                 }
             }
 
+            if ($request->filled('course_subjects')) {
+                $courseSubjects = array_filter($request->course_subjects, function($value) {
+                    return !is_null($value) && $value !== ''; // Remove null or empty values
+                });
+
+                if (!empty($courseSubjects)) {
+                    $query->whereIn('subject_id', $courseSubjects);
+                }
+            }
+
+            if ($request->filled('course_levels')) {
+                $courseLevels = array_filter($request->course_levels, function($value) {
+                    return !is_null($value) && $value !== ''; // Remove null or empty values
+                });
+
+                if (!empty($courseLevels)) {
+                    $query->whereIn('level_id', $courseLevels);
+                }
+            }
+
             if ($request->filled('course_instructors')) {
                 $query->whereIn('teacher_id', $request->course_instructors);
             }

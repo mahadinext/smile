@@ -4,9 +4,12 @@ namespace App\Helper;
 
 use App\Models\Cart;
 use App\Models\CourseCategory;
+use App\Models\CourseSubject;
+use App\Models\CourseLevel;
 use App\Models\User;
 use App\Models\WebColor;
 use App\Models\WebImage;
+
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
@@ -59,12 +62,32 @@ class Helper
     }
 
     /**
-     * @return collection
+     * @return array
      */
     public static function getAllCourseCategory(): array
     {
         return Cache::remember("all-course-category-cache", 60*60*24, function () {
             return CourseCategory::all()->pluck('name', 'id')->toArray();
+        });
+    }
+
+    /**
+     * @return array
+     */
+    public static function getAllCourseSubject()
+    {
+        return Cache::remember("all-course-subject-cache", 60*60*24, function () {
+            return CourseSubject::all()->pluck('name', 'id')->toArray();
+        });
+    }
+
+    /**
+     * @return array
+     */
+    public static function getAllCourseLevel()
+    {
+        return Cache::remember("all-course-level-cache", 60*60*24, function () {
+            return CourseLevel::all()->pluck('name', 'id')->toArray();
         });
     }
 

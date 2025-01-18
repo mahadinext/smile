@@ -21,11 +21,8 @@ use App\Http\Controllers\Teacher\CourseMaterialController;
 use App\Http\Controllers\Teacher\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
-
-
-
-
+use App\Http\Controllers\Admin\CourseLevelController;
+use App\Http\Controllers\Admin\CourseSubjectController;
 
 Route::redirect('/admin', '/login');
 Route::get('/home', function () {
@@ -99,6 +96,26 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
         Route::get('/delete/{id}', [CourseCategoryController::class, 'delete'])->name('delete');
     });
 
+    // Course Level
+    Route::group(['prefix' => 'course-level', 'as' => 'course-level.', 'middleware' => ['auth']], function () {
+        Route::get('/', [CourseLevelController::class, 'index'])->name('index');
+        Route::get('/create', [CourseLevelController::class, 'create'])->name('create');
+        Route::post('/store', [CourseLevelController::class, 'store'])->name('store');
+        Route::get('/edit/{id}', [CourseLevelController::class, 'edit'])->name('edit');
+        Route::post('/update/{id}', [CourseLevelController::class, 'update'])->name('update');
+        Route::get('/delete/{id}', [CourseLevelController::class, 'delete'])->name('delete');
+    });
+
+    // Course Subject
+    Route::group(['prefix' => 'course-subject', 'as' => 'course-subject.', 'middleware' => ['auth']], function () {
+        Route::get('/', [CourseSubjectController::class, 'index'])->name('index');
+        Route::get('/create', [CourseSubjectController::class, 'create'])->name('create');
+        Route::post('/store', [CourseSubjectController::class, 'store'])->name('store');
+        Route::get('/edit/{id}', [CourseSubjectController::class, 'edit'])->name('edit');
+        Route::post('/update/{id}', [CourseSubjectController::class, 'update'])->name('update');
+        Route::get('/delete/{id}', [CourseSubjectController::class, 'delete'])->name('delete');
+    });
+
     // Teacher
     Route::group(['prefix' => 'teachers', 'as' => 'teachers.', 'middleware' => ['auth']], function () {
         Route::get('/', [TeacherController::class, 'index'])->name('index');
@@ -121,6 +138,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
         Route::get('/show/{id}', [OrderController::class, 'show'])->name('show');
         Route::get('/create', [OrderController::class, 'create'])->name('create');
         Route::post('/store', [OrderController::class, 'store'])->name('store');
+        Route::get('/edit/{id}', [OrderController::class, 'edit'])->name('edit');
+        Route::post('/update/{id}', [OrderController::class, 'update'])->name('update');
         Route::get('/delete/{id}', [OrderController::class, 'delete'])->name('delete');
 
         Route::post('/total-cost', [OrderController::class, 'calculateTotalCost'])->name('total-cost');

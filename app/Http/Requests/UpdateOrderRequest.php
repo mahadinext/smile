@@ -18,21 +18,21 @@ class UpdateOrderRequest extends FormRequest
     {
         return [
             'student_id' => [
-                'required',
+                'nullable',
                 'integer',
                 'exists:users,id'
             ],
             'course_id' => [
-                'required',
+                'nullable',
                 'array',
             ],
             'course_id.*' => [
-                'required',
+                'nullable',
                 'integer',
                 'exists:courses,id',
             ],
             'order_type' => [
-                'required',
+                'nullable',
                 'integer',
             ],
             'transaction_id' => [
@@ -46,6 +46,11 @@ class UpdateOrderRequest extends FormRequest
                 'nullable',
                 'string',
                 'max:255',
+            ],
+            'status' => [
+                'required',
+                'integer',
+                'in:' . implode(',', array_keys(Order::STATUS_SELECT)),
             ],
         ];
     }
