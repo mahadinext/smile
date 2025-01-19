@@ -94,8 +94,10 @@ class CourseMaterialService
             $courseMaterial = [
                 'course_id' => $request->course_id,
                 'title' => $request->title,
-                'type' => $request->upload_type,
+                'material_type' => $request->material_type,
+                'upload_type' => $request->upload_type,
                 'remarks' => $request->remarks,
+                'created_by' => Auth::user()->id,
             ];
 
             if ($request->upload_type == CourseMaterials::TYPE_URL) {
@@ -136,7 +138,8 @@ class CourseMaterialService
 
             $courseMaterial->course_id = $request->course_id;
             $courseMaterial->title = $request->title;
-            $courseMaterial->type = $request->upload_type;
+            $courseMaterial->material_type = $request->material_type;
+            $courseMaterial->upload_type = $request->upload_type;
             $courseMaterial->remarks = $request->remarks;
             $courseMaterial->updated_by = Auth::user()->id;
 

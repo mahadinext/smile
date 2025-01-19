@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('course_id');
             $table->string('title');
-            $table->tinyInteger('type');
+            $table->tinyInteger('material_type');
+            $table->tinyInteger('upload_type');
             $table->string('file')->nullable();
             $table->string('url')->nullable();
             $table->text('remarks')->nullable();
@@ -28,6 +29,8 @@ return new class extends Migration
 
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
             $table->index('course_id');
+            $table->index('material_type');
+            $table->index('upload_type');
         });
     }
 

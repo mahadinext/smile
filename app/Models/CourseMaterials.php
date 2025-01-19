@@ -21,6 +21,16 @@ class CourseMaterials extends Model
         CourseMaterials::TYPE_URL     => 'URL',
     ];
 
+    public const MATERIAL_TYPE_COURSE_FILE = 1;
+    public const MATERIAL_TYPE_HOMEWORK = 2;
+    public const MATERIAL_TYPE_ANNOUNCEMENT = 3;
+
+    public const MATERIAL_TYPE = [
+        CourseMaterials::MATERIAL_TYPE_COURSE_FILE     => 'Course File/Material',
+        CourseMaterials::MATERIAL_TYPE_HOMEWORK     => 'Homework',
+        CourseMaterials::MATERIAL_TYPE_ANNOUNCEMENT     => 'Announcement',
+    ];
+
     protected $dates = [
         'created_at',
         'updated_at',
@@ -30,7 +40,8 @@ class CourseMaterials extends Model
     protected $fillable = [
         'course_id',
         'title',
-        'type',
+        'material_type',
+        'upload_type',
         'file',
         'url',
         'remarks',

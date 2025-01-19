@@ -210,9 +210,9 @@
                     row.append('<td>' + material.title + '</td>');
 
                     let contentCell = $('<td></td>');
-                    if (material.type == '{{ App\Models\CourseMaterials::TYPE_FILE }}') {
+                    if (material.upload_type == '{{ App\Models\CourseMaterials::TYPE_FILE }}') {
                         contentCell.append('<a href="' + material.file + '" target="_blank">View Material</a>');
-                    } else if (material.type == '{{ App\Models\CourseMaterials::TYPE_URL }}') {
+                    } else if (material.upload_type == '{{ App\Models\CourseMaterials::TYPE_URL }}') {
                         contentCell.append('<a href="' + material.url + '" target="_blank">View Material</a>');
                     } else {
                         contentCell.text('N/A');

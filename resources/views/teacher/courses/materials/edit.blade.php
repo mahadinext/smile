@@ -52,11 +52,28 @@
                                 </div>
 
                                 <div class="mb-3">
+                                    <label class="required" for="material_type">Material Type</label>
+                                    <select class="form-control js-example-basic-single {{ $errors->has('material_type') ? 'is-invalid' : '' }}" name="material_type" id="material_type" required>
+                                        <option value="">Select</option>
+                                        @foreach (App\Models\CourseMaterials::MATERIAL_TYPE as $key => $data)
+                                            <option value="{{ $key }}" {{ old('material_type', $courseMaterial->material_type) == $key ? 'selected' : '' }}>
+                                                {{ $data }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @if($errors->has('material_type'))
+                                        <div class="invalid-feedback">
+                                            {{ $errors->first('material_type') }}
+                                        </div>
+                                    @endif
+                                </div>
+
+                                <div class="mb-3">
                                     <label class="required" for="upload_type">Upload Type</label>
                                     <select class="form-control js-example-basic-single {{ $errors->has('upload_type') ? 'is-invalid' : '' }}" name="upload_type" id="upload_type" required>
                                         <option value="">Select</option>
                                         @foreach (App\Models\CourseMaterials::UPLOAD_TYPE as $key => $data)
-                                            <option value="{{ $key }}" {{ old('upload_type', $courseMaterial->type) == $key ? 'selected' : '' }}>
+                                            <option value="{{ $key }}" {{ old('upload_type', $courseMaterial->upload_type) == $key ? 'selected' : '' }}>
                                                 {{ $data }}
                                             </option>
                                         @endforeach
