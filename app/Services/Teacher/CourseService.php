@@ -257,7 +257,7 @@ class CourseService
 
             DB::commit();
 
-            event(new NewNotificationEvent($request->message, $course->teacher_id));
+            event(new NewNotificationEvent("Course updated successfully", $course->teacher_id));
             // DB::table('notifications')->insert([
             //     'user_id' => $course->teacher_id,
             //     'message' => $request->message,
