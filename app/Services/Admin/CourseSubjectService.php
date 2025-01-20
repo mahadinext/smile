@@ -11,6 +11,7 @@ use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Cache;
 
 class CourseSubjectService
 {
@@ -32,6 +33,7 @@ class CourseSubjectService
             ];
 
             $courseSubject = CourseSubject::create($courseSubject);
+            $this->clearCache();
 
             return $courseSubject;
         } catch (Exception $exception) {
@@ -57,6 +59,7 @@ class CourseSubjectService
             $courseSubject->updated_by = Auth::user()->id;
 
             $courseSubject->save();
+            $this->clearCache();
 
             return $courseSubject;
         } catch (Exception $exception) {
@@ -86,10 +89,21 @@ class CourseSubjectService
 
             DB::commit();
 
+            $this->clearCache();
+
             $this->auditLogEntry("course-subject:deleted", $courseSubject->id, 'course-subject-deleted', $courseSubject);
         } catch (Exception $exception) {
             Log::error("CourseSubjectService::delete()", [$exception]);
             DB::rollback();
+        }
+    }
+
+    private function clearCache()
+    {
+        try {
+            Cache::forget('all-course-subject-cache');
+        } catch (Exception $exception) {
+            Log::error("CourseSubjectService::clearCache()", [$exception]);
         }
     }
 }
