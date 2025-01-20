@@ -37,7 +37,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @if($courses && $courses->count() > 0)
+                                        @if($courses && $courses->isNotEmpty())
                                             @foreach($courses as $data)
                                                 <tr>
                                                     <td class="pro-title"><a href="#">{{ $data->course ? $data->course->title : '' }}</a></td>
