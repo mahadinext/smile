@@ -27,6 +27,7 @@ class Order extends Model
         'gateway',
         'transaction_id',
         'tracking_no',
+        'bkash_no',
         'total',
         'discount',
         'commission',

@@ -83,7 +83,7 @@
 
                                     <div class="col-md-12 col-12 mb--20">
                                         <label>Last 4 Digit of your bkash number*</label>
-                                        <input type="text" placeholder="Enter Last 4 Digit of your bkash number" name="bkash_no" value="{{ old('bkash_no') }}">
+                                        <input type="number" placeholder="Enter Last 4 Digit of your bkash number" name="bkash_no" value="{{ old('bkash_no') }}">
                                         @if ($errors->has('bkash_no'))
                                             <span class="text-danger">{{ $errors->first('bkash_no') }}</span>
                                         @endif
