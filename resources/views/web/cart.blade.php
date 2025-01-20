@@ -41,7 +41,7 @@
                                             @foreach($courses as $data)
                                                 <tr>
                                                     <td class="pro-title"><a href="#">{{ $data->course ? $data->course->title : '' }}</a></td>
-                                                <td class="pro-price"><span>৳{{ ($data->course && $data->course->discounted_price) ?? ($data->course ? $data->course->price : '') }}</span></td>
+                                                <td class="pro-price"><span>৳{{ ($data->course) ? ($data->course->discounted_price ??  $data->course->price) : '' }}</span></td>
                                                 <td class="pro-remove"><a href="{{ route('cart.delete', $data->id) }}"><i class="feather-x"></i></a>
                                                 </td>
                                                 </tr>
