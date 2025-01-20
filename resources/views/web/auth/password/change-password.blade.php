@@ -1,4 +1,4 @@
-﻿@extends('web.include.master')
+@extends('web.include.master')
 @section('content')
 
     {{-- @include('web.include.breadcrumb') --}}
@@ -8,26 +8,26 @@
             <div class="row gy-5 row--30 justify-content-center">
                 <div class="col-lg-6">
                     <div class="rbt-contact-form contact-form-style-1">
-                        @if (session('signinErrorMessage'))
+                        @if (session('success'))
+                            <div class="alert alert-success alert-dismissible fade show my-2" role="alert">
+                                <strong>{{ session('success') }}</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                        @endif
+                        @if (session('error'))
                             <div class="alert alert-danger alert-dismissible fade show my-2" role="alert">
-                                <strong>{{ session('signinErrorMessage') }}</strong>
+                                <strong>{{ session('error') }}</strong>
                                 <button type="button" class="btn-close" data-bs-dismiss="alert"
                                     aria-label="Close"></button>
                             </div>
                         @endif
-                        @if (session('signinPageMessage'))
-                            <div class="alert alert-succcess alert-dismissible fade show my-2" role="alert">
-                                <strong>{{ session('signinPageMessage') }}</strong>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
-                            </div>
-                        @endif
-                        <h3 class="title">Login</h3>
-                        <form class="max-width-auto" method="POST" action="{{ route('login') }}">
+                        <h3 class="title">Change Password</h3>
+                        <form class="max-width-auto" method="POST" action="{{ route('forgot-password.update') }}">
                             @csrf
                             <div class="col-12 my-3">
                                 <div class="rbt-form-group">
-                                    <label>{{ trans('global.login_email') }} <span style="color:red">*</span></label>
+                                    <label>Email <span style="color:red">*</span></label>
                                     <input id="email" name="email" type="text" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" required autocomplete="email" autofocus value="{{ old('email', null) }}">
                                     @if($errors->has('email'))
                                         <div class="invalid-feedback">
@@ -38,12 +38,21 @@
                             </div>
 
                             <div class="col-12 my-3">
-                                <div class="rbt-form-group position-relative">
-                                    <label>{{ trans('global.login_password') }} <span style="color:red">*</span></label>
-                                    <input id="password" name="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }} password-input" required value="{{ old('password', null) }}">
-                                    <button type="button" class="position-absolute translate-middle-y password-toggle-btn" style="right: 10px; top: 70%; border: none; background: none; cursor: pointer;">
-                                        <i class="feather-eye"></i>
-                                    </button>
+                                <div class="rbt-form-group">
+                                    <label>Token <span style="color:red">*</span></label>
+                                    <input id="token" name="token" type="text" class="form-control{{ $errors->has('token') ? ' is-invalid' : '' }}" required autocomplete="token" autofocus value="{{ old('token', null) }}">
+                                    @if($errors->has('token'))
+                                        <div class="invalid-feedback">
+                                            {{ $errors->first('token') }}
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="col-12 my-3">
+                                <div class="rbt-form-group">
+                                    <label>Password <span style="color:red">*</span></label>
+                                    <input id="password" name="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" required autocomplete="password" autofocus value="{{ old('password', null) }}">
                                     @if($errors->has('password'))
                                         <div class="invalid-feedback">
                                             {{ $errors->first('password') }}
@@ -55,19 +64,18 @@
                             <div class="form-submit-group">
                                 <button type="submit" class="rbt-btn btn-md btn-gradient hover-icon-reverse w-100">
                                     <span class="icon-reverse-wrapper">
-                                        <span class="btn-text">Log In</span>
+                                        <span class="btn-text">Submit</span>
                                     <span class="btn-icon"><i class="feather-arrow-right"></i></span>
                                     <span class="btn-icon"><i class="feather-arrow-right"></i></span>
                                     </span>
                                 </button>
                             </div>
                         </form>
-                        <div class="text-center mt-5">
-                            <a class="rbt-btn-link" href="{{ route('forgot-password.index') }}">Forgot password?</a>
-                        </div>
-                        <div class="text-center mt-2">
-                            <a class="rbt-btn-link" href="{{ route('student.register-page') }}">Register</a>
-                        </div>
+                        @if (session('success') && session('route') && session('route') != '')
+                            <div class="text-center mt-5">
+                                <a class="rbt-btn-link" href="{{ route(session('route')) }}">Login</a>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Email Verification</title>
+    <title>Reset Password</title>
     <style>
         /* Reset some default email styling */
         body, table, td, a {
@@ -92,27 +92,42 @@
     </style>
 </head>
 <body>
+    <div class="email-wrapper">
+        <div class="email-container">
+            <h1>✨ Almost There, [{{ $mailData['first_name'] }}]! ✨</h1>
 
-<div class="email-wrapper">
-    <div class="email-container">
-        <h1>✨ Almost There, [{{ $mailData['first_name'] }}]! ✨</h1>
+            <p>To reset your password, please use this token below:</p>
 
-        <p>We’re thrilled to know that you want to join us! To get started, we just need you to <strong>verify your email</strong> so you can unlock all the amazing features waiting for you.</p>
-        <p>Just click the link below to verify your email, and you’ll be all set to dive in:</p>
+            <div class="token-container" style="
+                background: #f5f5f5;
+                padding: 15px;
+                border-radius: 4px;
+                margin: 20px 0;
+                text-align: center;
+            ">
+                <p style="
+                    font-size: 24px;
+                    letter-spacing: 2px;
+                    font-weight: bold;
+                    color: #333;
+                    margin: 0;
+                    padding: 10px;
+                    font-family: monospace;
+                ">{{ $mailData['token'] }}</p>
+            </div>
 
-        <p>
-            <a href="{{ route($mailData['route'], $mailData['token']) }}" class="btn">
-                🔑 Verify My Email
-            </a>
-        </p>
+            <p>
+                <a href="{{ route($mailData['route']) }}" target="_blank" class="btn">
+                    🔑 Reset My Password
+                </a>
+            </p>
 
-        <p class="footer">
-            If you didn’t sign up for this, no worries! You can simply ignore this message.
-            <br>Or if you have any issues, reach out to us at <a href="mailto:{{ $mailData['email'] }}">{{ $mailData['email'] }}</a>.
-        </p>
+            <p class="footer">
+                If you didn’t sign up for this, no worries! You can simply ignore this message.
+                <br>Or if you have any issues, reach out to us at <a href="mailto:{{ $mailData['email'] }}">{{ $mailData['email'] }}</a>.
+            </p>
+        </div>
     </div>
-</div>
-
 </body>
 </html>
 

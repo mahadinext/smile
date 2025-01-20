@@ -12,6 +12,7 @@ use App\Http\Controllers\Web\StudentAuthController;
 use App\Http\Controllers\Web\TeacherController;
 use App\Http\Controllers\Web\WishlistController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Web\ForgotPasswordController;
 
 
 /*
@@ -63,4 +64,11 @@ Route::group(['middleware' => ['web.auth']], function () {
     Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
     Route::post('/checkout/store', [CheckoutController::class, 'store'])->name('checkout.store');
     Route::get('/checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');
+});
+
+Route::group(['prefix' => 'forgot-password', 'as' => 'forgot-password.', 'middleware' => ['checkIfLoggedIn']], function () {
+    Route::get('/', [ForgotPasswordController::class, 'index'])->name('index');
+    Route::post('/generate-token', [ForgotPasswordController::class, 'generateToken'])->name('generate-token');
+    Route::get('/reset', [ForgotPasswordController::class, 'resetPassword'])->name('reset');
+    Route::post('/reset-password/update', [ForgotPasswordController::class, 'updatePassword'])->name('update');
 });

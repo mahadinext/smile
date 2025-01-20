@@ -62,11 +62,11 @@
                                 </button>
                             </div>
                         </form>
-                        {{-- <div class="text-center mt-5">
-                            <a class="rbt-btn-link text-primary" href="#">Forgot password?</a>
-                        </div> --}}
                         <div class="text-center mt-5">
-                            <a class="rbt-btn-link text-primary" href="{{ route('teacher.register-page') }}">Register</a>
+                            <a class="rbt-btn-link" href="{{ route('forgot-password.index') }}">Forgot password?</a>
+                        </div>
+                        <div class="text-center mt-2">
+                            <a class="rbt-btn-link" href="{{ route('teacher.register-page') }}">Register</a>
                         </div>
                     </div>
                 </div>
