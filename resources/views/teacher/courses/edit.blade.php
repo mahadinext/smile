@@ -411,7 +411,7 @@
                         </div>
                     </div>
 
-                    @if(Auth::user()->user_type == User::ADMIN)
+                    @if(Auth::user()->user_type == App\Models\User::ADMIN)
                         <div class="col-lg-12" id="course-status-section">
                             <div class="card">
                                 <div class="card-header align-items-center d-flex">
