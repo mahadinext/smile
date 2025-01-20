@@ -133,7 +133,10 @@ trait AuthenticatesUsers
 
         if ($user->user_type == User::STUDENT) {
             if (!$user->email_verified_at) {
-                $this->logout($request);
+                // $this->logout($request);
+                $this->guard()->logout();
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
                 return Redirect()->route('student.login-page')->with('signinErrorMessage', 'Please verify your email to signin your account.');
             }
 
@@ -147,7 +150,10 @@ trait AuthenticatesUsers
 
         if ($user->user_type == User::TEACHER) {
             if (!$user->email_verified_at) {
-                $this->logout($request);
+                // $this->logout($request);
+                $this->guard()->logout();
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
                 return Redirect()->route('teacher.login-page')->with('signinErrorMessage', 'Please verify your email to signin your account.');
             }
 
