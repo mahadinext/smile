@@ -228,7 +228,7 @@ class CourseService
             $course->discount_expiry_date = $request->discount_expiry_date ?? null;
             $course->promotional_video = $request->promo_video;
             // $course->status = $request->course_status;
-            $course->status = Course::STATUS_PENDING;
+            $course->status = $request->course_status ?? Course::STATUS_PENDING;
             $course->updated_by = Auth::user()->id;
 
             $teacherId = $request->teacher_id ?? Auth::user()->id;
