@@ -124,7 +124,7 @@
                                             {{-- <td>{{ $courseMaterials->firstItem() + $key }}</td> --}}
                                             <td>{{ ($courseMaterials->currentPage() - 1) * $courseMaterials->perPage() + $loop->iteration }}</td>
                                             <td>{{ $material->course->title }}</td>
-                                            <td>{{ App\Models\CourseMaterials::UPLOAD_TYPE[$material->type] }}</td>
+                                            <td>{{ App\Models\CourseMaterials::UPLOAD_TYPE[$material->upload_type] }}</td>
                                             <td>
                                                 <a href="{{ $material->file }}" target="_blank">View Existing File</a>
                                             </td>
