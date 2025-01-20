@@ -19,7 +19,7 @@ class CartController extends Controller
             $courses = Cart::with(['course:id,title,price'])->where('user_id', Auth::user()->id)->get();
 
             $totalPrice = $courses->sum(function ($cart) {
-                return $cart->course->discounted_price ?? $cart->course->price;
+                return $cart->course->discounted_price ?? ($cart->course->price ?? 0);
             });
 
             $data = [
