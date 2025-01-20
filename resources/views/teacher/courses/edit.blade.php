@@ -411,34 +411,36 @@
                         </div>
                     </div>
 
-                    {{-- <div class="col-lg-12" id="course-status-section">
-                        <div class="card">
-                            <div class="card-header align-items-center d-flex">
-                                <h4 class="card-title mb-0 flex-grow-1">Course Status</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="mb-3">
-                                    <label class="required" for="course_status">Course status</label>
-                                    <select class="form-control {{ $errors->has('course_status') ? 'is-invalid' : '' }}" name="course_status" id="course_status">
-                                        <option value="">Select</option>
-                                        @foreach ($courseStatus as $key => $label)
-                                            @php
-                                                // Check if `old('status')` is null, and if so, set it to a -1
-                                                $oldStatus = old('course_status') !== null ? old('course_status') : -1;
-                                                $isSelected = $oldStatus == $key || (isset($course) && $course->status == $key);
-                                            @endphp
-                                            <option value="{{ $key }}" {{ $isSelected ? 'selected' : '' }}>{{ $label }}</option>
-                                        @endforeach
-                                    </select>
-                                    @if ($errors->has('course_status'))
-                                        <div class="invalid-feedback">
-                                            {{ $errors->first('course_status') }}
-                                        </div>
-                                    @endif
+                    @if(Auth::user()->user_type == User::ADMIN)
+                        <div class="col-lg-12" id="course-status-section">
+                            <div class="card">
+                                <div class="card-header align-items-center d-flex">
+                                    <h4 class="card-title mb-0 flex-grow-1">Course Status</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <label class="required" for="course_status">Course status</label>
+                                        <select class="form-control {{ $errors->has('course_status') ? 'is-invalid' : '' }}" name="course_status" id="course_status">
+                                            <option value="">Select</option>
+                                            @foreach ($courseStatus as $key => $label)
+                                                @php
+                                                    // Check if `old('status')` is null, and if so, set it to a -1
+                                                    $oldStatus = old('course_status') !== null ? old('course_status') : -1;
+                                                    $isSelected = $oldStatus == $key || (isset($course) && $course->status == $key);
+                                                @endphp
+                                                <option value="{{ $key }}" {{ $isSelected ? 'selected' : '' }}>{{ $label }}</option>
+                                            @endforeach
+                                        </select>
+                                        @if ($errors->has('course_status'))
+                                            <div class="invalid-feedback">
+                                                {{ $errors->first('course_status') }}
+                                            </div>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div> --}}
+                    @endif
 
                     <div class="mb-3 text-start">
                         <button class="btn btn-primary" type="submit" id="update-button">
