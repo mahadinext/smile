@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use App\Events\NewNotificationEvent;
 
 class CourseService
 {
@@ -255,6 +256,14 @@ class CourseService
             // $this->deleteAndUpdateCourseInfos($course->id, $request);
 
             DB::commit();
+
+            event(new NewNotificationEvent($request->message, $course->teacher_id));
+            // DB::table('notifications')->insert([
+            //     'user_id' => $course->teacher_id,
+            //     'message' => $request->message,
+            //     'created_at' => now(),
+            //     'updated_at' => now()
+            // ]);
 
             return $course;
         } catch (Exception $exception) {
